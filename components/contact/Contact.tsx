@@ -13,6 +13,8 @@ const DISCIPLINES = [
 
 const WEBMAIL_URL =
   "https://mail.google.com/mail/?view=cm&fs=1&to=modexa%40studiodirection.com&su=New%20Studio%20Direction%20Inquiry";
+const MAILTO_URL =
+  "mailto:modexa@studiodirection.com?subject=New%20Modexa%20Inquiry";
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -29,6 +31,13 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
+  };
+
+  const handleEmailClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      e.preventDefault();
+      window.location.href = MAILTO_URL;
+    }
   };
 
   return (
@@ -111,6 +120,7 @@ export default function Contact() {
               href={WEBMAIL_URL}
               target="_blank"
               rel="noreferrer"
+              onClick={handleEmailClick}
               className="inline-flex items-center gap-3 group"
               aria-label="Email Modexa"
               style={{ fontFamily: "'Space Mono', monospace" }}
@@ -195,6 +205,7 @@ export default function Contact() {
                   href={WEBMAIL_URL}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={handleEmailClick}
                   className="text-[#b6240f] underline"
                 >
                   modexa@studiodirection.com
@@ -253,6 +264,7 @@ export default function Contact() {
                   href={WEBMAIL_URL}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={handleEmailClick}
                   className="group flex flex-wrap items-start justify-between gap-2"
                   aria-label="Email Modexa directly"
                 >

@@ -76,7 +76,7 @@ export default function CreativeNetwork() {
     <section
       id="network"
       ref={sectionRef}
-      className="relative w-full px-5 md:px-8 lg:px-12 py-16 md:py-24"
+      className="relative hidden w-full px-5 md:block md:px-8 md:py-24 lg:px-12"
       style={{ backgroundColor: "#fbf9f3" }}
     >
       <div className="max-w-[1400px] mx-auto w-full">
