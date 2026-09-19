@@ -126,7 +126,7 @@ export default function Process() {
         style={{ opacity: 0.6 }}
       />
 
-      <div className="relative z-10 px-5 md:px-8 lg:px-12 pointer-events-none">
+      <div className="relative z-10 max-w-[1400px] mx-auto w-full px-5 md:px-8 lg:px-12 pointer-events-none">
         {/* Section header */}
         <div
           className="flex items-center justify-between pb-8 border-b mb-16"

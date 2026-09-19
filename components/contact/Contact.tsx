@@ -35,6 +35,7 @@ export default function Contact() {
       className="relative w-full px-5 md:px-8 lg:px-12 py-24"
       style={{ backgroundColor: "#ffffff" }}
     >
+      <div className="max-w-[1400px] mx-auto w-full">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left: Info */}
         <motion.div
@@ -337,6 +338,7 @@ export default function Contact() {
             </form>
           )}
         </motion.div>
+      </div>
       </div>
     </section>
   );

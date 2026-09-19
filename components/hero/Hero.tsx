@@ -26,6 +26,7 @@ export default function Hero() {
       className="relative w-full px-5 md:px-8 lg:px-12 pt-12 pb-24 overflow-hidden"
       style={{ backgroundColor: "#fbf9f3" }}
     >
+      <div className="max-w-[1350px] mx-auto w-full">
       {/* Top metadata header strip */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -85,14 +86,14 @@ export default function Hero() {
               className="text-[#1b1c18] tracking-tight leading-[0.95] mb-8"
               style={{
                 fontFamily: "'Newsreader', Georgia, serif",
-                fontSize: "clamp(3rem, 8vw, 5.5rem)",
+                fontSize: "clamp(3rem, 7vw, 5.25rem)",
                 lineHeight: "0.95",
                 fontWeight: 400,
               }}
             >
-              ONE CREATIVE
+              ONE CREATIVE DIRECTION.
               <br />
-              <span className="italic font-normal">DIRECTION.</span>
+              <span className="italic font-normal text-[#b6240f]">MANY WAYS TO BUILD.</span>
             </motion.h1>
 
             {/* Kinetic typography */}
@@ -115,15 +116,15 @@ export default function Hero() {
               className="max-w-xl mb-12"
               style={{
                 fontFamily: "'Manrope', sans-serif",
-                fontSize: "1.125rem",
+                fontSize: "1.0625rem",
                 lineHeight: "1.875rem",
                 letterSpacing: "-0.01em",
                 color: "#747878",
               }}
             >
-              Many ideas. Many specialized crafts. A unified, tactile design
-              atelier binding motion, code, architectural interfaces, and
-              editorial typography into one clear physical cadence.
+              One Creative Director coordinating a specialized network of video directors,
+              UI/UX architects, WebGL engineers, graphic designers, and marketing strategists—binding
+              motion, code, and editorial typography into one clear physical cadence.
             </motion.p>
           </div>
 
@@ -159,6 +160,7 @@ export default function Hero() {
         >
           <HeroCreativeComposition />
         </motion.div>
+      </div>
       </div>
     </section>
   );

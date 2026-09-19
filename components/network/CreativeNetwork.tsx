@@ -79,7 +79,8 @@ export default function CreativeNetwork() {
       className="relative w-full px-5 md:px-8 lg:px-12 py-24"
       style={{ backgroundColor: "#fbf9f3" }}
     >
-      {/* Header */}
+      <div className="max-w-[1400px] mx-auto w-full">
+        {/* Header */}
       <div
         className="w-full flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b"
         style={{ borderColor: "#e4e2dd" }}
@@ -326,6 +327,7 @@ export default function CreativeNetwork() {
             </p>
           </div>
         </motion.div>
+      </div>
       </div>
     </section>
   );

@@ -86,7 +86,7 @@ export default function ThreadSection() {
       className="relative w-full py-12 border-y overflow-hidden"
       style={{ backgroundColor: "#f5f3ed", borderColor: "#e4e2dd" }}
     >
-      <div className="px-5 md:px-8 lg:px-12 flex items-center justify-between mb-4">
+      <div className="max-w-[1400px] mx-auto w-full px-5 md:px-8 lg:px-12 flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <span
             className="font-mono text-[10px] text-[#b6240f] font-bold"

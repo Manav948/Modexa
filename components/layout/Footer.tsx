@@ -6,7 +6,7 @@ export default function Footer() {
       className="w-full border-t"
       style={{ backgroundColor: "#f5f3ed", borderColor: "#e4e2dd" }}
     >
-      <div className="w-full px-5 md:px-8 lg:px-12 flex flex-col gap-12 pt-12 pb-8">
+      <div className="max-w-[1400px] mx-auto w-full px-5 md:px-8 lg:px-12 flex flex-col gap-12 pt-12 pb-8">
         {/* Top row */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left: Tagline */}

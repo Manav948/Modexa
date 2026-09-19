@@ -94,7 +94,6 @@ export default function Work() {
         const targetX = mousePos.current.x - 140;
         const targetY = mousePos.current.y - 210;
 
-        // Smooth lerp physics
         cardPos.current.x += (targetX - cardPos.current.x) * 0.12;
         cardPos.current.y += (targetY - cardPos.current.y) * 0.12;
 
@@ -116,12 +115,13 @@ export default function Work() {
       ref={sectionRef}
       onMouseLeave={() => setActiveProject(null)}
       className="relative w-full px-5 md:px-8 lg:px-12 py-24 border-t"
-      style={{ backgroundColor: "#f5f3ed", borderColor: "#e4e2dd" }}
+      style={{ backgroundColor: "#000000", borderColor: "#30312d" }}
     >
+      <div className="max-w-[1400px] mx-auto w-full">
       {/* Header matching site-wide Newsreader serif typography */}
       <div
         className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-16 border-b"
-        style={{ borderColor: "#e4e2dd" }}
+        style={{ borderColor: "#30312d" }}
       >
         <div>
           {/* Top Tagline mask reveal */}
@@ -143,7 +143,7 @@ export default function Work() {
               initial={{ y: "100%" }}
               animate={isInView ? { y: 0 } : {}}
               transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] as const }}
-              className="text-[#1b1c18] tracking-tight leading-none"
+              className="text-[#fbf9f3] tracking-tight leading-none"
               style={{
                 fontFamily: "'Newsreader', Georgia, serif",
                 fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
@@ -172,7 +172,7 @@ export default function Work() {
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
                 className={`transition-colors uppercase tracking-widest ${
-                  activeFilter === filter ? "text-[#b6240f] font-bold" : "hover:text-[#1b1c18]"
+                  activeFilter === filter ? "text-[#b6240f] font-bold" : "hover:text-[#fbf9f3]"
                 }`}
               >
                 {filter}
@@ -212,7 +212,7 @@ export default function Work() {
           {/* Title in Newsreader serif */}
           <div className="overflow-hidden">
             <h3
-              className="text-[#1b1c18] transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-[#b6240f]"
+              className="text-[#fbf9f3] transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-[#b6240f]"
               style={{
                 fontFamily: "'Newsreader', Georgia, serif",
                 fontSize: "clamp(2rem, 5vw, 3.25rem)",
@@ -226,19 +226,22 @@ export default function Work() {
             </h3>
           </div>
 
-          {/* Large Image Container */}
+          {/* Large Image Container with internal parallax overflow-hidden */}
           <div
             className="relative w-full overflow-hidden border shadow-sm transition-all duration-500 group-hover:shadow-2xl"
-            style={{ aspectRatio: "16/9", borderColor: "#e4e2dd" }}
+            style={{ aspectRatio: "16/9", borderColor: "#30312d" }}
           >
             <img
               src={PROJECTS[0].image}
               alt={PROJECTS[0].title}
-              className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+              className="w-full h-[115%] -mt-[7.5%] object-cover object-center transition-all duration-700 ease-out"
             />
 
+            {/* Dark Black Glass Blur Overlay on Hover */}
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
+
             {/* Bottom Left Overlay Badge */}
-            <div className="absolute bottom-6 left-6 px-4 py-2 bg-white/95 backdrop-blur border border-[#e4e2dd] font-mono text-[10px] text-[#1b1c18] font-bold uppercase tracking-wider shadow-lg">
+            <div className="absolute bottom-6 left-6 px-4 py-2 bg-[#fbf9f3]/95 backdrop-blur border border-[#30312d] font-mono text-[10px] text-[#1b1c18] font-bold uppercase tracking-wider shadow-lg">
               {PROJECTS[0].overlayBadge}
             </div>
           </div>
@@ -272,7 +275,7 @@ export default function Work() {
 
             <div className="overflow-hidden">
               <h3
-                className="text-[#1b1c18] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#b6240f]"
+                className="text-[#fbf9f3] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#b6240f]"
                 style={{
                   fontFamily: "'Newsreader', Georgia, serif",
                   fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
@@ -288,14 +291,17 @@ export default function Work() {
 
             <div
               className="relative w-full overflow-hidden border shadow-sm transition-all duration-500 group-hover:shadow-xl"
-              style={{ aspectRatio: "4/3", borderColor: "#e4e2dd" }}
+              style={{ aspectRatio: "4/3", borderColor: "#30312d" }}
             >
               <img
                 src={PROJECTS[1].image}
                 alt={PROJECTS[1].title}
-                className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                className="w-full h-[115%] -mt-[7.5%] object-cover object-center transition-all duration-700 ease-out"
               />
-              <div className="absolute top-4 right-4 px-3 py-1 bg-[#1b1c18] text-white font-mono text-[9px] font-bold uppercase tracking-wider">
+              {/* Dark Black Glass Blur Overlay on Hover */}
+              <div className="absolute inset-0 bg-black/60 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
+
+              <div className="absolute top-4 right-4 px-3 py-1 bg-[#30312d] text-[#fbf9f3] font-mono text-[9px] font-bold uppercase tracking-wider z-20">
                 {PROJECTS[1].overlayBadge}
               </div>
             </div>
@@ -327,7 +333,7 @@ export default function Work() {
 
             <div className="overflow-hidden">
               <h3
-                className="text-[#1b1c18] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#b6240f]"
+                className="text-[#fbf9f3] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#b6240f]"
                 style={{
                   fontFamily: "'Newsreader', Georgia, serif",
                   fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
@@ -343,14 +349,17 @@ export default function Work() {
 
             <div
               className="relative w-full overflow-hidden border shadow-sm transition-all duration-500 group-hover:shadow-xl"
-              style={{ aspectRatio: "4/3", borderColor: "#e4e2dd" }}
+              style={{ aspectRatio: "4/3", borderColor: "#30312d" }}
             >
               <img
                 src={PROJECTS[2].image}
                 alt={PROJECTS[2].title}
-                className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                className="w-full h-[115%] -mt-[7.5%] object-cover object-center transition-all duration-700 ease-out"
               />
-              <div className="absolute top-4 right-4 px-3 py-1 bg-[#1b1c18] text-white font-mono text-[9px] font-bold uppercase tracking-wider">
+              {/* Dark Black Glass Blur Overlay on Hover */}
+              <div className="absolute inset-0 bg-black/60 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
+
+              <div className="absolute top-4 right-4 px-3 py-1 bg-[#30312d] text-[#fbf9f3] font-mono text-[9px] font-bold uppercase tracking-wider z-20">
                 {PROJECTS[2].overlayBadge}
               </div>
             </div>
@@ -368,14 +377,17 @@ export default function Work() {
         >
           <div
             className="relative w-full overflow-hidden border shadow-sm transition-all duration-500 group-hover:shadow-2xl"
-            style={{ aspectRatio: "21/9", borderColor: "#e4e2dd" }}
+            style={{ aspectRatio: "21/9", borderColor: "#30312d" }}
           >
             <img
               src={PROJECTS[3].image}
               alt={PROJECTS[3].title}
-              className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+              className="w-full h-[115%] -mt-[7.5%] object-cover object-center transition-all duration-700 ease-out"
             />
-            <div className="absolute bottom-6 left-6 p-4 bg-white/95 backdrop-blur border border-[#e4e2dd] flex flex-col gap-1 max-w-md shadow-xl">
+            {/* Dark Black Glass Blur Overlay on Hover */}
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
+
+            <div className="absolute bottom-6 left-6 p-4 bg-[#fbf9f3]/95 backdrop-blur border border-[#30312d] flex flex-col gap-1 max-w-md shadow-xl z-20">
               <span
                 className="font-mono text-[9px] text-[#b6240f] font-bold uppercase tracking-wider"
                 style={{ fontFamily: "'Space Mono', monospace" }}
@@ -401,7 +413,7 @@ export default function Work() {
                 {PROJECTS[3].overlaySubtext}
               </p>
             </div>
-            <div className="absolute bottom-6 right-6 px-4 py-2 bg-[#1b1c18] text-white font-mono text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg group-hover:bg-[#b6240f] transition-colors">
+            <div className="absolute bottom-6 right-6 px-4 py-2 bg-[#30312d] text-[#fbf9f3] font-mono text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg group-hover:bg-[#b6240f] transition-colors">
               <span>VIEW ARCHITECTURE</span>
               <span>▾</span>
             </div>
@@ -409,7 +421,7 @@ export default function Work() {
         </motion.div>
       </div>
 
-      {/* ULTRA-SMOOTH SHARP FLOATING PREVIEW (REMOVED ROUNDED CORNERS & REMOVED ORANGE BORDER) */}
+      {/* ULTRA-SMOOTH SHARP FLOATING PREVIEW */}
       <div
         ref={previewRef}
         className="fixed top-0 left-0 pointer-events-none z-50 transition-transform duration-75 ease-out"
@@ -424,9 +436,9 @@ export default function Work() {
           {activeProject && (
             <motion.div
               key={activeProject.id}
-              initial={{ scale: 0.85, opacity: 0, y: 15 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.85, opacity: 0, y: 15 }}
+              initial={{ scale: 0.85, opacity: 0, y: 15, rotate: -1 }}
+              animate={{ scale: 1, opacity: 1, y: 0, rotate: 0 }}
+              exit={{ scale: 0.85, opacity: 0, y: 15, rotate: 1 }}
               transition={{
                 duration: 0.5,
                 ease: [0.16, 1, 0.3, 1] as const,
@@ -490,6 +502,7 @@ export default function Work() {
             </motion.div>
           )}
         </AnimatePresence>
+      </div>
       </div>
     </section>
   );

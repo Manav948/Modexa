@@ -89,8 +89,8 @@ export default function Services() {
         const targetX = mousePos.current.x - 200;
         const targetY = mousePos.current.y - 125;
 
-        cardPos.current.x += (targetX - cardPos.current.x) * 0.12;
-        cardPos.current.y += (targetY - cardPos.current.y) * 0.12;
+        cardPos.current.x += (targetX - cardPos.current.x) * 0.14;
+        cardPos.current.y += (targetY - cardPos.current.y) * 0.14;
 
         previewRef.current.style.transform = `translate3d(${cardPos.current.x}px, ${cardPos.current.y}px, 0px)`;
       }
@@ -112,6 +112,7 @@ export default function Services() {
       className="relative w-full px-5 md:px-8 lg:px-12 py-24 border-t"
       style={{ backgroundColor: "#fbf9f3", borderColor: "#e4e2dd" }}
     >
+      <div className="max-w-350 mx-auto w-full">
       {/* Section Header */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16 items-start">
         <div className="lg:col-span-7">
@@ -252,7 +253,7 @@ export default function Services() {
         ))}
       </div>
 
-      {/* ULTRA-SMOOTH HOVER CURSOR FLOATING PREVIEW (REMOVED BORDER RADIUS & REMOVED ORANGE BORDER) */}
+      {/* ULTRA-SMOOTH HOVER CURSOR FLOATING PREVIEW */}
       <div
         ref={previewRef}
         className="fixed top-0 left-0 pointer-events-none z-50 transition-transform duration-75 ease-out"
@@ -279,7 +280,7 @@ export default function Services() {
                 <img
                   src={activeService.image}
                   alt={activeService.title}
-                  className="w-full h-full object-cover object-center scale-105"
+                  className="w-full h-full object-cover object-center scale-105 transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1b1c18] via-transparent to-transparent opacity-80" />
 
@@ -322,6 +323,7 @@ export default function Services() {
             </motion.div>
           )}
         </AnimatePresence>
+      </div>
       </div>
     </section>
   );

@@ -70,7 +70,7 @@ export default function Navbar() {
       }`}
       style={{ borderBottom: scrolled ? "1px solid #e4e2dd" : "none" }}
     >
-      <div className="h-full w-full px-5 md:px-8 lg:px-12 flex items-center justify-between">
+      <div className="h-full max-w-[1350px] mx-auto w-full px-5 md:px-8 lg:px-12 flex items-center justify-between">
         {/* Left: Logo + meta */}
         <div className="flex items-baseline gap-6">
           <a
@@ -80,21 +80,6 @@ export default function Navbar() {
           >
             STUDIO DIRECTION
           </a>
-
-          {/* Timezone indicators - only large screens */}
-          <div className="hidden 2xl:flex items-center gap-3 font-mono text-[10px] text-[#747878]"
-               style={{ fontFamily: "'Space Mono', monospace" }}>
-            <span className="tracking-wider">NYC 09:42 EST</span>
-            <span className="text-[#c4c7c7]">/</span>
-            <span className="tracking-wider">PARIS 15:42 CET</span>
-          </div>
-
-          {/* Status badge */}
-          <div className="hidden lg:flex items-center gap-1.5 px-2 py-0.5 bg-[#f5f3ed] border border-[#e4e2dd] font-mono text-[10px] text-[#747878]"
-               style={{ fontFamily: "'Space Mono', monospace" }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#b6240f] animate-pulse-dot" />
-            <span>ACCEPTING Q3/Q4 COMMISSIONS</span>
-          </div>
         </div>
 
         {/* Center: Navigation */}
@@ -128,11 +113,6 @@ export default function Navbar() {
           >
             START A PROJECT →
           </a>
-
-          {/* Avatar circle */}
-          <div className="w-8 h-8 rounded-full bg-[#1b1c18] flex items-center justify-center">
-            <span className="material-symbols-outlined text-white text-[18px]">person</span>
-          </div>
 
           {/* Mobile hamburger */}
           <button
