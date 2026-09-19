@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 interface Project {
   id: string;
@@ -73,6 +74,7 @@ export default function Work() {
   const sectionRef = useRef<HTMLElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+  const router = useRouter();
 
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [activeFilter, setActiveFilter] = useState("ALL");
@@ -80,6 +82,17 @@ export default function Work() {
   const mousePos = useRef({ x: 0, y: 0 });
   const cardPos = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number | null>(null);
+
+  const openProject = (projectId: string) => {
+    router.push(`/work/${projectId}`);
+  };
+
+  const handleProjectKeyDown = (event: React.KeyboardEvent, projectId: string) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openProject(projectId);
+    }
+  };
 
   // Ultra-smooth cursor follow centering & lerp
   useEffect(() => {
@@ -192,6 +205,10 @@ export default function Work() {
           className="group cursor-pointer flex flex-col gap-4"
           onMouseEnter={() => setActiveProject(PROJECTS[0])}
           onMouseLeave={() => setActiveProject(null)}
+          onClick={() => openProject(PROJECTS[0].id)}
+          onKeyDown={(event) => handleProjectKeyDown(event, PROJECTS[0].id)}
+          role="link"
+          tabIndex={0}
         >
           {/* Top metadata strip */}
           <div className="flex items-center justify-between font-mono text-[11px]">
@@ -257,6 +274,10 @@ export default function Work() {
             className="group cursor-pointer flex flex-col gap-3"
             onMouseEnter={() => setActiveProject(PROJECTS[1])}
             onMouseLeave={() => setActiveProject(null)}
+            onClick={() => openProject(PROJECTS[1].id)}
+            onKeyDown={(event) => handleProjectKeyDown(event, PROJECTS[1].id)}
+            role="link"
+            tabIndex={0}
           >
             <div className="flex items-center justify-between font-mono text-[10px]">
               <span
@@ -315,6 +336,10 @@ export default function Work() {
             className="group cursor-pointer flex flex-col gap-3"
             onMouseEnter={() => setActiveProject(PROJECTS[2])}
             onMouseLeave={() => setActiveProject(null)}
+            onClick={() => openProject(PROJECTS[2].id)}
+            onKeyDown={(event) => handleProjectKeyDown(event, PROJECTS[2].id)}
+            role="link"
+            tabIndex={0}
           >
             <div className="flex items-center justify-between font-mono text-[10px]">
               <span
@@ -374,6 +399,10 @@ export default function Work() {
           className="group cursor-pointer flex flex-col gap-4 mt-4"
           onMouseEnter={() => setActiveProject(PROJECTS[3])}
           onMouseLeave={() => setActiveProject(null)}
+          onClick={() => openProject(PROJECTS[3].id)}
+          onKeyDown={(event) => handleProjectKeyDown(event, PROJECTS[3].id)}
+          role="link"
+          tabIndex={0}
         >
           <div
             className="relative w-full overflow-hidden border shadow-sm transition-all duration-500 group-hover:shadow-2xl"
@@ -424,7 +453,7 @@ export default function Work() {
       {/* ULTRA-SMOOTH SHARP FLOATING PREVIEW */}
       <div
         ref={previewRef}
-        className="fixed top-0 left-0 pointer-events-none z-50 transition-transform duration-75 ease-out"
+        className="floating-preview fixed top-0 left-0 pointer-events-none z-50 transition-transform duration-75 ease-out"
         style={{
           width: "280px",
           height: "420px",

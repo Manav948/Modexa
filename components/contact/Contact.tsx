@@ -112,7 +112,7 @@ export default function Contact() {
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-3 group"
-              aria-label="Email Studio Direction"
+              aria-label="Email Modexa"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
               <span
@@ -253,11 +253,11 @@ export default function Contact() {
                   href={WEBMAIL_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex items-center justify-between gap-4"
-                  aria-label="Email Studio Direction directly"
+                  className="group flex flex-wrap items-start justify-between gap-2"
+                  aria-label="Email Modexa directly"
                 >
                   <span
-                    className="text-[#1b1c18] text-lg transition-colors group-hover:text-[#b6240f]"
+                    className="min-w-0 break-words text-[#1b1c18] text-lg transition-colors group-hover:text-[#b6240f]"
                     style={{ fontFamily: "'Manrope', sans-serif" }}
                   >
                     modexa@studiodirection.com

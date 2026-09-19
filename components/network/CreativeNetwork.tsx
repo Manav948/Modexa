@@ -76,13 +76,13 @@ export default function CreativeNetwork() {
     <section
       id="network"
       ref={sectionRef}
-      className="relative w-full px-5 md:px-8 lg:px-12 py-24"
+      className="relative w-full px-5 md:px-8 lg:px-12 py-16 md:py-24"
       style={{ backgroundColor: "#fbf9f3" }}
     >
       <div className="max-w-[1400px] mx-auto w-full">
         {/* Header */}
       <div
-        className="w-full flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b"
+        className="w-full flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 pb-6 border-b"
         style={{ borderColor: "#e4e2dd" }}
       >
         <motion.div
@@ -115,7 +115,7 @@ export default function CreativeNetwork() {
           className="mt-4 md:mt-0 font-mono text-[10px] text-[#747878]"
           style={{ fontFamily: "'Space Mono', monospace" }}
         >
-          INTERACTIVE TOPOLOGICAL NODES • CLICK/HOVER TO TEST PATHWAY
+          INTERACTIVE TOPOLOGICAL NODES • TAP/HOVER TO TEST PATHWAY
         </div>
       </div>
 
@@ -123,13 +123,13 @@ export default function CreativeNetwork() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
         {/* Left: Node map */}
         <motion.div
-          className="lg:col-span-8 p-6 md:p-10 border"
+          className="lg:col-span-8 p-3 sm:p-5 md:p-10 border"
           style={{ backgroundColor: "#f5f3ed", borderColor: "#e4e2dd" }}
           initial={{ opacity: 0, x: -20 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="relative w-full flex items-center justify-center" style={{ aspectRatio: "16/9" }}>
+          <div className="relative w-full flex items-center justify-center aspect-[4/5] md:aspect-[16/9]">
             {/* SVG connections */}
             <svg
               className="absolute inset-0 w-full h-full pointer-events-none"
@@ -164,15 +164,15 @@ export default function CreativeNetwork() {
             </svg>
 
             {/* Client node */}
-            <div className="absolute flex flex-col items-center" style={{ left: "8%", top: "50%", transform: "translateY(-50%)" }}>
+            <div className="absolute flex flex-col items-center" style={{ left: "3%", top: "50%", transform: "translateY(-50%)" }}>
               <div
-                className="w-12 h-12 md:w-16 md:h-16 bg-[#fbf9f3] border border-[#1b1c18] flex items-center justify-center font-mono font-bold shadow-sm text-[10px]"
+                className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-[#fbf9f3] border border-[#1b1c18] flex items-center justify-center font-mono font-bold shadow-sm text-[8px] sm:text-[10px]"
                 style={{ fontFamily: "'Space Mono', monospace" }}
               >
                 CLIENT
               </div>
               <span
-                className="mt-2 font-mono text-[10px] text-[#747878] uppercase tracking-wider"
+                className="mt-2 font-mono text-[8px] sm:text-[10px] text-[#747878] uppercase tracking-wider"
                 style={{ fontFamily: "'Space Mono', monospace" }}
               >
                 MANDATE
@@ -180,21 +180,21 @@ export default function CreativeNetwork() {
             </div>
 
             {/* Creative Director central node */}
-            <div className="absolute flex flex-col items-center" style={{ left: "42%", top: "50%", transform: "translateY(-50%)" }}>
+            <div className="absolute flex flex-col items-center" style={{ left: "36%", top: "50%", transform: "translateY(-50%)" }}>
               <div
-                className="w-16 h-16 md:w-20 md:h-20 bg-[#b6240f] text-white flex flex-col items-center justify-center p-2 text-center shadow-lg border border-[#1b1c18]/20 cursor-pointer"
+                className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-[#b6240f] text-white flex flex-col items-center justify-center p-1.5 sm:p-2 text-center shadow-lg border border-[#1b1c18]/20 cursor-pointer"
                 style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
               >
-                <span className="material-symbols-outlined text-[20px]">hub</span>
+                <span className="material-symbols-outlined text-[16px] sm:text-[20px]">hub</span>
                 <span
-                  className="font-mono text-[9px] font-bold leading-tight uppercase mt-1"
+                  className="font-mono text-[7px] sm:text-[9px] font-bold leading-tight uppercase mt-1"
                   style={{ fontFamily: "'Space Mono', monospace" }}
                 >
                   CREATIVE DIR.
                 </span>
               </div>
               <span
-                className="mt-2 font-mono text-[10px] text-[#b6240f] uppercase font-bold tracking-wider"
+                className="mt-2 font-mono text-[8px] sm:text-[10px] text-[#b6240f] uppercase font-bold tracking-wider"
                 style={{ fontFamily: "'Space Mono', monospace" }}
               >
                 FOCAL LENS
@@ -204,12 +204,12 @@ export default function CreativeNetwork() {
             {/* Specialist nodes */}
             <div
               className="absolute flex flex-col justify-between items-start"
-              style={{ right: "5%", top: "10%", bottom: "10%" }}
+              style={{ right: "2%", top: "7%", bottom: "7%" }}
             >
               {SPECIALISTS.map((s) => (
                 <button
                   key={s.key}
-                  className="group flex items-center gap-3 px-3 py-1.5 border transition-colors text-left"
+                  className="group flex max-w-[42vw] sm:max-w-none items-center gap-1.5 sm:gap-3 px-1.5 sm:px-3 py-1 sm:py-1.5 border transition-colors text-left"
                   style={{
                     backgroundColor: "#fbf9f3",
                     borderColor: activeNode === s.key ? "#b6240f" : "#e4e2dd",
@@ -217,6 +217,8 @@ export default function CreativeNetwork() {
                   data-node={s.key}
                   onMouseEnter={() => handleNodeHover(s.key)}
                   onMouseLeave={handleNodeLeave}
+                  onFocus={() => handleNodeHover(s.key)}
+                  onClick={() => handleNodeHover(s.key)}
                 >
                   <span
                     className="w-2 h-2 rounded-full transition-colors"
@@ -225,7 +227,7 @@ export default function CreativeNetwork() {
                     }}
                   />
                   <span
-                    className="font-mono text-[10px] uppercase"
+                    className="font-mono text-[8px] sm:text-[10px] uppercase leading-tight"
                     style={{ fontFamily: "'Space Mono', monospace" }}
                   >
                     {s.label}
@@ -238,7 +240,7 @@ export default function CreativeNetwork() {
 
         {/* Right: Dossier card */}
         <motion.div
-          className="lg:col-span-4 p-8 border flex flex-col justify-between"
+          className="lg:col-span-4 p-5 sm:p-8 border flex flex-col justify-between"
           style={{ backgroundColor: "#fbf9f3", borderColor: "#e4e2dd", minHeight: "380px" }}
           initial={{ opacity: 0, x: 20 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -246,7 +248,7 @@ export default function CreativeNetwork() {
         >
           <div>
             <div
-              className="flex items-center justify-between pb-3 border-b mb-6"
+              className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b mb-6"
               style={{ borderColor: "#e4e2dd" }}
             >
               <span
@@ -289,14 +291,14 @@ export default function CreativeNetwork() {
 
             <div className="space-y-2 mb-6">
               <div
-                className="flex items-center justify-between font-mono text-[10px] text-[#747878] border-b pb-1"
+                className="flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:justify-between font-mono text-[10px] text-[#747878] border-b pb-1"
                 style={{ borderColor: "#f0eee8", fontFamily: "'Space Mono', monospace" }}
               >
                 <span>INTEGRATION PROTOCOL</span>
                 <span className="text-[#1b1c18] font-semibold">{dossier.proto}</span>
               </div>
               <div
-                className="flex items-center justify-between font-mono text-[10px] text-[#747878] border-b pb-1"
+                className="flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:justify-between font-mono text-[10px] text-[#747878] border-b pb-1"
                 style={{ borderColor: "#f0eee8", fontFamily: "'Space Mono', monospace" }}
               >
                 <span>COMMUNICATION DELTA</span>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 interface ServiceItem {
   num: string;
@@ -70,11 +71,16 @@ export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+  const router = useRouter();
 
   const [activeService, setActiveService] = useState<ServiceItem | null>(null);
   const mousePos = useRef({ x: 0, y: 0 });
   const cardPos = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number | null>(null);
+
+  const openService = (serviceNum: string) => {
+    router.push(`/services/${serviceNum}`);
+  };
 
   // Ultra-smooth cursor follow centering & lerp
   useEffect(() => {
@@ -181,6 +187,15 @@ export default function Services() {
             style={{ borderColor: "#e4e2dd" }}
             onMouseEnter={() => setActiveService(service)}
             onMouseLeave={() => setActiveService(null)}
+            onClick={() => openService(service.num)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openService(service.num);
+              }
+            }}
+            role="link"
+            tabIndex={0}
           >
             <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
               {/* Left Column: Number & Title & Paragraph */}
@@ -256,7 +271,7 @@ export default function Services() {
       {/* ULTRA-SMOOTH HOVER CURSOR FLOATING PREVIEW */}
       <div
         ref={previewRef}
-        className="fixed top-0 left-0 pointer-events-none z-50 transition-transform duration-75 ease-out"
+        className="floating-preview fixed top-0 left-0 pointer-events-none z-50 transition-transform duration-75 ease-out"
         style={{
           width: "400px",
           height: "250px",

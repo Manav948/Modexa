@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 /* ============================================
-   STUDIO DIRECTION DESIGN SYSTEM
+  MODEXA DESIGN SYSTEM
    ============================================ */
 
 @theme inline {
@@ -212,6 +212,12 @@ body {
 
 .service-row:hover .line-progress {
   width: 100%;
+}
+
+@media (max-width: 767px) {
+  .floating-preview {
+    display: none !important;
+  }
 }
 
 /* ============================================

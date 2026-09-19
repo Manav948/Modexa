@@ -19,7 +19,7 @@ export default function CreativeStatement() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full px-5 md:px-8 lg:px-12 py-32 border-t overflow-hidden select-none"
+      className="relative w-full px-5 md:px-8 lg:px-12 py-32 md:border-t overflow-hidden select-none"
       style={{ backgroundColor: "#1b1c18", borderColor: "#30312d" }}
     >
       {/* Background large parallax typography watermark */}
@@ -27,7 +27,7 @@ export default function CreativeStatement() {
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[18vw] font-bold text-white/[0.02] tracking-tighter pointer-events-none whitespace-nowrap"
         style={{ fontFamily: "'Space Grotesk', sans-serif" }}
       >
-        STUDIO DIRECTION
+        MODEXA
       </div>
 
       <div className="relative z-10 max-w-[1400px] mx-auto flex flex-col gap-12">

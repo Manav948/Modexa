@@ -78,12 +78,12 @@ export default function Navbar() {
             className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold text-[#1b1c18] hover:text-[#b6240f] transition-colors duration-200"
             style={{ fontFamily: "'Space Mono', monospace" }}
           >
-            STUDIO DIRECTION
+            MODEXA
           </a>
         </div>
 
         {/* Center: Navigation */}
-        <nav className="hidden md:flex items-center gap-6 font-mono text-[10px] uppercase tracking-wider"
+        <nav className="hidden md:flex items-center gap-3 lg:gap-6 font-mono text-[10px] uppercase tracking-wider"
              style={{ fontFamily: "'Space Mono', monospace" }}>
           {navLinks.map((link) => (
             <a

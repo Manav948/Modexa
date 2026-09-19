@@ -45,7 +45,7 @@ export default function Footer() {
                 className="font-mono text-[10px] uppercase tracking-wider text-[#1b1c18] font-semibold mb-1"
                 style={{ fontFamily: "'Space Mono', monospace" }}
               >
-                Studio Colophon
+                Modexa
               </span>
               <span>Independent Creative Atelier & Design Direction Practice.</span>
               <span>Typefaces set in Newsreader, Manrope & Space Mono.</span>
@@ -81,7 +81,7 @@ export default function Footer() {
           className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t font-mono text-[10px] text-[#747878]"
           style={{ borderColor: "#e4e2dd", fontFamily: "'Space Mono', monospace" }}
         >
-          <span>© 2026 STUDIO DIRECTION. ALL ARCHIVAL RIGHTS RESERVED.</span>
+          <span className="text-center sm:text-left">© 2026 MODEXA. ALL ARCHIVAL RIGHTS RESERVED.</span>
           <div className="flex items-center gap-6 uppercase">
             <span className="cursor-pointer hover:text-[#1b1c18] transition-colors">Index Registry</span>
             <span className="cursor-pointer hover:text-[#1b1c18] transition-colors">Legal Notice</span>

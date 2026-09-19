@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "STUDIO DIRECTION — Flagship Creative Platform",
+  title: "MODEXA — Flagship Creative Platform",
   description:
     "A unified, tactile design atelier binding motion, code, architectural interfaces, and editorial typography into one clear physical cadence.",
   keywords: [
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "editorial",
   ],
   openGraph: {
-    title: "STUDIO DIRECTION",
+    title: "MODEXA",
     description:
       "Many ideas. Many specialized crafts. One creative direction.",
     type: "website",
@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className="h-full antialiased" data-scroll-behavior="smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

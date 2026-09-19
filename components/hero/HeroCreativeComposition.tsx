@@ -420,7 +420,7 @@ export default function HeroCreativeComposition() {
   return (
     <div className="lg:col-span-5 flex flex-col items-center justify-center mt-12 lg:mt-0 relative select-none">
       {/* Installation header */}
-      <div className="w-full flex items-center justify-between pb-3 font-mono text-[10px] text-[#747878]"
+      <div className="w-full flex flex-wrap items-center justify-between gap-2 pb-3 font-mono text-[9px] sm:text-[10px] text-[#747878]"
            style={{ fontFamily: "'Space Mono', monospace" }}>
         <span>FIG. 01 — COLLAPSED CREATIVE WORLD</span>
         <span className="text-[#b6240f] font-bold">[MULTI-DISCIPLINARY ASSEMBLY]</span>
@@ -430,8 +430,8 @@ export default function HeroCreativeComposition() {
       <div
         ref={boxRef}
         id="creative-world-box"
-        className="relative w-full bg-[#f5f3ed] overflow-hidden border border-[#e4e2dd] shadow-sm cursor-crosshair"
-        style={{ aspectRatio: "1/1", maxWidth: "500px", minHeight: "480px" }}
+        className="relative w-full bg-[#f5f3ed] overflow-hidden border border-[#e4e2dd] shadow-sm cursor-crosshair aspect-square max-w-[500px]"
+        style={{ maxWidth: "500px" }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onMouseMove={handleMouseMove}
@@ -492,7 +492,7 @@ export default function HeroCreativeComposition() {
       </div>
 
       {/* Installation footer */}
-      <div className="w-full pt-3 flex items-center justify-between font-mono text-[10px] text-[#747878]"
+      <div className="w-full pt-3 flex flex-wrap items-center justify-between gap-2 font-mono text-[9px] sm:text-[10px] text-[#747878]"
            style={{ fontFamily: "'Space Mono', monospace" }}>
         <span ref={captionRef}>INTERACTION: EXPLODE &amp; TETHER</span>
         <span className="text-[#b6240f] font-medium">8 FRAGMENTS BOUND</span>

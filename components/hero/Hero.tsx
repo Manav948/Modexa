@@ -32,7 +32,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="w-full flex items-center justify-between pb-6 mb-12 border-b"
+        className="w-full flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between pb-6 mb-12 border-b"
         style={{ borderColor: "#e4e2dd" }}
       >
         <div className="flex items-center gap-4">
