@@ -11,6 +11,9 @@ const DISCIPLINES = [
   "CAMPAIGN NARRATIVE",
 ];
 
+const WEBMAIL_URL =
+  "https://mail.google.com/mail/?view=cm&fs=1&to=modexa%40studiodirection.com&su=New%20Studio%20Direction%20Inquiry";
+
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
@@ -105,14 +108,17 @@ export default function Contact() {
 
             {/* Direct email link */}
             <a
-              href="mailto:hello@studiodirection.com"
+              href={WEBMAIL_URL}
+              target="_blank"
+              rel="noreferrer"
               className="inline-flex items-center gap-3 group"
+              aria-label="Email Studio Direction"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
               <span
                 className="font-mono text-[11px] tracking-wider uppercase text-[#1b1c18] group-hover:text-[#b6240f] transition-colors"
               >
-                hello@studiodirection.com →
+                modexa@studiodirection.com →
               </span>
             </a>
           </div>
@@ -185,8 +191,13 @@ export default function Contact() {
                 }}
               >
                 Or reach us directly at{" "}
-                <a href="mailto:hello@studiodirection.com" className="text-[#b6240f] underline">
-                  hello@studiodirection.com
+                <a
+                  href={WEBMAIL_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[#b6240f] underline"
+                >
+                  modexa@studiodirection.com
                 </a>
               </p>
             </div>
@@ -196,64 +207,13 @@ export default function Contact() {
               className="space-y-8"
               onSubmit={handleSubmit}
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="flex flex-col">
-                  <label
-                    className="font-mono text-[10px] uppercase text-[#747878] font-bold mb-2"
-                    htmlFor="name"
-                    style={{ fontFamily: "'Space Mono', monospace" }}
-                  >
-                    01. PRINCIPAL IDENTIFIER / NAME
-                  </label>
-                  <input
-                    className="bg-transparent border-b focus:outline-none py-2 transition-colors"
-                    style={{
-                      borderColor: "#747878",
-                      fontFamily: "'Manrope', sans-serif",
-                      fontSize: "0.9375rem",
-                      color: "#1b1c18",
-                    }}
-                    id="name"
-                    placeholder="e.g. Helena Vance"
-                    required
-                    type="text"
-                    onFocus={(e) => (e.target.style.borderColor = "#1b1c18")}
-                    onBlur={(e) => (e.target.style.borderColor = "#747878")}
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <label
-                    className="font-mono text-[10px] uppercase text-[#747878] font-bold mb-2"
-                    htmlFor="email"
-                    style={{ fontFamily: "'Space Mono', monospace" }}
-                  >
-                    02. TRANSMISSION CHANNEL / EMAIL
-                  </label>
-                  <input
-                    className="bg-transparent border-b focus:outline-none py-2 transition-colors"
-                    style={{
-                      borderColor: "#747878",
-                      fontFamily: "'Manrope', sans-serif",
-                      fontSize: "0.9375rem",
-                      color: "#1b1c18",
-                    }}
-                    id="email"
-                    placeholder="e.g. hvance@studio.org"
-                    required
-                    type="email"
-                    onFocus={(e) => (e.target.style.borderColor = "#1b1c18")}
-                    onBlur={(e) => (e.target.style.borderColor = "#747878")}
-                  />
-                </div>
-              </div>
-
               {/* Discipline chips */}
               <div className="flex flex-col">
                 <label
                   className="font-mono text-[10px] uppercase text-[#747878] font-bold mb-3"
                   style={{ fontFamily: "'Space Mono', monospace" }}
                 >
-                  03. REQUIRED DISCIPLINES (SELECT MULTIPLE)
+                  01. REQUIRED DISCIPLINES (SELECT MULTIPLE)
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {DISCIPLINES.map((d) => (
@@ -281,6 +241,45 @@ export default function Contact() {
                 </div>
               </div>
 
+              {/* Direct mail channel */}
+              <div className="flex flex-col gap-3 border-y py-5" style={{ borderColor: "#e4e2dd" }}>
+                <span
+                  className="font-mono text-[10px] uppercase text-[#747878] font-bold"
+                  style={{ fontFamily: "'Space Mono', monospace" }}
+                >
+                  02. DIRECT TRANSMISSION CHANNEL
+                </span>
+                <a
+                  href={WEBMAIL_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex items-center justify-between gap-4"
+                  aria-label="Email Studio Direction directly"
+                >
+                  <span
+                    className="text-[#1b1c18] text-lg transition-colors group-hover:text-[#b6240f]"
+                    style={{ fontFamily: "'Manrope', sans-serif" }}
+                  >
+                    modexa@studiodirection.com
+                  </span>
+                  <span
+                    className="font-mono text-[11px] text-[#b6240f] transition-transform duration-300 group-hover:translate-x-1"
+                    style={{ fontFamily: "'Space Mono', monospace" }}
+                  >
+                    OPEN MAIL →
+                  </span>
+                </a>
+                <a
+                  href={WEBMAIL_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="self-start font-mono text-[9px] uppercase tracking-wider text-[#747878] underline underline-offset-4 hover:text-[#b6240f] transition-colors"
+                  style={{ fontFamily: "'Space Mono', monospace" }}
+                >
+                  USE WEBMAIL INSTEAD →
+                </a>
+              </div>
+
               {/* Message */}
               <div className="flex flex-col">
                 <label
@@ -288,7 +287,7 @@ export default function Contact() {
                   htmlFor="message"
                   style={{ fontFamily: "'Space Mono', monospace" }}
                 >
-                  04. MANDATE SYNOPSIS & TARGET HORIZON
+                  03. MANDATE SYNOPSIS & TARGET HORIZON
                 </label>
                 <textarea
                   className="bg-transparent border-b focus:outline-none py-2 transition-colors resize-none"
