@@ -1,16 +1,18 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 
 interface Project {
   id: string;
   num: string;
   tagline: string;
   title: string;
+  italicTitle?: string;
   category: string;
   specs: string;
   image: string;
+  mobilePreview: string;
   overlayBadge?: string;
   overlaySubtext?: string;
 }
@@ -20,40 +22,48 @@ const PROJECTS: Project[] = [
     id: "01",
     num: "01",
     tagline: "■ FEATURED COMMISSION // 01",
-    title: "CODEVERSE PLATFORM",
+    title: "CODEVERSE",
+    italicTitle: "PLATFORM Architecture",
     category: "Full Platform Architecture & Design System",
     specs: "DIGITAL PLATFORM • UI/UX • DEV | 2026",
     image: "/images/work_codeverse_platform_1789796324968.png",
+    mobilePreview: "/images/work_codeverse_platform_1789796324968.png",
     overlayBadge: "DELIVERED: FULL PLATFORM ARCHITECTURE + DESIGN SYSTEM",
   },
   {
     id: "02",
     num: "02",
     tagline: "02 // KINETIC BRANDING",
-    title: "MOTION STORIES",
+    title: "MOTION",
+    italicTitle: "STORIES Film System",
     category: "Kinetic Typography & Brand Films",
     specs: "VIDEO / SOCIAL | 2026",
     image: "/images/work_motion_stories_1789796354503.png",
+    mobilePreview: "/images/work_motion_stories_1789796354503.png",
     overlayBadge: "VIDEO DIRECTION",
   },
   {
     id: "03",
     num: "03",
     tagline: "03 // IMMERSIVE ARCHITECTURE",
-    title: "ARCLAB SPATIAL",
+    title: "ARCLAB",
+    italicTitle: "SPATIAL Pavilion",
     category: "3D Web Experience & Spatial Pavilion",
     specs: "WEB EXPERIENCE | 2026",
     image: "/images/work_arclab_spatial_1789796381832.png",
+    mobilePreview: "/images/work_arclab_spatial_1789796381832.png",
     overlayBadge: "WEB EXPERIENCE",
   },
   {
     id: "04",
     num: "04",
     tagline: "CASE STUDY // 04",
-    title: "VANGUARD HARDWARE OS",
+    title: "VANGUARD",
+    italicTitle: "HARDWARE OS",
     category: "Industrial Instrument Operating System",
     specs: "HARDWARE OS • TELEMETRY | 2026",
     image: "/images/work_vanguard_hardware_1789796410306.png",
+    mobilePreview: "/images/work_vanguard_hardware_1789796410306.png",
     overlayBadge: "VANGUARD HARDWARE OS",
     overlaySubtext: "Industrial instrument operating system & composition dashboard",
   },
@@ -61,30 +71,65 @@ const PROJECTS: Project[] = [
 
 export default function Work() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const previewRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
-  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [activeFilter, setActiveFilter] = useState("ALL");
+
+  const mousePos = useRef({ x: 0, y: 0 });
+  const cardPos = useRef({ x: 0, y: 0 });
+  const rafRef = useRef<number | null>(null);
+
+  // Ultra-smooth cursor follow centering & lerp
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mousePos.current = { x: e.clientX, y: e.clientY };
+    };
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+
+    const updateCard = () => {
+      if (previewRef.current) {
+        // Centered directly under mouse (width 280px, height 420px -> offset -140px, -210px)
+        const targetX = mousePos.current.x - 140;
+        const targetY = mousePos.current.y - 210;
+
+        // Smooth lerp physics
+        cardPos.current.x += (targetX - cardPos.current.x) * 0.12;
+        cardPos.current.y += (targetY - cardPos.current.y) * 0.12;
+
+        previewRef.current.style.transform = `translate3d(${cardPos.current.x}px, ${cardPos.current.y}px, 0px)`;
+      }
+      rafRef.current = requestAnimationFrame(updateCard);
+    };
+    rafRef.current = requestAnimationFrame(updateCard);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   return (
     <section
       id="works"
       ref={sectionRef}
+      onMouseLeave={() => setActiveProject(null)}
       className="relative w-full px-5 md:px-8 lg:px-12 py-24 border-t"
       style={{ backgroundColor: "#f5f3ed", borderColor: "#e4e2dd" }}
     >
-      {/* Header matching reference screenshot 1 */}
+      {/* Header matching site-wide Newsreader serif typography */}
       <div
         className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-16 border-b"
         style={{ borderColor: "#e4e2dd" }}
       >
         <div>
-          {/* Top Tagline with sleeping-underneath mask reveal */}
+          {/* Top Tagline mask reveal */}
           <div className="overflow-hidden mb-2">
             <motion.div
               initial={{ y: "100%" }}
               animate={isInView ? { y: 0 } : {}}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
+              transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] as const }}
               className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
@@ -92,20 +137,22 @@ export default function Work() {
             </motion.div>
           </div>
 
-          {/* Main Title with sleeping-underneath mask reveal */}
+          {/* Main Title mask reveal in Newsreader serif */}
           <div className="overflow-hidden">
             <motion.h2
               initial={{ y: "100%" }}
               animate={isInView ? { y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] as const }}
-              className="text-[#1b1c18] font-bold tracking-tight uppercase"
+              transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] as const }}
+              className="text-[#1b1c18] tracking-tight leading-none"
               style={{
-                fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+                fontFamily: "'Newsreader', Georgia, serif",
                 fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
-                lineHeight: "0.95",
+                fontWeight: 400,
               }}
             >
-              CURATED WORK
+              CURATED WORK &amp;
+              <br />
+              <span className="italic font-normal text-[#b6240f]">COMMISSIONS.</span>
             </motion.h2>
           </div>
         </div>
@@ -115,7 +162,7 @@ export default function Work() {
           <motion.div
             initial={{ y: "100%", opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
             className="flex items-center gap-4 font-mono text-[11px] text-[#747878]"
             style={{ fontFamily: "'Space Mono', monospace" }}
           >
@@ -135,18 +182,16 @@ export default function Work() {
         </div>
       </div>
 
-      {/* Grid Layout matching reference screenshot */}
+      {/* Asymmetric Work Grid */}
       <div className="flex flex-col gap-16">
-        {/* ========================================================
-            FEATURED COMMISSION // 01 (Large Top Showcase)
-           ======================================================== */}
+        {/* FEATURED COMMISSION // 01 */}
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
+          transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
           className="group cursor-pointer flex flex-col gap-4"
-          onMouseEnter={() => setHoveredProject("01")}
-          onMouseLeave={() => setHoveredProject(null)}
+          onMouseEnter={() => setActiveProject(PROJECTS[0])}
+          onMouseLeave={() => setActiveProject(null)}
         >
           {/* Top metadata strip */}
           <div className="flex items-center justify-between font-mono text-[11px]">
@@ -164,22 +209,24 @@ export default function Work() {
             </span>
           </div>
 
-          {/* Title sleeping-underneath reveal */}
+          {/* Title in Newsreader serif */}
           <div className="overflow-hidden">
             <h3
-              className="text-[#1b1c18] font-bold uppercase transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-[#b6240f]"
+              className="text-[#1b1c18] transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-[#b6240f]"
               style={{
-                fontFamily: "'Space Grotesk', 'Inter', sans-serif",
-                fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                lineHeight: "1.0",
-                letterSpacing: "-0.02em",
+                fontFamily: "'Newsreader', Georgia, serif",
+                fontSize: "clamp(2rem, 5vw, 3.25rem)",
+                lineHeight: "1.05",
+                letterSpacing: "-0.015em",
+                fontWeight: 400,
               }}
             >
-              {PROJECTS[0].title}
+              {PROJECTS[0].title}{" "}
+              <span className="italic font-normal">{PROJECTS[0].italicTitle}</span>
             </h3>
           </div>
 
-          {/* Large Image / Video Media Container */}
+          {/* Large Image Container */}
           <div
             className="relative w-full overflow-hidden border shadow-sm transition-all duration-500 group-hover:shadow-2xl"
             style={{ aspectRatio: "16/9", borderColor: "#e4e2dd" }}
@@ -190,49 +237,24 @@ export default function Work() {
               className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
             />
 
-            {/* Hover Video / Motion Simulation Overlay */}
-            <div
-              className={`absolute inset-0 bg-black/40 backdrop-blur-[2px] transition-opacity duration-500 flex items-center justify-center ${
-                hoveredProject === "01" ? "opacity-100" : "opacity-0 pointer-events-none"
-              }`}
-            >
-              {/* Animated scanline / pulse effect */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#000_100%)] opacity-70" />
-
-              <div className="relative z-10 flex flex-col items-center gap-3">
-                <div className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center bg-[#b6240f] text-white shadow-xl animate-bounce">
-                  <span className="font-mono text-xl">▶</span>
-                </div>
-                <span
-                  className="font-mono text-[11px] text-white uppercase tracking-widest font-bold bg-[#1b1c18] px-3 py-1"
-                  style={{ fontFamily: "'Space Mono', monospace" }}
-                >
-                  PLAY MOTION PREVIEW
-                </span>
-              </div>
-            </div>
-
-            {/* Bottom Left Overlay Badge matching screenshot */}
+            {/* Bottom Left Overlay Badge */}
             <div className="absolute bottom-6 left-6 px-4 py-2 bg-white/95 backdrop-blur border border-[#e4e2dd] font-mono text-[10px] text-[#1b1c18] font-bold uppercase tracking-wider shadow-lg">
               {PROJECTS[0].overlayBadge}
             </div>
           </div>
         </motion.div>
 
-        {/* ========================================================
-            ROW 2: TWO COLUMNS SIDE BY SIDE (02 & 03)
-           ======================================================== */}
+        {/* ROW 2: TWO COLUMNS SIDE BY SIDE (02 & 03) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* Item 02: MOTION STORIES */}
           <motion.div
             initial={{ opacity: 0, y: 35 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
+            transition={{ duration: 1.0, delay: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
             className="group cursor-pointer flex flex-col gap-3"
-            onMouseEnter={() => setHoveredProject("02")}
-            onMouseLeave={() => setHoveredProject(null)}
+            onMouseEnter={() => setActiveProject(PROJECTS[1])}
+            onMouseLeave={() => setActiveProject(null)}
           >
-            {/* Top Bar */}
             <div className="flex items-center justify-between font-mono text-[10px]">
               <span
                 className="text-[#747878] font-bold tracking-wider uppercase"
@@ -248,22 +270,22 @@ export default function Work() {
               </span>
             </div>
 
-            {/* Title sleeping-underneath reveal */}
             <div className="overflow-hidden">
               <h3
-                className="text-[#1b1c18] font-bold uppercase transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#b6240f]"
+                className="text-[#1b1c18] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#b6240f]"
                 style={{
-                  fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+                  fontFamily: "'Newsreader', Georgia, serif",
                   fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
-                  lineHeight: "1.05",
-                  letterSpacing: "-0.01em",
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.015em",
+                  fontWeight: 400,
                 }}
               >
-                {PROJECTS[1].title}
+                {PROJECTS[1].title}{" "}
+                <span className="italic font-normal">{PROJECTS[1].italicTitle}</span>
               </h3>
             </div>
 
-            {/* Media Box */}
             <div
               className="relative w-full overflow-hidden border shadow-sm transition-all duration-500 group-hover:shadow-xl"
               style={{ aspectRatio: "4/3", borderColor: "#e4e2dd" }}
@@ -273,19 +295,6 @@ export default function Work() {
                 alt={PROJECTS[1].title}
                 className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
               />
-
-              {/* Hover Video Simulation */}
-              <div
-                className={`absolute inset-0 bg-black/40 backdrop-blur-[2px] transition-opacity duration-500 flex items-center justify-center ${
-                  hoveredProject === "02" ? "opacity-100" : "opacity-0 pointer-events-none"
-                }`}
-              >
-                <div className="w-12 h-12 rounded-full bg-[#b6240f] text-white flex items-center justify-center shadow-lg">
-                  <span className="font-mono text-lg">▶</span>
-                </div>
-              </div>
-
-              {/* Top Right Overlay Badge matching reference image */}
               <div className="absolute top-4 right-4 px-3 py-1 bg-[#1b1c18] text-white font-mono text-[9px] font-bold uppercase tracking-wider">
                 {PROJECTS[1].overlayBadge}
               </div>
@@ -296,12 +305,11 @@ export default function Work() {
           <motion.div
             initial={{ opacity: 0, y: 35 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
+            transition={{ duration: 1.0, delay: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
             className="group cursor-pointer flex flex-col gap-3"
-            onMouseEnter={() => setHoveredProject("03")}
-            onMouseLeave={() => setHoveredProject(null)}
+            onMouseEnter={() => setActiveProject(PROJECTS[2])}
+            onMouseLeave={() => setActiveProject(null)}
           >
-            {/* Top Bar */}
             <div className="flex items-center justify-between font-mono text-[10px]">
               <span
                 className="text-[#747878] font-bold tracking-wider uppercase"
@@ -317,22 +325,22 @@ export default function Work() {
               </span>
             </div>
 
-            {/* Title sleeping-underneath reveal */}
             <div className="overflow-hidden">
               <h3
-                className="text-[#1b1c18] font-bold uppercase transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#b6240f]"
+                className="text-[#1b1c18] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#b6240f]"
                 style={{
-                  fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+                  fontFamily: "'Newsreader', Georgia, serif",
                   fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
-                  lineHeight: "1.05",
-                  letterSpacing: "-0.01em",
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.015em",
+                  fontWeight: 400,
                 }}
               >
-                {PROJECTS[2].title}
+                {PROJECTS[2].title}{" "}
+                <span className="italic font-normal">{PROJECTS[2].italicTitle}</span>
               </h3>
             </div>
 
-            {/* Media Box */}
             <div
               className="relative w-full overflow-hidden border shadow-sm transition-all duration-500 group-hover:shadow-xl"
               style={{ aspectRatio: "4/3", borderColor: "#e4e2dd" }}
@@ -342,19 +350,6 @@ export default function Work() {
                 alt={PROJECTS[2].title}
                 className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
               />
-
-              {/* Hover Video Simulation */}
-              <div
-                className={`absolute inset-0 bg-black/40 backdrop-blur-[2px] transition-opacity duration-500 flex items-center justify-center ${
-                  hoveredProject === "03" ? "opacity-100" : "opacity-0 pointer-events-none"
-                }`}
-              >
-                <div className="w-12 h-12 rounded-full bg-[#b6240f] text-white flex items-center justify-center shadow-lg">
-                  <span className="font-mono text-lg">▶</span>
-                </div>
-              </div>
-
-              {/* Top Right Overlay Badge matching reference image */}
               <div className="absolute top-4 right-4 px-3 py-1 bg-[#1b1c18] text-white font-mono text-[9px] font-bold uppercase tracking-wider">
                 {PROJECTS[2].overlayBadge}
               </div>
@@ -362,18 +357,15 @@ export default function Work() {
           </motion.div>
         </div>
 
-        {/* ========================================================
-            ROW 3: FULL WIDTH CASE STUDY // 04 (VANGUARD HARDWARE OS)
-           ======================================================== */}
+        {/* ROW 3: FULL WIDTH CASE STUDY // 04 */}
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
+          transition={{ duration: 1.0, delay: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
           className="group cursor-pointer flex flex-col gap-4 mt-4"
-          onMouseEnter={() => setHoveredProject("04")}
-          onMouseLeave={() => setHoveredProject(null)}
+          onMouseEnter={() => setActiveProject(PROJECTS[3])}
+          onMouseLeave={() => setActiveProject(null)}
         >
-          {/* Media Box with Overlay Badge matching reference image 1 */}
           <div
             className="relative w-full overflow-hidden border shadow-sm transition-all duration-500 group-hover:shadow-2xl"
             style={{ aspectRatio: "21/9", borderColor: "#e4e2dd" }}
@@ -383,27 +375,6 @@ export default function Work() {
               alt={PROJECTS[3].title}
               className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
             />
-
-            {/* Hover Video Simulation Scanline */}
-            <div
-              className={`absolute inset-0 bg-black/50 backdrop-blur-[2px] transition-opacity duration-500 flex items-center justify-center ${
-                hoveredProject === "04" ? "opacity-100" : "opacity-0 pointer-events-none"
-              }`}
-            >
-              <div className="flex flex-col items-center gap-2">
-                <div className="w-14 h-14 rounded-full bg-[#b6240f] text-white flex items-center justify-center shadow-lg">
-                  <span className="font-mono text-xl">▶</span>
-                </div>
-                <span
-                  className="font-mono text-[10px] text-white uppercase tracking-widest font-bold"
-                  style={{ fontFamily: "'Space Mono', monospace" }}
-                >
-                  LIVE TELEMETRY FEED
-                </span>
-              </div>
-            </div>
-
-            {/* Bottom Left Overlay Card matching reference image 1 */}
             <div className="absolute bottom-6 left-6 p-4 bg-white/95 backdrop-blur border border-[#e4e2dd] flex flex-col gap-1 max-w-md shadow-xl">
               <span
                 className="font-mono text-[9px] text-[#b6240f] font-bold uppercase tracking-wider"
@@ -412,10 +383,16 @@ export default function Work() {
                 {PROJECTS[3].tagline}
               </span>
               <h4
-                className="text-[#1b1c18] font-bold uppercase text-lg leading-tight"
-                style={{ fontFamily: "'Space Grotesk', 'Inter', sans-serif" }}
+                className="text-[#1b1c18] text-xl leading-tight"
+                style={{
+                  fontFamily: "'Newsreader', Georgia, serif",
+                  fontWeight: 500,
+                }}
               >
-                {PROJECTS[3].overlayBadge}
+                {PROJECTS[3].title}{" "}
+                <span className="italic font-normal text-[#b6240f]">
+                  {PROJECTS[3].italicTitle}
+                </span>
               </h4>
               <p
                 className="text-[#747878] text-[12px] leading-snug"
@@ -424,14 +401,95 @@ export default function Work() {
                 {PROJECTS[3].overlaySubtext}
               </p>
             </div>
-
-            {/* Bottom Right Button matching reference image 1 */}
             <div className="absolute bottom-6 right-6 px-4 py-2 bg-[#1b1c18] text-white font-mono text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg group-hover:bg-[#b6240f] transition-colors">
               <span>VIEW ARCHITECTURE</span>
               <span>▾</span>
             </div>
           </div>
         </motion.div>
+      </div>
+
+      {/* ULTRA-SMOOTH SHARP FLOATING PREVIEW (REMOVED ROUNDED CORNERS & REMOVED ORANGE BORDER) */}
+      <div
+        ref={previewRef}
+        className="fixed top-0 left-0 pointer-events-none z-50 transition-transform duration-75 ease-out"
+        style={{
+          width: "280px",
+          height: "420px",
+          willChange: "transform",
+          display: activeProject ? "block" : "none",
+        }}
+      >
+        <AnimatePresence mode="wait">
+          {activeProject && (
+            <motion.div
+              key={activeProject.id}
+              initial={{ scale: 0.85, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.85, opacity: 0, y: 15 }}
+              transition={{
+                duration: 0.5,
+                ease: [0.16, 1, 0.3, 1] as const,
+              }}
+              className="w-full h-full bg-[#1b1c18] border border-[#1b1c18] overflow-hidden flex flex-col shadow-2xl rounded-none"
+              style={{ boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.6)" }}
+            >
+              {/* Top Studio Status Bar */}
+              <div className="w-full px-4 py-2.5 bg-[#1b1c18] border-b border-[#30312d] flex items-center justify-between font-mono text-[9px] text-[#747878]">
+                <div className="flex items-center gap-1.5 text-[#b6240f] font-bold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#b6240f] animate-pulse" />
+                  ARCHIVE PREVIEW
+                </div>
+                <span>[ {activeProject.num} // SPEC ]</span>
+              </div>
+
+              {/* Main Media Preview Container */}
+              <div className="relative w-full flex-1 overflow-hidden">
+                <img
+                  src={activeProject.mobilePreview}
+                  alt={activeProject.title}
+                  className="w-full h-full object-cover object-center scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1b1c18] via-transparent to-black/30 opacity-90" />
+
+                {/* Floating Play Indicator */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                  <div className="w-12 h-12 rounded-full bg-[#1b1c18]/90 text-white flex items-center justify-center shadow-2xl border border-[#e4e2dd]/40 backdrop-blur">
+                    <span className="font-mono text-base ml-0.5 text-[#b6240f]">▶</span>
+                  </div>
+                  <span
+                    className="font-mono text-[9px] text-white font-bold tracking-widest uppercase bg-[#1b1c18]/90 px-3 py-1 border border-[#30312d]"
+                    style={{ fontFamily: "'Space Mono', monospace" }}
+                  >
+                    PLAY REEL
+                  </span>
+                </div>
+
+                {/* Bottom Info Overlay inside Box */}
+                <div className="absolute bottom-3 left-3 right-3 p-2.5 bg-[#1b1c18]/95 border border-[#30312d] flex flex-col gap-0.5">
+                  <span
+                    className="font-mono text-[8px] text-[#b6240f] font-bold uppercase tracking-wider"
+                    style={{ fontFamily: "'Space Mono', monospace" }}
+                  >
+                    {activeProject.tagline}
+                  </span>
+                  <div
+                    className="text-white text-xs truncate"
+                    style={{ fontFamily: "'Newsreader', Georgia, serif" }}
+                  >
+                    {activeProject.title} {activeProject.italicTitle}
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Specs Footer Bar */}
+              <div className="w-full px-4 py-2 bg-[#1b1c18] border-t border-[#30312d] flex items-center justify-between font-mono text-[9px] text-[#747878]">
+                <span>COMMISSION ARCHIVE</span>
+                <span className="text-[#b6240f]">SELECT →</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 
 interface ServiceItem {
   num: string;
   title: string;
+  italicTitle?: string;
   description: string;
   tags: string;
   image: string;
@@ -15,7 +16,8 @@ interface ServiceItem {
 const SERVICES: ServiceItem[] = [
   {
     num: "01",
-    title: "VIDEO EDITING & MOTION",
+    title: "VIDEO EDITING &",
+    italicTitle: "MOTION DIRECTION",
     description:
       "Dynamic cuts, color grading, spatial sound design, and promotional video assets designed to halt thumbs and communicate gravity.",
     tags: "COMMERCIAL • SOCIAL • PRODUCT",
@@ -24,7 +26,8 @@ const SERVICES: ServiceItem[] = [
   },
   {
     num: "02",
-    title: "UI / UX PRODUCT DESIGN",
+    title: "UI / UX PRODUCT",
+    italicTitle: "DESIGN & CREATIVE TECH",
     description:
       "High-utility interfaces, micro-interaction logic, comprehensive component libraries, and ergonomic mobile/desktop applications.",
     tags: "WEB APPS • MOBILE • DESIGN SYSTEMS",
@@ -33,7 +36,8 @@ const SERVICES: ServiceItem[] = [
   },
   {
     num: "03",
-    title: "WEB & DIGITAL DEVELOPMENT",
+    title: "WEB & DIGITAL",
+    italicTitle: "DEVELOPMENT ARCHITECTURE",
     description:
       "Bespoke headless frontends, WebGL shaders, sub-second loading speeds, and robust CMS architectures built for scale.",
     tags: "TAILWIND • REACT • WEBGL • THREE",
@@ -42,7 +46,8 @@ const SERVICES: ServiceItem[] = [
   },
   {
     num: "04",
-    title: "GRAPHIC DESIGN & BRANDING",
+    title: "GRAPHIC DESIGN &",
+    italicTitle: "BRANDING SYSTEMS",
     description:
       "Distinctive identity systems, bespoke wordmarks, editorial packaging, and tactile collateral that command premium pricing.",
     tags: "IDENTITY • TYPOGRAPHY • PACKAGING",
@@ -51,7 +56,8 @@ const SERVICES: ServiceItem[] = [
   },
   {
     num: "05",
-    title: "DIGITAL GROWTH & MARKETING",
+    title: "DIGITAL GROWTH &",
+    italicTitle: "MARKETING ENGINE",
     description:
       "Precision go-to-market engines, conversion-rate optimization, performance creative tests, and authentic community acquisition.",
     tags: "ACQUISITION • CRO • LAUNCH STRATEGY",
@@ -63,13 +69,14 @@ const SERVICES: ServiceItem[] = [
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   const [activeService, setActiveService] = useState<ServiceItem | null>(null);
   const mousePos = useRef({ x: 0, y: 0 });
   const cardPos = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number | null>(null);
 
+  // Ultra-smooth cursor follow centering & lerp
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
@@ -78,11 +85,14 @@ export default function Services() {
 
     const updateCard = () => {
       if (previewRef.current) {
-        // Smooth lerp follow
-        cardPos.current.x += (mousePos.current.x + 220 - cardPos.current.x) * 0.12;
-        cardPos.current.y += (mousePos.current.y - 140 - cardPos.current.y) * 0.12;
-        previewRef.current.style.left = `${cardPos.current.x}px`;
-        previewRef.current.style.top = `${cardPos.current.y}px`;
+        // Centered directly under mouse (width 400px, height 250px -> offset -200px, -125px)
+        const targetX = mousePos.current.x - 200;
+        const targetY = mousePos.current.y - 125;
+
+        cardPos.current.x += (targetX - cardPos.current.x) * 0.12;
+        cardPos.current.y += (targetY - cardPos.current.y) * 0.12;
+
+        previewRef.current.style.transform = `translate3d(${cardPos.current.x}px, ${cardPos.current.y}px, 0px)`;
       }
       rafRef.current = requestAnimationFrame(updateCard);
     };
@@ -98,10 +108,11 @@ export default function Services() {
     <section
       id="services"
       ref={sectionRef}
+      onMouseLeave={() => setActiveService(null)}
       className="relative w-full px-5 md:px-8 lg:px-12 py-24 border-t"
       style={{ backgroundColor: "#fbf9f3", borderColor: "#e4e2dd" }}
     >
-      {/* Section Header matching exact reference screenshot */}
+      {/* Section Header */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16 items-start">
         <div className="lg:col-span-7">
           {/* Tagline mask reveal */}
@@ -109,7 +120,7 @@ export default function Services() {
             <motion.div
               initial={{ y: "100%" }}
               animate={isInView ? { y: 0 } : {}}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
+              transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] as const }}
               className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
@@ -117,20 +128,22 @@ export default function Services() {
             </motion.div>
           </div>
 
-          {/* Main Title mask reveal */}
+          {/* Main Title mask reveal in Newsreader font */}
           <div className="overflow-hidden">
             <motion.h2
               initial={{ y: "100%" }}
               animate={isInView ? { y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] as const }}
-              className="text-[#1b1c18] font-bold tracking-tight uppercase"
+              transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] as const }}
+              className="text-[#1b1c18] tracking-tight leading-none"
               style={{
-                fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+                fontFamily: "'Newsreader', Georgia, serif",
                 fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
-                lineHeight: "0.95",
+                fontWeight: 400,
               }}
             >
-              SERVICES
+              SERVICES &amp;
+              <br />
+              <span className="italic font-normal text-[#b6240f]">CAPABILITIES.</span>
             </motion.h2>
           </div>
         </div>
@@ -141,7 +154,7 @@ export default function Services() {
             <motion.p
               initial={{ y: "100%", opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : {}}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
+              transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
               className="font-mono text-[11px] leading-relaxed uppercase text-[#747878] tracking-wider"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
@@ -156,14 +169,14 @@ export default function Services() {
         {SERVICES.map((service, i) => (
           <motion.div
             key={service.num}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 35 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{
-              duration: 0.7,
-              delay: 0.15 + i * 0.1,
+              duration: 1.0,
+              delay: 0.15 + i * 0.12,
               ease: [0.16, 1, 0.3, 1] as const,
             }}
-            className="service-row group relative py-10 border-b cursor-pointer transition-colors duration-300 hover:bg-[#f5f3ed]/60 px-3 md:px-4"
+            className="service-row group relative py-10 border-b cursor-pointer transition-colors duration-300 hover:bg-[#f5f3ed]/70 px-3 md:px-4"
             style={{ borderColor: "#e4e2dd" }}
             onMouseEnter={() => setActiveService(service)}
             onMouseLeave={() => setActiveService(null)}
@@ -181,24 +194,26 @@ export default function Services() {
                   </span>
                 </div>
 
-                {/* Title & Description with sleep-underneath mask */}
+                {/* Title & Description in Newsreader font */}
                 <div className="flex flex-col gap-2">
                   <div className="overflow-hidden">
                     <h3
-                      className="text-[#1b1c18] font-bold uppercase transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#b6240f]"
+                      className="text-[#1b1c18] transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-[#b6240f]"
                       style={{
-                        fontFamily: "'Space Grotesk', 'Inter', sans-serif",
-                        fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)",
-                        lineHeight: "1.05",
-                        letterSpacing: "-0.02em",
+                        fontFamily: "'Newsreader', Georgia, serif",
+                        fontSize: "clamp(1.5rem, 3.5vw, 2.25rem)",
+                        lineHeight: "1.1",
+                        letterSpacing: "-0.015em",
+                        fontWeight: 400,
                       }}
                     >
-                      {service.title}
+                      {service.title}{" "}
+                      <span className="italic font-normal">{service.italicTitle}</span>
                     </h3>
                   </div>
 
                   <p
-                    className="max-w-xl text-[#747878] transition-colors duration-300 group-hover:text-[#30312d]"
+                    className="max-w-xl text-[#747878] transition-colors duration-300 group-hover:text-[#1b1c18]"
                     style={{
                       fontFamily: "'Manrope', sans-serif",
                       fontSize: "0.875rem",
@@ -219,9 +234,9 @@ export default function Services() {
                   {service.tags}
                 </span>
 
-                {/* Circular Arrow Button matching reference screenshot */}
+                {/* Circular Arrow Button */}
                 <div
-                  className="w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-300 group-hover:border-[#b6240f] group-hover:bg-[#b6240f] group-hover:text-white"
+                  className="w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-300 group-hover:border-[#b6240f] group-hover:bg-[#b6240f] group-hover:text-white shadow-sm"
                   style={{ borderColor: "#1b1c18", color: "#1b1c18" }}
                 >
                   <span className="font-mono text-[14px] transition-transform duration-300 group-hover:rotate-45">
@@ -237,63 +252,76 @@ export default function Services() {
         ))}
       </div>
 
-      {/* BIGGER Floating Cursor Preview Card with Distinct Images */}
+      {/* ULTRA-SMOOTH HOVER CURSOR FLOATING PREVIEW (REMOVED BORDER RADIUS & REMOVED ORANGE BORDER) */}
       <div
         ref={previewRef}
-        className="fixed pointer-events-none z-50 overflow-hidden border shadow-2xl transition-all duration-300 ease-out rounded-sm"
+        className="fixed top-0 left-0 pointer-events-none z-50 transition-transform duration-75 ease-out"
         style={{
-          width: "420px",
-          height: "270px",
-          backgroundColor: "#1b1c18",
-          borderColor: "#b6240f",
-          opacity: activeService ? 1 : 0,
-          transform: activeService ? "scale(1)" : "scale(0.85)",
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.4)",
+          width: "400px",
+          height: "250px",
+          willChange: "transform",
+          display: activeService ? "block" : "none",
         }}
       >
-        {activeService && (
-          <div className="relative w-full h-full flex flex-col">
-            {/* Image Preview Container */}
-            <div className="relative w-full flex-1 overflow-hidden">
-              <img
-                src={activeService.image}
-                alt={activeService.title}
-                className="w-full h-full object-cover object-center transition-transform duration-700 ease-out scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1b1c18] via-transparent to-transparent opacity-80" />
+        <AnimatePresence mode="wait">
+          {activeService && (
+            <motion.div
+              key={activeService.num}
+              initial={{ scale: 0.85, opacity: 0, y: 12 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.85, opacity: 0, y: 12 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] as const }}
+              className="w-full h-full bg-[#1b1c18] border border-[#1b1c18] shadow-2xl rounded-none overflow-hidden flex flex-col"
+              style={{ boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.6)" }}
+            >
+              {/* Image Preview Container */}
+              <div className="relative w-full flex-1 overflow-hidden">
+                <img
+                  src={activeService.image}
+                  alt={activeService.title}
+                  className="w-full h-full object-cover object-center scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1b1c18] via-transparent to-transparent opacity-80" />
 
-              {/* Top Tag */}
-              <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#1b1c18]/90 backdrop-blur border border-[#e4e2dd]/20 font-mono text-[9px] text-white uppercase tracking-widest">
-                [ SPEC // {activeService.num} ]
-              </div>
-
-              {/* Live Pulsing Dot */}
-              <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2 py-1 bg-[#b6240f] font-mono text-[9px] text-white uppercase tracking-widest font-bold">
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                LIVE PREVIEW
-              </div>
-            </div>
-
-            {/* Bottom Info Bar inside Card */}
-            <div className="w-full px-4 py-3 bg-[#1b1c18] border-t border-[#30312d] flex items-center justify-between">
-              <div>
+                {/* Top Tag */}
                 <div
-                  className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-wider"
+                  className="absolute top-3 left-3 px-2.5 py-1 bg-[#1b1c18]/90 backdrop-blur border border-[#e4e2dd]/20 font-mono text-[9px] text-white uppercase tracking-widest"
                   style={{ fontFamily: "'Space Mono', monospace" }}
                 >
-                  {activeService.title}
+                  [ SPEC // {activeService.num} ]
                 </div>
+
+                {/* Live Pulsing Dot */}
                 <div
-                  className="font-mono text-[9px] text-[#747878] uppercase"
+                  className="absolute top-3 right-3 flex items-center gap-1.5 px-2 py-1 bg-[#b6240f] font-mono text-[9px] text-white uppercase tracking-widest font-bold"
                   style={{ fontFamily: "'Space Mono', monospace" }}
                 >
-                  {activeService.spec}
+                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                  LIVE PREVIEW
                 </div>
               </div>
-              <span className="font-mono text-[11px] text-white">→</span>
-            </div>
-          </div>
-        )}
+
+              {/* Bottom Info Bar inside Card */}
+              <div className="w-full px-4 py-3 bg-[#1b1c18] border-t border-[#30312d] flex items-center justify-between">
+                <div>
+                  <div
+                    className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-wider"
+                    style={{ fontFamily: "'Space Mono', monospace" }}
+                  >
+                    {activeService.title} {activeService.italicTitle}
+                  </div>
+                  <div
+                    className="font-mono text-[9px] text-[#747878] uppercase"
+                    style={{ fontFamily: "'Space Mono', monospace" }}
+                  >
+                    {activeService.spec}
+                  </div>
+                </div>
+                <span className="font-mono text-[11px] text-white">→</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

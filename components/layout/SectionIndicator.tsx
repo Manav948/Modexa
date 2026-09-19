@@ -18,7 +18,7 @@ export default function SectionIndicator() {
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.3 }
     );
 
     SECTION_IDS.forEach((id) => {
@@ -30,9 +30,11 @@ export default function SectionIndicator() {
   }, []);
 
   return (
-    <aside className="hidden xl:flex fixed right-12 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-2">
-      <div className="flex flex-col items-center gap-2 font-mono text-[10px]"
-           style={{ fontFamily: "'Space Mono', monospace" }}>
+    <aside className="hidden xl:flex fixed right-4 top-1/2 -translate-y-1/2 z-40 flex-col items-center py-4 px-2 rounded-full bg-[#fbf9f3]/80 backdrop-blur-md border border-[#e4e2dd] shadow-sm">
+      <div
+        className="flex flex-col items-center gap-1.5 font-mono text-[9px]"
+        style={{ fontFamily: "'Space Mono', monospace" }}
+      >
         {SECTIONS.map((num, i) => (
           <div key={num} className="flex flex-col items-center">
             <button
@@ -40,9 +42,9 @@ export default function SectionIndicator() {
                 const el = document.getElementById(SECTION_IDS[i]);
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className={`transition-colors cursor-pointer font-bold ${
+              className={`transition-all cursor-pointer font-bold px-1 py-0.5 ${
                 activeSection === i
-                  ? "text-[#b6240f]"
+                  ? "text-[#b6240f] scale-110"
                   : "text-[#747878] hover:text-[#1b1c18]"
               }`}
             >
@@ -52,10 +54,10 @@ export default function SectionIndicator() {
               <div
                 className="w-px"
                 style={{
-                  height: activeSection === i ? "48px" : "24px",
+                  height: activeSection === i ? "32px" : "14px",
                   backgroundColor: activeSection === i ? "#b6240f" : "#e4e2dd",
-                  transition: "height 0.3s ease, background-color 0.3s ease",
-                  margin: "4px 0",
+                  transition: "height 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease",
+                  margin: "2px 0",
                 }}
               />
             )}
