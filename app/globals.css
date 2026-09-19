@@ -1,26 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Manrope:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================
+   STUDIO DIRECTION DESIGN SYSTEM
+   ============================================ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Core Colors */
+  --color-background: #fbf9f3;
+  --color-surface: #fbf9f3;
+  --color-surface-bright: #ffffff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f5f3ed;
+  --color-surface-container: #f0eee8;
+  --color-surface-container-high: #eae8e2;
+  --color-surface-container-highest: #e4e2dd;
+  --color-surface-dim: #dcdad4;
+  --color-surface-variant: #e4e2dd;
+  --color-on-surface: #1b1c18;
+  --color-on-surface-variant: #444748;
+  --color-primary: #000000;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #1c1b1b;
+  --color-on-primary-container: #858383;
+  --color-secondary: #b6240f;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #fe573c;
+  --color-on-secondary-container: #5a0600;
+  --color-secondary-fixed: #ffdad4;
+  --color-on-secondary-fixed-variant: #900e00;
+  --color-tertiary: #000000;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #1a1d07;
+  --color-on-tertiary-container: #838667;
+  --color-outline: #747878;
+  --color-outline-variant: #c4c7c7;
+  --color-inverse-surface: #30312d;
+  --color-inverse-on-surface: #f3f1eb;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
+  --color-error-container: #ffdad6;
+
+  /* Brand accent (Vermilion) */
+  --color-accent: #E7472E;
+  --color-accent-muted: #7C8061;
+  --color-border: #E8E2D5;
+
+  /* Typography Tokens */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-editorial: 'Newsreader', Georgia, serif;
+  --font-mono: 'DM Mono', 'Space Mono', monospace;
+  --font-label: 'Space Mono', monospace;
+  --font-body: 'Manrope', 'Inter', sans-serif;
+
+  /* Spacing */
+  --spacing-margin: 3rem;
+  --spacing-margin-tablet: 2rem;
+  --spacing-margin-mobile: 1.25rem;
+  --spacing-gutter: 1.5rem;
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.75rem;
+  --spacing-space-xl: 3rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================
+   GLOBAL RESETS & BASE
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --background: #fbf9f3;
+  --foreground: #1b1c18;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: none;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+::selection {
+  background: #b6240f;
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================
+   TYPOGRAPHY SCALE
+   ============================================ */
+
+.font-display {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.font-editorial {
+  font-family: 'Newsreader', Georgia, serif;
+}
+
+.font-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6875rem;
+  line-height: 0.875rem;
+  letter-spacing: 0.1em;
+}
+
+.font-label-md {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.08em;
+}
+
+.font-body {
+  font-family: 'Manrope', 'Inter', sans-serif;
+}
+
+/* ============================================
+   ANIMATION UTILITIES
+   ============================================ */
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes ticker-cycle {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-1.3em); }
+  50% { transform: translateY(-2.6em); }
+  75% { transform: translateY(-3.9em); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mask-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0% 0 0); }
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+  animation: float-gentle 4s ease-in-out infinite;
+}
+
+/* ============================================
+   MAGNETIC BUTTON
+   ============================================ */
+
+.magnetic-btn {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* ============================================
+   LINE PROGRESS
+   ============================================ */
+
+.line-progress {
+  height: 1.5px;
+  width: 0;
+  background: #b6240f;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-row:hover .line-progress {
+  width: 100%;
+}
+
+/* ============================================
+   SCROLL REVEAL
+   ============================================ */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   MASK REVEAL FOR IMAGES
+   ============================================ */
+
+.image-mask-wrap {
+  overflow: hidden;
+}
+
+.image-mask-wrap img {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.image-mask-wrap.revealed img {
+  clip-path: inset(0% 0 0 0);
+}
+
+/* ============================================
+   DISCIPLINE CHIP
+   ============================================ */
+
+.discipline-tag input:checked ~ span,
+.discipline-tag.active {
+  background: #b6240f;
+  color: #ffffff;
+  border-color: #b6240f;
+}
+
+/* ============================================
+   NETWORK PATH DRAW
+   ============================================ */
+
+.network-path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.network-path.active {
+  stroke-dashoffset: 0;
+}
+
+/* ============================================
+   FRAGMENT WORLD ELEMENT
+   ============================================ */
+
+.world-fragment {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* ============================================
+   TICKER SCRUB
+   ============================================ */
+
+#ticker-slider {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .world-fragment {
+    transform: none !important;
+  }
 }
