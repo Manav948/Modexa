@@ -12,14 +12,25 @@ export default function ScrollRevealProvider() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -60px 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
 
-    const revealEls = document.querySelectorAll(".reveal-on-scroll, .image-mask-wrap");
-    revealEls.forEach((el) => observer.observe(el));
+    const observeElements = () => {
+      const revealEls = document.querySelectorAll(
+        ".reveal-on-scroll, .image-mask-wrap, .line-reveal, .word-reveal, .text-reveal"
+      );
+      revealEls.forEach((el) => observer.observe(el));
+    };
 
-    return () => observer.disconnect();
+    observeElements();
+    const timer = setTimeout(observeElements, 200);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
 
   return null;
 }
+

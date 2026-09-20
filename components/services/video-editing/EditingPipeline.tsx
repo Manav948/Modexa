@@ -42,13 +42,13 @@ export default function EditingPipeline() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-[#e4e2dd] gap-6">
           <div>
-            <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-2 font-bold">
+            <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-2 font-bold line-reveal">
               <span>05 / THE EDIT PIPELINE</span>
               <span className="w-4 h-px bg-[#b6240f]" />
               <span>DISCIPLINED PROCESS</span>
             </div>
             <h2
-              className="text-[#1b1c18] uppercase tracking-tight"
+              className="text-[#1b1c18] uppercase tracking-tight text-reveal"
               style={{
                 fontFamily: "'Newsreader', Georgia, serif",
                 fontSize: "clamp(2rem, 4vw, 3.25rem)",
@@ -58,7 +58,7 @@ export default function EditingPipeline() {
               From raw footage to final frame.
             </h2>
           </div>
-          <span className="font-mono text-[10px] text-[#747878] uppercase tracking-wider font-bold">
+          <span className="font-mono text-[10px] text-[#747878] uppercase tracking-wider font-bold line-reveal">
             EST. TURNAROUND: 48–72H COMMISSIONS
           </span>
         </div>

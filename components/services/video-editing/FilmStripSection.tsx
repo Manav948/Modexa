@@ -41,13 +41,13 @@ export default function FilmStripSection() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 pb-4 border-b border-[#e4e2dd] gap-4">
           <div>
-            <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-1.5 font-bold">
+            <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-1.5 font-bold line-reveal">
               <span>03 / DIRECTORIAL HORIZON</span>
               <span className="w-4 h-px bg-[#b6240f]" />
               <span>PANORAMIC TIMELINE</span>
             </div>
             <h2
-              className="text-[#1b1c18] uppercase tracking-tight"
+              className="text-[#1b1c18] uppercase tracking-tight text-reveal"
               style={{
                 fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "clamp(2rem, 4vw, 3.25rem)",
@@ -57,7 +57,7 @@ export default function FilmStripSection() {
               THE FILM STRIP
             </h2>
           </div>
-          <div className="font-mono text-[10px] text-[#747878] uppercase tracking-widest">
+          <div className="font-mono text-[10px] text-[#747878] uppercase tracking-widest line-reveal">
             <span>DRAG OR SCROLL HORIZONTALLY →</span>
           </div>
         </div>

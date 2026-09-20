@@ -58,13 +58,13 @@ export default function EditingCapabilities() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-[#e4e2dd] gap-6">
           <div>
-            <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-2 font-bold">
+            <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-2 font-bold line-reveal">
               <span>04 / SCOPE OF DISCIPLINE</span>
               <span className="w-4 h-px bg-[#b6240f]" />
               <span>CAPABILITIES DIRECTORY</span>
             </div>
             <h2
-              className="text-[#1b1c18] uppercase tracking-tight"
+              className="text-[#1b1c18] uppercase tracking-tight text-reveal"
               style={{
                 fontFamily: "'Newsreader', Georgia, serif",
                 fontSize: "clamp(2rem, 4vw, 3.25rem)",
@@ -74,7 +74,7 @@ export default function EditingCapabilities() {
               What I Edit
             </h2>
           </div>
-          <span className="font-mono text-[10px] text-[#747878] uppercase tracking-wider font-bold">
+          <span className="font-mono text-[10px] text-[#747878] uppercase tracking-wider font-bold line-reveal">
             [FULL SPECTRUM MOTION CRAFT]
           </span>
         </div>

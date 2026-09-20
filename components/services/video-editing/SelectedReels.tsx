@@ -129,13 +129,13 @@ export default function SelectedReels() {
       <div className="max-w-[1400px] mx-auto w-full px-5 md:px-8 lg:px-12 mb-16">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between pb-6 border-b border-[#e4e2dd] gap-6">
           <div>
-            <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-2 font-bold">
+            <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-2 font-bold line-reveal">
               <span>02 / RETENTION &amp; MOMENTUM</span>
               <span className="w-4 h-px bg-[#b6240f]" />
               <span>INFINITE FILM WALL MATRIX</span>
             </div>
             <h2
-              className="text-[#1b1c18] uppercase tracking-tight"
+              className="text-[#1b1c18] uppercase tracking-tight text-reveal"
               style={{
                 fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)",
@@ -146,7 +146,7 @@ export default function SelectedReels() {
             </h2>
           </div>
           <p
-            className="text-[#747878] max-w-md font-sans text-sm md:text-base leading-relaxed"
+            className="text-[#747878] max-w-md font-sans text-sm md:text-base leading-relaxed text-reveal"
             style={{ fontFamily: "'Manrope', sans-serif" }}
           >
             All film frames share identical dimensions (280 × 400). Floating across a drafting coordinate grid, vertical rhythm offsets travel endlessly.

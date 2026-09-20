@@ -19,7 +19,7 @@ export default function InitiationCTA() {
       <div className="relative z-10 max-w-[1400px] mx-auto w-full px-5 md:px-8 lg:px-12">
         <div className="max-w-4xl">
           {/* Section Sub-Tag */}
-          <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-4 font-bold">
+          <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-4 font-bold line-reveal">
             <span>07 / MANDATE INITIATION</span>
             <span className="w-4 h-px bg-[#b6240f]" />
             <span>DIRECT COMMISSIONS</span>
@@ -27,7 +27,7 @@ export default function InitiationCTA() {
 
           {/* Large-scale Editorial Headline matching Stitch specification */}
           <h2
-            className="text-white uppercase leading-none tracking-tight mb-6"
+            className="text-white uppercase leading-none tracking-tight mb-6 text-reveal"
             style={{
               fontFamily: "'Space Grotesk', sans-serif",
               fontSize: "clamp(2.75rem, 6.5vw, 5.5rem)",
@@ -43,7 +43,7 @@ export default function InitiationCTA() {
           </h2>
 
           <p
-            className="text-[#c4c7c7] max-w-2xl text-base md:text-lg leading-relaxed mb-8"
+            className="text-[#c4c7c7] max-w-2xl text-base md:text-lg leading-relaxed mb-8 text-reveal"
             style={{ fontFamily: "'Manrope', sans-serif" }}
           >
             Bring the raw material, the rushed rushes, or simply the vision. Our editorial direction unifies cadence, sound design, and retention into an unforgettable cinematic artifact.

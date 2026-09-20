@@ -60,25 +60,48 @@ export default function VideoEditingHero() {
             </span>
           </div>
 
-          {/* Headline matching Reference Image */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+          {/* Headline matching Reference Image with line-by-line word-by-word mask reveal */}
+          <h1
             className="text-white uppercase leading-[0.92] tracking-tight mb-6"
             style={{
               fontFamily: "'Space Grotesk', sans-serif",
               fontSize: "clamp(3.25rem, 7.5vw, 6.75rem)",
             }}
           >
-            EVERY CUT <br />
-            <span
-              className="italic font-normal text-[#fbf9f3] lowercase tracking-normal"
-              style={{ fontFamily: "'Newsreader', Georgia, serif" }}
-            >
-              changes the story.
-            </span>
-          </motion.h1>
+            <div className="overflow-hidden inline-block pr-4">
+              <motion.span
+                initial={{ y: "110%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] as const }}
+                className="inline-block"
+              >
+                EVERY
+              </motion.span>
+            </div>
+            {" "}
+            <div className="overflow-hidden inline-block">
+              <motion.span
+                initial={{ y: "110%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1.0, delay: 0.1, ease: [0.16, 1, 0.3, 1] as const }}
+                className="inline-block"
+              >
+                CUT
+              </motion.span>
+            </div>
+            <br />
+            <div className="overflow-hidden inline-block">
+              <motion.span
+                initial={{ y: "110%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
+                className="inline-block italic font-normal text-[#fbf9f3] lowercase tracking-normal"
+                style={{ fontFamily: "'Newsreader', Georgia, serif" }}
+              >
+                changes the story.
+              </motion.span>
+            </div>
+          </h1>
 
           {/* Sub-description */}
           <motion.p
