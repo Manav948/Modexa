@@ -82,134 +82,182 @@ export default function KineticTypeSection() {
       ref={sectionRef}
       id="dm-kinetic"
       className="relative w-full overflow-hidden"
-      style={{ backgroundColor: "#f7f5ef", minHeight: "70vh" }}
+      style={{ backgroundColor: "#f7f5ef" }}
     >
-      {/* Meta line at top */}
-      <div
-        className="kinetic-meta flex items-center gap-6 px-5 md:px-8 lg:px-14 pt-10 pb-0 font-mono text-[10px] uppercase tracking-widest border-t"
-        style={{ borderColor: "#E8E2D5", color: "#55534E", fontFamily: "'DM Mono', monospace" }}
-      >
-        <span>06 // KINETIC METRIC POSTER</span>
-        <span className="w-4 h-px bg-[#E8E2D5]" />
-        <span className="text-[#E7472E] font-bold">SYSTEM STATEMENT</span>
-      </div>
-
-      {/* Main kinetic type composition */}
-      <div className="relative w-full flex">
-
-        {/* LEFT: Partially cropped large words — extends beyond left edge */}
+      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-14">
         <div
-          className="kinetic-left-words absolute left-0 top-0 bottom-0 flex flex-col justify-start pt-4"
-          style={{ zIndex: 1 }}
+          className="kinetic-meta flex items-center gap-4 md:gap-6 pt-10 pb-3 font-mono text-[9px] sm:text-[10px] uppercase tracking-widest border-t"
+          style={{ borderColor: "#E8E2D5", color: "#55534E", fontFamily: "'DM Mono', monospace" }}
         >
-          {/* "ENTION" — last part of ATTENTION (partially cropped left edge) */}
-          <div
-            className="leading-none select-none"
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(6rem, 16vw, 18rem)",
-              fontWeight: 700,
-              letterSpacing: "-0.04em",
-              color: "#151515",
-              marginLeft: "-0.12em",
-              opacity: 0.9,
-              lineHeight: 0.88,
-            }}
-          >
-            ON
-          </div>
-          {/* "TENT" — part of CONTENT */}
-          <div
-            className="leading-none select-none"
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(6rem, 16vw, 18rem)",
-              fontWeight: 700,
-              letterSpacing: "-0.04em",
-              color: "#E8E2D5",
-              marginLeft: "-0.12em",
-              lineHeight: 0.88,
-            }}
-          >
-            E
-          </div>
-          {/* Dash separator — matches reference */}
-          <div className="flex items-center gap-3 pl-3 mt-2">
-            <span className="w-12 h-[2px]" style={{ backgroundColor: "#E8E2D5" }} />
-          </div>
-          <div
-            className="leading-none select-none mt-1"
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(6rem, 16vw, 18rem)",
-              fontWeight: 700,
-              letterSpacing: "-0.04em",
-              color: "#E8E2D5",
-              marginLeft: "-0.12em",
-              lineHeight: 0.88,
-            }}
-          >
-            Y
-          </div>
+          <span>06 // KINETIC METRIC POSTER</span>
+          <span className="w-4 h-px bg-[#E8E2D5]" />
+          <span className="text-[#E7472E] font-bold">SYSTEM STATEMENT</span>
         </div>
 
-        {/* RIGHT: "REACH into CONVE..." — right-anchored and partially cropped */}
-        <div
-          className="kinetic-right-words absolute right-0 bottom-6 flex flex-col items-end text-right"
-          style={{ zIndex: 1 }}
-        >
-          {/* "REACH into" — serif mix */}
-          <div className="flex items-baseline gap-3 leading-none select-none">
-            <span
+        <div className="relative w-full min-h-[500px] md:min-h-[660px] overflow-hidden py-7 md:py-10">
+          <div className="absolute inset-x-[2.5%] top-5 bottom-4 mx-auto h-full border border-[#E8E2D5] bg-[#f8f6f1]" />
+          <div className="absolute left-8 top-14 h-[72%] w-px bg-[#E8E2D5] md:left-14" />
+          <div className="absolute right-8 top-14 h-[72%] w-px bg-[#E8E2D5] md:right-14" />
+          <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-[#E8E2D5] opacity-80" />
+
+          <div className="kinetic-left-words absolute left-5 top-12 md:left-12 md:top-16 lg:left-16 flex flex-col leading-none select-none" style={{ zIndex: 1 }}>
+            <div
+              className="block"
               style={{
                 fontFamily: "'Space Grotesk', sans-serif",
-                fontSize: "clamp(4rem, 10vw, 12rem)",
+                fontSize: "clamp(3.8rem, 9vw, 12rem)",
                 fontWeight: 700,
-                letterSpacing: "-0.04em",
-                color: "#E8E2D5",
-                lineHeight: 0.88,
+                letterSpacing: "-0.08em",
+                color: "#151515",
+                lineHeight: 0.8,
               }}
             >
               REACH
-            </span>
-            <span
+            </div>
+            <div
+              className="flex items-end gap-2 md:gap-4"
+              style={{ marginTop: "0.2em" }}
+            >
+              <span
+                style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: "clamp(2.4rem, 6vw, 8rem)",
+                  fontWeight: 700,
+                  letterSpacing: "-0.06em",
+                  color: "#151515",
+                  lineHeight: 0.8,
+                }}
+              >
+                INTO
+              </span>
+              <span
+                style={{
+                  fontFamily: "'Newsreader', Georgia, serif",
+                  fontSize: "clamp(2rem, 4.5vw, 6rem)",
+                  fontWeight: 400,
+                  fontStyle: "italic",
+                  color: "#E7472E",
+                  lineHeight: 0.8,
+                }}
+              >
+                motion
+              </span>
+            </div>
+          </div>
+
+          <div className="kinetic-right-words absolute right-5 top-20 md:right-12 md:top-24 lg:right-20 flex flex-col items-end text-right leading-none select-none" style={{ zIndex: 1 }}>
+            <div
               style={{
-                fontFamily: "'Newsreader', Georgia, serif",
-                fontSize: "clamp(3rem, 7.5vw, 9rem)",
-                fontWeight: 400,
-                fontStyle: "italic",
-                color: "#E7472E",
-                lineHeight: 0.88,
+                fontFamily: "'Space Grotesk', sans-serif",
+                fontSize: "clamp(3.8rem, 9vw, 12rem)",
+                fontWeight: 700,
+                letterSpacing: "-0.08em",
+                color: "#151515",
+                lineHeight: 0.8,
               }}
             >
-              into
+              CONVER
+            </div>
+            <div
+              style={{
+                fontFamily: "'Space Grotesk', sans-serif",
+                fontSize: "clamp(2.6rem, 6vw, 7.5rem)",
+                fontWeight: 700,
+                letterSpacing: "-0.08em",
+                color: "#E7472E",
+                lineHeight: 0.8,
+                marginTop: "0.2em",
+              }}
+            >
+              SION
+            </div>
+          </div>
+
+          <div className="absolute inset-x-0 top-[65%] z-[2] flex -translate-y-1/2 justify-center px-8 md:px-12">
+            <div className="max-w-2xl text-center" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2.1em", marginTop: "2.8rem" }}>
+              <div
+                style={{
+                  fontFamily: "'Newsreader', Georgia, serif",
+                  fontSize: "clamp(1.5rem, 2.8vw, 2.8rem)",
+                  lineHeight: 1.12,
+                  color: "#151515",
+                  fontStyle: "italic",
+                  opacity: 0.82,
+                }}
+              >
+                Creative systems that turn attention into measurable growth.
+              </div>
+              <div
+                className="font-mono uppercase"
+                style={{
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: "0.58rem",
+                  letterSpacing: "0.24em",
+                  color: "#55534E",
+                }}
+              >
+                strategy / creative / conversion
+              </div>
+              <div
+                style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: "clamp(0.72rem, 1vw, 0.9rem)",
+                  lineHeight: 1.7,
+                  color: "#55534E",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  maxWidth: "540px",
+                }}
+              >
+                built for visibility, resonance, and performance across every scroll.
+              </div>
+            </div>
+          </div>
+
+          <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center gap-3 md:gap-5" style={{ zIndex: 2 }}>
+            <span className="h-[2px] w-12 bg-[#151515] md:w-20" />
+            <span
+              className="font-mono uppercase tracking-[0.28em]"
+              style={{
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "0.56rem",
+                color: "#55534E",
+                letterSpacing: "0.28em",
+              }}
+            >
+              PERFORMANCE
             </span>
+            <span className="h-[2px] w-12 bg-[#151515] md:w-20" />
           </div>
 
-          {/* Dash line — matches reference */}
-          <div className="flex items-center gap-3 justify-end pr-4 my-1">
-            <span className="w-16 h-[2px]" style={{ backgroundColor: "#E8E2D5" }} />
+          <div className="absolute bottom-20 left-8 md:left-12" style={{ zIndex: 2 }}>
+            <div
+              className="font-mono uppercase"
+              style={{
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "0.58rem",
+                color: "#55534E",
+                letterSpacing: "0.2em",
+              }}
+            >
+              01 // SIGNAL
+            </div>
           </div>
 
-          {/* "CONVE..." — partially cropped right edge */}
-          <div
-            className="leading-none select-none overflow-hidden"
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(5rem, 13vw, 15rem)",
-              fontWeight: 700,
-              letterSpacing: "-0.04em",
-              color: "#151515",
-              marginRight: "-0.08em",
-              lineHeight: 0.88,
-            }}
-          >
-            CONVER
+          <div className="absolute bottom-20 right-8 md:right-12" style={{ zIndex: 2 }}>
+            <div
+              className="font-mono uppercase"
+              style={{
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "0.58rem",
+                color: "#55534E",
+                letterSpacing: "0.2em",
+              }}
+            >
+              02 // SCALE
+            </div>
           </div>
         </div>
-
-        {/* Invisible spacer to give the section its height */}
-        <div className="w-full" style={{ height: "60vh", minHeight: "420px" }} />
       </div>
     </section>
   );
