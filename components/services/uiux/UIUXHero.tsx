@@ -380,7 +380,7 @@ export default function UIUXHero() {
                   className="text-white leading-tight"
                   style={{ fontFamily: "'Newsreader', Georgia, serif", fontSize: "1.1rem", fontWeight: 400, fontStyle: "italic" }}
                 >
-                  "Gesture-first tactile feedback with physical momentum damping."
+                  &quot;Gesture-first tactile feedback with physical momentum damping.&quot;
                 </p>
               </div>
               {/* Progress bar */}
