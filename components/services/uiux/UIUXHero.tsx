@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -12,6 +13,7 @@ export default function UIUXHero() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const screenRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -42,6 +44,11 @@ export default function UIUXHero() {
       gsap.fromTo(screenRef.current,
         { clipPath: "inset(100% 0% 0% 0%)", opacity: 0 },
         { clipPath: "inset(0% 0% 0% 0%)", opacity: 1, duration: 1.4, ease: "power3.out", delay: 0.6 }
+      );
+
+      gsap.fromTo(imageRef.current,
+        { clipPath: "inset(0% 0% 100% 0%)", opacity: 0 },
+        { clipPath: "inset(0% 0% 0% 0%)", opacity: 1, duration: 1.2, ease: "power3.out", delay: 0.45 }
       );
 
       // Floating dark card slides in from right
@@ -123,7 +130,7 @@ export default function UIUXHero() {
         {/* ── Two-column row: HUGE heading left + body right ── */}
         <div className="grid grid-cols-12 gap-6 items-end">
           {/* LEFT: The mega heading */}
-          <div className="col-span-12 lg:col-span-7 xl:col-span-6">
+          <div className="col-span-12 lg:col-span-7 xl:col-span-7">
             <div className="flex flex-col">
               {/* WHERE */}
               <div className="overflow-hidden">
@@ -131,7 +138,7 @@ export default function UIUXHero() {
                   className="hero-line leading-[0.88] tracking-tight"
                   style={{
                     fontFamily: "'Space Grotesk', sans-serif",
-                    fontSize: "clamp(4.5rem, 11vw, 12rem)",
+                    fontSize: "clamp(3.75rem, 8.5vw, 9rem)",
                     fontWeight: 700,
                     color: "#151515",
                     letterSpacing: "-0.03em",
@@ -146,7 +153,7 @@ export default function UIUXHero() {
                   className="hero-line leading-[0.88] tracking-tight"
                   style={{
                     fontFamily: "'Space Grotesk', sans-serif",
-                    fontSize: "clamp(4.5rem, 11vw, 12rem)",
+                    fontSize: "clamp(3.75rem, 8.5vw, 9rem)",
                     fontWeight: 700,
                     color: "#151515",
                     letterSpacing: "-0.03em",
@@ -161,7 +168,7 @@ export default function UIUXHero() {
                   className="hero-line leading-[1.0]"
                   style={{
                     fontFamily: "'Newsreader', Georgia, serif",
-                    fontSize: "clamp(3.5rem, 8.5vw, 9.5rem)",
+                    fontSize: "clamp(3rem, 6.5vw, 7rem)",
                     fontWeight: 400,
                     fontStyle: "italic",
                     color: "#55534E",
@@ -177,7 +184,7 @@ export default function UIUXHero() {
                   className="hero-line leading-[0.88] tracking-tight"
                   style={{
                     fontFamily: "'Space Grotesk', sans-serif",
-                    fontSize: "clamp(3rem, 7.5vw, 8.5rem)",
+                    fontSize: "clamp(2.75rem, 6vw, 6.5rem)",
                     fontWeight: 700,
                     color: "#151515",
                     letterSpacing: "-0.03em",
@@ -190,13 +197,27 @@ export default function UIUXHero() {
             </div>
           </div>
 
-          {/* RIGHT: body copy + tags */}
-          <div className="uiux-body-right col-span-12 lg:col-span-5 xl:col-span-6 flex flex-col justify-end pb-6 pt-4 lg:pt-0">
+          {/* RIGHT: image, body copy, and tags */}
+          <div className="uiux-body-right col-span-12 lg:col-span-5 xl:col-span-5 flex flex-col justify-end pt-8 lg:pt-0">
+            <div ref={imageRef} className="relative aspect-[4/3] w-full overflow-hidden border" style={{ borderColor: "#E8E2D5" }}>
+              <Image
+                src="/images/service_ui_ux_1789796467059.png"
+                alt="Interface design system displayed on a studio monitor"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-[#151515]/90 px-3 py-2 font-mono text-[9px] uppercase tracking-widest text-white" style={{ fontFamily: "'DM Mono', monospace" }}>
+                <span>FIELD STUDY / 01</span>
+                <span className="text-[#E7472E]">LIVE SYSTEM</span>
+              </div>
+            </div>
             <p
-              className="text-[#55534E] text-sm leading-relaxed max-w-sm mb-5"
+              className="text-[#55534E] text-sm leading-relaxed max-w-sm mt-5 mb-5"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
-              Interfaces engineered to feel as palpable as physical objects. We build digital operating services governed by unyielding typographic proportions, kinetic velocity, and tactile intent.
+              Interfaces with structure, rhythm, and tactile intent.
             </p>
             {/* Tags */}
             <div
