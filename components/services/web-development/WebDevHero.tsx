@@ -17,6 +17,7 @@ export default function WebDevHero() {
   const bottomBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const media = gsap.matchMedia();
     const ctx = gsap.context(() => {
       // 1. Initial State
       gsap.set([telemetryRef.current, bottomBarRef.current], { opacity: 0, y: -10 });
@@ -50,33 +51,26 @@ export default function WebDevHero() {
           "-=0.6"
         );
 
-      // ScrollTrigger depth parallax
-      if (heroRef.current) {
+      // Keep the long depth treatment for desktop; touch layouts use normal flow.
+      media.add("(min-width: 1024px)", () => {
+        if (!heroRef.current) return;
         gsap.to(contentRef.current, {
           y: 60,
           opacity: 0.85,
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: 1.2,
-          },
+          scrollTrigger: { trigger: heroRef.current, start: "top top", end: "bottom top", scrub: 1.2, invalidateOnRefresh: true },
         });
-
         gsap.to(bottomBarRef.current, {
           y: 30,
           opacity: 0.4,
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: 1,
-          },
+          scrollTrigger: { trigger: heroRef.current, start: "top top", end: "bottom top", scrub: 1, invalidateOnRefresh: true },
         });
-      }
+      });
     }, heroRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      media.revert();
+    };
   }, []);
 
   const scrollToSection = (id: string) => {

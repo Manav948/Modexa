@@ -19,6 +19,7 @@ export default function KineticTypeSection() {
   useEffect(() => {
     if (!sectionRef.current) return;
 
+    const media = gsap.matchMedia();
     const ctx = gsap.context(() => {
       // The small meta line at the top
       gsap.fromTo(
@@ -50,31 +51,25 @@ export default function KineticTypeSection() {
         }
       );
 
-      // Parallax scroll effect on the type
-      gsap.to(".kinetic-left-words", {
-        yPercent: -15,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.5,
-        },
-      });
-
-      gsap.to(".kinetic-right-words", {
-        yPercent: 12,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.5,
-        },
+      // The desktop poster parallax is deliberately omitted on touch layouts.
+      media.add("(min-width: 1024px)", () => {
+        gsap.to(".kinetic-left-words", {
+          yPercent: -15,
+          ease: "none",
+          scrollTrigger: { trigger: sectionRef.current, start: "top bottom", end: "bottom top", scrub: 1.5, invalidateOnRefresh: true },
+        });
+        gsap.to(".kinetic-right-words", {
+          yPercent: 12,
+          ease: "none",
+          scrollTrigger: { trigger: sectionRef.current, start: "top bottom", end: "bottom top", scrub: 1.5, invalidateOnRefresh: true },
+        });
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      media.revert();
+    };
   }, []);
 
   return (
@@ -94,7 +89,7 @@ export default function KineticTypeSection() {
           <span className="text-[#E7472E] font-bold">SYSTEM STATEMENT</span>
         </div>
 
-        <div className="relative w-full min-h-[500px] md:min-h-[660px] overflow-hidden py-7 md:py-10">
+        <div className="relative w-full min-h-[380px] lg:min-h-[660px] overflow-hidden py-7 md:py-10">
           <div className="absolute inset-x-[2.5%] top-5 bottom-4 mx-auto h-full border border-[#E8E2D5] bg-[#f8f6f1]" />
           <div className="absolute left-8 top-14 h-[72%] w-px bg-[#E8E2D5] md:left-14" />
           <div className="absolute right-8 top-14 h-[72%] w-px bg-[#E8E2D5] md:right-14" />

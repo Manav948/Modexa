@@ -18,7 +18,7 @@ export default function WebDevelopmentPage() {
   return (
     <>
       <ScrollRevealProvider />
-      <div className="flex flex-col flex-1 min-h-screen" style={{ backgroundColor: "#fbf9f3" }}>
+      <div className="flex flex-col flex-1 min-h-screen max-md:min-h-0" style={{ backgroundColor: "#fbf9f3" }}>
         {/* Navigation Bar */}
         <Navbar />
 

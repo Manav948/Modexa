@@ -80,6 +80,8 @@
 :root {
   --background: #fbf9f3;
   --foreground: #1b1c18;
+  --mobile-section-space: clamp(3.5rem, 9vw, 5rem);
+  --mobile-section-gap: clamp(2.5rem, 7vw, 4rem);
   scroll-behavior: smooth;
 }
 
@@ -240,6 +242,73 @@ body {
   .left-camp-card,
   .right-camp-card {
     transform: none !important;
+  }
+}
+
+/* Mobile is a separate composition: normal editorial sections follow their
+   content instead of reserving desktop visual-installation space. */
+@media (max-width: 1023px) {
+  html,
+  body {
+    max-width: 100%;
+  }
+
+  #overview {
+    padding-top: 3rem;
+    padding-bottom: var(--mobile-section-space);
+  }
+
+  #services,
+  #philosophy,
+  #works,
+  #delivery,
+  #inquiry-station,
+  #selected-work,
+  #long-form,
+  #capabilities,
+  #pipeline,
+  #archive-index,
+  #film-strip,
+  #dm-campaigns,
+  #dm-services,
+  #dm-archive,
+  #uiux-interaction-lab,
+  #uiux-capabilities,
+  #uiux-mandate,
+  #stack,
+  #ledger {
+    padding-top: var(--mobile-section-space);
+    padding-bottom: var(--mobile-section-space);
+  }
+
+  #services > div > :first-child,
+  #works > div > :first-child,
+  #delivery > div > :first-child,
+  #selected-work > :first-child,
+  #long-form > div > :first-child,
+  #capabilities > div > :first-child,
+  #pipeline > div > :first-child {
+    margin-bottom: var(--mobile-section-gap);
+  }
+
+  #dm-hero,
+  #uiux-hero,
+  #uiux-neura-archive,
+  #dm-kinetic {
+    min-height: 0;
+  }
+
+  #dm-hero > div {
+    padding-top: 3.5rem;
+    padding-bottom: var(--mobile-section-space);
+  }
+
+  #dm-kinetic .relative.w-full {
+    min-height: 23.75rem;
+  }
+
+  #uiux-neura-archive .grid {
+    align-items: start;
   }
 }
 

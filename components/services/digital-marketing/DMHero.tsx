@@ -79,10 +79,10 @@ export default function DMHero() {
     <section
       ref={heroRef}
       id="dm-hero"
-      className="relative w-full min-h-screen overflow-hidden select-none"
+      className="relative w-full min-h-screen max-md:min-h-0 overflow-hidden select-none"
       style={{ backgroundColor: "#f7f5ef" }}
     >
-      <div className="relative max-w-[1400px] mx-auto w-full px-5 md:px-8 lg:px-14 pt-14 pb-20 min-h-screen flex flex-col justify-between overflow-x-hidden">
+      <div className="relative max-w-[1400px] mx-auto w-full px-5 md:px-8 lg:px-14 pt-14 pb-20 max-md:min-h-0 max-md:justify-start overflow-x-hidden">
 
         {/* Top editorial label */}
         <div className="dm-hero-label flex items-center gap-3 mb-8 md:mb-10">

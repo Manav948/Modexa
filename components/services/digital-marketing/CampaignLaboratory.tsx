@@ -82,7 +82,7 @@ export default function CampaignLaboratory() {
       <div className="relative w-full px-5 md:px-8 lg:px-14 py-20">
         <div className="max-w-[1400px] mx-auto">
           {/* Three-column asymmetric grid (matches reference) */}
-          <div className="relative grid grid-cols-12 gap-6 items-start min-h-[680px]">
+          <div className="relative grid grid-cols-12 gap-6 items-start min-h-0 md:min-h-[680px]">
 
             {/* ── LEFT dark portrait card ── */}
             <div className="left-camp-card col-span-12 md:col-span-4 lg:col-span-3 relative">

@@ -17,7 +17,7 @@ export default function VideoEditingPage() {
   return (
     <>
       <ScrollRevealProvider />
-      <div className="flex flex-col flex-1 bg-[#fbf9f3] text-[#1b1c18] min-h-screen">
+      <div className="flex flex-col flex-1 bg-[#fbf9f3] text-[#1b1c18] min-h-screen max-md:min-h-0">
         {/* Navigation bar */}
         <Navbar />
 

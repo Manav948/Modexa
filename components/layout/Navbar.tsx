@@ -124,7 +124,7 @@ export default function Navbar() {
 
       <AnimatePresence>
         {menuOpen && (
-          <motion.div id="mobile-navigation" ref={menuPanelRef} tabIndex={-1} initial={{ clipPath: "inset(0 0 100% 0)", opacity: 0.8 }} animate={{ clipPath: "inset(0 0 0% 0)", opacity: 1 }} exit={{ clipPath: "inset(0 0 100% 0)", opacity: 0.8 }} transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }} className="absolute inset-x-0 top-full max-h-[calc(100vh-76px)] overflow-y-auto border-b border-[#E8E2D5] bg-[#f7f5ef] px-5 py-8 text-[#151515] shadow-2xl md:hidden">
+          <motion.div id="mobile-navigation" ref={menuPanelRef} tabIndex={-1} initial={{ clipPath: "inset(0 0 100% 0)", opacity: 0.8 }} animate={{ clipPath: "inset(0 0 0% 0)", opacity: 1 }} exit={{ clipPath: "inset(0 0 100% 0)", opacity: 0.8 }} transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }} className="absolute inset-x-0 top-full max-h-[calc(100dvh-76px)] overflow-y-auto border-b border-[#E8E2D5] bg-[#f7f5ef] px-5 py-8 text-[#151515] shadow-2xl md:hidden">
             <div className="mb-8 flex items-center justify-between border-b border-[#E8E2D5] pb-3 font-mono text-[9px] uppercase tracking-widest text-[#55534E]"><span>MODEXA / NAVIGATION</span><span className="text-[#E7472E]">INDEX 2026.4</span></div>
             <nav className="flex flex-col" aria-label="Mobile navigation">
               <Link href={homeHref("#works")} onClick={closeMenus} className="flex min-h-14 items-center border-b border-[#E8E2D5] font-display text-3xl tracking-tight transition-colors hover:text-[#E7472E]">WORK</Link>

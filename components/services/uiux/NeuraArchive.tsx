@@ -179,7 +179,7 @@ export default function NeuraArchive() {
             </div>
 
             {/* App layout */}
-            <div className="flex" style={{ minHeight: "480px", backgroundColor: "#faf8f3" }}>
+            <div className="flex min-h-0 md:min-h-[480px]" style={{ backgroundColor: "#faf8f3" }}>
               {/* App sidebar */}
               <div
                 className="flex flex-col border-r text-[8px] font-mono uppercase"
@@ -223,7 +223,7 @@ export default function NeuraArchive() {
                 </div>
 
                 {/* Network graph placeholder */}
-                <div className="relative w-full" style={{ height: "240px" }}>
+                <div className="relative h-[180px] w-full md:h-[240px]">
                   <svg viewBox="0 0 600 240" className="w-full h-full">
                     {/* Graph background grid */}
                     <defs>

@@ -14,7 +14,7 @@ export default function UIUXPage() {
   return (
     <>
       <ScrollRevealProvider />
-      <div className="flex flex-col flex-1 min-h-screen" style={{ backgroundColor: "#f7f5ef" }}>
+      <div className="flex flex-col flex-1 min-h-screen max-md:min-h-0" style={{ backgroundColor: "#f7f5ef" }}>
         <Navbar />
         <main className="w-full pt-[60px]">
           {/* 01. Hero — WHERE STRUCTURE meets INTERACTION. */}
