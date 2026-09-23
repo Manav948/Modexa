@@ -21,17 +21,16 @@ export default function Footer() {
                 fontWeight: 400,
               }}
             >
-              MANY IDEAS. MANY SKILLS.
+              DESIGN. CONTENT.
               <br />
-              <span className="italic">ONE CREATIVE DIRECTION.</span>
+              <span className="italic">TECHNOLOGY. DIGITAL.</span>
             </p>
             <div
               className="mt-8 flex flex-wrap items-center gap-6 font-mono text-[10px] text-[#747878]"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
-              <span>40.7128° N, 74.0060° W</span>
-              <span>48.8566° N, 2.3522° E</span>
-              <span>REF. ARCHIVE VOL. VI</span>
+              <span>ONE CREATIVE DIRECTION.</span>
+              <span>THE RIGHT SPECIALISTS FOR THE WORK.</span>
             </div>
           </div>
 
@@ -47,8 +46,8 @@ export default function Footer() {
               >
                 Modexa
               </span>
-              <span>Independent Creative Atelier & Design Direction Practice.</span>
-              <span>Typefaces set in Newsreader, Manrope & Space Mono.</span>
+              <span>One creative direction. The right specialists for the work.</span>
+              <span>VIDEO / DESIGN / MARKETING / DEVELOPMENT</span>
             </div>
 
             <a
@@ -69,7 +68,7 @@ export default function Footer() {
               }}
             >
               <span className="font-mono text-[10px] tracking-widest uppercase">
-                INITIATE ENGAGEMENT
+                START A PROJECT
               </span>
               <span className="font-mono text-[10px]">→</span>
             </a>

@@ -9,14 +9,12 @@ if (typeof window !== "undefined") {
 }
 
 const SERVICES = [
-  { num: "01", title: "Social Media", desc: "Platform-native content systems, cultural timing and community tone.", tag: "SOCIAL / CREATIVE" },
-  { num: "02", title: "Content Strategy", desc: "Audience mapping, editorial calendars, voice frameworks and content pillars.", tag: "STRATEGY / PLANNING" },
-  { num: "03", title: "Campaign Creative", desc: "Concepting, visual production and multi-platform campaign execution.", tag: "CAMPAIGN / VISUAL" },
-  { num: "04", title: "Digital Strategy", desc: "Market positioning, growth architecture and competitive differentiation.", tag: "STRATEGY / GROWTH" },
-  { num: "05", title: "Content Direction", desc: "Creative direction across long-form, short-form and editorial content.", tag: "CREATIVE / DIRECTION" },
-  { num: "06", title: "Distribution & Growth", desc: "Channel strategy, paid creative testing and organic acceleration.", tag: "DISTRIBUTION / REACH" },
-  { num: "07", title: "Audience Research", desc: "Behavioral analysis, cultural listening and insight architecture.", tag: "AUDIENCE / INSIGHT" },
-  { num: "08", title: "Campaign Management", desc: "End-to-end campaign operations, reporting and performance creative iteration.", tag: "MANAGEMENT / OPS" },
+  { num: "01", title: "Social Media", desc: "Content and creative direction designed for the platforms where people spend attention.", tag: "SOCIAL / CREATIVE" },
+  { num: "02", title: "Content Strategy", desc: "A clear direction for what to say, show and publish.", tag: "STRATEGY / CONTENT" },
+  { num: "03", title: "Campaign Creative", desc: "Ideas turned into visual campaigns with a consistent point of view.", tag: "CAMPAIGN / VISUAL" },
+  { num: "04", title: "Digital Strategy", desc: "Connecting audience, content and distribution around a clear objective.", tag: "STRATEGY / DISTRIBUTION" },
+  { num: "05", title: "Content Direction", desc: "Building a consistent visual and editorial language across content.", tag: "CONTENT / DIRECTION" },
+  { num: "06", title: "Distribution", desc: "Making sure good content reaches the right places.", tag: "DISTRIBUTION / REACH" },
 ];
 
 export default function DMServicesIndex() {
@@ -66,7 +64,7 @@ export default function DMServicesIndex() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 pb-6 border-b border-[#E8E2D5] gap-4">
           <div>
             <div className="dm-service-label flex items-center gap-3 font-mono text-[10px] text-[#E7472E] uppercase tracking-widest mb-2 font-bold" style={{ fontFamily: "'DM Mono', monospace" }}>
-              <span>04 / SCOPE OF DISCIPLINE</span>
+                <span>04 / CAPABILITIES</span>
               <span className="w-4 h-px bg-[#E7472E]" />
               <span>SERVICES INDEX</span>
             </div>
@@ -78,15 +76,15 @@ export default function DMServicesIndex() {
                 fontWeight: 700,
               }}
             >
-              What We Build
+                What We Make Move
             </h2>
           </div>
-          <span
-            className="font-mono text-[10px] text-[#55534E] uppercase tracking-wider font-bold"
-            style={{ fontFamily: "'DM Mono', monospace" }}
-          >
-            [FULL SPECTRUM DIGITAL CRAFT]
-          </span>
+            <span
+              className="font-mono text-[10px] text-[#55534E] uppercase tracking-wider font-bold"
+              style={{ fontFamily: "'DM Mono', monospace" }}
+            >
+              [ATTENTION / CONTENT / CONNECTION]
+            </span>
         </div>
 
         {/* Services list */}

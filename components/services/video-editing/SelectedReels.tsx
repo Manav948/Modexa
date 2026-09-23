@@ -21,17 +21,17 @@ const REELS: ReelItem[] = [
     title: "Launch Reel Cut 01",
     desc: "Viscoelastic pacing with audio-reactive typographic hooks.",
     duration: "00:15 CUT",
-    retention: "89% RETENTION",
+    retention: "SHORT-FORM",
     image: "/images/media__1789795957723.png",
   },
   {
     id: "02",
-    label: "METRO ARCHIVE",
+    label: "SOCIAL EDIT",
     category: "2026 // CULTURAL",
     title: "Heritage Teaser Cut",
     desc: "Tactile macro zooms paired with spatial subterranean foley.",
     duration: "00:30 TEASER",
-    retention: "94% RETENTION",
+    retention: "MOTION",
     image: "/images/work_arclab_spatial_1789796381832.png",
   },
   {
@@ -41,7 +41,7 @@ const REELS: ReelItem[] = [
     title: "Micro Arc Narrative",
     desc: "Three-act structure compressed into eighteen ruthless seconds.",
     duration: "00:19 STORY",
-    retention: "86% RETENTION",
+    retention: "LONG-FORM",
     image: "/images/work_motion_stories_1789796354503.png",
   },
   {
@@ -51,27 +51,27 @@ const REELS: ReelItem[] = [
     title: "Audio-Driven Cut",
     desc: "Sound-designed cuts where every transition is triggered by sub-bass.",
     duration: "00:45 AUDIO CUT",
-    retention: "91% RETENTION",
+    retention: "STORY",
     image: "/images/work_vanguard_hardware_1789796410306.png",
   },
   {
     id: "05",
-    label: "CODEVERSE SPATIAL",
+    label: "DIGITAL CUT",
     category: "2026 // BRAND LAUNCH",
     title: "Spatial Launch Cut",
     desc: "Precision typographic overlays with motion-tracked spatial cuts.",
     duration: "01:42 TRAILER",
-    retention: "92% RETENTION",
+    retention: "EDIT",
     image: "/images/work_codeverse_platform_1789796324968.png",
   },
   {
     id: "06",
-    label: "TERRACOTTA ATELIER",
+    label: "MATERIAL FILM",
     category: "2025 // PRINT & FILM",
     title: "Tactile Material Film",
     desc: "Paced to mimic the slow mechanical turning of an artisan wheel.",
     duration: "00:40 ESSAY",
-    retention: "88% RETENTION",
+    retention: "SOUND",
     image: "/images/media__1789794671970.png",
   },
 ];
@@ -130,9 +130,9 @@ export default function SelectedReels() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between pb-6 border-b border-[#e4e2dd] gap-6">
           <div>
             <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-2 font-bold line-reveal">
-              <span>02 / RETENTION &amp; MOMENTUM</span>
+              <span>02 / RHYTHM &amp; PACING</span>
               <span className="w-4 h-px bg-[#b6240f]" />
-              <span>INFINITE FILM WALL MATRIX</span>
+              <span>SELECTED VIDEO WORK</span>
             </div>
             <h2
               className="text-[#1b1c18] uppercase tracking-tight text-reveal"

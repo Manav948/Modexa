@@ -19,46 +19,46 @@ const SERVICES: ServiceItem[] = [
   {
     num: "01",
     slug: "video-editing",
-    title: "VIDEO EDITING &",
-    italicTitle: "MOTION DIRECTION",
+    title: "VIDEO",
+    italicTitle: "EDITING",
     description:
-      "Dynamic cuts, color grading, spatial sound design, and promotional video assets designed to halt thumbs and communicate gravity.",
-    tags: "COMMERCIAL • SOCIAL • PRODUCT",
+      "Short-form, long-form and motion-led storytelling built around rhythm, pacing and purpose.",
+    tags: "SHORT-FORM • LONG-FORM • MOTION",
     image: "/images/service_video_motion_1789796437874.png",
-    spec: "ASPECT RATIO 16:9 // 4K 60FPS PRORES",
+    spec: "RHYTHM // PACING // PURPOSE",
   },
   {
     num: "02",
     slug: "ui-ux-design",
-    title: "UI / UX PRODUCT",
-    italicTitle: "DESIGN & CREATIVE TECH",
+    title: "UI/UX",
+    italicTitle: "DESIGN",
     description:
-      "High-utility interfaces, micro-interaction logic, comprehensive component libraries, and ergonomic mobile/desktop applications.",
-    tags: "WEB APPS • MOBILE • DESIGN SYSTEMS",
+      "Interfaces and digital experiences designed around clarity, interaction and visual language.",
+    tags: "PRODUCTS • WEB • SYSTEMS",
     image: "/images/service_ui_ux_1789796467059.png",
-    spec: "SYSTEM TOKENS // FIGMA & REACT",
+    spec: "CLARITY // INTERACTION // SYSTEMS",
   },
   {
     num: "03",
-    slug: "web-development",
-    title: "WEB & DIGITAL",
-    italicTitle: "DEVELOPMENT ARCHITECTURE",
+    slug: "digital-marketing",
+    title: "DIGITAL",
+    italicTitle: "MARKETING",
     description:
-      "Bespoke headless frontends, WebGL shaders, sub-second loading speeds, and robust CMS architectures built for scale.",
-    tags: "TAILWIND • REACT • WEBGL • THREE",
-    image: "/images/work_codeverse_platform_1789796324968.png",
-    spec: "WEBGL CANVAS // TURBOPACK ENGINE",
+      "Content, campaigns and digital strategy designed to earn attention and keep it.",
+    tags: "CONTENT • CAMPAIGNS • DISTRIBUTION",
+    image: "/images/work_vanguard_hardware_1789796410306.png",
+    spec: "ATTENTION // CONNECTION // REACH",
   },
   {
     num: "04",
-    slug: "digital-marketing",
-    title: "DIGITAL GROWTH &",
-    italicTitle: "MARKETING ENGINE",
+    slug: "web-development",
+    title: "WEB",
+    italicTitle: "DEVELOPMENT",
     description:
-      "Precision go-to-market engines, conversion-rate optimization, performance creative tests, and authentic community acquisition.",
-    tags: "ACQUISITION • CRO • LAUNCH STRATEGY",
-    image: "/images/work_vanguard_hardware_1789796410306.png",
-    spec: "PERFORMANCE MODEL // METRICS DASH",
+      "Fast, interactive and thoughtful digital experiences built from design to deployment.",
+    tags: "INTERACTIVE • PERFORMANCE • DEPLOYMENT",
+    image: "/images/work_codeverse_platform_1789796324968.png",
+    spec: "DESIGN // CODE // DELIVERY",
   },
 ];
 
@@ -128,7 +128,7 @@ export default function Services() {
               className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
-              [ CAPABILITIES & RIGOR ]
+              [ WHAT WE DO ]
             </motion.div>
           </div>
 
@@ -145,9 +145,9 @@ export default function Services() {
                 fontWeight: 400,
               }}
             >
-              SERVICES &amp;
+              WHAT WE
               <br />
-              <span className="italic font-normal text-[#b6240f]">CAPABILITIES.</span>
+              <span className="italic font-normal text-[#b6240f]">DO.</span>
             </motion.h2>
           </div>
         </div>
@@ -162,7 +162,7 @@ export default function Services() {
               className="font-mono text-[11px] leading-relaxed uppercase text-[#747878] tracking-wider"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
-              NO PACKAGED COMMODITIES. EVERY ENGAGEMENT IS BESPOKE TO THE STRATEGIC GOAL.
+              CREATIVE AND DIGITAL CAPABILITIES BROUGHT TOGETHER AROUND ONE CLEAR DIRECTION.
             </motion.p>
           </div>
         </div>

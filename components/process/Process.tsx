@@ -5,25 +5,25 @@ import { motion, useInView } from "framer-motion";
 
 const PRINCIPLES = [
   {
-    label: "[I. CONCEPTION & REDUCTION]",
-    title: "Elimination of the Superfluous",
-    body: "We isolate the central tension within your product or brand. Every unnecessary garnish, artificial gradient, and decorative trend is excised until only pure tectonic structure remains.",
-    phase: "PHASE: EXTRACTION",
-    metric: "RESTRICTION 85%",
+    label: "[01. DISCOVER]",
+    title: "Understand the idea",
+    body: "Understand the idea, audience and objective.",
+    phase: "PHASE: CONTEXT",
+    metric: "DISCOVER",
   },
   {
-    label: "[II. TACTILE ENGINEERING]",
-    title: "Materials in Digital Space",
-    body: "Software does not need to feel floaty and weightless. By introducing true mechanical inertia, viscoelastic springs, and ink-settling physics, interfaces gain gravitational authority.",
-    phase: "PHASE: SYNTHESIS",
-    metric: "ACCELERATION CURVE",
+    label: "[02. DEFINE]",
+    title: "Shape the direction",
+    body: "Shape the scope, creative approach and path forward.",
+    phase: "PHASE: DIRECTION",
+    metric: "DEFINE",
   },
   {
-    label: "[III. DIRECTION & SCALE]",
-    title: "One Cohesive Narrative",
-    body: "A single, resolute creative direction ensures your film trailer, high-frequency design system, editorial literature, and web platform speak with the exact same distinctive voice.",
-    phase: "PHASE: DELIVERY",
-    metric: "ZERO COMPROMISE",
+    label: "[03. CREATE]",
+    title: "Bring the craft together",
+    body: "Bring the right specialists and disciplines together.",
+    phase: "PHASE: CRAFT",
+    metric: "CREATE",
   },
 ];
 
@@ -142,20 +142,20 @@ export default function Process() {
               className="font-mono text-[10px] text-[#b6240f] font-bold"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
-              04 / DOCTRINE
+              02 / PROCESS
             </span>
             <span
               className="font-mono text-[10px] text-[#747878] uppercase tracking-wider"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
-              VELLUM DISPLACEMENT GRID
+              FROM IDEA TO OUTPUT
             </span>
           </div>
           <div
             className="font-mono text-[10px] text-[#747878] uppercase tracking-widest hidden sm:block"
             style={{ fontFamily: "'Space Mono', monospace" }}
           >
-            TOUCH / DISPLACE CANVAS
+            MOVE THE IDEA FORWARD
           </div>
         </div>
 

@@ -2,31 +2,38 @@
 
 const STAGES = [
   {
-    num: "STAGE 01",
+    num: "01",
     title: "Understand",
-    desc: "Ingesting raw footage, transcribing key dialogue, deciphering the brand mandate, core emotional cadence, and audience retention horizon.",
-    tag: "• FOOTAGE AUDIT & LOGGING",
+    desc: "Find the story inside the footage.",
+    tag: "• STORY / CONTEXT",
     highlight: true,
   },
   {
-    num: "STAGE 02",
-    title: "Structure",
-    desc: "Assembling the narrative spine through a ruthless radio-edit pass. Eliminating filler, testing alternative hooks, and establishing macro rhythm.",
-    tag: "• ASSEMBLY & RADIO CUT",
+    num: "02",
+    title: "Select",
+    desc: "Keep what matters.",
+    tag: "• SELECT / SHAPE",
     highlight: false,
   },
   {
-    num: "STAGE 03",
+    num: "03",
+    title: "Edit",
+    desc: "Build rhythm and structure.",
+    tag: "• CUT / PACE",
+    highlight: false,
+  },
+  {
+    num: "04",
     title: "Refine",
-    desc: "Micro-cutting frames, viscoelastic match cuts, bespoke foley integration, kinetic motion overlays, and precision DaVinci color grading.",
-    tag: "• SOUND DESIGN & GRADE",
+    desc: "Sharpen every transition.",
+    tag: "• MOTION / SOUND",
     highlight: false,
   },
   {
-    num: "STAGE 04",
+    num: "05",
     title: "Deliver",
-    desc: "High-fidelity ProRes 422 masters, platform-ready crops (9:16, 16:9, 1:1, 4:5), and an organized archival folder with all clean assets.",
-    tag: "• MULTI-ASPECT MASTER PACK",
+    desc: "Prepare the final work for its destination.",
+    tag: "• FINAL OUTPUT",
     highlight: true,
   },
 ];
@@ -43,9 +50,9 @@ export default function EditingPipeline() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-[#e4e2dd] gap-6">
           <div>
             <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-2 font-bold line-reveal">
-              <span>05 / THE EDIT PIPELINE</span>
+              <span>03 / PROCESS</span>
               <span className="w-4 h-px bg-[#b6240f]" />
-              <span>DISCIPLINED PROCESS</span>
+              <span>FROM FOOTAGE TO FINAL FRAME</span>
             </div>
             <h2
               className="text-[#1b1c18] uppercase tracking-tight text-reveal"
@@ -55,11 +62,11 @@ export default function EditingPipeline() {
                 fontWeight: 400,
               }}
             >
-              From raw footage to final frame.
+              From footage to final frame.
             </h2>
           </div>
           <span className="font-mono text-[10px] text-[#747878] uppercase tracking-wider font-bold line-reveal">
-            EST. TURNAROUND: 48–72H COMMISSIONS
+            UNDERSTAND / SELECT / EDIT / REFINE / DELIVER
           </span>
         </div>
 

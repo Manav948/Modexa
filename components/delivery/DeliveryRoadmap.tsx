@@ -6,33 +6,33 @@ import { useRef } from "react";
 const PHASES = [
   {
     number: "01",
-    title: "PROJECT BRIEF",
-    body: "We establish where the work must arrive, what it needs to change, and the constraints that make the direction matter.",
-    meta: "DISCIPLINE: 01 / SCOPE: DEFINED",
+    title: "DISCOVER",
+    body: "Understand the idea, audience and objective.",
+    meta: "01 / CONTEXT",
   },
   {
     number: "02",
-    title: "DISCOVERY & ART DIRECTION",
-    body: "We translate mood, typography, references, and interactive intention into a resolute point of view that can carry through every touchpoint.",
-    meta: "RESEARCH: 02 / REFERENCES: CURATED",
+    title: "DEFINE",
+    body: "Shape the direction, scope and creative approach.",
+    meta: "02 / DIRECTION",
   },
   {
     number: "03",
-    title: "RIGHT SPECIALISTS",
-    body: "The creative direction assembles the exact specialists needed to turn the central idea into a coherent and considered system.",
-    meta: "NETWORK: SELECTED / FORMAT: BESPOKE",
+    title: "CREATE",
+    body: "Bring the right specialists and disciplines together.",
+    meta: "03 / CRAFT",
   },
   {
     number: "04",
-    title: "DESIGN & SPRINT BUILD",
-    body: "Exploration becomes a working system through rapid prototyping, art direction, and focused build cycles with constant refinement.",
-    meta: "METHOD: ITERATIVE / DELIVERY: TACTILE",
+    title: "REFINE",
+    body: "Review, iterate and sharpen the work.",
+    meta: "04 / ITERATION",
   },
   {
     number: "05",
-    title: "DELIVERY & GO-TO-MARKET",
-    body: "Handover is treated as a launch system: the files, motion, and operating logic are ready to move from studio to audience.",
-    meta: "OUTPUT: LAUNCH READY / SUPPORT: ON CALL",
+    title: "DELIVER",
+    body: "Turn the final direction into something ready to use.",
+    meta: "05 / OUTPUT",
   },
 ];
 
@@ -66,7 +66,7 @@ export default function DeliveryRoadmap() {
               className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest mb-4"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
-              08 / DELIVERY PROTOCOL
+              03 / DELIVERY
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 24 }}
@@ -81,7 +81,7 @@ export default function DeliveryRoadmap() {
             >
               FROM IDEA
               <br />
-              <span className="text-[#b6240f]">TO LAUNCH.</span>
+              <span className="text-[#b6240f]">TO OUTPUT.</span>
             </motion.h2>
           </div>
 
@@ -92,7 +92,7 @@ export default function DeliveryRoadmap() {
             className="lg:col-span-5 self-end max-w-lg font-body text-[0.9375rem] leading-7 text-[#747878]"
             style={{ fontFamily: "'Manrope', sans-serif" }}
           >
-            Agency models are built on billing hours and junior staff rotation. We reject that logic. When you partner with Atelier Direction, you receive direct creative authorship from the person making the final call, executed alongside practitioners who have mastered their craft over decades.
+            The right creative team can change how an idea looks, feels and moves. We bring the right people and craft around one clear direction.
           </motion.p>
         </div>
 

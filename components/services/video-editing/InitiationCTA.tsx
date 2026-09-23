@@ -20,9 +20,9 @@ export default function InitiationCTA() {
         <div className="max-w-4xl">
           {/* Section Sub-Tag */}
           <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-4 font-bold line-reveal">
-            <span>07 / MANDATE INITIATION</span>
+            <span>04 / START A PROJECT</span>
             <span className="w-4 h-px bg-[#b6240f]" />
-            <span>DIRECT COMMISSIONS</span>
+            <span>GOT FOOTAGE?</span>
           </div>
 
           {/* Large-scale Editorial Headline matching Stitch specification */}
@@ -46,44 +46,44 @@ export default function InitiationCTA() {
             className="text-[#c4c7c7] max-w-2xl text-base md:text-lg leading-relaxed mb-8 text-reveal"
             style={{ fontFamily: "'Manrope', sans-serif" }}
           >
-            Bring the raw material, the rushed rushes, or simply the vision. Our editorial direction unifies cadence, sound design, and retention into an unforgettable cinematic artifact.
+            Bring us the footage, the idea or the first cut. We&apos;ll find the rhythm and shape the story.
           </p>
 
           {/* Action CTAs */}
           <div className="flex flex-wrap items-center gap-4 mb-16 font-mono text-[10px]">
             <a
-              href="mailto:hello@studiodirection.com?subject=Video%20Editing%20Direct%20Commission"
+              href="mailto:hello@company.com?subject=Video%20Editing%20Project"
               className="px-8 py-4 bg-[#b6240f] text-white tracking-widest uppercase hover:bg-[#fe573c] transition-colors inline-flex items-center gap-3 font-bold shadow-lg"
             >
-              <span>START A PROJECT</span>
+                <span>START A PROJECT</span>
               <span>→</span>
             </a>
-            <a
-              href="/#overview"
-              className="px-6 py-4 border border-[#444748] hover:border-white text-white tracking-widest uppercase transition-colors"
-            >
-              RETURN TO MAIN ATELIER
-            </a>
+              <a
+                href="/#overview"
+                className="px-6 py-4 border border-[#444748] hover:border-white text-white tracking-widest uppercase transition-colors"
+              >
+                <span>BACK TO SERVICES</span>
+              </a>
           </div>
 
           {/* Studio Technical Provenance Colophon Stamp */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 border-t border-[#30312d] font-mono text-[10px] text-[#747878]">
             <div>
-              <span className="text-white font-bold">TURNAROUND SLA:</span>
+              <span className="text-white font-bold">CAPABILITY:</span>
               <p className="mt-1 leading-relaxed text-[#c4c7c7]">
-                Initial rough cut delivered within 48–72 hours of complete footage ingest.
+                Short-form, long-form and motion-led storytelling.
               </p>
             </div>
             <div>
-              <span className="text-white font-bold">AVAILABILITY:</span>
+              <span className="text-white font-bold">FOCUS:</span>
               <p className="mt-1 leading-relaxed text-[#c4c7c7]">
-                Accepting 2 selective flagship retainer accounts for Q3/Q4.
+                Rhythm, pacing, emotion and purpose.
               </p>
             </div>
             <div>
-              <span className="text-white font-bold">SECURITY:</span>
+              <span className="text-white font-bold">OUTPUT:</span>
               <p className="mt-1 leading-relaxed text-[#c4c7c7]">
-                Strict NDA compliance, encrypted storage, and local off-grid archive backups.
+                Final work ready for its destination.
               </p>
             </div>
           </div>

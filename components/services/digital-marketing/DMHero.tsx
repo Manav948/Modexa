@@ -86,12 +86,12 @@ export default function DMHero() {
 
         {/* Top editorial label */}
         <div className="dm-hero-label flex items-center gap-3 mb-8 md:mb-10">
-          <span
-            className="font-mono text-[9px] sm:text-[10px] px-2.5 py-1 border text-[#E7472E] tracking-widest uppercase font-bold"
-            style={{ borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace" }}
-          >
-            [ DIGITAL MARKETING & ATTENTION ARCHITECTURE ]
-          </span>
+              <span
+                className="font-mono text-[9px] sm:text-[10px] px-2.5 py-1 border text-[#E7472E] tracking-widest uppercase font-bold"
+                style={{ borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace" }}
+              >
+                DIGITAL MARKETING / 03
+              </span>
         </div>
 
         {/* Main composition row */}
@@ -101,72 +101,72 @@ export default function DMHero() {
           <div className="col-span-12 lg:col-span-8 xl:col-span-7 flex flex-col">
             <div ref={headlineRef} className="mb-6 md:mb-8 max-w-full">
               <div className="overflow-hidden mb-1">
-                <div
-                  className="line-mask block w-full max-w-full"
-                  style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    fontSize: "clamp(3.25rem, 8vw, 10rem)",
-                    fontWeight: 700,
-                    letterSpacing: "-0.05em",
-                    lineHeight: 0.88,
-                    color: "#151515",
-                    whiteSpace: "nowrap",
-                    maxWidth: "100%",
-                  }}
-                >
-                  ATTENTION
-                </div>
+                  <div
+                    className="line-mask block w-full max-w-full"
+                    style={{
+                      fontFamily: "'Space Grotesk', sans-serif",
+                      fontSize: "clamp(3.25rem, 8vw, 10rem)",
+                      fontWeight: 700,
+                      letterSpacing: "-0.05em",
+                      lineHeight: 0.88,
+                      color: "#151515",
+                      whiteSpace: "nowrap",
+                      maxWidth: "100%",
+                    }}
+                  >
+                    MAKE PEOPLE
+                  </div>
               </div>
               <div className="overflow-hidden mb-1">
-                <div
-                  className="line-mask block w-full max-w-full"
-                  style={{
-                    fontFamily: "'Newsreader', Georgia, serif",
-                    fontSize: "clamp(2.15rem, 5vw, 5.5rem)",
-                    fontWeight: 400,
-                    fontStyle: "italic",
-                    letterSpacing: "-0.02em",
-                    lineHeight: 0.92,
-                    color: "#55534E",
-                    maxWidth: "100%",
-                  }}
-                >
-                  is not captured.
-                </div>
+                  <div
+                    className="line-mask block w-full max-w-full"
+                    style={{
+                      fontFamily: "'Newsreader', Georgia, serif",
+                      fontSize: "clamp(2.15rem, 5vw, 5.5rem)",
+                      fontWeight: 400,
+                      fontStyle: "italic",
+                      letterSpacing: "-0.02em",
+                      lineHeight: 0.92,
+                      color: "#55534E",
+                      maxWidth: "100%",
+                    }}
+                  >
+                    stop
+                  </div>
               </div>
               <div className="overflow-hidden mb-1">
-                <div
-                  className="line-mask block w-full max-w-full"
-                  style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    fontSize: "clamp(3.25rem, 8vw, 10rem)",
-                    fontWeight: 700,
-                    letterSpacing: "-0.05em",
-                    lineHeight: 0.88,
-                    color: "#151515",
-                    whiteSpace: "nowrap",
-                    maxWidth: "100%",
-                  }}
-                >
-                  IT IS
-                </div>
+                  <div
+                    className="line-mask block w-full max-w-full"
+                    style={{
+                      fontFamily: "'Space Grotesk', sans-serif",
+                      fontSize: "clamp(3.25rem, 8vw, 10rem)",
+                      fontWeight: 700,
+                      letterSpacing: "-0.05em",
+                      lineHeight: 0.88,
+                      color: "#151515",
+                      whiteSpace: "nowrap",
+                      maxWidth: "100%",
+                    }}
+                  >
+                    scrolling.
+                  </div>
               </div>
               <div className="overflow-hidden">
-                <div
-                  className="line-mask block w-full max-w-full"
-                  style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    fontSize: "clamp(3.25rem, 8vw, 10rem)",
-                    fontWeight: 700,
-                    letterSpacing: "-0.05em",
-                    lineHeight: 0.88,
-                    color: "#151515",
-                    whiteSpace: "nowrap",
-                    maxWidth: "100%",
-                  }}
-                >
-                  DESIGNED.
-                </div>
+                  <div
+                    className="line-mask block w-full max-w-full"
+                    style={{
+                      fontFamily: "'Space Grotesk', sans-serif",
+                      fontSize: "clamp(3.25rem, 8vw, 10rem)",
+                      fontWeight: 700,
+                      letterSpacing: "-0.05em",
+                      lineHeight: 0.88,
+                      color: "#151515",
+                      whiteSpace: "nowrap",
+                      maxWidth: "100%",
+                    }}
+                  >
+                    
+                  </div>
               </div>
             </div>
 
@@ -177,16 +177,14 @@ export default function DMHero() {
                   className="text-[#55534E] text-[0.8rem] sm:text-sm leading-relaxed"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
-                  We build digital marketing through strategy, content, and
-                  creative direction — engineering the moments that make brands
-                  impossible to scroll past.
+                  Strategy, content and creative direction built around attention and connection.
                 </p>
                 <a
                   href="#dm-campaigns"
                   className="inline-flex items-center gap-2 mt-5 font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-[#151515] border-b border-[#151515] pb-0.5 hover:text-[#E7472E] hover:border-[#E7472E] transition-colors"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
-                  EXPLORE THE ARCHITECTURE ↓
+                  EXPLORE WORK ↓
                 </a>
               </div>
               <div
@@ -199,15 +197,15 @@ export default function DMHero() {
                 </div>
                 <div className="flex justify-between border-b border-[#E8E2D5] pb-1.5">
                   <span>02 / STRATEGY</span>
-                  <span>AUDIENCE</span>
+                  <span>CONTENT</span>
                 </div>
                 <div className="flex justify-between border-b border-[#E8E2D5] pb-1.5">
                   <span>03 / CREATIVE</span>
                   <span>CAMPAIGN</span>
                 </div>
                 <div className="flex justify-between pb-1.5">
-                  <span>04 / GROWTH</span>
-                  <span className="text-[#E7472E] font-bold">ACTIVE</span>
+                  <span>04 / DISTRIBUTION</span>
+                  <span className="text-[#E7472E] font-bold">CONNECTED</span>
                 </div>
               </div>
             </div>
@@ -283,7 +281,7 @@ export default function DMHero() {
                   className="font-mono text-[8px] uppercase tracking-widest mt-2"
                   style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'DM Mono', monospace" }}
                 >
-                  EST. 24 / Q3 STUDIO
+                  CONTENT / CAMPAIGN SYSTEM
                 </div>
               </div>
             </div>

@@ -196,7 +196,7 @@ export default function KineticTypeSection() {
                   color: "#55534E",
                 }}
               >
-                strategy / creative / conversion
+                strategy / creative / distribution
               </div>
               <div
                 style={{
@@ -209,7 +209,7 @@ export default function KineticTypeSection() {
                   maxWidth: "540px",
                 }}
               >
-                built for visibility, resonance, and performance across every scroll.
+                built for attention, connection and the right destination.
               </div>
             </div>
           </div>
@@ -225,7 +225,7 @@ export default function KineticTypeSection() {
                 letterSpacing: "0.28em",
               }}
             >
-              PERFORMANCE
+              CONNECTION
             </span>
             <span className="h-[2px] w-12 bg-[#151515] md:w-20" />
           </div>

@@ -4,17 +4,16 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const DISCIPLINES = [
-  "VIDEO DIRECTION",
-  "UI / UX ARCHITECTURE",
-  "WEBGL & TECH",
-  "BRANDING SYSTEM",
-  "CAMPAIGN NARRATIVE",
+  "VIDEO EDITING",
+  "UI / UX DESIGN",
+  "DIGITAL MARKETING",
+  "WEB DEVELOPMENT",
 ];
 
 const WEBMAIL_URL =
-  "https://mail.google.com/mail/?view=cm&fs=1&to=modexa%40studiodirection.com&su=New%20Studio%20Direction%20Inquiry";
+  "mailto:hello@company.com?subject=New%20Project%20Inquiry";
 const MAILTO_URL =
-  "mailto:modexa@studiodirection.com?subject=New%20Modexa%20Inquiry";
+  "mailto:hello@company.com?subject=New%20Project%20Inquiry";
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -61,7 +60,7 @@ export default function Contact() {
               className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest mb-3"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
-              08 / INTAKE
+              04 / CONTACT
             </div>
             <h2
               className="text-[#1b1c18] leading-tight mb-6"
@@ -73,9 +72,9 @@ export default function Contact() {
                 fontWeight: 400,
               }}
             >
-              INITIATE A DIRECT
+              HAVE SOMETHING
               <br />
-              <span className="italic">COMMISSION.</span>
+              <span className="italic">WORTH BUILDING?</span>
             </h2>
             <p
               className="max-w-md mb-8"
@@ -86,9 +85,7 @@ export default function Contact() {
                 color: "#747878",
               }}
             >
-              Tell us regarding your mandate, timeline constraints, and required
-              disciplines. All initial correspondence is assessed personally by
-              our Creative Director.
+              Tell us what you&apos;re working on. We&apos;ll bring the right creative and technical direction around it.
             </p>
 
             <div
@@ -99,19 +96,19 @@ export default function Contact() {
                 <span className="material-symbols-outlined text-[16px] text-[#b6240f]">
                   location_on
                 </span>
-                <span className="text-[#1b1c18]">NYC: 40.7128° N, 74.0060° W</span>
+                <span className="text-[#1b1c18]">DESIGN / CONTENT / TECHNOLOGY</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-[16px] text-[#b6240f]">
                   location_on
                 </span>
-                <span className="text-[#1b1c18]">PARIS: 48.8566° N, 2.3522° E</span>
+                <span className="text-[#1b1c18]">ONE CREATIVE DIRECTION</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-[16px] text-[#b6240f]">
                   verified
                 </span>
-                <span className="text-[#1b1c18]">DIRECTOR AVAILABILITY: CONFIRMED FOR Q3/Q4</span>
+                <span className="text-[#1b1c18]">THE RIGHT SPECIALISTS FOR THE WORK</span>
               </div>
             </div>
 
@@ -128,7 +125,7 @@ export default function Contact() {
               <span
                 className="font-mono text-[11px] tracking-wider uppercase text-[#1b1c18] group-hover:text-[#b6240f] transition-colors"
               >
-                modexa@studiodirection.com →
+                hello@company.com →
               </span>
             </a>
           </div>
@@ -145,7 +142,7 @@ export default function Contact() {
               className="font-mono text-[8px] tracking-widest text-[#b6240f] uppercase font-bold"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
-              DIRECTION VERIFIED
+              PROJECT READY
             </span>
             <span
               className="text-[#b6240f] leading-none py-1"
@@ -161,7 +158,7 @@ export default function Contact() {
               className="font-mono text-[7px] tracking-wider text-[#b6240f] uppercase"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
-              ATELIER SEAL
+              STUDIO NOTE
             </span>
           </div>
         </motion.div>
@@ -180,7 +177,7 @@ export default function Contact() {
                 className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest"
                 style={{ fontFamily: "'Space Mono', monospace" }}
               >
-                TRANSMISSION RECEIVED
+                  MESSAGE RECEIVED
               </div>
               <h3
                 className="text-[#1b1c18]"
@@ -191,7 +188,7 @@ export default function Contact() {
                   fontStyle: "italic",
                 }}
               >
-                Director review within 24h.
+                We&apos;ll review the direction and come back with a clear next step.
               </h3>
               <p
                 style={{
@@ -208,7 +205,7 @@ export default function Contact() {
                   onClick={handleEmailClick}
                   className="text-[#b6240f] underline"
                 >
-                  modexa@studiodirection.com
+                  hello@company.com
                 </a>
               </p>
             </div>
@@ -224,7 +221,7 @@ export default function Contact() {
                   className="font-mono text-[10px] uppercase text-[#747878] font-bold mb-3"
                   style={{ fontFamily: "'Space Mono', monospace" }}
                 >
-                  01. REQUIRED DISCIPLINES (SELECT MULTIPLE)
+                  01. WHAT DO YOU NEED? (SELECT MULTIPLE)
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {DISCIPLINES.map((d) => (
@@ -258,7 +255,7 @@ export default function Contact() {
                   className="font-mono text-[10px] uppercase text-[#747878] font-bold"
                   style={{ fontFamily: "'Space Mono', monospace" }}
                 >
-                  02. DIRECT TRANSMISSION CHANNEL
+                  02. EMAIL
                 </span>
                 <a
                   href={WEBMAIL_URL}
@@ -272,7 +269,7 @@ export default function Contact() {
                     className="min-w-0 break-words text-[#1b1c18] text-lg transition-colors group-hover:text-[#b6240f]"
                     style={{ fontFamily: "'Manrope', sans-serif" }}
                   >
-                    modexa@studiodirection.com
+                    hello@company.com
                   </span>
                   <span
                     className="font-mono text-[11px] text-[#b6240f] transition-transform duration-300 group-hover:translate-x-1"
@@ -288,7 +285,7 @@ export default function Contact() {
                   className="self-start font-mono text-[9px] uppercase tracking-wider text-[#747878] underline underline-offset-4 hover:text-[#b6240f] transition-colors"
                   style={{ fontFamily: "'Space Mono', monospace" }}
                 >
-                  USE WEBMAIL INSTEAD →
+                  EMAIL DIRECTLY →
                 </a>
               </div>
 
@@ -299,7 +296,7 @@ export default function Contact() {
                   htmlFor="message"
                   style={{ fontFamily: "'Space Mono', monospace" }}
                 >
-                  03. MANDATE SYNOPSIS & TARGET HORIZON
+                  03. TELL US ABOUT THE PROJECT
                 </label>
                 <textarea
                   className="bg-transparent border-b focus:outline-none py-2 transition-colors resize-none"
@@ -310,7 +307,7 @@ export default function Contact() {
                     color: "#1b1c18",
                   }}
                   id="message"
-                  placeholder="Describe project scale, target debut, and core creative friction..."
+                  placeholder="What are you trying to make?"
                   required
                   rows={4}
                   onFocus={(e) => (e.target.style.borderColor = "#1b1c18")}
@@ -324,7 +321,7 @@ export default function Contact() {
                   className="font-mono text-[10px] text-[#747878] uppercase tracking-wider"
                   style={{ fontFamily: "'Space Mono', monospace" }}
                 >
-                  SECURE TRANSMISSION ENCRYPTED
+                  READY WHEN YOU ARE
                 </span>
                 <button
                   id="submit-btn"

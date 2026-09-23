@@ -9,12 +9,13 @@ if (typeof window !== "undefined") {
 }
 
 const CAPABILITIES = [
-  { num: "01", title: "Product Design", desc: "End-to-end product design from discovery to delivered UI system.", tags: "UX / PRODUCT" },
-  { num: "02", title: "Interaction Design", desc: "Gesture, motion, and feedback systems with physical-grade precision.", tags: "MOTION / GESTURE" },
-  { num: "03", title: "Design Systems", desc: "Structured component libraries, token systems and documentation.", tags: "SYSTEM / TOKENS" },
-  { num: "04", title: "Web & App", desc: "Browser-native interfaces and mobile applications built to spec.", tags: "WEB / NATIVE" },
-  { num: "05", title: "UX Research", desc: "Behavioral insight, usability testing, and information architecture.", tags: "RESEARCH / ARCH." },
-  { num: "06", title: "Prototyping", desc: "High-fidelity interactive prototypes for testing and stakeholder presentation.", tags: "PROTOTYPE / TEST" },
+  { num: "01", title: "UI Design", desc: "Visual systems that make digital products clear and consistent.", tags: "VISUAL / SYSTEM" },
+  { num: "02", title: "UX Design", desc: "Experiences structured around people, tasks and context.", tags: "FLOW / CONTEXT" },
+  { num: "03", title: "Web Design", desc: "Digital interfaces designed for clarity, responsiveness and interaction.", tags: "WEB / RESPONSIVE" },
+  { num: "04", title: "Mobile Design", desc: "Focused experiences designed for smaller screens and real-world use.", tags: "MOBILE / FOCUS" },
+  { num: "05", title: "Design Systems", desc: "Reusable visual and interaction foundations that keep products consistent.", tags: "TOKENS / COMPONENTS" },
+  { num: "06", title: "Prototyping", desc: "Ideas turned into interfaces that can be explored before they are built.", tags: "PROTOTYPE / TEST" },
+  { num: "07", title: "Interaction Design", desc: "Motion, feedback and transitions that make interfaces feel responsive.", tags: "MOTION / FEEDBACK" },
 ];
 
 export default function UIUXCapabilities() {
@@ -53,17 +54,17 @@ export default function UIUXCapabilities() {
         <div className="flex flex-wrap items-end justify-between gap-4 mb-12 pb-6 border-b border-[#E8E2D5]">
           <div>
             <div className="font-mono text-[9px] uppercase tracking-widest text-[#E7472E] font-bold mb-2" style={{ fontFamily: "'DM Mono', monospace" }}>
-              04 / SCOPE OF DISCIPLINE
+              03 / CAPABILITIES
             </div>
             <h2
               className="cap-heading uppercase leading-none tracking-tight"
               style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 700, color: "#151515" }}
             >
-              Capabilities
+              What We Design
             </h2>
           </div>
           <span className="font-mono text-[9px] text-[#55534E] uppercase tracking-wider" style={{ fontFamily: "'DM Mono', monospace" }}>
-            [FULL SPECTRUM DESIGN CRAFT]
+            [CLARITY / STRUCTURE / INTERACTION]
           </span>
         </div>
 

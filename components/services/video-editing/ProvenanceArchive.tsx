@@ -1,12 +1,10 @@
 "use client";
 
 const ARCHIVE = [
-  { ref: "[01]", name: "KINETIC DRAFTING REVIEW", format: "Brand Campaign • 9:16 + 16:9", year: "2026", status: "DELIVERED", active: true },
-  { ref: "[02]", name: "SPATIAL COMPUTING HORIZONS", format: "Tech Keynote Edit • 4K ProRes", year: "2026", status: "DELIVERED", active: true },
-  { ref: "[03]", name: "ATELIER NOIR", format: "Fashion Week Reel Series • 9:16", year: "2025", status: "ARCHIVED", active: false },
-  { ref: "[04]", name: "VOID RESONANCE", format: "Music Film & Sound Sculpture", year: "2025", status: "ARCHIVED", active: false },
-  { ref: "[05]", name: "MONOLITHIC URBANISM", format: "Architectural Documentary • 4:3", year: "2025", status: "ARCHIVED", active: false },
-  { ref: "[06]", name: "EPHEMERAL INK", format: "Brand Story • Multi-Platform", year: "2024", status: "ARCHIVED", active: false },
+  { ref: "[01]", name: "SHORT-FORM", format: "Social Content • 9:16", year: "01", status: "VIDEO", active: true },
+  { ref: "[02]", name: "LONG-FORM", format: "Narrative Content • 16:9", year: "02", status: "VIDEO", active: true },
+  { ref: "[03]", name: "MOTION", format: "Titles & Transitions", year: "03", status: "MOTION", active: false },
+  { ref: "[04]", name: "STORYTELLING", format: "Edit Structure & Pace", year: "04", status: "STORY", active: false },
 ];
 
 export default function ProvenanceArchive() {
@@ -20,10 +18,10 @@ export default function ProvenanceArchive() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8 pb-3 border-b border-[#e4e2dd]">
           <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-[#1b1c18] line-reveal">
-            <span className="text-[#b6240f] font-bold">06 / PROVENANCE INDEX</span>
-            <span className="text-[#747878]">— ARCHIVAL REGISTRY</span>
+            <span className="text-[#b6240f] font-bold">05 / VIDEO INDEX</span>
+            <span className="text-[#747878]">— SELECTED DIRECTIONS</span>
           </div>
-          <span className="font-mono text-[10px] text-[#747878] uppercase line-reveal">VOL. VI • 2024–2026</span>
+          <span className="font-mono text-[10px] text-[#747878] uppercase line-reveal">RHYTHM / PACING / STORY</span>
         </div>
 
         {/* Archival Table */}

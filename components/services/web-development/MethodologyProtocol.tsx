@@ -9,42 +9,12 @@ if (typeof window !== "undefined") {
 }
 
 const PHASES = [
-  {
-    phase: "PHASE // 01",
-    title: "Architecture & Schema Mapping",
-    description:
-      "Data contract modeling, API boundary definitions, dynamic route mapping, and edge latency requirement benchmarks before writing a line of client code.",
-  },
-  {
-    phase: "PHASE // 02",
-    title: "Design Token Codification",
-    description:
-      "Translating Figma/art direction files into atomic, mathematical CSS variables, typography fluid clamp formulas, and reusable strict-typed primitives.",
-  },
-  {
-    phase: "PHASE // 03",
-    title: "Kinetic & Motion Physics",
-    description:
-      "GSAP ScrollTrigger sequencing, Lenis virtual scroll synchronization, cursor gesture dampeners, and WebGL shader matrix integration.",
-  },
-  {
-    phase: "PHASE // 04",
-    title: "Full-Stack & Edge Integration",
-    description:
-      "Headless CMS webhook wiring, database schema migrations, transactional authentication gates, and streaming SSR fallbacks.",
-  },
-  {
-    phase: "PHASE // 05",
-    title: "Hardware Profiling Audit",
-    description:
-      "Chrome Performance profiler passes, memory leak sweeps, Lighthouse 100/100 audits, and multi-tier device testing (OLED mobile through 5K displays).",
-  },
-  {
-    phase: "PHASE // 06",
-    title: "Production CI/CD Dispatch",
-    description:
-      "Zero-downtime atomic deployments, automated type verification pipelines, CDN edge caching warmup, and real-user monitoring instrumentation.",
-  },
+  { phase: "PHASE // 01", title: "Discover", description: "Understand the product, audience and goal." },
+  { phase: "PHASE // 02", title: "Structure", description: "Define the experience, architecture and technical direction." },
+  { phase: "PHASE // 03", title: "Build", description: "Turn the design into a working digital experience." },
+  { phase: "PHASE // 04", title: "Integrate", description: "Connect the systems, data and interactions." },
+  { phase: "PHASE // 05", title: "Refine", description: "Improve the details, performance and behavior." },
+  { phase: "PHASE // 06", title: "Deploy", description: "Take the finished experience into production." },
 ];
 
 export default function MethodologyProtocol() {
@@ -80,13 +50,13 @@ export default function MethodologyProtocol() {
     >
       <div className="mb-14">
         <span className="font-mono text-xs text-[#e7472e] uppercase tracking-widest block mb-2 font-medium">
-          SECTION 06 // METHODOLOGY LEDGER
+          SECTION 08 // PROCESS
         </span>
         <h2 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase text-[#1b1c18]">
-          SEQUENTIAL ENGINEERING PROTOCOL
+          FROM IDEA TO DEPLOYMENT
         </h2>
         <p className="font-sans text-sm md:text-base text-[#444748] max-w-xl mt-3 leading-relaxed">
-          How we take complex, ambitious creative visions from wireframe mathematics to rock-solid production reality.
+          A clear path from product idea to working digital experience.
         </p>
       </div>
 

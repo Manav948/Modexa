@@ -97,13 +97,13 @@ export default function UIUXHero() {
         style={{ borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace", color: "#55534E" }}
       >
         <div className="flex items-center gap-6">
-          <span className="text-[#E7472E] font-bold">■ DISPATCH 01 // DESIGN INFORMATION ARCHITECTURE</span>
-          <span className="hidden md:inline">PARIS 24 HOURS 6</span>
-          <span className="hidden md:inline">NYC 22 7047 8</span>
+          <span className="text-[#E7472E] font-bold">UI/UX DESIGN / 02</span>
+          <span className="hidden md:inline">CLARITY / STRUCTURE</span>
+          <span className="hidden md:inline">INTERACTION / SYSTEMS</span>
         </div>
         <div className="flex items-center gap-6 hidden lg:flex">
-          <span>[IMPORT — ADAPTIVE DYNAMIC GRID [1–21]</span>
-          <span className="text-[#E7472E]">] LATENCY — 1400 [SERVO CIRCUIT]</span>
+          <span>[DIGITAL PRODUCTS / WEB]</span>
+          <span className="text-[#E7472E]">[RESPONSIVE / TACTILE]</span>
         </div>
       </div>
 
@@ -112,8 +112,8 @@ export default function UIUXHero() {
         className="uiux-label w-full border-b px-5 md:px-8 lg:px-14 py-2 flex items-center justify-between font-mono text-[9px] uppercase tracking-widest"
         style={{ borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace", color: "#55534E" }}
       >
-        <span className="border border-[#E8E2D5] px-2 py-0.5">SPACE DESIGN → INTERFACE SYSTEMS</span>
-        <span className="hidden md:inline">EST. 2024 // PGM 3 — NYC</span>
+        <span className="border border-[#E8E2D5] px-2 py-0.5">CLARITY → INTERACTION</span>
+        <span className="hidden md:inline">DIGITAL PRODUCTS / WEB</span>
       </div>
 
       {/* ── Main hero content ── */}
@@ -124,7 +124,7 @@ export default function UIUXHero() {
           className="uiux-label font-mono text-[9px] uppercase tracking-widest text-[#E7472E] font-bold mb-3"
           style={{ fontFamily: "'DM Mono', monospace" }}
         >
-          HYPERFLORA 01: DIGITAL PRODUCTS & UX
+          UI/UX DESIGN / DIGITAL EXPERIENCES
         </div>
 
         {/* ── Two-column row: HUGE heading left + body right ── */}
@@ -144,7 +144,7 @@ export default function UIUXHero() {
                     letterSpacing: "-0.03em",
                   }}
                 >
-                  WHERE
+                  INTERFACES
                 </div>
               </div>
               {/* STRUCTURE */}
@@ -159,7 +159,7 @@ export default function UIUXHero() {
                     letterSpacing: "-0.03em",
                   }}
                 >
-                  STRUCTURE
+                  BUILT TO FEEL
                 </div>
               </div>
               {/* meets — italic serif, smaller */}
@@ -175,7 +175,7 @@ export default function UIUXHero() {
                     letterSpacing: "-0.01em",
                   }}
                 >
-                  meets
+                  as good as
                 </div>
               </div>
               {/* INTERACTION. */}
@@ -190,7 +190,7 @@ export default function UIUXHero() {
                     letterSpacing: "-0.03em",
                   }}
                 >
-                  INTERACTION
+                  THEY WORK
                   <span style={{ color: "#E7472E" }}>.</span>
                 </div>
               </div>
@@ -258,7 +258,7 @@ export default function UIUXHero() {
             </div>
             <div className="flex items-center gap-4">
               <span>STATE — PROGRESS:LIVE</span>
-              <span className="border px-2 py-0.5" style={{ borderColor: "#E8E2D5" }}>DIRECT COMMISSIONS</span>
+              <span className="border px-2 py-0.5" style={{ borderColor: "#E8E2D5" }}>SELECTED WORK</span>
             </div>
           </div>
         </div>
@@ -291,7 +291,7 @@ export default function UIUXHero() {
             </div>
             <div className="p-4 mt-auto border-t text-[9px] font-mono uppercase" style={{ borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace", color: "#55534E" }}>
               <div>BINARY CACHE: 0.12.88</div>
-              <div>BINARY LATENCY: 12.1.08</div>
+              <div>INTERACTION: READY</div>
             </div>
           </div>
 

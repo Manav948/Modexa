@@ -25,7 +25,7 @@ export default function UIUXCTA() {
             className="font-mono text-[9px] uppercase tracking-widest text-[#E7472E] font-bold mb-4"
             style={{ fontFamily: "'DM Mono', monospace" }}
           >
-            05 / START A MANDATE
+            06 / START A PROJECT
           </div>
 
           {/* Heading */}
@@ -38,12 +38,12 @@ export default function UIUXCTA() {
               letterSpacing: "-0.03em",
             }}
           >
-            READY TO DESIGN<br />
+            HAVE AN EXPERIENCE<br />
             <span
               className="italic font-normal tracking-normal"
               style={{ fontFamily: "'Newsreader', Georgia, serif", color: "#f7f5ef", fontSize: "0.85em" }}
             >
-              something that feels impossible?
+              worth designing?
             </span>
           </h2>
 
@@ -51,14 +51,13 @@ export default function UIUXCTA() {
             className="text-[rgba(255,255,255,0.6)] max-w-xl text-base leading-relaxed mb-8"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            Bring the interface you're trying to build. We'll design the system, map the interactions,
-            and build the experience from the ground up — engineered to feel palpable.
+            Bring the experience you&apos;re trying to shape. We&apos;ll design the system, map the interactions and make the next action clear.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap items-center gap-4 mb-16 font-mono text-[10px]" style={{ fontFamily: "'DM Mono', monospace" }}>
             <a
-              href="mailto:hello@studiodirection.com?subject=UI/UX%20Design%20Commission"
+              href="mailto:hello@company.com?subject=UI%2FUX%20Design%20Project"
               className="px-8 py-4 text-white tracking-widest uppercase inline-flex items-center gap-3 font-bold shadow-lg hover:opacity-90 transition-opacity"
               style={{ backgroundColor: "#E7472E" }}
             >
@@ -70,7 +69,7 @@ export default function UIUXCTA() {
               className="px-6 py-4 border text-white tracking-widest uppercase transition-colors hover:border-white"
               style={{ borderColor: "#444" }}
             >
-              RETURN TO SERVICES
+              BACK TO SERVICES
             </a>
           </div>
 
@@ -80,21 +79,21 @@ export default function UIUXCTA() {
             style={{ borderColor: "#2a2a2a", fontFamily: "'DM Mono', monospace" }}
           >
             <div>
-              <span className="text-white font-bold">TURNAROUND:</span>
+                <span className="text-white font-bold">FOCUS:</span>
               <p className="mt-1 leading-relaxed text-[rgba(255,255,255,0.5)]">
-                Design strategy + first screens within 7–10 business days.
+                Clarity, structure and interaction from the first screen.
               </p>
             </div>
             <div>
-              <span className="text-white font-bold">AVAILABILITY:</span>
+                <span className="text-white font-bold">DELIVERABLES:</span>
               <p className="mt-1 leading-relaxed text-[rgba(255,255,255,0.5)]">
-                Accepting 3 focused design mandates for Q4 2026.
+                Flows, screens, systems and prototypes ready to explore.
               </p>
             </div>
             <div>
-              <span className="text-white font-bold">DELIVERY:</span>
+                <span className="text-white font-bold">DIRECTION:</span>
               <p className="mt-1 leading-relaxed text-[rgba(255,255,255,0.5)]">
-                Figma source files, design tokens and dev-ready component specs.
+                A clear visual and interaction language for the product.
               </p>
             </div>
           </div>

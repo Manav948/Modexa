@@ -55,21 +55,21 @@ export default function PerformanceMandate() {
           {/* Left Column: Monumental Type Block */}
           <div className="lg:col-span-6">
             <span className="font-mono text-xs text-[#ffdad4] uppercase tracking-widest block mb-4 font-medium">
-              ENGINEERING PRINCIPLE 01
+              06 / PERFORMANCE
             </span>
             <h2
               ref={headlineRef}
               className="font-display text-4xl sm:text-6xl md:text-7xl uppercase leading-[0.9] tracking-tighter text-white"
             >
-              FAST
+              PERFORMANCE
               <br />
-              IS A
+              IS PART OF
               <br />
               <span
                 className="text-[#e7472e] italic font-editorial lowercase font-normal pr-2"
                 style={{ fontFamily: "'Newsreader', Georgia, serif" }}
               >
-                feature.
+                the experience.
               </span>
             </h2>
             <div className="w-24 h-1 bg-[#e7472e] mt-8" />
@@ -78,35 +78,35 @@ export default function PerformanceMandate() {
           {/* Right Column: Editorial Argument & Pillars */}
           <div ref={contentRef} className="lg:col-span-6 flex flex-col gap-6 pt-2">
             <p className="font-display text-xl sm:text-2xl text-white/95 leading-snug">
-              &ldquo;We reject JavaScript obesity, third-party script pollution, and lazy abstractions. Every byte is justified; every render loop is profiled.&rdquo;
+              &ldquo;Fast, efficient experiences without unnecessary weight.&rdquo;
             </p>
             <p className="font-sans text-sm sm:text-base text-white/70 leading-relaxed">
-              Speed is not an afterthought benchmark score to patch before launch—it is the foundational aesthetic of respect for the user. When an interface responds instantaneously, cognitive load evaporates, and brand authority becomes undeniable.
+              Performance is part of the design. The interface should feel clear, responsive and ready for the people using it.
             </p>
 
             {/* 3 Architectural Pillars */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-white/15 mt-2">
               <div>
                 <span className="font-mono text-xs text-[#ffdad4] uppercase block font-semibold">
-                  CLS &lt; 0.01
+                  RESPONSIVE
                 </span>
                 <h4 className="font-display text-sm uppercase text-white mt-1.5 font-bold">
-                  Zero Layout Shift
+                  Clear Structure
                 </h4>
                 <p className="font-sans text-xs text-white/60 mt-1 leading-relaxed">
-                  Containers enforce strict aspect ratios prior to asset delivery.
+                  Layouts that hold together across screens and contexts.
                 </p>
               </div>
 
               <div>
                 <span className="font-mono text-xs text-[#ffdad4] uppercase block font-semibold">
-                  TTFB &lt; 48MS
+                  EFFICIENT
                 </span>
                 <h4 className="font-display text-sm uppercase text-white mt-1.5 font-bold">
-                  Edge Dispatch
+                  Focused Output
                 </h4>
                 <p className="font-sans text-xs text-white/60 mt-1 leading-relaxed">
-                  Static caching and edge middleware deployed across 300+ PoPs.
+                  Only the weight the experience actually needs.
                 </p>
               </div>
 

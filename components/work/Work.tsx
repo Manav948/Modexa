@@ -22,23 +22,23 @@ const PROJECTS: Project[] = [
   {
     id: "01",
     num: "01",
-    tagline: "■ FEATURED COMMISSION // 01",
-    title: "CODEVERSE",
-    italicTitle: "PLATFORM Architecture",
-    category: "Full Platform Architecture & Design System",
-    specs: "DIGITAL PLATFORM • UI/UX • DEV | 2026",
+    tagline: "01 / WEB",
+    title: "DIGITAL",
+    italicTitle: "EXPERIENCE",
+    category: "Interface, interaction and development",
+    specs: "WEB • UI/UX • DEVELOPMENT",
     image: "/images/work_codeverse_platform_1789796324968.png",
     mobilePreview: "/images/work_codeverse_platform_1789796324968.png",
-    overlayBadge: "DELIVERED: FULL PLATFORM ARCHITECTURE + DESIGN SYSTEM",
+    overlayBadge: "WEB / DIGITAL EXPERIENCE",
   },
   {
     id: "02",
     num: "02",
-    tagline: "02 // KINETIC BRANDING",
+    tagline: "02 / VIDEO",
     title: "MOTION",
-    italicTitle: "STORIES Film System",
-    category: "Kinetic Typography & Brand Films",
-    specs: "VIDEO / SOCIAL | 2026",
+    italicTitle: "STORIES",
+    category: "Editing, rhythm and motion direction",
+    specs: "VIDEO / CONTENT",
     image: "/images/work_motion_stories_1789796354503.png",
     mobilePreview: "/images/work_motion_stories_1789796354503.png",
     overlayBadge: "VIDEO DIRECTION",
@@ -46,11 +46,11 @@ const PROJECTS: Project[] = [
   {
     id: "03",
     num: "03",
-    tagline: "03 // IMMERSIVE ARCHITECTURE",
-    title: "ARCLAB",
-    italicTitle: "SPATIAL Pavilion",
-    category: "3D Web Experience & Spatial Pavilion",
-    specs: "WEB EXPERIENCE | 2026",
+    tagline: "03 / DIGITAL",
+    title: "SPATIAL",
+    italicTitle: "EXPERIENCE",
+    category: "Creative technology and digital space",
+    specs: "DIGITAL / INTERACTIVE",
     image: "/images/work_arclab_spatial_1789796381832.png",
     mobilePreview: "/images/work_arclab_spatial_1789796381832.png",
     overlayBadge: "WEB EXPERIENCE",
@@ -58,15 +58,15 @@ const PROJECTS: Project[] = [
   {
     id: "04",
     num: "04",
-    tagline: "CASE STUDY // 04",
-    title: "VANGUARD",
-    italicTitle: "HARDWARE OS",
-    category: "Industrial Instrument Operating System",
-    specs: "HARDWARE OS • TELEMETRY | 2026",
+    tagline: "04 / UI/UX",
+    title: "PRODUCT",
+    italicTitle: "SYSTEM",
+    category: "Interface structure and interaction design",
+    specs: "UI/UX • DIGITAL PRODUCT",
     image: "/images/work_vanguard_hardware_1789796410306.png",
     mobilePreview: "/images/work_vanguard_hardware_1789796410306.png",
-    overlayBadge: "VANGUARD HARDWARE OS",
-    overlaySubtext: "Industrial instrument operating system & composition dashboard",
+    overlayBadge: "UI/UX / PRODUCT SYSTEM",
+    overlaySubtext: "Interface structure, visual language and interaction detail",
   },
 ];
 
@@ -148,7 +148,7 @@ export default function Work() {
               className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
-              [ SELECTED COMMISSIONS ]
+              [ SELECTED WORK ]
             </motion.div>
           </div>
 
@@ -165,9 +165,9 @@ export default function Work() {
                 fontWeight: 400,
               }}
             >
-              CURATED WORK &amp;
+              SELECTED WORK &amp;
               <br />
-              <span className="italic font-normal text-[#b6240f]">COMMISSIONS.</span>
+              <span className="italic font-normal text-[#b6240f]">ACROSS DISCIPLINES.</span>
             </motion.h2>
           </div>
         </div>
@@ -445,7 +445,7 @@ export default function Work() {
               </p>
             </div>
             <div className="absolute bottom-6 right-6 px-4 py-2 bg-[#30312d] text-[#fbf9f3] font-mono text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg group-hover:bg-[#b6240f] transition-colors">
-              <span>VIEW ARCHITECTURE</span>
+              <span>VIEW PROJECT</span>
               <span>▾</span>
             </div>
           </div>
@@ -481,7 +481,7 @@ export default function Work() {
               <div className="w-full px-4 py-2.5 bg-[#1b1c18] border-b border-[#30312d] flex items-center justify-between font-mono text-[9px] text-[#747878]">
                 <div className="flex items-center gap-1.5 text-[#b6240f] font-bold">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#b6240f] animate-pulse" />
-                  ARCHIVE PREVIEW
+                  WORK PREVIEW
                 </div>
                 <span>[ {activeProject.num} // SPEC ]</span>
               </div>
@@ -504,7 +504,7 @@ export default function Work() {
                     className="font-mono text-[9px] text-white font-bold tracking-widest uppercase bg-[#1b1c18]/90 px-3 py-1 border border-[#30312d]"
                     style={{ fontFamily: "'Space Mono', monospace" }}
                   >
-                    PLAY REEL
+                    VIEW PROJECT
                   </span>
                 </div>
 
@@ -527,8 +527,8 @@ export default function Work() {
 
               {/* Bottom Specs Footer Bar */}
               <div className="w-full px-4 py-2 bg-[#1b1c18] border-t border-[#30312d] flex items-center justify-between font-mono text-[9px] text-[#747878]">
-                <span>COMMISSION ARCHIVE</span>
-                <span className="text-[#b6240f]">SELECT →</span>
+                <span>SELECTED WORK</span>
+                <span className="text-[#b6240f]">VIEW →</span>
               </div>
             </motion.div>
           )}

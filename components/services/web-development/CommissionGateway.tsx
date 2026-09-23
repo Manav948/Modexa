@@ -13,22 +13,21 @@ export default function CommissionGateway() {
       <div className="max-w-5xl mx-auto flex flex-col items-start gap-8 relative z-10">
         <div className="flex items-center gap-2.5 font-mono text-xs text-[#ffdad4] uppercase tracking-widest font-medium">
           <span className="w-2 h-2 rounded-full bg-[#e7472e] animate-ping" />
-          <span>COMMISSION TRANSMISSION GATE // 2026</span>
+          <span>04 / START A PROJECT</span>
         </div>
 
         <h2 className="font-display text-3xl sm:text-5xl md:text-6xl uppercase text-white leading-tight">
-          HAVE A SYSTEM WORTH BUILDING?<br />
+          HAVE SOMETHING<br />
           <span
             className="font-editorial italic lowercase font-normal text-[#f0eee8] pr-2"
             style={{ fontFamily: "'Newsreader', Georgia, serif" }}
           >
-            let&apos;s write
+            worth building?
           </span>
-          THE CODE.
         </h2>
 
         <p className="font-sans text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed">
-          Whether you are staging a monumental interactive product reveal or re-architecting a sluggish digital infrastructure, our engineering studio turns your creative ambition into an unyielding reality.
+          Websites and digital products built where design, interaction and technology meet.
         </p>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto pt-2">
@@ -42,27 +41,27 @@ export default function CommissionGateway() {
             href="mailto:tech@company.com?subject=TECHNICAL%20INQUIRY"
             className="inline-flex items-center justify-center px-8 py-4 border border-white/25 text-white font-mono text-xs uppercase tracking-wider hover:border-white hover:bg-white/10 transition-colors duration-200"
           >
-            DIRECT TO LEAD ENGINEER
+            EXPLORE WORK
           </a>
         </div>
 
         {/* Studio Technical Provenance Metadata */}
         <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 border-t border-white/10 font-mono text-xs uppercase tracking-wider text-white/50 mt-4">
           <div>
-            <span className="block opacity-40 text-[10px] mb-1">COMMISSION PIPELINE</span>
-            <span className="text-white font-medium">OPEN FOR COMMISSIONS</span>
+            <span className="block opacity-40 text-[10px] mb-1">CAPABILITY</span>
+            <span className="text-white font-medium">WEB DEVELOPMENT</span>
           </div>
           <div>
-            <span className="block opacity-40 text-[10px] mb-1">PRIMARY DESPATCH</span>
-            <span className="text-white font-medium">PARIS // NYC</span>
+            <span className="block opacity-40 text-[10px] mb-1">APPROACH</span>
+            <span className="text-white font-medium">DESIGN + CODE</span>
           </div>
           <div>
-            <span className="block opacity-40 text-[10px] mb-1">DEPLOY ENCRYPTION</span>
-            <span className="text-white font-medium">TLS 1.3 / ED25519</span>
+            <span className="block opacity-40 text-[10px] mb-1">FOCUS</span>
+            <span className="text-white font-medium">INTERACTION</span>
           </div>
           <div>
-            <span className="block opacity-40 text-[10px] mb-1">CODE LICENSE</span>
-            <span className="text-white font-medium">PROPRIETARY CLIENT IP</span>
+            <span className="block opacity-40 text-[10px] mb-1">OUTPUT</span>
+            <span className="text-white font-medium">PRODUCTION READY</span>
           </div>
         </div>
       </div>

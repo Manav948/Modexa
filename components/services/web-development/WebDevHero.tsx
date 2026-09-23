@@ -105,18 +105,18 @@ export default function WebDevHero() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e7472e] opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e7472e]" />
           </span>
-          <span className="text-white font-medium">SPEC: DEV.04 // CREATIVE TECHNOLOGY &amp; WEB ARCHITECTURE</span>
+          <span className="text-white font-medium">WEB DEVELOPMENT / 04</span>
         </div>
 
         <div className="hidden md:flex items-center gap-6 text-white/50">
           <span>RUNTIME: NEXT.JS / REACT / TS</span>
-          <span>LATENCY &lt; 14MS</span>
+          <span>RESPONSIVE BY DESIGN</span>
         </div>
 
         <div className="flex items-center gap-2 text-white/70">
-          <span>GPU ACCELERATED</span>
+          <span>INTERACTIVE WEB</span>
           <span className="text-[#e7472e]">●</span>
-          <span>60FPS CADENCE</span>
+          <span>DESIGN / CODE / DELIVERY</span>
         </div>
       </div>
 
@@ -124,9 +124,9 @@ export default function WebDevHero() {
       <div ref={contentRef} className="relative z-10 my-auto py-10 lg:py-16 max-w-5xl">
         {/* Discipline Tag */}
         <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 bg-white/5 border border-white/15 font-mono text-[10px] md:text-[11px] uppercase tracking-[0.22em] text-[#ffdad4]">
-          <span>DISCIPLINE [04]</span>
+          <span>WEB DEVELOPMENT</span>
           <span className="opacity-40">/</span>
-          <span>ENGINEERING CORPS</span>
+          <span>DESIGN + TECHNOLOGY</span>
         </div>
 
         {/* H1 Headline */}
@@ -138,20 +138,19 @@ export default function WebDevHero() {
           }}
         >
           WE BUILD<br />
-          WHAT PEOPLE<br />
+          DIGITAL<br />
           <span
             className="font-editorial italic font-normal text-[#f0eee8] tracking-normal lowercase pr-3"
             style={{ fontFamily: "'Newsreader', Georgia, serif" }}
           >
-            interact
+            experiences
           </span>
-          WITH.
+          .
         </h1>
 
         {/* Supporting Editorial Body */}
         <p className="font-sans text-sm sm:text-base md:text-lg text-white/80 max-w-2xl leading-relaxed">
-          Websites engineered with architectural clarity, kinetic choreography, and unyielding performance.
-          From interaction physics to distributed infrastructure, we build digital experiences that perform.
+          Websites and digital products built where design, interaction and technology meet.
         </p>
 
         {/* Physical CTAs */}
@@ -164,7 +163,7 @@ export default function WebDevHero() {
             }}
             className="inline-flex items-center justify-center px-6 py-3.5 bg-[#e7472e] text-white font-mono text-xs uppercase tracking-wider hover:bg-[#b6240f] transition-all duration-300 shadow-[0_0_25px_rgba(231,71,46,0.35)]"
           >
-            LET&apos;S BUILD →
+            START A PROJECT →
           </a>
 
           <a
@@ -175,7 +174,7 @@ export default function WebDevHero() {
             }}
             className="inline-flex items-center justify-center px-6 py-3.5 border border-white/25 text-white font-mono text-xs uppercase tracking-wider hover:border-white hover:bg-white/10 transition-all duration-300"
           >
-            EXPLORE STACK
+            EXPLORE WORK
           </a>
         </div>
       </div>
@@ -190,7 +189,7 @@ export default function WebDevHero() {
           <span className="hidden sm:inline opacity-30">/</span>
           <span className="hidden sm:inline">NYC 40.7128° W</span>
           <span className="hidden md:inline opacity-30">/</span>
-          <span>INDEX REF: TECH-DIR-2026</span>
+          <span>DESIGN / INTERACTION / TECHNOLOGY</span>
         </div>
 
         <button
@@ -198,7 +197,7 @@ export default function WebDevHero() {
           className="flex items-center gap-2.5 group cursor-pointer text-left bg-transparent border-none p-0"
         >
           <span className="text-white/80 group-hover:text-[#ffdad4] transition-colors">
-            SCROLL TO COMPILE
+            SCROLL TO EXPLORE
           </span>
           <div className="w-8 h-px bg-white/30 relative overflow-hidden">
             <div className="w-2.5 h-full bg-[#e7472e] absolute top-0 left-0 animate-pulse" />

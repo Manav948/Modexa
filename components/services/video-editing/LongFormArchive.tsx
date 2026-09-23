@@ -5,28 +5,28 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const CHAPTERS = [
   { time: "00:00 — 04:12", title: "I. PROLOGUE", sub: "Cold opening & Thesis", timecode: "02:15 / 38:10", progress: "15%" },
-  { time: "04:12 — 18:40", title: "II. THE MONOLITH", sub: "Investigation & Archive Cuts", timecode: "14:32 / 38:10", progress: "42%" },
+  { time: "04:12 — 18:40", title: "II. THE BUILD", sub: "Structure & Story Cuts", timecode: "14:32 / 38:10", progress: "42%" },
   { time: "18:40 — 38:10", title: "III. RESONANCE", sub: "Culmination & Outro", timecode: "28:50 / 38:10", progress: "78%" },
 ];
 
 const SECONDARY_PROJECTS = [
   {
     id: "01",
-    tag: "INTERVIEW ESSAY // 48 MIN",
-    ep: "EPISODE 04",
-    title: "DISPATCH / 04 — The Specialist Dialogue",
-    desc: "Dual-camera high-level philosophical discourse. Seamless multi-cam switching governed by micro-reactions, custom animated slide-deck inserts, and noise-isolated vocal warmth.",
-    views: "1.2M VIEWS • 54% AVG RETENTION",
+    tag: "INTERVIEW / LONG-FORM",
+    ep: "PROJECT 01",
+    title: "THE SPECIALIST DIALOGUE",
+    desc: "A conversation shaped through considered multicam editing, clear pacing and warm sound.",
+    views: "VIDEO / STORY / SOUND",
     image: "/images/work_motion_stories_1789796354503.png",
     spec: "DUAL 4K PRORES // MULTICAM 24-BIT",
   },
   {
     id: "02",
-    tag: "KEYNOTE EDIT // 32 MIN",
-    ep: "ANNUAL FORUM",
-    title: "DESIGN CADENCE — Keynote & Deep Dive",
-    desc: "Technical engineering keynote edited with cinematic pacing. Screen-recording zooms, motion-tracked annotations, and rhythmically synced transitions that never let attention sag.",
-    views: "PRORES MASTER ARCHIVE",
+    tag: "TALK / LONG-FORM",
+    ep: "PROJECT 02",
+    title: "DESIGN CADENCE",
+    desc: "A long-form edit shaped with structure, screen detail and a clear narrative rhythm.",
+    views: "VIDEO / EDIT / DELIVERY",
     image: "/images/work_codeverse_platform_1789796324968.png",
     spec: "SCREEN GRAPHICS // DaVinci ACES",
   },
@@ -234,7 +234,7 @@ export default function LongFormArchive() {
                 className="text-[#747878] text-sm leading-relaxed mb-6"
                 style={{ fontFamily: "'Manrope', sans-serif" }}
               >
-                A 38-minute deep-dive documentary exploring architectural acoustics and void spaces. We unified 18 hours of raw 6K footage into a tightly structured narrative arc that maintains retention while honoring festival cinema standards.
+                A long-form narrative shaped through structure, pacing, sound and a clear editorial point of view.
               </p>
 
               <div className="flex flex-col gap-2.5 border-t border-[#e4e2dd] pt-4 font-mono text-[10px]">
@@ -262,7 +262,7 @@ export default function LongFormArchive() {
                 href="#initiation"
                 className="w-full py-3 bg-[#1b1c18] text-white font-mono text-[10px] tracking-widest uppercase flex items-center justify-center gap-2 hover:bg-[#b6240f] transition-colors shadow-md"
               >
-                <span>COMMISSION SIMILAR FEATURE</span>
+                <span>START A PROJECT</span>
                 <span>→</span>
               </a>
             </div>

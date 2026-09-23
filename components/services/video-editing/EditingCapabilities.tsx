@@ -3,48 +3,10 @@
 import { motion } from "framer-motion";
 
 const CAPABILITIES = [
-  {
-    num: "01",
-    title: "Reels & Short Form",
-    desc: "High-velocity pacing, retention hooks, platform-native 9:16 aspect ratio framing, visual rhythm.",
-    badge: "TIKTOK / REELS / SHORTS",
-  },
-  {
-    num: "02",
-    title: "YouTube & Series Content",
-    desc: "Paced storytelling, narrative retention engineering, chapter titles, custom graphical maps.",
-    badge: "LONG FORM 4K",
-  },
-  {
-    num: "03",
-    title: "Podcasts & Multi-Camera Dialogues",
-    desc: "Organic speaker switching, audio stem de-noising & leveling, dynamic cutaways and proof inserts.",
-    badge: "MULTICAM AUDIO/VIDEO",
-  },
-  {
-    num: "04",
-    title: "In-Depth Interviews & Documentaries",
-    desc: "Subtle emotional arcs, archival asset montages, textural sound beds, and respectful tempo.",
-    badge: "NARRATIVE ARCHIVE",
-  },
-  {
-    num: "05",
-    title: "Motion Graphics & Kinetic Typography",
-    desc: "Vector animations, bespoke title design, typographic overlays, lower-thirds with physical inertia.",
-    badge: "AFTER EFFECTS & KINETICS",
-  },
-  {
-    num: "06",
-    title: "Content Repurposing & Omnichannel Slicing",
-    desc: "Extracting 10+ high-engagement micro-stories from flagship keynote & podcast recordings.",
-    badge: "CROSS-PLATFORM VALUE",
-  },
-  {
-    num: "07",
-    title: "Bespoke Captions & Spatial Sound Design",
-    desc: "Sub-bass riser integration, mechanical foley, word-by-word kinetic typography with zero template feel.",
-    badge: "AUDIO MASTERING",
-  },
+  { num: "01", title: "Short-Form", desc: "Reels, social clips and fast-moving content built to hold attention.", badge: "SOCIAL / MOTION" },
+  { num: "02", title: "Long-Form", desc: "YouTube, branded content and longer narratives shaped around structure and pacing.", badge: "NARRATIVE / SERIES" },
+  { num: "03", title: "Motion", desc: "Titles, transitions and visual movement that support the story rather than distract from it.", badge: "TYPE / MOVEMENT" },
+  { num: "04", title: "Storytelling", desc: "Cuts that create rhythm, emotion and a reason to keep watching.", badge: "RHYTHM / PURPOSE" },
 ];
 
 export default function EditingCapabilities() {
@@ -59,9 +21,9 @@ export default function EditingCapabilities() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-[#e4e2dd] gap-6">
           <div>
             <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-2 font-bold line-reveal">
-              <span>04 / SCOPE OF DISCIPLINE</span>
+              <span>02 / CAPABILITIES</span>
               <span className="w-4 h-px bg-[#b6240f]" />
-              <span>CAPABILITIES DIRECTORY</span>
+              <span>VIDEO EDITING</span>
             </div>
             <h2
               className="text-[#1b1c18] uppercase tracking-tight text-reveal"
@@ -71,11 +33,11 @@ export default function EditingCapabilities() {
                 fontWeight: 400,
               }}
             >
-              What I Edit
+              What We Edit
             </h2>
           </div>
           <span className="font-mono text-[10px] text-[#747878] uppercase tracking-wider font-bold line-reveal">
-            [FULL SPECTRUM MOTION CRAFT]
+            [RHYTHM / PACING / STORY]
           </span>
         </div>
 

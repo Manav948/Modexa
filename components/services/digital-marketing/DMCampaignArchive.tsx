@@ -9,11 +9,11 @@ if (typeof window !== "undefined") {
 }
 
 const ARCHIVE = [
-  { ref: "01", title: "SOCIAL CAMPAIGN", format: "Short-Form Content Series • 9:16", year: "2026", status: "DELIVERED" },
-  { ref: "02", title: "CONTENT DIRECTION", format: "Brand Strategy & Creative • Multi-Platform", year: "2026", status: "DELIVERED" },
-  { ref: "03", title: "DIGITAL CAMPAIGN", format: "Paid Creative Testing • Performance", year: "2025", status: "ARCHIVED" },
-  { ref: "04", title: "BRAND LAUNCH", format: "Go-To-Market Architecture • Social + Digital", year: "2025", status: "ARCHIVED" },
-  { ref: "05", title: "CONTENT SERIES", format: "Long-Form Editorial • Platform Native", year: "2025", status: "ARCHIVED" },
+  { ref: "01", title: "SOCIAL MEDIA", format: "Content / Platform Direction", year: "01", status: "SOCIAL" },
+  { ref: "02", title: "CONTENT STRATEGY", format: "Editorial Direction / Planning", year: "02", status: "STRATEGY" },
+  { ref: "03", title: "CAMPAIGN CREATIVE", format: "Concept / Visual Campaign", year: "03", status: "CAMPAIGN" },
+  { ref: "04", title: "DIGITAL STRATEGY", format: "Audience / Content / Distribution", year: "04", status: "STRATEGY" },
+  { ref: "05", title: "DISTRIBUTION", format: "Right Content / Right Places", year: "05", status: "REACH" },
 ];
 
 export default function DMCampaignArchive() {
@@ -49,14 +49,14 @@ export default function DMCampaignArchive() {
             className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-[#151515]"
             style={{ fontFamily: "'DM Mono', monospace" }}
           >
-            <span className="text-[#E7472E] font-bold">05 / CAMPAIGN INDEX</span>
-            <span className="text-[#55534E]">— ARCHIVAL REGISTRY</span>
+            <span className="text-[#E7472E] font-bold">06 / DIGITAL INDEX</span>
+            <span className="text-[#55534E]">— SELECTED DIRECTIONS</span>
           </div>
           <span
             className="font-mono text-[10px] text-[#55534E] uppercase"
             style={{ fontFamily: "'DM Mono', monospace" }}
           >
-            VOL. V • 2024–2026
+            ATTENTION / CONTENT / CONNECTION
           </span>
         </div>
 

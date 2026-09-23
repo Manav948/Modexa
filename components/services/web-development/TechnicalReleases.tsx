@@ -44,14 +44,14 @@ export default function TechnicalReleases() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 pb-4 border-b border-[#e4e2dd]">
         <div>
           <span className="font-mono text-xs text-[#e7472e] uppercase tracking-widest block mb-2 font-medium">
-            SECTION 05 // PRODUCTION ARCHIVE
+            SECTION 07 // SELECTED WORK
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase text-[#1b1c18]">
             TECHNICAL RELEASES
           </h2>
         </div>
         <span className="font-mono text-xs text-[#747878] uppercase tracking-wider mt-2 md:mt-0 font-medium">
-          VERIFIED REPOSITORIES [2025–2026]
+          WEB / INTERACTIVE / SYSTEMS
         </span>
       </div>
 
@@ -72,23 +72,23 @@ export default function TechnicalReleases() {
                 className="object-cover grayscale contrast-125 transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div className="absolute top-4 left-4 bg-[#151515] text-white px-3 py-1 font-mono text-[10px] md:text-[11px] uppercase tracking-wider">
-                CASE 01 // WEBGL REALTIME
+                01 / INTERACTIVE WEB
               </div>
               <div className="absolute bottom-4 right-4 bg-[#fbf9f3]/90 backdrop-blur-md px-3 py-1.5 font-mono text-[10px] md:text-[11px] text-[#1b1c18] border border-[#e4e2dd]">
-                60 FPS SHADER DYNAMICS
+                MOTION / INTERACTION
               </div>
             </div>
           </div>
 
           <div className="lg:col-span-5 flex flex-col justify-center">
             <span className="font-mono text-xs text-[#e7472e] uppercase tracking-widest block mb-2 font-medium">
-              CLIENT: KRONOS GENEVE // WATCH ARCHITECTURE
+              01 / INTERACTIVE WEB
             </span>
             <h3 className="font-display text-2xl sm:text-3xl md:text-4xl uppercase text-[#1b1c18] leading-tight mb-4">
-              KRONOS HAUTE HORLOGERIE
+              INTERACTIVE EXPERIENCE
             </h3>
             <p className="font-sans text-sm md:text-base text-[#444748] mb-6 leading-relaxed">
-              An interactive 3D digital flagship featuring custom WebGL shaders, camera path bezier trajectories bound to inertial scroll, and dynamic metallic anisotropic lighting simulations running at 60 FPS on mobile silicon.
+              A digital experience where motion, atmosphere and interaction work together.
             </p>
 
             <div className="flex flex-wrap gap-2 font-mono text-[11px] text-[#1b1c18] uppercase mb-8">
@@ -103,7 +103,7 @@ export default function TechnicalReleases() {
                 href="#inquiry-station"
                 className="inline-flex items-center gap-2 font-mono text-xs text-[#e7472e] uppercase tracking-widest hover:underline group font-bold"
               >
-                <span>EXPLORE ARCHITECTURAL BREAKDOWN</span>
+                <span>VIEW PROJECT</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </a>
             </div>
@@ -117,13 +117,13 @@ export default function TechnicalReleases() {
         >
           <div className="lg:col-span-5 order-2 lg:order-1 flex flex-col justify-center">
             <span className="font-mono text-xs text-[#e7472e] uppercase tracking-widest block mb-2 font-medium">
-              CLIENT: NEURA SYSTEMS // DISTRIBUTED OS
+              02 / DIGITAL PRODUCT
             </span>
             <h3 className="font-display text-2xl sm:text-3xl md:text-4xl uppercase text-[#1b1c18] leading-tight mb-4">
-              NEURA OPERATING ENVIRONMENT
+              PRODUCT INTERFACE
             </h3>
             <p className="font-sans text-sm md:text-base text-[#444748] mb-6 leading-relaxed">
-              A high-throughput browser workspace built for machine intelligence orchestration. Engineered with virtualized infinite tree hierarchies, custom Web Workers for background telemetry crunching, and sub-10ms keyboard-driven command palette execution.
+              A focused digital product shaped around structure, workflow and interaction.
             </p>
 
             <div className="flex flex-wrap gap-2 font-mono text-[11px] text-[#1b1c18] uppercase mb-8">
@@ -138,7 +138,7 @@ export default function TechnicalReleases() {
                 href="#inquiry-station"
                 className="inline-flex items-center gap-2 font-mono text-xs text-[#e7472e] uppercase tracking-widest hover:underline group font-bold"
               >
-                <span>READ INFRASTRUCTURE AUDIT</span>
+                <span>VIEW PROJECT</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </a>
             </div>

@@ -10,34 +10,34 @@ const NODE_DATA: Record<string, {
   proto: string;
 }> = {
   video: {
-    id: "REF. SPEC-01",
-    title: "Motion Direction & Pace",
-    desc: "Direct orchestration of cinematic pacing, raw cuts, and kinetic typography. Pacing and cut velocity align with master audio and campaign intent.",
-    proto: "DIRECTOR REVIEW GATE",
+    id: "01 / VIDEO",
+    title: "Video Editing",
+    desc: "Story, rhythm and motion shaped through the edit.",
+    proto: "RHYTHM / PACING",
   },
   design: {
-    id: "REF. SPEC-02",
-    title: "UI / UX Interface Architecture",
-    desc: "Tectonic component schemas and ergonomic layout hierarchies. Strict typography rules and physical interaction mechanics applied to high-density products.",
-    proto: "ZERO REDUNDANCY SPEC",
+    id: "02 / UI/UX",
+    title: "UI/UX Design",
+    desc: "Clarity, structure and interaction shaped around people and context.",
+    proto: "CLARITY / SYSTEMS",
   },
   webgl: {
-    id: "REF. SPEC-03",
-    title: "Creative Tech & Shaders",
-    desc: "60fps GPU acceleration, bespoke WebGL post-processing, and tactile canvas elasticity crafted directly in custom GLSL code.",
-    proto: "HARDWARE SYNCHRONY",
+    id: "03 / DIGITAL",
+    title: "Digital Marketing",
+    desc: "Content, campaigns and distribution shaped around attention and connection.",
+    proto: "CONTENT / REACH",
   },
   brand: {
-    id: "REF. SPEC-04",
-    title: "Typographic & Archival Systems",
-    desc: "Swiss proportion grids, unyielding baseline alignments, custom editorial glyph sets, and physical paper-grade packaging specifications.",
-    proto: "ARCHIVAL GRADE VOL. VII",
+    id: "04 / WEB",
+    title: "Web Development",
+    desc: "Design, interaction and technology brought together in a working experience.",
+    proto: "DESIGN / CODE",
   },
   growth: {
-    id: "REF. SPEC-05",
-    title: "Strategic Campaign Dispatch",
-    desc: "Synchronized visual release schedules, street-level billboard takeovers, and responsive digital interactive campaign nodes.",
-    proto: "UNIFIED COMMAND",
+    id: "05 / DIRECTION",
+    title: "Creative Direction",
+    desc: "The clear point of view that keeps every discipline moving together.",
+    proto: "ONE DIRECTION",
   },
 };
 
@@ -115,7 +115,7 @@ export default function CreativeNetwork() {
           className="mt-4 md:mt-0 font-mono text-[10px] text-[#747878]"
           style={{ fontFamily: "'Space Mono', monospace" }}
         >
-          INTERACTIVE TOPOLOGICAL NODES • TAP/HOVER TO TEST PATHWAY
+          CREATIVE DISCIPLINES • TAP/HOVER TO EXPLORE
         </div>
       </div>
 
@@ -169,13 +169,13 @@ export default function CreativeNetwork() {
                 className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-[#fbf9f3] border border-[#1b1c18] flex items-center justify-center font-mono font-bold shadow-sm text-[8px] sm:text-[10px]"
                 style={{ fontFamily: "'Space Mono', monospace" }}
               >
-                CLIENT
+                IDEA
               </div>
               <span
                 className="mt-2 font-mono text-[8px] sm:text-[10px] text-[#747878] uppercase tracking-wider"
                 style={{ fontFamily: "'Space Mono', monospace" }}
               >
-                MANDATE
+                BRIEF
               </span>
             </div>
 
@@ -190,14 +190,14 @@ export default function CreativeNetwork() {
                   className="font-mono text-[7px] sm:text-[9px] font-bold leading-tight uppercase mt-1"
                   style={{ fontFamily: "'Space Mono', monospace" }}
                 >
-                  CREATIVE DIR.
+                  DIRECTION
                 </span>
               </div>
               <span
                 className="mt-2 font-mono text-[8px] sm:text-[10px] text-[#b6240f] uppercase font-bold tracking-wider"
                 style={{ fontFamily: "'Space Mono', monospace" }}
               >
-                FOCAL LENS
+                CLEAR POINT OF VIEW
               </span>
             </div>
 
@@ -261,7 +261,7 @@ export default function CreativeNetwork() {
                 className="font-mono text-[10px] text-[#747878] uppercase"
                 style={{ fontFamily: "'Space Mono', monospace" }}
               >
-                ROUTED • ACTIVE
+                SELECTED • ACTIVE
               </span>
             </div>
 
@@ -294,15 +294,15 @@ export default function CreativeNetwork() {
                 className="flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:justify-between font-mono text-[10px] text-[#747878] border-b pb-1"
                 style={{ borderColor: "#f0eee8", fontFamily: "'Space Mono', monospace" }}
               >
-                <span>INTEGRATION PROTOCOL</span>
+                <span>PRIMARY CRAFT</span>
                 <span className="text-[#1b1c18] font-semibold">{dossier.proto}</span>
               </div>
               <div
                 className="flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:justify-between font-mono text-[10px] text-[#747878] border-b pb-1"
                 style={{ borderColor: "#f0eee8", fontFamily: "'Space Mono', monospace" }}
               >
-                <span>COMMUNICATION DELTA</span>
-                <span className="text-[#1b1c18] font-semibold">0 LATENCY / SINGLE POINT</span>
+                <span>CONNECTED BY</span>
+                <span className="text-[#1b1c18] font-semibold">ONE DIRECTION</span>
               </div>
             </div>
           </div>
@@ -314,7 +314,7 @@ export default function CreativeNetwork() {
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#b6240f]" />
-              <span>QUALITY GOVERNOR</span>
+              <span>QUALITY PRINCIPLE</span>
             </div>
             <p
               className="leading-snug"
@@ -324,8 +324,7 @@ export default function CreativeNetwork() {
                 color: "#747878",
               }}
             >
-              All work flows through Creative Direction before reaching client
-              presentation. Disjointed agency handoffs are structurally prohibited.
+              Every project moves through one clear creative direction before it reaches the audience.
             </p>
           </div>
         </motion.div>

@@ -214,13 +214,13 @@ export default function CampaignLaboratory() {
                     className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-[#151515] hover:text-[#E7472E] transition-colors"
                     style={{ fontFamily: "'DM Mono', monospace" }}
                   >
-                    EXPLORE SCOPE →
+                    DISCOVER MORE →
                   </a>
                   <span
                     className="font-mono text-[10px] text-[#55534E] uppercase"
                     style={{ fontFamily: "'DM Mono', monospace" }}
                   >
-                    VOL. 01 · Q3 24
+                    CONTENT / CAMPAIGNS
                   </span>
                 </div>
               </blockquote>
@@ -253,20 +253,20 @@ export default function CampaignLaboratory() {
                       className="font-mono text-[8px] text-[#E7472E] uppercase tracking-widest font-bold mb-1"
                       style={{ fontFamily: "'DM Mono', monospace" }}
                     >
-                      CONTENT SERIES // BRIEF 04
+                      CONTENT DIRECTION
                     </div>
                     <div
                       className="text-white text-sm font-semibold mb-1"
                       style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                     >
-                      Chronicles of Silence
+                        A CLEARER SIGNAL
                     </div>
                     <div className="flex items-center justify-between">
                       <span
                         className="font-mono text-[8px] text-[#55534E] uppercase"
                         style={{ fontFamily: "'DM Mono', monospace" }}
                       >
-                        SERIAL // 01 OF 06
+                        EDITORIAL / 01
                       </span>
                       <span
                         className="font-mono text-[8px] text-[#E7472E] font-bold uppercase"
@@ -305,14 +305,14 @@ export default function CampaignLaboratory() {
                     className="text-[#55534E] font-mono text-[9px] uppercase"
                     style={{ fontFamily: "'DM Mono', monospace" }}
                   >
-                    Q3 PERFORMANCE
+                    CAMPAIGN DIRECTION
                   </div>
                 </div>
                 <div
                   className="font-mono text-[10px] text-[#E7472E] font-bold mt-3 uppercase tracking-widest"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
-                  LIVE METRICS
+                  CONTENT SYSTEM
                 </div>
               </div>
 
@@ -351,19 +351,19 @@ export default function CampaignLaboratory() {
                   className="font-mono text-[9px] uppercase text-[#55534E]"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
-                  REACH / 1.4M
+                  REACH / RIGHT PLACES
                 </div>
                 <div
                   className="font-mono text-[9px] uppercase text-[#55534E]"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
-                  RETENTION / 68%
+                  RETENTION / RETURN
                 </div>
                 <div
                   className="font-mono text-[9px] uppercase text-[#E7472E] font-bold"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
-                  CONVERSION ↑
+                  CONNECTION ↑
                 </div>
               </div>
             </div>

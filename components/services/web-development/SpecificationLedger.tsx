@@ -11,37 +11,37 @@ if (typeof window !== "undefined") {
 const LEDGER_ROWS = [
   {
     num: "01",
-    title: "Bespoke Frontend Engineering",
-    tech: "Next.js App Router • TypeScript • Streaming React • Tailwind Tokens",
-    cycle: "CYCLE: 14–21 DAYS",
+    title: "Frontend",
+    tech: "Next.js • React • TypeScript • Tailwind CSS",
+    cycle: "01 / BUILD",
     specLink: "mailto:hello@company.com?subject=SPEC:%20Bespoke%20Frontend%20Engineering",
   },
   {
     num: "02",
-    title: "Creative Motion & WebGL Shaders",
-    tech: "GSAP Physics • Three.js 3D • Custom GLSL • Lenis Smooth Scroll",
-    cycle: "CYCLE: 21–28 DAYS",
+    title: "Interactive Web",
+    tech: "GSAP • Lenis • ScrollTrigger",
+    cycle: "02 / INTERACTION",
     specLink: "mailto:hello@company.com?subject=SPEC:%20Creative%20Motion%20WebGL",
   },
   {
     num: "03",
-    title: "Full-Stack Edge Web Applications",
-    tech: "Distributed Node • PostgreSQL • Prisma • Headless Sanity/Payload CMS",
-    cycle: "CYCLE: 28–45 DAYS",
+    title: "Web Applications",
+    tech: "Node.js • Prisma • MongoDB",
+    cycle: "03 / SYSTEMS",
     specLink: "mailto:hello@company.com?subject=SPEC:%20Full-Stack%20Edge%20Apps",
   },
   {
     num: "04",
-    title: "Design Systems & Component Tokenization",
-    tech: "Figma-to-Code Pipeline • Radix UI • Accessible WAI-ARIA • NPM Registry",
-    cycle: "CYCLE: 14–21 DAYS",
+    title: "Design Systems",
+    tech: "React • TypeScript • Tailwind CSS",
+    cycle: "04 / SYSTEMS",
     specLink: "mailto:hello@company.com?subject=SPEC:%20Design%20Systems",
   },
   {
     num: "05",
-    title: "Performance Optimization & Code Refactoring",
-    tech: "Core Web Vitals Remediation • Bundle Trimming • Memory Leak Elimination",
-    cycle: "CYCLE: 07–14 DAYS",
+    title: "Performance",
+    tech: "Responsive structure • Focused output • Smooth interaction",
+    cycle: "05 / REFINE",
     specLink: "mailto:hello@company.com?subject=SPEC:%20Performance%20Refactoring",
   },
 ];
@@ -82,14 +82,14 @@ export default function SpecificationLedger() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 pb-4 border-b border-[#e4e2dd]">
         <div>
           <span className="font-mono text-xs text-[#e7472e] uppercase tracking-widest block mb-2 font-medium">
-            SECTION 07 // CAPABILITIES INDEX
+            SECTION 09 // CAPABILITIES
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase text-[#1b1c18]">
-            SPECIFICATION LEDGER
+            WHAT WE BUILD
           </h2>
         </div>
         <span className="font-mono text-xs text-[#747878] uppercase tracking-wider font-medium">
-          ACTIVE CAPACITY: 2 COMMISSIONS / Q2 2026
+          FRONTEND / SYSTEMS / INTERACTION
         </span>
       </div>
 
@@ -122,7 +122,7 @@ export default function SpecificationLedger() {
                 href={row.specLink}
                 className="font-mono text-[11px] uppercase tracking-wider px-4 py-2 bg-[#151515] text-white hover:bg-[#e7472e] transition-colors duration-200 font-medium"
               >
-                REQUEST SPEC →
+                DISCOVER MORE →
               </a>
             </div>
           </div>

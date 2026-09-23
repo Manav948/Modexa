@@ -4,12 +4,10 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const WORDS = [
-  { text: "MANY", highlight: false },
-  { text: "SPECIALIST", highlight: false },
-  { text: "SKILLS.", highlight: false },
   { text: "ONE", highlight: true },
-  { text: "CREATIVE", highlight: false },
-  { text: "DIRECTION.", highlight: false },
+  { text: "IDEA.", highlight: false },
+  { text: "MANY", highlight: false },
+  { text: "SPECIALISTS.", highlight: false },
 ];
 
 export default function CreativeStatement() {
@@ -33,9 +31,8 @@ export default function CreativeStatement() {
       <div className="relative z-10 max-w-[1400px] mx-auto flex flex-col gap-12">
         {/* Top Tagline */}
         <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] tracking-widest uppercase font-bold">
-          <span>[ OPERATING MANIFESTO ]</span>
-          <span className="text-[#747878]">•</span>
-          <span className="text-[#747878]">ATELIER SPECS 2026</span>
+            <span>[ CREATIVE STUDIO ]</span>
+            <span className="text-[#747878]">CONNECTED DIGITAL WORK</span>
         </div>
 
         {/* Large Statement Typography */}
@@ -70,7 +67,7 @@ export default function CreativeStatement() {
         {/* Subtext description */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pt-8 border-t border-white/10">
           <div className="md:col-span-4 font-mono text-[10px] text-[#747878] uppercase tracking-widest">
-            // SINGLE POINT OF ACCOUNTABILITY
+              // ONE CREATIVE DIRECTION
           </div>
           <div className="md:col-span-8">
             <p
@@ -81,9 +78,7 @@ export default function CreativeStatement() {
                 lineHeight: "1.875rem",
               }}
             >
-              Clients bypass agency bloat and freelancer market noise. Every project is steered by
-              one Creative Director who coordinates senior specialists in film, software architecture,
-              WebGL, branding, and performance engines.
+                A single creative direction can bring together editors, designers, developers, marketers and other specialists when the project needs them.
             </p>
           </div>
         </div>

@@ -225,7 +225,7 @@ export default function InteractionLab() {
               className="text-[#55534E] text-sm leading-relaxed"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
-              Non-static wireframes. We design interfaces as reactive kinetic surfaces governed by tactile feedback physics, cursor inertia, and sub-millisecond state transitions.
+              We design digital experiences with clarity, structure and intent. Motion and feedback make the next action feel natural.
             </p>
           </div>
         </div>

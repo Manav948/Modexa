@@ -76,8 +76,8 @@ export default function NeuraArchive() {
         className="neura-label flex items-center justify-between px-5 md:px-8 lg:px-14 py-3 border-b font-mono text-[9px] uppercase tracking-widest"
         style={{ borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace", color: "#55534E" }}
       >
-        <span className="text-[#E7472E] font-bold">SECTION 03 // ARCHIVE REFERENCE</span>
-        <span>03 / AFTER DARK STUDIO / 2024–2026</span>
+        <span className="text-[#E7472E] font-bold">04 / SELECTED SYSTEM</span>
+        <span>UI/UX / DIGITAL EXPERIENCE</span>
       </div>
 
       {/* Main body */}
@@ -93,9 +93,9 @@ export default function NeuraArchive() {
             <span className="text-[#151515] font-bold">01 </span>// NEUROSCIENCE PLATFORM UI
           </div>
 
-          {/* NEURA ARCHIVE — letter-by-letter revealed */}
+          {/* CLARITY SYSTEM — letter-by-letter revealed */}
           <div ref={titleRef} className="overflow-hidden mb-6">
-            {"NEURA ARCHIVE".split("").map((ch, i) => (
+            {"CLARITY SYSTEM".split("").map((ch, i) => (
               <span
                 key={i}
                 className="neura-letter inline-block"
@@ -121,14 +121,14 @@ export default function NeuraArchive() {
               className="text-[#55534E] text-sm leading-relaxed max-w-sm mb-6"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
-              A bespoke desktop operating environment built for distributed research teams. Designed with split-column telemetry, keyboard-driven navigation schemas, and zero-latency document rendering.
+              A digital product system shaped around structure, hierarchy and useful interaction.
             </p>
 
             {/* Metadata grid */}
             <div className="grid grid-cols-2 gap-x-6 gap-y-3 mb-6 font-mono text-[9px] uppercase" style={{ fontFamily: "'DM Mono', monospace" }}>
               <div>
                 <div className="text-[#55534E] mb-0.5">SECTOR</div>
-                <div className="text-[#151515] font-bold">CORE OS & DESIGN SYSTEM</div>
+                <div className="text-[#151515] font-bold">VISUAL & INTERACTION SYSTEM</div>
               </div>
               <div>
                 <div className="text-[#55534E] mb-0.5">PLATFORM</div>
@@ -140,7 +140,7 @@ export default function NeuraArchive() {
               </div>
               <div>
                 <div className="text-[#55534E] mb-0.5">FLUX</div>
-                <div className="text-[#151515] font-bold">FULL DIRECT MANAGEMENT</div>
+                <div className="text-[#151515] font-bold">CLEAR PRODUCT DIRECTION</div>
               </div>
             </div>
 
@@ -173,7 +173,7 @@ export default function NeuraArchive() {
                 <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "#E8E2D5" }} />
               </div>
               <div className="flex-1 ml-2 border border-[#E8E2D5] px-3 py-0.5">
-                neura-archive.internal // research.ops
+                clarity-system // product.ops
               </div>
               <span>⊞ 1.4GHz OPS</span>
             </div>
@@ -186,7 +186,7 @@ export default function NeuraArchive() {
                 style={{ minWidth: "140px", borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace" }}
               >
                 <div className="p-3 border-b" style={{ borderColor: "#E8E2D5" }}>
-                  <div className="text-[#E7472E] font-bold mb-2">NEURA</div>
+                  <div className="text-[#E7472E] font-bold mb-2">SYSTEM</div>
                   <div className="text-[#55534E]">RESEARCH ENV.</div>
                 </div>
                 {["NETWORK MAP", "TELEMETRY", "SUBJECTS", "ARCHIVES", "CONFIG"].map((item, i) => (

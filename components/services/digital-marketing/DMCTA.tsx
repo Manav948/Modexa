@@ -24,9 +24,9 @@ export default function DMCTA() {
             className="flex items-center gap-3 font-mono text-[10px] text-[#E7472E] uppercase tracking-widest mb-4 font-bold"
             style={{ fontFamily: "'DM Mono', monospace" }}
           >
-            <span>07 / MANDATE INITIATION</span>
+            <span>05 / START A PROJECT</span>
             <span className="w-4 h-px bg-[#E7472E]" />
-            <span>DIRECT COMMISSIONS</span>
+            <span>DIGITAL MARKETING</span>
           </div>
 
           {/* Headline */}
@@ -37,12 +37,12 @@ export default function DMCTA() {
               fontSize: "clamp(2.75rem, 6.5vw, 5.5rem)",
             }}
           >
-            READY TO MAKE<br />
+            HAVE SOMETHING<br />
             <span
               className="italic font-normal text-[#f7f5ef] lowercase tracking-normal"
               style={{ fontFamily: "'Newsreader', Georgia, serif" }}
             >
-              something impossible to scroll past?
+              worth saying?
             </span>
           </h2>
 
@@ -50,18 +50,17 @@ export default function DMCTA() {
             className="text-[rgba(255,255,255,0.6)] max-w-2xl text-base md:text-lg leading-relaxed mb-8"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            Bring the brief, the brand, or simply the ambition. We architect the strategy,
-            produce the content, and deliver the campaigns that make your audience stop, watch, and act.
+            Tell us what you want people to notice. We&apos;ll shape the strategy, content and campaign around it.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap items-center gap-4 mb-16 font-mono text-[10px]" style={{ fontFamily: "'DM Mono', monospace" }}>
             <a
-              href="mailto:hello@studiodirection.com?subject=Digital%20Marketing%20Commission"
+              href="mailto:hello@company.com?subject=Digital%20Marketing%20Project"
               className="px-8 py-4 text-white tracking-widest uppercase inline-flex items-center gap-3 font-bold shadow-lg hover:opacity-90 transition-opacity"
               style={{ backgroundColor: "#E7472E" }}
             >
-              <span>START A CAMPAIGN</span>
+              <span>START A PROJECT</span>
               <span>→</span>
             </a>
             <a
@@ -69,7 +68,7 @@ export default function DMCTA() {
               className="px-6 py-4 border text-white tracking-widest uppercase transition-colors hover:border-white"
               style={{ borderColor: "#444" }}
             >
-              RETURN TO SERVICES
+              BACK TO SERVICES
             </a>
           </div>
 
@@ -79,21 +78,21 @@ export default function DMCTA() {
             style={{ borderColor: "#2a2a2a", color: "rgba(255,255,255,0.4)", fontFamily: "'DM Mono', monospace" }}
           >
             <div>
-              <span className="text-white font-bold">TURNAROUND SLA:</span>
+              <span className="text-white font-bold">CAPABILITY:</span>
               <p className="mt-1 leading-relaxed text-[rgba(255,255,255,0.6)]">
-                Strategy delivered within 5–7 business days of brief sign-off.
+                Strategy, content and creative direction.
               </p>
             </div>
             <div>
-              <span className="text-white font-bold">AVAILABILITY:</span>
+              <span className="text-white font-bold">FOCUS:</span>
               <p className="mt-1 leading-relaxed text-[rgba(255,255,255,0.6)]">
-                Accepting 2 selective retainer accounts for Q3/Q4.
+                Attention, connection and distribution.
               </p>
             </div>
             <div>
-              <span className="text-white font-bold">CONFIDENTIALITY:</span>
+              <span className="text-white font-bold">OUTPUT:</span>
               <p className="mt-1 leading-relaxed text-[rgba(255,255,255,0.6)]">
-                Full NDA compliance and secure brand asset management.
+                Content and campaigns ready for the right places.
               </p>
             </div>
           </div>
