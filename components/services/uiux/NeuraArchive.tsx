@@ -90,7 +90,7 @@ export default function NeuraArchive() {
             className="neura-label font-mono text-[9px] uppercase tracking-widest text-[#55534E] mb-2"
             style={{ fontFamily: "'DM Mono', monospace" }}
           >
-            <span className="text-[#151515] font-bold">01 </span>// NEUROSCIENCE PLATFORM UI
+            <span className="text-[#151515] font-bold">01 </span>{"// NEUROSCIENCE PLATFORM UI"}
           </div>
 
           {/* CLARITY SYSTEM — letter-by-letter revealed */}
@@ -267,7 +267,7 @@ export default function NeuraArchive() {
                 </div>
 
                 {/* Data table */}
-                <div className="mt-3 border-t" style={{ borderColor: "#E8E2D5" }}>
+                <div className="mt-3 overflow-x-auto border-t" style={{ borderColor: "#E8E2D5" }}>
                   <table className="w-full font-mono text-[8px] uppercase" style={{ fontFamily: "'DM Mono', monospace" }}>
                     <thead>
                       <tr style={{ backgroundColor: "#f0ede6", color: "#55534E" }}>

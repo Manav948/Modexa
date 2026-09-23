@@ -236,6 +236,11 @@ body {
   .floating-preview {
     display: none !important;
   }
+
+  .left-camp-card,
+  .right-camp-card {
+    transform: none !important;
+  }
 }
 
 /* ============================================

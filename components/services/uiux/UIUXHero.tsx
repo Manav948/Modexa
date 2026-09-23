@@ -353,7 +353,7 @@ export default function UIUXHero() {
           {/* FLOATING dark card (overlapping right edge) */}
           <div
             ref={cardRef}
-            className="absolute right-4 md:right-8 -bottom-8 shadow-2xl z-20"
+            className="absolute right-4 -bottom-8 z-20 hidden shadow-2xl md:block md:right-8"
             style={{ width: "clamp(220px, 22vw, 280px)" }}
           >
             <div style={{ backgroundColor: "#151515" }}>

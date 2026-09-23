@@ -170,6 +170,18 @@ export default function DMHero() {
               </div>
             </div>
 
+            <div className="lg:hidden relative mt-8 w-full overflow-hidden border border-[#E8E2D5] bg-[#151515]" style={{ aspectRatio: "4/3" }}>
+              <img
+                src="/images/media__1789795957723.png"
+                alt="Digital marketing campaign visual"
+                className="h-full w-full object-cover grayscale contrast-125"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#151515] via-transparent to-transparent opacity-80" />
+              <div className="absolute bottom-3 left-3 right-3 font-mono text-[9px] uppercase tracking-widest text-white/70">
+                CONTENT / CAMPAIGN SYSTEM
+              </div>
+            </div>
+
             {/* Body copy — two column layout */}
             <div ref={bodyRef} className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-4">
               <div>
@@ -246,7 +258,7 @@ export default function DMHero() {
                     className="text-white text-xs leading-snug italic mb-2"
                     style={{ fontFamily: "'Newsreader', Georgia, serif", fontSize: "0.8rem" }}
                   >
-                    "Every brand silence is someone else's moment."
+                    &quot;Every brand silence is someone else&apos;s moment.&quot;
                   </p>
                   <div
                     className="font-mono text-[8px] uppercase tracking-widest"

@@ -132,14 +132,14 @@ export default function LivingSyntaxArtifact() {
         {/* Editor Console Window */}
         <div className="w-full bg-[#0a0a0a] text-white shadow-2xl border border-white/10 overflow-hidden font-mono text-xs">
           {/* Terminal Header */}
-          <div className="bg-[#151515] px-4 py-3 border-b border-white/10 flex justify-between items-center text-white/60">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 bg-[#151515] px-4 py-3 text-white/60">
             <div className="flex items-center gap-4">
               <div className="flex gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#e7472e]" />
                 <span className="w-2.5 h-2.5 rounded-full bg-[#7c8061]" />
                 <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
               </div>
-              <span className="font-mono text-xs tracking-wider text-white/90">
+              <span className="min-w-0 truncate font-mono text-xs tracking-wider text-white/90">
                 hooks/useSpringCursor.ts
               </span>
             </div>
@@ -148,7 +148,7 @@ export default function LivingSyntaxArtifact() {
               <span className="text-white/40 hidden sm:inline">UTF-8 // LF // TYPESCRIPT</span>
               <button
                 onClick={copyCode}
-                className="hover:text-white transition-colors text-[#ffdad4] uppercase text-[10px] tracking-wider px-2 py-0.5 border border-white/15 bg-white/5"
+                className="shrink-0 border border-white/15 bg-white/5 px-2 py-0.5 text-[10px] uppercase tracking-wider text-[#ffdad4] transition-colors hover:text-white"
               >
                 {copied ? "COPIED ✓" : "COPY CODE"}
               </button>

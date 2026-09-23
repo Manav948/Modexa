@@ -100,7 +100,7 @@ export default function KineticTypeSection() {
           <div className="absolute right-8 top-14 h-[72%] w-px bg-[#E8E2D5] md:right-14" />
           <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-[#E8E2D5] opacity-80" />
 
-          <div className="kinetic-left-words absolute left-5 top-12 md:left-12 md:top-16 lg:left-16 flex flex-col leading-none select-none" style={{ zIndex: 1 }}>
+          <div className="kinetic-left-words absolute left-5 top-12 md:left-12 md:top-16 lg:left-16 hidden flex-col leading-none select-none md:flex" style={{ zIndex: 1 }}>
             <div
               className="block"
               style={{
@@ -145,7 +145,7 @@ export default function KineticTypeSection() {
             </div>
           </div>
 
-          <div className="kinetic-right-words absolute right-5 top-20 md:right-12 md:top-24 lg:right-20 flex flex-col items-end text-right leading-none select-none" style={{ zIndex: 1 }}>
+          <div className="kinetic-right-words absolute right-5 top-20 md:right-12 md:top-24 lg:right-20 hidden flex-col items-end text-right leading-none select-none md:flex" style={{ zIndex: 1 }}>
             <div
               style={{
                 fontFamily: "'Space Grotesk', sans-serif",
@@ -173,7 +173,16 @@ export default function KineticTypeSection() {
             </div>
           </div>
 
-          <div className="absolute inset-x-0 top-[65%] z-[2] flex -translate-y-1/2 justify-center px-8 md:px-12">
+          <div className="relative z-[1] flex min-h-[310px] flex-col justify-center gap-2 px-6 py-10 md:hidden">
+            <div className="font-display text-[clamp(3.25rem,18vw,5rem)] font-bold leading-[0.78] tracking-[-0.08em] text-[#151515]">REACH</div>
+            <div className="flex items-end gap-2 font-display text-[clamp(2.5rem,13vw,4rem)] font-bold leading-[0.8] tracking-[-0.07em] text-[#151515]">
+              INTO <span className="font-editorial text-[clamp(2rem,10vw,3rem)] font-normal italic tracking-normal text-[#E7472E]">motion</span>
+            </div>
+            <div className="mt-8 self-end font-display text-[clamp(3.25rem,18vw,5rem)] font-bold leading-[0.78] tracking-[-0.08em] text-[#151515]">CONVER<span className="text-[#E7472E]">SION</span></div>
+            <p className="mt-8 max-w-[15rem] self-center text-center font-editorial text-xl italic leading-tight text-[#151515]/80">Creative systems that turn attention into connection.</p>
+          </div>
+
+          <div className="absolute inset-x-0 top-[65%] z-[2] hidden -translate-y-1/2 justify-center px-8 md:flex md:px-12">
             <div className="max-w-2xl text-center" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2.1em", marginTop: "2.8rem" }}>
               <div
                 style={{
@@ -214,7 +223,7 @@ export default function KineticTypeSection() {
             </div>
           </div>
 
-          <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center gap-3 md:gap-5" style={{ zIndex: 2 }}>
+          <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 items-center gap-3 md:flex md:gap-5" style={{ zIndex: 2 }}>
             <span className="h-[2px] w-12 bg-[#151515] md:w-20" />
             <span
               className="font-mono uppercase tracking-[0.28em]"
@@ -230,7 +239,7 @@ export default function KineticTypeSection() {
             <span className="h-[2px] w-12 bg-[#151515] md:w-20" />
           </div>
 
-          <div className="absolute bottom-20 left-8 md:left-12" style={{ zIndex: 2 }}>
+          <div className="absolute bottom-20 left-8 hidden md:left-12 md:block" style={{ zIndex: 2 }}>
             <div
               className="font-mono uppercase"
               style={{
@@ -244,7 +253,7 @@ export default function KineticTypeSection() {
             </div>
           </div>
 
-          <div className="absolute bottom-20 right-8 md:right-12" style={{ zIndex: 2 }}>
+          <div className="absolute bottom-20 right-8 hidden md:right-12 md:block" style={{ zIndex: 2 }}>
             <div
               className="font-mono uppercase"
               style={{
