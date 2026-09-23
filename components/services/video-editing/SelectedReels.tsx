@@ -155,7 +155,7 @@ export default function SelectedReels() {
       </div>
 
       {/* Infinite Horizontal Staggered Marquee Container with Ample Vertical Clearance */}
-      <div className="relative w-full py-20 min-h-[580px] md:min-h-[640px] flex items-center overflow-hidden">
+      <div className="relative hidden w-full py-20 min-h-[580px] md:min-h-[640px] md:flex items-center overflow-hidden">
         {/* Continuous Horizontal Infinite Slider Track */}
         <div className="flex items-center gap-8 md:gap-10 w-max animate-reel-marquee">
           {infiniteReels.map((reel, index) => {
@@ -232,6 +232,45 @@ export default function SelectedReels() {
             );
           })}
         </div>
+      </div>
+
+      {/* A single-column reading sequence keeps the reel archive legible on touch screens. */}
+      <div className="md:hidden grid grid-cols-1 gap-4 px-5">
+        {REELS.slice(0, 3).map((reel) => (
+          <article
+            key={reel.id}
+            className="flex gap-4 border border-[#e4e2dd] bg-[#f5f3ed] p-3"
+          >
+            <div className="relative h-36 w-24 flex-shrink-0 overflow-hidden border border-[#e4e2dd] bg-[#1b1c18]">
+              <img
+                src={reel.image}
+                alt={reel.title}
+                className="h-full w-full object-cover grayscale contrast-125"
+              />
+              <span className="absolute bottom-1 right-1 bg-[#fbf9f3] px-1.5 py-0.5 font-mono text-[8px] font-bold text-[#b6240f]">
+                {reel.retention}
+              </span>
+            </div>
+            <div className="min-w-0 py-1">
+              <div className="mb-2 flex flex-wrap items-center gap-2 font-mono text-[8px] text-[#747878]">
+                <span className="font-bold text-[#b6240f]">[{reel.id} / REEL]</span>
+                <span>{reel.duration}</span>
+              </div>
+              <h3
+                className="text-base font-bold uppercase leading-tight text-[#1b1c18]"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                {reel.title}
+              </h3>
+              <p
+                className="mt-2 text-[11px] leading-tight text-[#747878]"
+                style={{ fontFamily: "'Manrope', sans-serif" }}
+              >
+                {reel.desc}
+              </p>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );

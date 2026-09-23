@@ -301,6 +301,7 @@ export default function HeroCreativeComposition() {
 
   useEffect(() => {
     initFragmentStates();
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
 
     const updateFragments = () => {
       idleTimeRef.current += 0.025;
@@ -319,7 +320,7 @@ export default function HeroCreativeComposition() {
         let magneticX = 0;
         let magneticY = 0;
 
-        if (mouseRef.current.inside && hovering && boxRef.current) {
+        if (!isTouch && mouseRef.current.inside && hovering && boxRef.current) {
           const elRect = state.el.getBoundingClientRect();
           const boxRect = boxRef.current.getBoundingClientRect();
           const elCenterX = ((elRect.left + elRect.width / 2) - boxRect.left) * (500 / boxRect.width);

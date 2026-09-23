@@ -38,6 +38,7 @@ export default function Process() {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
 
     let vw = (canvas.width = canvas.offsetWidth || 1200);
     let vh = (canvas.height = canvas.offsetHeight || 500);
@@ -63,7 +64,9 @@ export default function Process() {
       const rect = canvas.getBoundingClientRect();
       mouse = { x: e.clientX - rect.left, y: e.clientY - rect.top };
     };
-    canvas.parentElement?.addEventListener("mousemove", handleMouseMove, { passive: true });
+    if (!isTouch) {
+      canvas.parentElement?.addEventListener("mousemove", handleMouseMove, { passive: true });
+    }
 
     const render = () => {
       ctx.clearRect(0, 0, vw, vh);
@@ -107,7 +110,9 @@ export default function Process() {
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       window.removeEventListener("resize", handleResize);
-      canvas.parentElement?.removeEventListener("mousemove", handleMouseMove);
+      if (!isTouch) {
+        canvas.parentElement?.removeEventListener("mousemove", handleMouseMove);
+      }
     };
   }, []);
 
@@ -122,7 +127,7 @@ export default function Process() {
       <canvas
         ref={canvasRef}
         id="vellum-grid-canvas"
-        className="absolute inset-0 w-full h-full pointer-events-auto cursor-crosshair opacity-75"
+        className="absolute inset-0 w-full h-full pointer-events-none md:pointer-events-auto cursor-crosshair opacity-75"
         style={{ opacity: 0.6 }}
       />
 

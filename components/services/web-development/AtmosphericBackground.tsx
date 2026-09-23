@@ -15,6 +15,7 @@ export default function AtmosphericBackground() {
     let animationFrameId: number;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
 
     // Mouse coordinates with easing
     const mouse = { x: width / 2, y: height / 2, targetX: width / 2, targetY: height / 2 };
@@ -30,7 +31,9 @@ export default function AtmosphericBackground() {
       height = canvas.height = window.innerHeight;
     };
 
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    if (!isMobile) {
+      window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    }
     window.addEventListener("resize", handleResize);
 
     // Organic cloud / fluid wave particles
@@ -58,7 +61,7 @@ export default function AtmosphericBackground() {
       ctx.fillRect(0, 0, width, height);
 
       // Render each moving organic atmospheric bloom
-      blobs.forEach((b, i) => {
+      (isMobile ? blobs.slice(0, 2) : blobs).forEach((b, i) => {
         const oscillation = Math.sin(t * b.speed + b.phase);
         const oscillation2 = Math.cos(t * b.speed * 0.8 + b.phase);
 
@@ -96,7 +99,9 @@ export default function AtmosphericBackground() {
     render();
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      if (!isMobile) {
+        window.removeEventListener("mousemove", handleMouseMove);
+      }
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
     };

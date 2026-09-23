@@ -44,6 +44,8 @@ export default function LongFormArchive() {
 
   // Smooth cursor-follow preview logic for long-form project cards
   useEffect(() => {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
     };

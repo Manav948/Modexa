@@ -79,6 +79,8 @@ export default function Services() {
 
   // Ultra-smooth cursor follow centering & lerp
   useEffect(() => {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
     };
