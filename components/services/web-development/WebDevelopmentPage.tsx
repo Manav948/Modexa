@@ -2,7 +2,6 @@
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 import ScrollRevealProvider from "@/components/layout/ScrollRevealProvider";
 import WebDevHero from "./WebDevHero";
 import CadenceTicker from "./CadenceTicker";
@@ -17,7 +16,7 @@ import CommissionGateway from "./CommissionGateway";
 
 export default function WebDevelopmentPage() {
   return (
-    <SmoothScrollProvider>
+    <>
       <ScrollRevealProvider />
       <div className="flex flex-col flex-1 min-h-screen" style={{ backgroundColor: "#fbf9f3" }}>
         {/* Navigation Bar */}
@@ -57,6 +56,6 @@ export default function WebDevelopmentPage() {
 
         <Footer />
       </div>
-    </SmoothScrollProvider>
+    </>
   );
 }

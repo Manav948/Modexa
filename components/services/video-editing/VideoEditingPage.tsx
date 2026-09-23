@@ -2,7 +2,6 @@
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 import ScrollRevealProvider from "@/components/layout/ScrollRevealProvider";
 import VideoEditingHero from "./VideoEditingHero";
 import SelectedReels from "./SelectedReels";
@@ -16,7 +15,7 @@ import InitiationCTA from "./InitiationCTA";
 
 export default function VideoEditingPage() {
   return (
-    <SmoothScrollProvider>
+    <>
       <ScrollRevealProvider />
       <div className="flex flex-col flex-1 bg-[#fbf9f3] text-[#1b1c18] min-h-screen">
         {/* Navigation bar */}
@@ -55,6 +54,6 @@ export default function VideoEditingPage() {
         {/* Footer */}
         <Footer />
       </div>
-    </SmoothScrollProvider>
+    </>
   );
 }

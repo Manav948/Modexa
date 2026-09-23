@@ -1,6 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 import ScrollRevealProvider from "@/components/layout/ScrollRevealProvider";
 import SectionIndicator from "@/components/layout/SectionIndicator";
 import Hero from "@/components/hero/Hero";
@@ -14,7 +13,7 @@ import Contact from "@/components/contact/Contact";
 
 export default function Home() {
   return (
-    <SmoothScrollProvider>
+    <>
       <ScrollRevealProvider />
       <div className="flex flex-col flex-1 bg-[#fbf9f3]">
         {/* Fixed navigation */}
@@ -53,6 +52,6 @@ export default function Home() {
         {/* Footer */}
         <Footer />
       </div>
-    </SmoothScrollProvider>
+    </>
   );
 }

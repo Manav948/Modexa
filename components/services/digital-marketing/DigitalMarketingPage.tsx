@@ -2,7 +2,6 @@
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 import ScrollRevealProvider from "@/components/layout/ScrollRevealProvider";
 import DMHero from "./DMHero";
 import DMTicker from "./DMTicker";
@@ -14,7 +13,7 @@ import DMCTA from "./DMCTA";
 
 export default function DigitalMarketingPage() {
   return (
-    <SmoothScrollProvider>
+    <>
       <ScrollRevealProvider />
       <div className="flex flex-col flex-1 min-h-screen" style={{ backgroundColor: "#f7f5ef" }}>
         <Navbar />
@@ -42,6 +41,6 @@ export default function DigitalMarketingPage() {
         </main>
         <Footer />
       </div>
-    </SmoothScrollProvider>
+    </>
   );
 }

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 interface ServiceItem {
   num: string;
+  slug: string;
   title: string;
   italicTitle?: string;
   description: string;
@@ -17,6 +18,7 @@ interface ServiceItem {
 const SERVICES: ServiceItem[] = [
   {
     num: "01",
+    slug: "video-editing",
     title: "VIDEO EDITING &",
     italicTitle: "MOTION DIRECTION",
     description:
@@ -27,6 +29,7 @@ const SERVICES: ServiceItem[] = [
   },
   {
     num: "02",
+    slug: "ui-ux-design",
     title: "UI / UX PRODUCT",
     italicTitle: "DESIGN & CREATIVE TECH",
     description:
@@ -37,6 +40,7 @@ const SERVICES: ServiceItem[] = [
   },
   {
     num: "03",
+    slug: "web-development",
     title: "WEB & DIGITAL",
     italicTitle: "DEVELOPMENT ARCHITECTURE",
     description:
@@ -47,16 +51,7 @@ const SERVICES: ServiceItem[] = [
   },
   {
     num: "04",
-    title: "GRAPHIC DESIGN &",
-    italicTitle: "BRANDING SYSTEMS",
-    description:
-      "Distinctive identity systems, bespoke wordmarks, editorial packaging, and tactile collateral that command premium pricing.",
-    tags: "IDENTITY • TYPOGRAPHY • PACKAGING",
-    image: "/images/work_motion_stories_1789796354503.png",
-    spec: "FOIL EMBOSS // VARIABLE TYPOGRAPHY",
-  },
-  {
-    num: "05",
+    slug: "digital-marketing",
     title: "DIGITAL GROWTH &",
     italicTitle: "MARKETING ENGINE",
     description:
@@ -78,8 +73,8 @@ export default function Services() {
   const cardPos = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number | null>(null);
 
-  const openService = (serviceNum: string) => {
-    router.push(`/services/${serviceNum}`);
+  const openService = (serviceSlug: string) => {
+    router.push(`/services/${serviceSlug}`);
   };
 
   // Ultra-smooth cursor follow centering & lerp
@@ -187,11 +182,11 @@ export default function Services() {
             style={{ borderColor: "#e4e2dd" }}
             onMouseEnter={() => setActiveService(service)}
             onMouseLeave={() => setActiveService(null)}
-            onClick={() => openService(service.num)}
+            onClick={() => openService(service.slug)}
             onKeyDown={(event) => {
               if (event.key === "Enter" || event.key === " ") {
                 event.preventDefault();
-                openService(service.num);
+                openService(service.slug);
               }
             }}
             role="link"

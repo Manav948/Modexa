@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 
 export const metadata: Metadata = {
   title: "MODEXA — Flagship Creative Platform",
@@ -45,7 +46,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#fbf9f3] text-[#1b1c18]">
-        {children}
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>
   );

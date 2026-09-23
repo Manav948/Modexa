@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -15,11 +16,21 @@ export default function SmoothScrollProvider({
   children: React.ReactNode;
 }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const skipNextRouteResetRef = useRef(false);
+  const pathname = usePathname();
 
   useEffect(() => {
+    const handlePopState = () => {
+      skipNextRouteResetRef.current = true;
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
     // Native touch scrolling stays more responsive on mobile than a second interpolated scroll layer.
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    if (isMobile) return;
+    if (isMobile) {
+      return () => window.removeEventListener("popstate", handlePopState);
+    }
 
     const lenis = new Lenis({
       duration: 1.4,
@@ -31,6 +42,9 @@ export default function SmoothScrollProvider({
     });
 
     lenisRef.current = lenis;
+
+    lenis.scrollTo(0, { immediate: true });
+    window.scrollTo(0, 0);
 
     // Synchronize Lenis scroll updates with GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
@@ -56,8 +70,27 @@ export default function SmoothScrollProvider({
       gsap.ticker.remove(updateRaf);
       resizeObserver.disconnect();
       lenis.destroy();
+      lenisRef.current = null;
+      window.removeEventListener("popstate", handlePopState);
     };
   }, []);
+
+  useEffect(() => {
+    if (skipNextRouteResetRef.current) {
+      skipNextRouteResetRef.current = false;
+      return;
+    }
+
+    const resetScroll = () => {
+      lenisRef.current?.scrollTo(0, { immediate: true });
+      window.scrollTo(0, 0);
+      ScrollTrigger.refresh();
+    };
+
+    resetScroll();
+    const frame = requestAnimationFrame(resetScroll);
+    return () => cancelAnimationFrame(frame);
+  }, [pathname]);
 
   return <>{children}</>;
 }
