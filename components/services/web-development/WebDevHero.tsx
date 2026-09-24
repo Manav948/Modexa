@@ -1,78 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AtmosphericBackground from "./AtmosphericBackground";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function WebDevHero() {
-  const heroRef = useRef<HTMLElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const telemetryRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const bottomBarRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const media = gsap.matchMedia();
-    const ctx = gsap.context(() => {
-      // 1. Initial State
-      gsap.set([telemetryRef.current, bottomBarRef.current], { opacity: 0, y: -10 });
-      gsap.set(contentRef.current, { opacity: 0, y: 25 });
-
-      // Split lines or masked reveal
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-      tl.to(telemetryRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        delay: 0.2,
-      })
-        .to(
-          contentRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1.1,
-          },
-          "-=0.5"
-        )
-        .to(
-          bottomBarRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-          },
-          "-=0.6"
-        );
-
-      // Keep the long depth treatment for desktop; touch layouts use normal flow.
-      media.add("(min-width: 1024px)", () => {
-        if (!heroRef.current) return;
-        gsap.to(contentRef.current, {
-          y: 60,
-          opacity: 0.85,
-          scrollTrigger: { trigger: heroRef.current, start: "top top", end: "bottom top", scrub: 1.2, invalidateOnRefresh: true },
-        });
-        gsap.to(bottomBarRef.current, {
-          y: 30,
-          opacity: 0.4,
-          scrollTrigger: { trigger: heroRef.current, start: "top top", end: "bottom top", scrub: 1, invalidateOnRefresh: true },
-        });
-      });
-    }, heroRef);
-
-    return () => {
-      ctx.revert();
-      media.revert();
-    };
-  }, []);
-
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -82,7 +12,6 @@ export default function WebDevHero() {
 
   return (
     <section
-      ref={heroRef}
       className="relative w-full min-h-[94vh] lg:min-h-screen bg-[#000000] text-[#ffffff] flex flex-col justify-between overflow-hidden pt-28 pb-10 px-5 md:px-10 lg:px-16 select-none"
       style={{ backgroundColor: "#080808" }}
     >
@@ -91,7 +20,6 @@ export default function WebDevHero() {
 
       {/* Top Telemetry Ribbon */}
       <div
-        ref={telemetryRef}
         className="relative z-10 w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pt-2 border-b border-white/10 pb-4 font-mono text-[10px] md:text-[11px] tracking-widest text-white/60 uppercase"
       >
         <div className="flex items-center gap-2.5">
@@ -115,7 +43,7 @@ export default function WebDevHero() {
       </div>
 
       {/* Hero Monumental Headline & Narrative Engine */}
-      <div ref={contentRef} className="relative z-10 my-auto py-10 lg:py-16 max-w-5xl">
+      <div className="relative z-10 my-auto py-10 lg:py-16 max-w-5xl">
         {/* Discipline Tag */}
         <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 bg-white/5 border border-white/15 font-mono text-[10px] md:text-[11px] uppercase tracking-[0.22em] text-[#ffdad4]">
           <span>WEB DEVELOPMENT</span>
@@ -125,7 +53,6 @@ export default function WebDevHero() {
 
         {/* H1 Headline */}
         <h1
-          ref={headlineRef}
           className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[88px] uppercase tracking-tight leading-[0.92] text-white mb-6"
           style={{
             textShadow: "0 0 50px rgba(255,255,255,0.18), 0 0 90px rgba(255,255,255,0.08)",
@@ -175,7 +102,6 @@ export default function WebDevHero() {
 
       {/* Hero Bottom Ribbon & Kinetic Scroll Prompt */}
       <div
-        ref={bottomBarRef}
         className="relative z-10 w-full flex justify-between items-end border-t border-white/10 pt-4 font-mono text-[10px] md:text-[11px] uppercase tracking-widest text-white/60"
       >
         <div className="flex items-center gap-4 sm:gap-6">
