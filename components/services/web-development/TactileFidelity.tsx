@@ -8,213 +8,255 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+const MODULES = [
+  {
+    number: "01",
+    label: "MOTION RESPONSE",
+    title: "KINETIC SPRING DAMPING",
+    description: "Natural movement, controlled acceleration and a smooth, deliberate settle.",
+    visual: "spring",
+  },
+  {
+    number: "02",
+    label: "RESPONSIVE SYSTEM",
+    title: "HARDWARE THREAD ISOLATION",
+    description: "Separate interaction work from expensive rendering so input remains responsive.",
+    visual: "threads",
+  },
+  {
+    number: "03",
+    label: "VISUAL SYSTEM",
+    title: "FLUID CLIP PATH TOPOLOGY",
+    description: "Controlled clip-path transitions create smooth visual movement without unnecessary layout work.",
+    visual: "clip-path",
+  },
+  {
+    number: "04",
+    label: "INPUT RESPONSE",
+    title: "ZERO-DELAY TACTILE TRIGGERS",
+    description: "Direct interaction should feel immediate, physical and predictable.",
+    visual: "tactile",
+  },
+] as const;
+
+const THREAD_BARS = [
+  { label: "THREAD", heights: ["h-8", "h-10", "h-9", "h-12", "h-10"] },
+  { label: "INPUT", heights: ["h-7", "h-11", "h-9", "h-8", "h-10"] },
+  { label: "RENDER", heights: ["h-12", "h-10", "h-14", "h-11", "h-13"] },
+  { label: "RESPONSE", heights: ["h-8", "h-9", "h-11", "h-8", "h-10"] },
+];
+
 export default function TactileFidelity() {
   const sectionRef = useRef<HTMLElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const [activeTrigger, setActiveTrigger] = useState(false);
+  const [isResponseActive, setIsResponseActive] = useState(false);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const cards = gridRef.current?.querySelectorAll(".specimen-card");
-      if (cards && cards.length > 0) {
-        gsap.from(cards, {
-          opacity: 0,
-          y: 40,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: "power2.out",
+    const section = sectionRef.current;
+    if (!section || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const context = gsap.context(() => {
+      const intro = section.querySelectorAll<HTMLElement>("[data-interaction-intro]");
+      gsap.fromTo(
+        intro,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: "power3.out",
           scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
+            trigger: section,
+            start: "top 78%",
+            once: true,
+          },
+        },
+      );
+
+      section.querySelectorAll<HTMLElement>("[data-interaction-module]").forEach((module) => {
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: module,
+            start: "top 84%",
+            once: true,
           },
         });
-      }
-    }, sectionRef);
 
-    return () => ctx.revert();
+        timeline.fromTo(
+          module,
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.62, ease: "power2.out" },
+        );
+
+        const title = module.querySelector<HTMLElement>("[data-module-title]");
+        const description = module.querySelector<HTMLElement>("[data-module-description]");
+        if (title) {
+          timeline.fromTo(
+            title,
+            { opacity: 0, y: 12 },
+            { opacity: 1, y: 0, duration: 0.48, ease: "power2.out" },
+            "<0.08",
+          );
+        }
+        if (description) {
+          timeline.fromTo(
+            description,
+            { opacity: 0, y: 10 },
+            { opacity: 1, y: 0, duration: 0.44, ease: "power2.out" },
+            "<0.08",
+          );
+        }
+
+        module.querySelectorAll<SVGPathElement>("[data-draw-path]").forEach((path) => {
+          const length = path.getTotalLength();
+          timeline.fromTo(
+            path,
+            { strokeDasharray: length, strokeDashoffset: length },
+            { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" },
+            "<0.08",
+          );
+        });
+
+        const bars = module.querySelectorAll<HTMLElement>("[data-thread-bar]");
+        if (bars.length) {
+          timeline.fromTo(
+            bars,
+            { scaleY: 0.18, opacity: 0.35, transformOrigin: "bottom center" },
+            { scaleY: 1, opacity: 1, duration: 0.42, stagger: 0.035, ease: "power2.out" },
+            "<0.05",
+          );
+        }
+
+        const rings = module.querySelectorAll<SVGCircleElement>("[data-response-ring]");
+        if (rings.length) {
+          timeline.fromTo(
+            rings,
+            { scale: 0.78, opacity: 0, transformOrigin: "center center" },
+            { scale: 1, opacity: 1, duration: 0.55, stagger: 0.1, ease: "power2.out" },
+            "<0.05",
+          );
+        }
+      });
+    }, section);
+
+    return () => context.revert();
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="w-full py-20 lg:py-28 px-5 md:px-10 lg:px-16 border-t"
-      style={{ backgroundColor: "#fbf9f3", borderColor: "#e4e2dd" }}
+      aria-labelledby="interaction-metrics-title"
+      className="w-full border-t border-[#E8E2D5] bg-[#F7F5EF] px-5 py-16 text-[#151515] sm:px-8 sm:py-20 md:px-12 lg:px-16 lg:py-28"
     >
-      <div className="mb-14">
-        <span className="font-mono text-xs text-[#e7472e] uppercase tracking-widest block mb-2 font-medium">
-          SECTION 04 // INTERACTION METRICS
-        </span>
-        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase text-[#1b1c18]">
-          DEVELOPMENT IS{" "}
-          <span
-            className="font-editorial italic lowercase font-normal text-[#444748] pr-2"
-            style={{ fontFamily: "'Newsreader', Georgia, serif" }}
+      <div className="mx-auto max-w-[1440px]">
+        <header className="mb-10 border-b border-[#E8E2D5] pb-8 sm:mb-12 sm:pb-10 lg:mb-14">
+          <p data-interaction-intro className="mb-5 font-mono text-[10px] uppercase tracking-[0.16em] text-[#747878] sm:text-[11px]">
+            SECTION 04 <span className="px-1.5 text-[#E7472E]">{"//"}</span> INTERACTION METRICS
+          </p>
+          <h2
+            id="interaction-metrics-title"
+            data-interaction-intro
+            className="font-display text-[clamp(2.5rem,7vw,5.75rem)] font-normal uppercase leading-[0.92] tracking-[-0.06em]"
           >
-            how it
-          </span>{" "}
-          FEELS
-        </h2>
-        <p className="font-sans text-base sm:text-lg text-[#444748] max-w-2xl mt-4 leading-relaxed">
-          Visual aesthetics mean nothing if the physical responsiveness is sluggish or uncertain. We treat user gestures as physical forces governed by inertia, elasticity, and spatial hierarchy.
-        </p>
-      </div>
-
-      {/* 4-Quadrant Laboratory Grid */}
-      <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-        {/* Specimen 01: Kinetic Spring Damping */}
-        <div className="specimen-card p-6 md:p-8 bg-[#f5f3ed] border border-[#e4e2dd] flex flex-col justify-between hover:bg-[#f0eee8] transition-all duration-300 group">
-          <div>
-            <div className="flex justify-between items-center mb-6 pb-2 border-b border-[#e4e2dd]">
-              <span className="font-mono text-xs text-[#e7472e] uppercase font-medium">
-                SPECIMEN 01 // DAMPED PHYSICS
-              </span>
-              <span className="font-mono text-xs text-[#747878]">FPS: 60.0</span>
-            </div>
-            <h3 className="font-display text-xl uppercase text-[#1b1c18] group-hover:text-[#e7472e] transition-colors mb-2">
-              Kinetic Spring Damping
-            </h3>
-            <p className="font-sans text-sm text-[#444748] mb-8 leading-relaxed">
-              Instead of standard linear CSS eases (<code className="font-mono text-xs bg-[#e4e2dd] px-1 py-0.5 text-[#1b1c18]">ease-in-out</code>), every drag, cursor trail, and drawer pull uses critically damped spring physics equations, avoiding mechanical stiffness.
-            </p>
-          </div>
-
-          {/* Inline SVG Visualization: Damped Sine Wave */}
-          <div className="w-full h-28 bg-[#fbf9f3] flex items-center justify-center p-3 border border-[#e4e2dd]/80 overflow-hidden">
-            <svg
-              className="w-full h-full text-[#e7472e] group-hover:scale-105 transition-transform duration-500"
-              fill="none"
-              preserveAspectRatio="none"
-              viewBox="0 0 300 80"
-            >
-              <path
-                d="M0,40 C30,10 60,70 100,25 C140,55 180,35 220,42 C260,39 280,40 300,40"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeWidth="2.5"
-              />
-              <line
-                stroke="currentColor"
-                strokeDasharray="4 4"
-                strokeOpacity="0.2"
-                x1="0"
-                x2="300"
-                y1="40"
-                y2="40"
-              />
-              <circle cx="100" cy="25" fill="currentColor" r="4" className="animate-pulse" />
-              <circle cx="220" cy="42" fill="currentColor" r="4" />
-            </svg>
-          </div>
-        </div>
-
-        {/* Specimen 02: Hardware Thread Isolation */}
-        <div className="specimen-card p-6 md:p-8 bg-[#f5f3ed] border border-[#e4e2dd] flex flex-col justify-between hover:bg-[#f0eee8] transition-all duration-300 group">
-          <div>
-            <div className="flex justify-between items-center mb-6 pb-2 border-b border-[#e4e2dd]">
-              <span className="font-mono text-xs text-[#e7472e] uppercase font-medium">
-                SPECIMEN 02 // COMPOSITOR BOUND
-              </span>
-              <span className="font-mono text-xs text-[#747878]">JANK: 0.00%</span>
-            </div>
-            <h3 className="font-display text-xl uppercase text-[#1b1c18] group-hover:text-[#e7472e] transition-colors mb-2">
-              Hardware Thread Isolation
-            </h3>
-            <p className="font-sans text-sm text-[#444748] mb-8 leading-relaxed">
-              Animations strictly adhere to <code className="font-mono text-xs bg-[#e4e2dd] px-1 py-0.5 text-[#1b1c18]">transform</code> and <code className="font-mono text-xs bg-[#e4e2dd] px-1 py-0.5 text-[#1b1c18]">opacity</code> vectors. Zero CPU reflows (<code className="font-mono text-xs bg-[#e4e2dd] px-1 py-0.5 text-[#1b1c18]">width</code>, <code className="font-mono text-xs bg-[#e4e2dd] px-1 py-0.5 text-[#1b1c18]">height</code>, <code className="font-mono text-xs bg-[#e4e2dd] px-1 py-0.5 text-[#1b1c18]">top</code>, <code className="font-mono text-xs bg-[#e4e2dd] px-1 py-0.5 text-[#1b1c18]">margin</code>) during scroll ticks ensures 120Hz ProMotion stability.
-            </p>
-          </div>
-
-          {/* Frame Rate Histogram */}
-          <div className="w-full h-28 bg-[#fbf9f3] flex items-end justify-between px-6 py-3 border border-[#e4e2dd]/80">
-            <div className="w-2.5 bg-[#444748]/30 h-10 transition-all duration-300 group-hover:h-14" />
-            <div className="w-2.5 bg-[#444748]/30 h-14 transition-all duration-300 group-hover:h-16" />
-            <div className="w-2.5 bg-[#444748]/30 h-12 transition-all duration-300 group-hover:h-15" />
-            <div className="w-2.5 bg-[#444748]/30 h-16 transition-all duration-300 group-hover:h-18" />
-            <div className="w-2.5 bg-[#e7472e] h-20 shadow-[0_0_8px_rgba(231,71,46,0.3)]" />
-            <div className="w-2.5 bg-[#e7472e] h-20 shadow-[0_0_8px_rgba(231,71,46,0.3)]" />
-            <div className="w-2.5 bg-[#e7472e] h-20 shadow-[0_0_8px_rgba(231,71,46,0.3)]" />
-            <div className="w-2.5 bg-[#e7472e] h-20 shadow-[0_0_8px_rgba(231,71,46,0.3)]" />
-            <div className="w-2.5 bg-[#e7472e] h-20 shadow-[0_0_8px_rgba(231,71,46,0.3)]" />
-            <div className="w-2.5 bg-[#e7472e] h-20 shadow-[0_0_8px_rgba(231,71,46,0.3)]" />
-            <div className="w-2.5 bg-[#e7472e] h-20 shadow-[0_0_8px_rgba(231,71,46,0.3)]" />
-            <div className="w-2.5 bg-[#444748]/30 h-16 transition-all duration-300 group-hover:h-18" />
-          </div>
-        </div>
-
-        {/* Specimen 03: Fluid Clamp Topology */}
-        <div className="specimen-card p-6 md:p-8 bg-[#f5f3ed] border border-[#e4e2dd] flex flex-col justify-between hover:bg-[#f0eee8] transition-all duration-300 group">
-          <div>
-            <div className="flex justify-between items-center mb-6 pb-2 border-b border-[#e4e2dd]">
-              <span className="font-mono text-xs text-[#e7472e] uppercase font-medium">
-                SPECIMEN 03 // PROPORTION
-              </span>
-              <span className="font-mono text-xs text-[#747878]">SCALE: FLUID</span>
-            </div>
-            <h3 className="font-display text-xl uppercase text-[#1b1c18] group-hover:text-[#e7472e] transition-colors mb-2">
-              Fluid Clamp Topology
-            </h3>
-            <p className="font-sans text-sm text-[#444748] mb-8 leading-relaxed">
-              Typography and layout gutters calculate harmonically using viewport slope mathematical formulas. Transitions between mobile, laptop, and ultra-wide displays occur continuously without layout pops.
-            </p>
-          </div>
-
-          {/* Fluid Curve Visualization */}
-          <div className="w-full h-28 bg-[#fbf9f3] flex items-center justify-center p-3 border border-[#e4e2dd]/80">
-            <svg className="w-full h-full text-[#1b1c18]" fill="none" viewBox="0 0 300 80">
-              <path
-                d="M0,70 Q 150,70 180,30 T 300,10"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-              />
-              <path d="M0,70 L300,70" stroke="currentColor" strokeOpacity="0.1" strokeWidth="1" />
-              <text className="font-mono text-[10px]" fill="currentColor" opacity="0.5" x="10" y="65">
-                320px
-              </text>
-              <text className="font-mono text-[10px]" fill="currentColor" opacity="0.5" x="245" y="25">
-                2560px
-              </text>
-            </svg>
-          </div>
-        </div>
-
-        {/* Specimen 04: Zero-Delay Tactile Triggers */}
-        <div
-          onClick={() => setActiveTrigger(true)}
-          onMouseUp={() => setActiveTrigger(false)}
-          className="specimen-card p-6 md:p-8 bg-[#f5f3ed] border border-[#e4e2dd] flex flex-col justify-between hover:bg-[#f0eee8] transition-all duration-300 group cursor-pointer"
-        >
-          <div>
-            <div className="flex justify-between items-center mb-6 pb-2 border-b border-[#e4e2dd]">
-              <span className="font-mono text-xs text-[#e7472e] uppercase font-medium">
-                SPECIMEN 04 // LATENCY
-              </span>
-              <span className="font-mono text-xs text-[#747878]">RESPONSE: &lt; 8MS</span>
-            </div>
-            <h3 className="font-display text-xl uppercase text-[#1b1c18] group-hover:text-[#e7472e] transition-colors mb-2">
-              Zero-Delay Tactile Triggers
-            </h3>
-            <p className="font-sans text-sm text-[#444748] mb-8 leading-relaxed">
-              Micro-interactions dispatch on <code className="font-mono text-xs bg-[#e4e2dd] px-1 py-0.5 text-[#1b1c18]">pointerdown</code> rather than <code className="font-mono text-xs bg-[#e4e2dd] px-1 py-0.5 text-[#1b1c18]">click</code>, recovering 80-120ms of human reaction latency. Optical states acknowledge input before the browser finishes paint loops.
-            </p>
-          </div>
-
-          {/* Pulse Ripple Radar */}
-          <div className="w-full h-28 bg-[#fbf9f3] flex items-center justify-center p-3 border border-[#e4e2dd]/80 relative overflow-hidden">
-            <div className="relative flex items-center justify-center">
-              <span
-                className={`w-4 h-4 rounded-full bg-[#e7472e] transition-transform duration-100 ${
-                  activeTrigger ? "scale-150" : "scale-100"
-                }`}
-              />
-              <span className="absolute w-12 h-12 rounded-full border border-[#e7472e]/40 animate-ping" />
-              <span className="absolute w-20 h-20 rounded-full border border-[#e7472e]/20" />
-            </div>
-            <span className="absolute bottom-2 right-3 font-mono text-[9px] text-[#747878] uppercase">
-              CLICK TO TRIGGER FAST PULSE
+            <span className="block">DEVELOPMENT</span>
+            <span className="mt-1 block">
+              IS <span className="font-editorial font-normal italic lowercase tracking-[-0.035em] text-[#55534E]">how it</span>{" "}
+              <span className="font-display font-medium not-italic">FEELS</span>
             </span>
-          </div>
+          </h2>
+          <p data-interaction-intro className="mt-5 max-w-[610px] font-sans text-sm leading-relaxed text-[#55534E] sm:mt-6 sm:text-[15px]">
+            Visual aesthetics mean nothing if the physical responsiveness of an interface feels sluggish or uncertain.
+          </p>
+        </header>
+
+        <div className="grid grid-cols-1 border-l border-t border-[#E8E2D5] md:grid-cols-2">
+          {MODULES.map((module) => (
+            <article
+              key={module.number}
+              data-interaction-module
+              className="flex min-w-0 flex-col border-b border-r border-[#E8E2D5] bg-[#F7F5EF] p-5 sm:p-7 lg:p-8"
+            >
+              <div className="flex items-center justify-between gap-4 border-b border-[#E8E2D5] pb-3">
+                <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#E7472E] sm:text-[11px]">
+                  {module.number} <span className="px-1">{"//"}</span> {module.label}
+                </p>
+                <span aria-hidden="true" className="h-1 w-1 shrink-0 rounded-full bg-[#E8E2D5]" />
+              </div>
+
+              <h3 data-module-title className="mt-5 font-display text-xl font-medium uppercase leading-tight tracking-[-0.035em] sm:text-2xl lg:text-[26px]">
+                {module.title}
+              </h3>
+              <p data-module-description className="mt-2 max-w-[460px] font-sans text-sm leading-relaxed text-[#55534E]">
+                {module.description}
+              </p>
+
+              <div className="mt-auto flex min-h-[132px] items-end pt-8" aria-label={`${module.title} technical visualization`}>
+                {module.visual === "spring" && (
+                  <svg aria-hidden="true" className="h-[92px] w-full overflow-visible" fill="none" viewBox="0 0 440 96" preserveAspectRatio="none">
+                    <path d="M0 58H440" stroke="#E8E2D5" strokeWidth="1" />
+                    <path data-draw-path d="M0 57 C38 57 48 56 72 53 C94 50 98 17 124 16 C154 14 151 81 183 79 C212 77 207 32 238 31 C267 30 265 67 296 66 C327 65 329 45 357 46 C387 47 392 58 440 58" stroke="#E7472E" strokeWidth="1.5" strokeLinecap="round" />
+                    <circle cx="124" cy="16" r="2.5" fill="#E7472E" />
+                    <circle cx="440" cy="58" r="2.5" fill="#151515" />
+                  </svg>
+                )}
+
+                {module.visual === "threads" && (
+                  <div className="w-full">
+                    <div className="grid grid-cols-4 gap-3 sm:gap-5">
+                      {THREAD_BARS.map((group, groupIndex) => (
+                        <div key={group.label} className="flex h-[86px] items-end justify-between gap-1 border-b border-[#E8E2D5] px-1">
+                          {group.heights.map((height, barIndex) => (
+                            <span
+                              key={`${group.label}-${barIndex}`}
+                              data-thread-bar
+                              className={`block w-[3px] origin-bottom ${height} ${groupIndex === 1 && barIndex === 2 ? "bg-[#E7472E]" : "bg-[#c9c5bc]"}`}
+                            />
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-2 grid grid-cols-4 gap-3 sm:gap-5">
+                      {THREAD_BARS.map((group) => (
+                        <span key={group.label} className="text-center font-mono text-[8px] uppercase tracking-[0.08em] text-[#747878] sm:text-[9px]">
+                          {group.label}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {module.visual === "clip-path" && (
+                  <svg aria-hidden="true" className="h-[92px] w-full" fill="none" viewBox="0 0 440 96" preserveAspectRatio="none">
+                    <path d="M0 77H440" stroke="#E8E2D5" strokeWidth="1" />
+                    <path d="M0 64 C82 64 97 62 147 52 C207 40 227 13 281 15 C341 18 359 48 440 27" stroke="#c9c5bc" strokeWidth="1" />
+                    <path data-draw-path d="M0 71 C82 71 99 67 150 58 C210 46 228 20 284 22 C345 25 365 54 440 34" stroke="#151515" strokeWidth="1.5" strokeLinecap="round" />
+                    <circle data-response-ring cx="284" cy="22" r="4" fill="#E7472E" />
+                  </svg>
+                )}
+
+                {module.visual === "tactile" && (
+                  <div className="flex w-full items-center justify-between gap-4">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#747878]">READY <span className="text-[#E8E2D5]">/</span> INPUT</span>
+                    <button
+                      type="button"
+                      aria-label="Toggle the tactile response visualization"
+                      aria-pressed={isResponseActive}
+                      onClick={() => setIsResponseActive((active) => !active)}
+                      className="group/trigger relative flex h-24 w-24 shrink-0 items-center justify-center rounded-full border border-[#E8E2D5] transition-colors duration-300 hover:border-[#c9c5bc] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E7472E]"
+                    >
+                      <svg aria-hidden="true" className="h-20 w-20" fill="none" viewBox="0 0 80 80">
+                        <circle data-response-ring cx="40" cy="40" r="27" stroke="#c9c5bc" strokeWidth="1" />
+                        <circle data-response-ring cx="40" cy="40" r="17" stroke="#E8E2D5" strokeWidth="1" />
+                        <circle cx="40" cy="40" r="4" fill={isResponseActive ? "#E7472E" : "#151515"} className="transition-colors duration-200" />
+                        <circle cx="59" cy="29" r="2.5" fill="#E7472E" />
+                      </svg>
+                    </button>
+                    <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#747878]">RESPONSE <span className="text-[#E8E2D5]">/</span> SETTLE</span>
+                  </div>
+                )}
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

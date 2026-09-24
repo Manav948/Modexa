@@ -8,6 +8,7 @@ import CadenceTicker from "./CadenceTicker";
 import EngineeringStack from "./EngineeringStack";
 import LivingSyntaxArtifact from "./LivingSyntaxArtifact";
 import TactileFidelity from "./TactileFidelity";
+import EngineeringCapabilities from "./EngineeringCapabilities";
 import PerformanceMandate from "./PerformanceMandate";
 import TechnicalReleases from "./TechnicalReleases";
 import MethodologyProtocol from "./MethodologyProtocol";
@@ -37,6 +38,9 @@ export default function WebDevelopmentPage() {
 
           {/* 05. Tactile Fidelity — 4-Quadrant Laboratory Grid */}
           <TactileFidelity />
+
+          {/* 05. Engineering Capabilities */}
+          <EngineeringCapabilities />
 
           {/* 06. Performance Mandate — FAST IS A feature. */}
           <PerformanceMandate />
