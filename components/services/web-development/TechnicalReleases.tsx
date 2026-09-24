@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,159 +9,263 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+const PROJECTS = [
+  {
+    id: "01",
+    title: "PROJECT 01",
+    description: "A wellness landing page pairing editorial type with a full-bleed landscape image.",
+    image: "/images/web1.png",
+    width: 1285,
+    height: 766,
+    alt: "Yoga and meditation landing page with a mountain landscape",
+  },
+  {
+    id: "02",
+    title: "PROJECT 02",
+    description: "An illustrated pet-care landing page designed around friendly service discovery.",
+    image: "/images/web2.png",
+    width: 666,
+    height: 310,
+    alt: "Pet care website with illustrated animals and service information",
+  },
+  {
+    id: "03",
+    title: "PROJECT 03",
+    description: "A travel landing page pairing destination imagery with route discovery.",
+    image: "/images/web3.png",
+    width: 1052,
+    height: 575,
+    alt: "Travel website featuring a coastal road and destination imagery",
+  },
+  {
+    id: "04",
+    title: "PROJECT 04",
+    description: "A sustainability landing page centered on environmental messaging and a nature-led visual system.",
+    image: "/images/web4.png",
+    width: 628,
+    height: 285,
+    alt: "Sustainability landing page with environmental messaging and green landscape imagery",
+  },
+];
+
+const PROJECT_SPEED = 27;
+
 export default function TechnicalReleases() {
   const sectionRef = useRef<HTMLElement>(null);
-  const case1Ref = useRef<HTMLDivElement>(null);
-  const case2Ref = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const firstSetRef = useRef<HTMLDivElement>(null);
+  const reelTweenRef = useRef<gsap.core.Tween | null>(null);
+  const activeIndexRef = useRef(0);
+  const hoveredRef = useRef(false);
+  const visibleRef = useRef(false);
+  const playingRef = useRef(true);
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      [case1Ref.current, case2Ref.current].forEach((el) => {
-        if (!el) return;
-        gsap.from(el, {
-          opacity: 0,
-          y: 50,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 80%",
-          },
-        });
-      });
-    }, sectionRef);
+    const section = sectionRef.current;
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    const firstSet = firstSetRef.current;
+    if (!section || !viewport || !track || !firstSet) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    return () => ctx.revert();
+    const context = gsap.context(() => {
+      const intro = section.querySelectorAll<HTMLElement>("[data-work-intro]");
+      gsap.fromTo(
+        intro,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: { trigger: section, start: "top 78%", once: true },
+        },
+      );
+
+      const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
+      const loopDistance = firstSet.getBoundingClientRect().width + gap;
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      const speed = isMobile ? 15 : PROJECT_SPEED;
+      const cards = Array.from(track.querySelectorAll<HTMLElement>("[data-project-frame]"));
+      const scaleSetters = cards.map((card) => gsap.quickTo(card, "scale", { duration: 0.42, ease: "power2.out" }));
+      const opacitySetters = cards.map((card) => gsap.quickTo(card, "opacity", { duration: 0.42, ease: "power2.out" }));
+
+      const updateFocus = () => {
+        const center = viewport.getBoundingClientRect().left + viewport.clientWidth / 2;
+        let nearestIndex = 0;
+        let nearestDistance = Number.POSITIVE_INFINITY;
+
+        cards.forEach((card, index) => {
+          const bounds = card.getBoundingClientRect();
+          const distance = Math.abs(bounds.left + bounds.width / 2 - center);
+          const influence = Math.max(0, 1 - distance / (viewport.clientWidth * 0.72));
+          scaleSetters[index](0.965 + influence * 0.055);
+          opacitySetters[index](0.76 + influence * 0.24);
+          if (distance < nearestDistance) {
+            nearestDistance = distance;
+            nearestIndex = Number(card.dataset.projectIndex) || 0;
+          }
+        });
+
+        if (nearestIndex !== activeIndexRef.current) {
+          activeIndexRef.current = nearestIndex;
+          setActiveProjectIndex(nearestIndex);
+        }
+      };
+
+      const tween = gsap.to(track, {
+        x: -loopDistance,
+        duration: loopDistance / speed,
+        ease: "none",
+        repeat: -1,
+        paused: true,
+        onUpdate: updateFocus,
+      });
+      reelTweenRef.current = tween;
+      updateFocus();
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top bottom",
+        end: "bottom top",
+        onEnter: () => {
+          visibleRef.current = true;
+          if (playingRef.current) tween.play();
+        },
+        onEnterBack: () => {
+          visibleRef.current = true;
+          if (playingRef.current) tween.play();
+        },
+        onLeave: () => {
+          visibleRef.current = false;
+          tween.pause();
+        },
+        onLeaveBack: () => {
+          visibleRef.current = false;
+          tween.pause();
+        },
+        onUpdate: (self) => {
+          if (hoveredRef.current) return;
+          const velocityInfluence = Math.min(Math.abs(self.getVelocity()) / 14000, 0.16);
+          const factor = self.direction > 0 ? 1 + velocityInfluence : 1 - velocityInfluence * 0.55;
+          tween.timeScale(factor);
+        },
+      });
+    }, section);
+
+    return () => {
+      context.revert();
+      reelTweenRef.current = null;
+      visibleRef.current = false;
+    };
   }, []);
+
+  const renderProjects = (duplicate: boolean) =>
+    PROJECTS.map((project, index) => (
+      <article
+        key={`${duplicate ? "copy" : "original"}-${project.id}`}
+        data-project-frame
+        data-project-index={index}
+        className="project-frame group w-[clamp(260px,82vw,960px)] shrink-0 origin-center will-change-transform sm:w-[clamp(320px,68vw,960px)]"
+      >
+        <div className="relative aspect-[16/9] overflow-hidden border border-[#E8E2D5] bg-[#eeece5]">
+          <Image
+            src={project.image}
+            alt={project.alt}
+            width={project.width}
+            height={project.height}
+            sizes="(max-width: 640px) 82vw, (max-width: 1024px) 68vw, 960px"
+            className="h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+            draggable={false}
+          />
+          <span className="absolute left-3 top-3 border border-[#E8E2D5] bg-[#F7F5EF]/95 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.1em] text-[#55534E] sm:left-4 sm:top-4 sm:text-[10px]">
+            {project.id} <span className="px-1 text-[#E7472E]">{"//"}</span> WEB DEVELOPMENT
+          </span>
+        </div>
+        <div className="grid grid-cols-[1fr_auto] items-start gap-x-5 gap-y-2 border-b border-[#E8E2D5] py-4 sm:py-5">
+          <h3 className="font-editorial text-2xl uppercase leading-none tracking-[-0.02em] text-[#151515] sm:text-3xl">{project.title}</h3>
+          <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#747878] sm:text-[10px]">{project.id} / {String(PROJECTS.length).padStart(2, "0")}</span>
+          <p className="col-span-2 max-w-[560px] font-sans text-sm leading-relaxed text-[#55534E]">{project.description}</p>
+        </div>
+      </article>
+    ));
+
+  const handlePointerEnter = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse") return;
+    hoveredRef.current = true;
+    reelTweenRef.current?.timeScale(0.28);
+  };
+
+  const handlePointerLeave = () => {
+    hoveredRef.current = false;
+    reelTweenRef.current?.timeScale(1);
+  };
+
+  const togglePlayback = () => {
+    const nextPlaying = !playingRef.current;
+    playingRef.current = nextPlaying;
+    setIsPlaying(nextPlaying);
+    if (!nextPlaying) {
+      reelTweenRef.current?.pause();
+      return;
+    }
+    if (visibleRef.current) reelTweenRef.current?.play();
+  };
 
   return (
     <section
       ref={sectionRef}
-      className="w-full py-20 lg:py-28 px-5 md:px-10 lg:px-16 border-t"
-      style={{ backgroundColor: "#fbf9f3", borderColor: "#e4e2dd" }}
+      aria-labelledby="selected-work-title"
+      className="w-full overflow-hidden border-t border-[#E8E2D5] bg-[#F7F5EF] py-16 text-[#151515] sm:py-20 lg:py-24"
     >
-      {/* Section Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 pb-4 border-b border-[#e4e2dd]">
+      <div className="mx-auto mb-9 flex max-w-[1440px] flex-col gap-5 px-5 sm:mb-12 sm:px-8 md:flex-row md:items-end md:justify-between md:px-12 lg:px-16">
         <div>
-          <span className="font-mono text-xs text-[#e7472e] uppercase tracking-widest block mb-2 font-medium">
-            SECTION 07 // SELECTED WORK
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase text-[#1b1c18]">
-            TECHNICAL RELEASES
+          <p data-work-intro className="mb-3 font-mono text-[10px] uppercase tracking-[0.16em] text-[#747878] sm:text-[11px]">
+            SECTION 07 <span className="px-1.5 text-[#E7472E]">{"//"}</span> SELECTED WORK
+          </p>
+          <h2 data-work-intro id="selected-work-title" className="font-display text-4xl font-normal uppercase leading-none tracking-[-0.05em] sm:text-5xl lg:text-6xl">
+            SELECTED WORK
           </h2>
         </div>
-        <span className="font-mono text-xs text-[#747878] uppercase tracking-wider mt-2 md:mt-0 font-medium">
-          WEB / INTERACTIVE / SYSTEMS
-        </span>
+        <p data-work-intro className="max-w-[470px] font-sans text-sm leading-relaxed text-[#55534E] sm:text-[15px]">
+          A selection of digital experiences built across design, development and interaction.
+        </p>
       </div>
 
-      {/* Case Studies Exhibition Grid */}
-      <div className="flex flex-col gap-16 lg:gap-24">
-        {/* Case 01: Horology WebGL Simulation */}
-        <div
-          ref={case1Ref}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pb-16 lg:pb-20 border-b border-[#e4e2dd]"
-        >
-          <div className="lg:col-span-7">
-            <div className="w-full aspect-[16/10] bg-[#f0eee8] relative overflow-hidden group shadow-md border border-[#e4e2dd]">
-              <Image
-                src="/images/kronos_watch.png"
-                alt="Kronos Haute Horlogerie 3D WebGL Dial simulation"
-                fill
-                sizes="(max-width: 1024px) 100vw, 60vw"
-                className="object-cover grayscale contrast-125 transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              <div className="absolute top-4 left-4 bg-[#151515] text-white px-3 py-1 font-mono text-[10px] md:text-[11px] uppercase tracking-wider">
-                01 / INTERACTIVE WEB
-              </div>
-              <div className="absolute bottom-4 right-4 bg-[#fbf9f3]/90 backdrop-blur-md px-3 py-1.5 font-mono text-[10px] md:text-[11px] text-[#1b1c18] border border-[#e4e2dd]">
-                MOTION / INTERACTION
-              </div>
-            </div>
+      <div
+        ref={viewportRef}
+        role="region"
+        aria-label="Selected web development projects"
+        tabIndex={0}
+        onPointerEnter={handlePointerEnter}
+        onPointerLeave={handlePointerLeave}
+        className="w-full overflow-hidden outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#E7472E] motion-reduce:overflow-x-auto"
+      >
+        <div ref={trackRef} className="flex w-max gap-5 pl-[9vw] pr-[9vw] sm:gap-8 sm:pl-[16vw] sm:pr-[16vw] motion-reduce:transform-none">
+          <div ref={firstSetRef} className="flex w-max shrink-0 gap-5 sm:gap-8">
+            {renderProjects(false)}
           </div>
-
-          <div className="lg:col-span-5 flex flex-col justify-center">
-            <span className="font-mono text-xs text-[#e7472e] uppercase tracking-widest block mb-2 font-medium">
-              01 / INTERACTIVE WEB
-            </span>
-            <h3 className="font-display text-2xl sm:text-3xl md:text-4xl uppercase text-[#1b1c18] leading-tight mb-4">
-              INTERACTIVE EXPERIENCE
-            </h3>
-            <p className="font-sans text-sm md:text-base text-[#444748] mb-6 leading-relaxed">
-              A digital experience where motion, atmosphere and interaction work together.
-            </p>
-
-            <div className="flex flex-wrap gap-2 font-mono text-[11px] text-[#1b1c18] uppercase mb-8">
-              <span className="bg-[#e4e2dd] px-2.5 py-1">THREE.JS</span>
-              <span className="bg-[#e4e2dd] px-2.5 py-1">GLSL SHADERS</span>
-              <span className="bg-[#e4e2dd] px-2.5 py-1">NEXT.JS APP ROUTER</span>
-              <span className="bg-[#e4e2dd] px-2.5 py-1">LENIS VIRTUAL SCROLL</span>
-            </div>
-
-            <div>
-              <a
-                href="#inquiry-station"
-                className="inline-flex items-center gap-2 font-mono text-xs text-[#e7472e] uppercase tracking-widest hover:underline group font-bold"
-              >
-                <span>VIEW PROJECT</span>
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
-              </a>
-            </div>
+          <div aria-hidden="true" className="flex w-max shrink-0 gap-5 sm:gap-8 motion-reduce:hidden">
+            {renderProjects(true)}
           </div>
         </div>
+      </div>
 
-        {/* Case 02: Realtime OS Environment */}
-        <div
-          ref={case2Ref}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
+      <div className="mx-auto mt-5 flex max-w-[1440px] items-center justify-between px-5 font-mono text-[9px] uppercase tracking-[0.12em] text-[#747878] sm:mt-6 sm:px-8 sm:text-[10px] md:px-12 lg:px-16">
+        <p aria-live="polite"><span className="text-[#E7472E]">{String(activeProjectIndex + 1).padStart(2, "0")}</span> / {String(PROJECTS.length).padStart(2, "0")}</p>
+        <button
+          type="button"
+          onClick={togglePlayback}
+          aria-label={isPlaying ? "Pause project reel" : "Play project reel"}
+          className="border-b border-[#c9c5bc] pb-1 transition-colors hover:border-[#E7472E] hover:text-[#151515] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E7472E] motion-reduce:hidden"
         >
-          <div className="lg:col-span-5 order-2 lg:order-1 flex flex-col justify-center">
-            <span className="font-mono text-xs text-[#e7472e] uppercase tracking-widest block mb-2 font-medium">
-              02 / DIGITAL PRODUCT
-            </span>
-            <h3 className="font-display text-2xl sm:text-3xl md:text-4xl uppercase text-[#1b1c18] leading-tight mb-4">
-              PRODUCT INTERFACE
-            </h3>
-            <p className="font-sans text-sm md:text-base text-[#444748] mb-6 leading-relaxed">
-              A focused digital product shaped around structure, workflow and interaction.
-            </p>
-
-            <div className="flex flex-wrap gap-2 font-mono text-[11px] text-[#1b1c18] uppercase mb-8">
-              <span className="bg-[#e4e2dd] px-2.5 py-1">TYPESCRIPT STRICT</span>
-              <span className="bg-[#e4e2dd] px-2.5 py-1">WEB WORKERS</span>
-              <span className="bg-[#e4e2dd] px-2.5 py-1">VIRTUALIZED DOM</span>
-              <span className="bg-[#e4e2dd] px-2.5 py-1">WEBSOCKET MULTIPLEX</span>
-            </div>
-
-            <div>
-              <a
-                href="#inquiry-station"
-                className="inline-flex items-center gap-2 font-mono text-xs text-[#e7472e] uppercase tracking-widest hover:underline group font-bold"
-              >
-                <span>VIEW PROJECT</span>
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
-              </a>
-            </div>
-          </div>
-
-          <div className="lg:col-span-7 order-1 lg:order-2">
-            <div className="w-full aspect-[16/10] bg-[#f0eee8] relative overflow-hidden group shadow-md border border-[#e4e2dd]">
-              <Image
-                src="/images/neura_os.png"
-                alt="Neura Distributed Operating Environment desktop monitor interface"
-                fill
-                sizes="(max-width: 1024px) 100vw, 60vw"
-                className="object-cover grayscale contrast-125 transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              <div className="absolute top-4 left-4 bg-[#151515] text-white px-3 py-1 font-mono text-[10px] md:text-[11px] uppercase tracking-wider">
-                CASE 02 // DISTRIBUTED WORKSPACE
-              </div>
-              <div className="absolute bottom-4 right-4 bg-[#fbf9f3]/90 backdrop-blur-md px-3 py-1.5 font-mono text-[10px] md:text-[11px] text-[#1b1c18] border border-[#e4e2dd]">
-                SUB-10MS COMMAND PIPELINE
-              </div>
-            </div>
-          </div>
-        </div>
+          {isPlaying ? "PAUSE REEL" : "PLAY REEL"}
+        </button>
+        <p>DRAG / SCROLL TO EXPLORE</p>
       </div>
     </section>
   );
