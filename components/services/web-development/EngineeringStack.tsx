@@ -8,85 +8,74 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-interface StackLayer {
-  number: string;
-  category: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  badge: string;
-  meta: string;
-}
-
-const STACK_LAYERS: StackLayer[] = [
+const STACK_LAYERS = [
   {
-    number: "01 //",
-    category: "01 / FRONTEND",
-    title: "NEXT.JS",
-    subtitle: "React interfaces / App Router / Responsive structure",
-    description: "Interfaces built for clarity, responsiveness and interaction.",
-    badge: "NEXT.JS",
-    meta: "REACT / TYPESCRIPT",
+    number: "01",
+    title: "NEXT.JS 16.3.5",
+    description: "App Router architecture for server-rendered pages and responsive digital experiences.",
+    category: "FRAMEWORK",
+    detail: "APP ROUTER",
   },
   {
-    number: "02 //",
-    category: "02 / FULL-STACK",
-    title: "TYPESCRIPT",
-    subtitle: "Typed interfaces / Clear contracts / Maintainable systems",
-    description: "From the interface to the systems behind it.",
-    badge: "TYPESCRIPT",
-    meta: "STRUCTURE / LOGIC",
+    number: "02",
+    title: "TYPESCRIPT 5.X",
+    description: "Typed interfaces and predictable application logic across the codebase.",
+    category: "LANGUAGE",
+    detail: "TYPE SYSTEM",
   },
   {
-    number: "03 //",
-    category: "03 / INTERACTIVE WEB",
-    title: "GSAP + LENIS",
-    subtitle: "Motion / ScrollTrigger / Smooth interaction",
-    description: "Motion and interaction designed as part of the experience.",
-    badge: "GSAP",
-    meta: "LENIS / SCROLLTRIGGER",
+    number: "03",
+    title: "GSAP + LENIS + WEBGL",
+    description: "Scroll-linked motion and smooth interaction, composed as part of the experience.",
+    category: "MOTION",
+    detail: "SCROLLTRIGGER",
   },
   {
-    number: "04 //",
-    category: "04 / PERFORMANCE",
-    title: "TAILWIND CSS",
-    subtitle: "Responsive systems / Fluid type / Focused output",
-    description: "Fast, efficient experiences without unnecessary weight.",
-    badge: "TAILWIND CSS",
-    meta: "RESPONSIVE / EFFICIENT",
+    number: "04",
+    title: "TAILWIND CSS & TOKENS",
+    description: "Responsive styling shaped by a shared set of color and typography tokens.",
+    category: "STYLING",
+    detail: "DESIGN TOKENS",
   },
   {
-    number: "05 //",
-    category: "05 / DEPLOYMENT",
+    number: "05",
     title: "NODE.JS + PRISMA",
-    subtitle: "Server logic / Data / Production delivery",
-    description: "From local development to a reliable production environment.",
-    badge: "NODE.JS",
-    meta: "PRISMA / DEPLOYMENT",
+    description: "Server-side services and persistent data systems for production applications.",
+    category: "BACKEND",
+    detail: "MONGODB / DATA",
   },
 ];
 
 export default function EngineeringStack() {
   const sectionRef = useRef<HTMLElement>(null);
-  const rowsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const ctx = gsap.context(() => {
-      const rows = rowsRef.current?.querySelectorAll(".stack-row");
-      if (rows && rows.length > 0) {
-        gsap.from(rows, {
-          opacity: 0,
-          y: 35,
-          stagger: 0.12,
-          duration: 0.85,
-          ease: "power2.out",
+      section.querySelectorAll<HTMLElement>("[data-stack-row]").forEach((row) => {
+        const title = row.querySelector<HTMLElement>("[data-stack-title]");
+        const description = row.querySelector<HTMLElement>("[data-stack-description]");
+        const metadata = row.querySelector<HTMLElement>("[data-stack-meta]");
+        const rule = row.querySelector<HTMLElement>("[data-stack-rule]");
+        if (!title || !description || !metadata || !rule) return;
+
+        const timeline = gsap.timeline({
           scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 78%",
+            trigger: row,
+            start: "top 86%",
+            once: true,
           },
         });
-      }
-    }, sectionRef);
+
+        timeline
+          .fromTo(rule, { scaleX: 0.55, transformOrigin: "left center", opacity: 0.35 }, { scaleX: 1, opacity: 1, duration: 0.65, ease: "power2.out" })
+          .fromTo(title, { y: 22, opacity: 0, filter: "blur(3px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.72, ease: "power3.out" }, "<0.04")
+          .fromTo(description, { y: 14, opacity: 0, filter: "blur(2px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.62, ease: "power2.out" }, "<0.1")
+          .fromTo(metadata, { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, "<0.08");
+      });
+    }, section);
 
     return () => ctx.revert();
   }, []);
@@ -95,67 +84,47 @@ export default function EngineeringStack() {
     <section
       id="stack"
       ref={sectionRef}
-      className="w-full py-20 lg:py-28 px-5 md:px-10 lg:px-16 border-t"
-      style={{ backgroundColor: "#fbf9f3", borderColor: "#e4e2dd" }}
+      aria-labelledby="engineering-stack-title"
+      className="w-full bg-[#f7f5ef] px-5 pb-20 pt-16 text-[#151515] sm:px-8 md:px-12 lg:px-16 lg:pb-28 lg:pt-24"
     >
-      {/* Section Header Ledger */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pb-10 border-b border-[#e4e2dd]">
-        <div>
-          <span className="font-mono text-xs uppercase tracking-widest text-[#e7472e] block mb-2 font-medium">
-            SECTION 02 // SUB-SYSTEM SPECIFICATION
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-[#1b1c18]">
-            THE ENGINEERING STACK
-          </h2>
-        </div>
-        <p className="font-sans text-sm md:text-base text-[#444748] max-w-md leading-relaxed">
-          We deliberately bypass disposable abstractions. Our architectural baseline prioritizes long-term mechanical stability, sub-millisecond interaction feedback, and strict type provenance.
-        </p>
-      </div>
-
-      {/* Monumental Stack Layers */}
-      <div ref={rowsRef} className="flex flex-col divide-y divide-[#e4e2dd]">
-        {STACK_LAYERS.map((layer) => (
-          <div
-            key={layer.title}
-            className="stack-row py-10 px-3 md:px-4 group transition-all duration-300 hover:bg-[#f5f3ed]"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-baseline">
-              {/* Layer Number */}
-              <div className="lg:col-span-1 font-mono text-sm text-[#e7472e] uppercase font-bold">
-                {layer.number}
-              </div>
-
-              {/* Title & Category */}
-              <div className="lg:col-span-4">
-                <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-wider text-[#747878] block">
-                  {layer.category}
-                </span>
-                <h3 className="font-display text-xl sm:text-2xl uppercase text-[#1b1c18] group-hover:text-[#e7472e] transition-colors duration-200 mt-1">
-                  {layer.title}
-                </h3>
-                <span className="font-mono text-[11px] text-[#444748] block mt-1.5">
-                  {layer.subtitle}
-                </span>
-              </div>
-
-              {/* Narrative description */}
-              <div className="lg:col-span-4 font-sans text-sm text-[#444748] leading-relaxed">
-                {layer.description}
-              </div>
-
-              {/* Telemetry pill & metadata */}
-              <div className="lg:col-span-3 flex flex-col items-start lg:items-end font-mono text-xs text-[#747878]">
-                <span className="bg-[#e4e2dd] px-2.5 py-1 text-[#1b1c18] text-[11px] font-medium tracking-wide">
-                  {layer.badge}
-                </span>
-                <span className="mt-2 text-[10px] tracking-wider text-[#747878]">
-                  {layer.meta}
-                </span>
-              </div>
-            </div>
+      <div className="mx-auto max-w-[1440px]">
+        <div className="border-b border-[#E8E2D5] pb-8 md:pb-10">
+          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#747878] sm:text-[11px]">
+            SECTION 01 <span className="px-1.5 text-[#E7472E]">{"//"}</span> ENGINEERING STACK
+          </p>
+          <div className="mt-5 flex flex-col gap-5 md:mt-6 md:flex-row md:items-end md:justify-between">
+            <h2 id="engineering-stack-title" className="font-display text-[clamp(2.2rem,5vw,4.6rem)] font-normal uppercase leading-[0.94] tracking-[-0.055em]">
+              THE ENGINEERING<br />STACK
+            </h2>
+            <p className="max-w-[420px] font-sans text-sm leading-relaxed text-[#55534E] md:pb-1 md:text-[15px]">
+              The frameworks, languages and motion systems behind considered digital experiences.
+            </p>
           </div>
-        ))}
+        </div>
+
+        <div className="flex flex-col">
+          {STACK_LAYERS.map((layer) => (
+            <article
+              key={layer.number}
+              data-stack-row
+              className="group relative grid grid-cols-1 gap-x-6 gap-y-3 border-b border-[#E8E2D5] py-7 sm:py-8 md:grid-cols-[32px_minmax(0,1fr)] md:gap-x-6 lg:grid-cols-[42px_minmax(0,1.25fr)_minmax(220px,1fr)_minmax(125px,0.62fr)] lg:items-center lg:gap-x-10 lg:py-9"
+            >
+              <span className="font-mono text-[10px] tracking-[0.12em] text-[#E7472E] md:self-start md:pt-2">{layer.number}</span>
+              <h3 data-stack-title className="font-editorial text-[clamp(2rem,3.4vw,3.4rem)] font-normal leading-[0.98] tracking-[-0.035em] text-[#151515] transition-transform duration-300 ease-out group-hover:translate-x-1">
+                {layer.title}
+              </h3>
+              <p data-stack-description className="max-w-[390px] font-sans md:col-start-2 lg:col-auto text-sm leading-relaxed text-[#55534E] md:text-[14px]">
+                {layer.description}
+              </p>
+              <div data-stack-meta className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.1em] text-[#747878] md:col-start-2 md:flex-col md:items-start md:gap-1.5 lg:col-auto lg:justify-self-end">
+                <span>{layer.category}</span>
+                <span aria-hidden="true" className="text-[#E8E2D5] md:hidden">/</span>
+                <span>{layer.detail}</span>
+              </div>
+              <span data-stack-rule aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px origin-left bg-[#d8d2c5] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

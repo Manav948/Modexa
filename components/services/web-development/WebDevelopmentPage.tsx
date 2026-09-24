@@ -26,11 +26,11 @@ export default function WebDevelopmentPage() {
           {/* 01. Dark Cinematic Hero — WE BUILD WHAT PEOPLE interact WITH. */}
           <WebDevHero />
 
-          {/* 02. Continuous Cadence Ticker */}
-          <CadenceTicker />
-
-          {/* 03. The Engineering Stack — 5 Monumental Layers */}
+          {/* 02. Engineering Stack — editorial technology index */}
           <EngineeringStack />
+
+          {/* Existing cadence ticker */}
+          <CadenceTicker />
 
           {/* 04. Living Code Workspace — SYNTAX AS AN EDITORIAL ARTIFACT */}
           <LivingSyntaxArtifact />
