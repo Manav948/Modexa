@@ -13,42 +13,36 @@ const PROJECTS = [
   {
     id: "01",
     title: "PROJECT 01",
-    description: "A wellness landing page pairing editorial type with a full-bleed landscape image.",
-    image: "/images/web1.png",
-    width: 1285,
-    height: 766,
-    alt: "Yoga and meditation landing page with a mountain landscape",
+    description: "Athletic product landing page with a split-hero motion composition.",
+    image: "/images/web5.png",
+    width: 925,
+    height: 521,
+    alt: "Athletic product landing page screenshot",
   },
   {
     id: "02",
     title: "PROJECT 02",
-    description: "An illustrated pet-care landing page designed around friendly service discovery.",
-    image: "/images/web2.png",
-    width: 666,
-    height: 310,
-    alt: "Pet care website with illustrated animals and service information",
+    description: "Dark cinematic sports-gear launch experience with layered product UI.",
+    image: "/images/web6.png",
+    width: 896,
+    height: 637,
+    alt: "Sports gear launch landing page screenshot",
   },
   {
     id: "03",
     title: "PROJECT 03",
-    description: "A travel landing page pairing destination imagery with route discovery.",
-    image: "/images/web3.png",
-    width: 1052,
-    height: 575,
-    alt: "Travel website featuring a coastal road and destination imagery",
-  },
-  {
-    id: "04",
-    title: "PROJECT 04",
-    description: "A sustainability landing page centered on environmental messaging and a nature-led visual system.",
-    image: "/images/web4.png",
-    width: 628,
-    height: 285,
-    alt: "Sustainability landing page with environmental messaging and green landscape imagery",
+    description: "Luxury mobility interface pairing editorial type with booking workflow.",
+    image: "/images/web7.png",
+    width: 952,
+    height: 703,
+    alt: "Luxury car rental landing page screenshot",
   },
 ];
 
-const PROJECT_SPEED = 27;
+/** Pixels per second — higher = faster cinematic pace (was 27 / 15). */
+const PROJECT_SPEED_DESKTOP = 46;
+const PROJECT_SPEED_MOBILE = 28;
+const HOVER_TIME_SCALE = 0.42;
 
 export default function TechnicalReleases() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -58,6 +52,7 @@ export default function TechnicalReleases() {
   const reelTweenRef = useRef<gsap.core.Tween | null>(null);
   const activeIndexRef = useRef(0);
   const hoveredRef = useRef(false);
+  const cardHoverIndexRef = useRef<number | null>(null);
   const visibleRef = useRef(false);
   const playingRef = useRef(true);
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
@@ -86,28 +81,49 @@ export default function TechnicalReleases() {
         },
       );
 
-      const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
-      const loopDistance = firstSet.getBoundingClientRect().width + gap;
+      const measureLoop = () => {
+        const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
+        return firstSet.getBoundingClientRect().width + gap;
+      };
+
+      let loopDistance = measureLoop();
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
-      const speed = isMobile ? 15 : PROJECT_SPEED;
+      const speed = isMobile ? PROJECT_SPEED_MOBILE : PROJECT_SPEED_DESKTOP;
       const cards = Array.from(track.querySelectorAll<HTMLElement>("[data-project-frame]"));
-      const scaleSetters = cards.map((card) => gsap.quickTo(card, "scale", { duration: 0.42, ease: "power2.out" }));
-      const opacitySetters = cards.map((card) => gsap.quickTo(card, "opacity", { duration: 0.42, ease: "power2.out" }));
+      const scaleSetters = cards.map((card) =>
+        gsap.quickTo(card, "scale", { duration: 0.42, ease: "power2.out" }),
+      );
+      const opacitySetters = cards.map((card) =>
+        gsap.quickTo(card, "opacity", { duration: 0.42, ease: "power2.out" }),
+      );
 
       const updateFocus = () => {
         const center = viewport.getBoundingClientRect().left + viewport.clientWidth / 2;
         let nearestIndex = 0;
         let nearestDistance = Number.POSITIVE_INFINITY;
+        const hoverLogical = cardHoverIndexRef.current;
 
         cards.forEach((card, index) => {
           const bounds = card.getBoundingClientRect();
           const distance = Math.abs(bounds.left + bounds.width / 2 - center);
           const influence = Math.max(0, 1 - distance / (viewport.clientWidth * 0.72));
-          scaleSetters[index](0.965 + influence * 0.055);
-          opacitySetters[index](0.76 + influence * 0.24);
+          const logicalIndex = Number(card.dataset.projectIndex) || 0;
+          const isHovered = hoverLogical !== null && logicalIndex === hoverLogical;
+
+          let scale = 0.965 + influence * 0.055;
+          let opacity = 0.76 + influence * 0.24;
+
+          if (hoverLogical !== null) {
+            scale = isHovered ? 1.02 : 0.955 + influence * 0.02;
+            opacity = isHovered ? 1 : 0.62 + influence * 0.12;
+          }
+
+          scaleSetters[index](scale);
+          opacitySetters[index](opacity);
+
           if (distance < nearestDistance) {
             nearestDistance = distance;
-            nearestIndex = Number(card.dataset.projectIndex) || 0;
+            nearestIndex = logicalIndex;
           }
         });
 
@@ -127,6 +143,23 @@ export default function TechnicalReleases() {
       });
       reelTweenRef.current = tween;
       updateFocus();
+
+      const refreshLoopMetrics = () => {
+        const nextDistance = measureLoop();
+        if (Math.abs(nextDistance - loopDistance) < 1) return;
+        const progress = tween.progress();
+        loopDistance = nextDistance;
+        tween.vars.x = -loopDistance;
+        tween.duration(loopDistance / speed);
+        tween.progress(progress);
+        ScrollTrigger.refresh();
+      };
+
+      const resizeObserver = new ResizeObserver(() => {
+        refreshLoopMetrics();
+      });
+      resizeObserver.observe(firstSet);
+      resizeObserver.observe(viewport);
 
       ScrollTrigger.create({
         trigger: section,
@@ -150,11 +183,15 @@ export default function TechnicalReleases() {
         },
         onUpdate: (self) => {
           if (hoveredRef.current) return;
-          const velocityInfluence = Math.min(Math.abs(self.getVelocity()) / 14000, 0.16);
+          const velocityInfluence = Math.min(Math.abs(self.getVelocity()) / 14000, 0.18);
           const factor = self.direction > 0 ? 1 + velocityInfluence : 1 - velocityInfluence * 0.55;
           tween.timeScale(factor);
         },
       });
+
+      return () => {
+        resizeObserver.disconnect();
+      };
     }, section);
 
     return () => {
@@ -170,7 +207,14 @@ export default function TechnicalReleases() {
         key={`${duplicate ? "copy" : "original"}-${project.id}`}
         data-project-frame
         data-project-index={index}
-        className="project-frame group w-[clamp(260px,82vw,960px)] shrink-0 origin-center will-change-transform sm:w-[clamp(320px,68vw,960px)]"
+        className="project-frame group w-[clamp(260px,82vw,920px)] shrink-0 origin-center will-change-transform sm:w-[clamp(320px,68vw,920px)]"
+        onPointerEnter={(event) => {
+          if (event.pointerType !== "mouse") return;
+          cardHoverIndexRef.current = index;
+        }}
+        onPointerLeave={() => {
+          cardHoverIndexRef.current = null;
+        }}
       >
         <div className="relative aspect-[16/9] overflow-hidden border border-[#E8E2D5] bg-[#eeece5]">
           <Image
@@ -178,18 +222,25 @@ export default function TechnicalReleases() {
             alt={project.alt}
             width={project.width}
             height={project.height}
-            sizes="(max-width: 640px) 82vw, (max-width: 1024px) 68vw, 960px"
-            className="h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+            sizes="(max-width: 640px) 82vw, (max-width: 1024px) 68vw, 920px"
+            className="h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             draggable={false}
+            priority={!duplicate && index === 0}
           />
-          <span className="absolute left-3 top-3 border border-[#E8E2D5] bg-[#F7F5EF]/95 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.1em] text-[#55534E] sm:left-4 sm:top-4 sm:text-[10px]">
+          <span className="absolute left-3 top-3 border border-[#E8E2D5] bg-[#F7F5EF]/95 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.1em] text-[#55534E] opacity-90 transition-opacity duration-300 group-hover:opacity-100 sm:left-4 sm:top-4 sm:text-[10px]">
             {project.id} <span className="px-1 text-[#E7472E]">{"//"}</span> WEB DEVELOPMENT
           </span>
         </div>
         <div className="grid grid-cols-[1fr_auto] items-start gap-x-5 gap-y-2 border-b border-[#E8E2D5] py-4 sm:py-5">
-          <h3 className="font-editorial text-2xl uppercase leading-none tracking-[-0.02em] text-[#151515] sm:text-3xl">{project.title}</h3>
-          <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#747878] sm:text-[10px]">{project.id} / {String(PROJECTS.length).padStart(2, "0")}</span>
-          <p className="col-span-2 max-w-[560px] font-sans text-sm leading-relaxed text-[#55534E]">{project.description}</p>
+          <h3 className="font-editorial text-2xl uppercase leading-none tracking-[-0.02em] text-[#151515] sm:text-3xl">
+            {project.title}
+          </h3>
+          <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#747878] sm:text-[10px]">
+            {project.id} / {String(PROJECTS.length).padStart(2, "0")}
+          </span>
+          <p className="col-span-2 max-w-[560px] translate-y-0 font-sans text-sm leading-relaxed text-[#55534E] opacity-90 transition-[opacity,transform] duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+            {project.description}
+          </p>
         </div>
       </article>
     ));
@@ -197,11 +248,12 @@ export default function TechnicalReleases() {
   const handlePointerEnter = (event: React.PointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== "mouse") return;
     hoveredRef.current = true;
-    reelTweenRef.current?.timeScale(0.28);
+    reelTweenRef.current?.timeScale(HOVER_TIME_SCALE);
   };
 
   const handlePointerLeave = () => {
     hoveredRef.current = false;
+    cardHoverIndexRef.current = null;
     reelTweenRef.current?.timeScale(1);
   };
 
@@ -227,7 +279,11 @@ export default function TechnicalReleases() {
           <p data-work-intro className="mb-3 font-mono text-[10px] uppercase tracking-[0.16em] text-[#747878] sm:text-[11px]">
             SECTION 07 <span className="px-1.5 text-[#E7472E]">{"//"}</span> SELECTED WORK
           </p>
-          <h2 data-work-intro id="selected-work-title" className="font-display text-4xl font-normal uppercase leading-none tracking-[-0.05em] sm:text-5xl lg:text-6xl">
+          <h2
+            data-work-intro
+            id="selected-work-title"
+            className="font-display text-4xl font-normal uppercase leading-none tracking-[-0.05em] sm:text-5xl lg:text-6xl"
+          >
             SELECTED WORK
           </h2>
         </div>
@@ -245,7 +301,10 @@ export default function TechnicalReleases() {
         onPointerLeave={handlePointerLeave}
         className="w-full overflow-hidden outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#E7472E] motion-reduce:overflow-x-auto"
       >
-        <div ref={trackRef} className="flex w-max gap-5 pl-[9vw] pr-[9vw] sm:gap-8 sm:pl-[16vw] sm:pr-[16vw] motion-reduce:transform-none">
+        <div
+          ref={trackRef}
+          className="flex w-max gap-5 pl-[9vw] pr-[9vw] sm:gap-8 sm:pl-[16vw] sm:pr-[16vw] motion-reduce:transform-none"
+        >
           <div ref={firstSetRef} className="flex w-max shrink-0 gap-5 sm:gap-8">
             {renderProjects(false)}
           </div>
@@ -256,7 +315,10 @@ export default function TechnicalReleases() {
       </div>
 
       <div className="mx-auto mt-5 flex max-w-[1440px] items-center justify-between px-5 font-mono text-[9px] uppercase tracking-[0.12em] text-[#747878] sm:mt-6 sm:px-8 sm:text-[10px] md:px-12 lg:px-16">
-        <p aria-live="polite"><span className="text-[#E7472E]">{String(activeProjectIndex + 1).padStart(2, "0")}</span> / {String(PROJECTS.length).padStart(2, "0")}</p>
+        <p aria-live="polite">
+          <span className="text-[#E7472E]">{String(activeProjectIndex + 1).padStart(2, "0")}</span> /{" "}
+          {String(PROJECTS.length).padStart(2, "0")}
+        </p>
         <button
           type="button"
           onClick={togglePlayback}
