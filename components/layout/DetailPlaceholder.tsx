@@ -27,7 +27,7 @@ export default function DetailPlaceholder({ type }: DetailPlaceholderProps) {
             </span>
             <h1
               className="mt-5 max-w-3xl text-[clamp(2.5rem,7vw,6rem)] leading-[0.95]"
-              style={{ fontFamily: "'Newsreader', Georgia, serif" }}
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               {type === "SERVICE" ? "SERVICE DETAILS." : "PROJECT DETAILS."}
             </h1>

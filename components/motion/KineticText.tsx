@@ -51,7 +51,7 @@ export default function KineticText() {
     <div
       className="flex flex-wrap items-baseline gap-x-3 gap-y-1"
       style={{
-        fontFamily: "'Newsreader', Georgia, serif",
+        fontFamily: "'Space Grotesk', sans-serif",
         fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
         lineHeight: "2.75rem",
         letterSpacing: "-0.015em",
@@ -88,7 +88,7 @@ export default function KineticText() {
               style={{
                 color: "#b6240f",
                 height: "1.3em",
-                fontFamily: "'Newsreader', Georgia, serif",
+                fontFamily: "'Space Grotesk', sans-serif",
               }}
             >
               {word}

@@ -105,9 +105,9 @@ export default function SpecificationLedger() {
                 {row.num}
               </span>
               <div>
-                <h4 className="font-display text-xl sm:text-2xl uppercase text-[#1b1c18] group-hover:text-[#e7472e] transition-colors duration-200">
+                <h3 className="font-display text-xl sm:text-2xl uppercase text-[#1b1c18] group-hover:text-[#e7472e] transition-colors duration-200">
                   {row.title}
-                </h4>
+                </h3>
                 <p className="font-mono text-xs text-[#747878] mt-1">
                   {row.tech}
                 </p>

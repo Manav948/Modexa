@@ -1,5 +1,9 @@
 "use client";
 
+import Link from "next/link";
+
+import StartProjectButton from "@/components/motion/StartProjectButton";
+
 export default function InitiationCTA() {
   return (
     <section
@@ -36,7 +40,7 @@ export default function InitiationCTA() {
             READY TO MAKE<br />
             <span
               className="italic font-normal text-[#fbf9f3] lowercase tracking-normal"
-              style={{ fontFamily: "'Newsreader', Georgia, serif" }}
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               SOMETHING worth watching?
             </span>
@@ -44,26 +48,20 @@ export default function InitiationCTA() {
 
           <p
             className="text-[#c4c7c7] max-w-2xl text-base md:text-lg leading-relaxed mb-8 text-reveal"
-            style={{ fontFamily: "'Manrope', sans-serif" }}
+            style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Bring us the footage, the idea or the first cut. We&apos;ll find the rhythm and shape the story.
           </p>
 
           {/* Action CTAs */}
           <div className="flex flex-wrap items-center gap-4 mb-16 font-mono text-[10px]">
-            <a
-              href="mailto:hello@company.com?subject=Video%20Editing%20Project"
-              className="px-8 py-4 bg-[#b6240f] text-white tracking-widest uppercase hover:bg-[#fe573c] transition-colors inline-flex items-center gap-3 font-bold shadow-lg"
-            >
-                <span>START A PROJECT</span>
-              <span>→</span>
-            </a>
-              <a
+            <StartProjectButton theme="dark" href="mailto:hello@company.com?subject=Video%20Editing%20Project" />
+              <Link
                 href="/#overview"
                 className="px-6 py-4 border border-[#444748] hover:border-white text-white tracking-widest uppercase transition-colors"
               >
                 <span>BACK TO SERVICES</span>
-              </a>
+              </Link>
           </div>
 
           {/* Studio Technical Provenance Colophon Stamp */}

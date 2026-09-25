@@ -1,12 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { useState } from "react";
 
 const MODULES = [
   {
@@ -47,104 +41,10 @@ const THREAD_BARS = [
 ];
 
 export default function TactileFidelity() {
-  const sectionRef = useRef<HTMLElement>(null);
   const [isResponseActive, setIsResponseActive] = useState(false);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const context = gsap.context(() => {
-      const intro = section.querySelectorAll<HTMLElement>("[data-interaction-intro]");
-      gsap.fromTo(
-        intro,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.12,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 78%",
-            once: true,
-          },
-        },
-      );
-
-      section.querySelectorAll<HTMLElement>("[data-interaction-module]").forEach((module) => {
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: module,
-            start: "top 84%",
-            once: true,
-          },
-        });
-
-        timeline.fromTo(
-          module,
-          { opacity: 0, y: 24 },
-          { opacity: 1, y: 0, duration: 0.62, ease: "power2.out" },
-        );
-
-        const title = module.querySelector<HTMLElement>("[data-module-title]");
-        const description = module.querySelector<HTMLElement>("[data-module-description]");
-        if (title) {
-          timeline.fromTo(
-            title,
-            { opacity: 0, y: 12 },
-            { opacity: 1, y: 0, duration: 0.48, ease: "power2.out" },
-            "<0.08",
-          );
-        }
-        if (description) {
-          timeline.fromTo(
-            description,
-            { opacity: 0, y: 10 },
-            { opacity: 1, y: 0, duration: 0.44, ease: "power2.out" },
-            "<0.08",
-          );
-        }
-
-        module.querySelectorAll<SVGPathElement>("[data-draw-path]").forEach((path) => {
-          const length = path.getTotalLength();
-          timeline.fromTo(
-            path,
-            { strokeDasharray: length, strokeDashoffset: length },
-            { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" },
-            "<0.08",
-          );
-        });
-
-        const bars = module.querySelectorAll<HTMLElement>("[data-thread-bar]");
-        if (bars.length) {
-          timeline.fromTo(
-            bars,
-            { scaleY: 0.18, opacity: 0.35, transformOrigin: "bottom center" },
-            { scaleY: 1, opacity: 1, duration: 0.42, stagger: 0.035, ease: "power2.out" },
-            "<0.05",
-          );
-        }
-
-        const rings = module.querySelectorAll<SVGCircleElement>("[data-response-ring]");
-        if (rings.length) {
-          timeline.fromTo(
-            rings,
-            { scale: 0.78, opacity: 0, transformOrigin: "center center" },
-            { scale: 1, opacity: 1, duration: 0.55, stagger: 0.1, ease: "power2.out" },
-            "<0.05",
-          );
-        }
-      });
-    }, section);
-
-    return () => context.revert();
-  }, []);
 
   return (
     <section
-      ref={sectionRef}
       aria-labelledby="interaction-metrics-title"
       className="w-full border-t border-[#E8E2D5] bg-[#F7F5EF] px-5 py-16 text-[#151515] sm:px-8 sm:py-20 md:px-12 lg:px-16 lg:py-28"
     >

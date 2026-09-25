@@ -1,5 +1,7 @@
 "use client";
 
+import StartProjectButton from "@/components/motion/StartProjectButton";
+
 export default function CommissionGateway() {
   return (
     <section
@@ -20,7 +22,7 @@ export default function CommissionGateway() {
           HAVE SOMETHING<br />
           <span
             className="font-editorial italic lowercase font-normal text-[#f0eee8] pr-2"
-            style={{ fontFamily: "'Newsreader', Georgia, serif" }}
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
             worth building?
           </span>
@@ -31,12 +33,7 @@ export default function CommissionGateway() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto pt-2">
-          <a
-            href="mailto:hello@company.com?subject=PROJECT%20INITIATION%20//%20STUDIO%20DIRECTION"
-            className="inline-flex items-center justify-center px-8 py-4 bg-[#e7472e] text-white font-mono text-xs uppercase tracking-wider hover:bg-[#b6240f] transition-all duration-300 shadow-[0_0_25px_rgba(231,71,46,0.35)]"
-          >
-            START A PROJECT →
-          </a>
+          <StartProjectButton theme="dark" href="mailto:hello@company.com?subject=PROJECT%20INITIATION%20//%20STUDIO%20DIRECTION" />
           <a
             href="mailto:tech@company.com?subject=TECHNICAL%20INQUIRY"
             className="inline-flex items-center justify-center px-8 py-4 border border-white/25 text-white font-mono text-xs uppercase tracking-wider hover:border-white hover:bg-white/10 transition-colors duration-200"

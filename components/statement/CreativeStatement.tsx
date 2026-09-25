@@ -51,7 +51,7 @@ export default function CreativeStatement() {
                   word.highlight ? "text-[#b6240f] italic" : ""
                 }`}
                 style={{
-                  fontFamily: "'Newsreader', Georgia, serif",
+                  fontFamily: "'Space Grotesk', sans-serif",
                   fontSize: "clamp(2.75rem, 7.5vw, 6.5rem)",
                   lineHeight: "1.0",
                   letterSpacing: "-0.02em",
@@ -67,13 +67,13 @@ export default function CreativeStatement() {
         {/* Subtext description */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pt-8 border-t border-white/10">
           <div className="md:col-span-4 font-mono text-[10px] text-[#747878] uppercase tracking-widest">
-              // ONE CREATIVE DIRECTION
+              {"// ONE CREATIVE DIRECTION"}
           </div>
           <div className="md:col-span-8">
             <p
               className="text-[#e4e2dd] max-w-2xl leading-relaxed"
               style={{
-                fontFamily: "'Manrope', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: "1.0625rem",
                 lineHeight: "1.875rem",
               }}

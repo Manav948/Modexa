@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import StartProjectButton from "@/components/motion/StartProjectButton";
 
 const CHAPTERS = [
   { time: "00:00 — 04:12", title: "I. PROLOGUE", sub: "Cold opening & Thesis", timecode: "02:15 / 38:10", progress: "15%" },
@@ -99,7 +100,7 @@ export default function LongFormArchive() {
           </div>
           <p
             className="text-[#747878] max-w-md font-sans text-sm md:text-base leading-relaxed text-reveal"
-            style={{ fontFamily: "'Manrope', sans-serif" }}
+            style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Hover over the master player or project cards to trigger interactive video playback, optical HUD viewfinders, and stem preview audio monitors.
           </p>
@@ -183,7 +184,7 @@ export default function LongFormArchive() {
                             isMainHovered ? "animate-pulse" : "h-1"
                           }`}
                           style={{
-                            height: isMainHovered ? `${Math.floor(Math.random() * 12) + 4}px` : "3px",
+                            height: isMainHovered ? `${4 + ((i * 7) % 12)}px` : "3px",
                           }}
                         />
                       ))}
@@ -232,7 +233,7 @@ export default function LongFormArchive() {
               </h3>
               <p
                 className="text-[#747878] text-sm leading-relaxed mb-6"
-                style={{ fontFamily: "'Manrope', sans-serif" }}
+                style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 A long-form narrative shaped through structure, pacing, sound and a clear editorial point of view.
               </p>
@@ -258,13 +259,7 @@ export default function LongFormArchive() {
             </div>
 
             <div className="pt-6 border-t border-[#e4e2dd] mt-6">
-              <a
-                href="#initiation"
-                className="w-full py-3 bg-[#1b1c18] text-white font-mono text-[10px] tracking-widest uppercase flex items-center justify-center gap-2 hover:bg-[#b6240f] transition-colors shadow-md"
-              >
-                <span>START A PROJECT</span>
-                <span>→</span>
-              </a>
+              <StartProjectButton href="#initiation" className="w-full" />
             </div>
           </div>
         </div>
@@ -283,16 +278,16 @@ export default function LongFormArchive() {
                 <span className="text-[#b6240f] font-bold">{proj.ep}</span>
               </div>
 
-              <h4
+              <h3
                 className="text-[#1b1c18] uppercase text-2xl group-hover:text-[#b6240f] transition-colors font-bold"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 {proj.title}
-              </h4>
+              </h3>
 
               <p
                 className="text-[#747878] text-xs leading-relaxed mt-2 mb-6"
-                style={{ fontFamily: "'Manrope', sans-serif" }}
+                style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 {proj.desc}
               </p>

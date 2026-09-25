@@ -90,8 +90,11 @@ export default function TechnicalReleases() {
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
       const speed = isMobile ? PROJECT_SPEED_MOBILE : PROJECT_SPEED_DESKTOP;
       const cards = Array.from(track.querySelectorAll<HTMLElement>("[data-project-frame]"));
-      const scaleSetters = cards.map((card) =>
-        gsap.quickTo(card, "scale", { duration: 0.42, ease: "power2.out" }),
+      const scaleXSetters = cards.map((card) =>
+        gsap.quickTo(card, "scaleX", { duration: 0.42, ease: "power2.out" }),
+      );
+      const scaleYSetters = cards.map((card) =>
+        gsap.quickTo(card, "scaleY", { duration: 0.42, ease: "power2.out" }),
       );
       const opacitySetters = cards.map((card) =>
         gsap.quickTo(card, "opacity", { duration: 0.42, ease: "power2.out" }),
@@ -118,7 +121,8 @@ export default function TechnicalReleases() {
             opacity = isHovered ? 1 : 0.62 + influence * 0.12;
           }
 
-          scaleSetters[index](scale);
+          scaleXSetters[index](scale);
+          scaleYSetters[index](scale);
           opacitySetters[index](opacity);
 
           if (distance < nearestDistance) {

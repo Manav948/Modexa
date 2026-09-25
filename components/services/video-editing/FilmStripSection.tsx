@@ -101,7 +101,7 @@ export default function FilmStripSection() {
               </h3>
               <p
                 className="text-[#747878] text-xs leading-snug mt-1"
-                style={{ fontFamily: "'Manrope', sans-serif" }}
+                style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 {item.desc}
               </p>

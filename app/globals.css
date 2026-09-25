@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Manrope:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 /* ============================================
@@ -50,10 +50,10 @@
   /* Typography Tokens */
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  --font-editorial: 'Newsreader', Georgia, serif;
-  --font-mono: 'DM Mono', 'Space Mono', monospace;
-  --font-label: 'Space Mono', monospace;
-  --font-body: 'Manrope', 'Inter', sans-serif;
+  --font-editorial: 'Space Grotesk', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --font-label: 'DM Mono', monospace;
+  --font-body: 'Inter', sans-serif;
 
   /* Spacing */
   --spacing-margin: 3rem;
@@ -104,7 +104,7 @@ body {
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
@@ -130,25 +130,25 @@ body {
 }
 
 .font-editorial {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
 }
 
 .font-label {
-  font-family: 'Space Mono', monospace;
+  font-family: 'DM Mono', monospace;
   font-size: 0.6875rem;
   line-height: 0.875rem;
   letter-spacing: 0.1em;
 }
 
 .font-label-md {
-  font-family: 'Space Mono', monospace;
+  font-family: 'DM Mono', monospace;
   font-size: 0.75rem;
   line-height: 1rem;
   letter-spacing: 0.08em;
 }
 
 .font-body {
-  font-family: 'Manrope', 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 /* ============================================
@@ -225,6 +225,50 @@ body {
 .magnetic-btn {
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
+}
+
+.start-project-button {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid #b6240f;
+  border-radius: 2px;
+  background: #b6240f;
+  color: #fff;
+  font: 600 0.75rem/1.2 'DM Mono', monospace;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.start-project-button:hover {
+  background: #941d0d;
+  border-color: #941d0d;
+}
+
+.start-project-button-dark {
+  background: #b6240f;
+  border-color: #b6240f;
+  color: #fff;
+}
+
+.start-project-arrow { transition: transform 180ms ease; }
+.start-project-button:hover .start-project-arrow { transform: translateX(3px); }
+
+.living-phone-frame {
+  --video-focus-x: 60%;
+  transform-origin: center;
+}
+
+.start-project-button:focus-visible,
+button:focus-visible,
+a:focus-visible,
+[role="link"]:focus-visible {
+  outline: 2px solid #b6240f;
+  outline-offset: 4px;
 }
 
 /* ============================================

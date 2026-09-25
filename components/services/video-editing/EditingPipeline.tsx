@@ -57,7 +57,7 @@ export default function EditingPipeline() {
             <h2
               className="text-[#1b1c18] uppercase tracking-tight text-reveal"
               style={{
-                fontFamily: "'Newsreader', Georgia, serif",
+                fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "clamp(2rem, 4vw, 3.25rem)",
                 fontWeight: 400,
               }}
@@ -88,13 +88,13 @@ export default function EditingPipeline() {
               </span>
               <h3
                 className="text-[#1b1c18] uppercase mt-2 mb-3 text-2xl"
-                style={{ fontFamily: "'Newsreader', Georgia, serif" }}
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 {stage.title}
               </h3>
               <p
                 className="text-[#747878] text-xs leading-relaxed mb-6"
-                style={{ fontFamily: "'Manrope', sans-serif" }}
+                style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 {stage.desc}
               </p>

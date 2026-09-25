@@ -167,7 +167,7 @@ export default function UIUXHero() {
                 <div
                   className="hero-line leading-[1.0]"
                   style={{
-                    fontFamily: "'Newsreader', Georgia, serif",
+                    fontFamily: "'Space Grotesk', sans-serif",
                     fontSize: "clamp(3rem, 6.5vw, 7rem)",
                     fontWeight: 400,
                     fontStyle: "italic",
@@ -378,7 +378,7 @@ export default function UIUXHero() {
               <div className="px-3 pb-3">
                 <p
                   className="text-white leading-tight"
-                  style={{ fontFamily: "'Newsreader', Georgia, serif", fontSize: "1.1rem", fontWeight: 400, fontStyle: "italic" }}
+                  style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1.1rem", fontWeight: 400, fontStyle: "italic" }}
                 >
                   &quot;Gesture-first tactile feedback with physical momentum damping.&quot;
                 </p>

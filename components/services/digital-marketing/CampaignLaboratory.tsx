@@ -117,9 +117,9 @@ export default function CampaignLaboratory() {
                   <div className="absolute bottom-0 left-0 right-0 p-3">
                     <p
                       className="text-white leading-tight italic text-xs mb-1"
-                      style={{ fontFamily: "'Newsreader', Georgia, serif" }}
+                      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                     >
-                      "Curve followed silence until the room answered."
+                      &quot;Curve followed silence until the room answered.&quot;
                     </p>
                     <div
                       className="font-mono text-[8px] uppercase tracking-widest"
@@ -147,7 +147,7 @@ export default function CampaignLaboratory() {
               <div
                 className="strategy-word mb-6 leading-none"
                 style={{
-                  fontFamily: "'Newsreader', Georgia, serif",
+                  fontFamily: "'Space Grotesk', sans-serif",
                   fontSize: "clamp(3.5rem, 7vw, 7rem)",
                   fontWeight: 400,
                   fontStyle: "italic",
@@ -187,14 +187,14 @@ export default function CampaignLaboratory() {
                     color: "#151515",
                   }}
                 >
-                  "THE HOOK MUST{" "}
+                  &quot;THE HOOK MUST{" "}
                   <span
                     className="underline decoration-[#E7472E] decoration-[3px] underline-offset-4"
                     style={{ color: "#E7472E" }}
                   >
                     BREATHE
                   </span>{" "}
-                  BEFORE IT CONVERTS."
+                    BEFORE IT CONVERTS.&quot;
                 </p>
 
                 {/* Body paragraph below quote */}

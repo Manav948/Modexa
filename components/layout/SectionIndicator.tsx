@@ -30,14 +30,17 @@ export default function SectionIndicator() {
   }, []);
 
   return (
-    <aside className="hidden xl:flex fixed right-4 top-1/2 -translate-y-1/2 z-40 flex-col items-center py-4 px-2 rounded-full bg-[#fbf9f3]/80 backdrop-blur-md border border-[#e4e2dd] shadow-sm">
+    <aside aria-label="Page sections" className="hidden md:flex fixed right-3 xl:right-5 top-1/2 -translate-y-1/2 z-40 flex-col items-center py-3 px-2 border border-[#d2ccbd] bg-[#fbf9f3]/95 shadow-sm">
       <div
-        className="flex flex-col items-center gap-1.5 font-mono text-[9px]"
-        style={{ fontFamily: "'Space Mono', monospace" }}
+        className="flex flex-col items-center gap-1.5 font-mono text-xs"
+        style={{ fontFamily: "'DM Mono', monospace" }}
       >
         {SECTIONS.map((num, i) => (
           <div key={num} className="flex flex-col items-center">
             <button
+              type="button"
+              aria-label={`Go to section ${num}`}
+              aria-current={activeSection === i ? "location" : undefined}
               onClick={() => {
                 const el = document.getElementById(SECTION_IDS[i]);
                 if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -45,14 +48,14 @@ export default function SectionIndicator() {
               className={`transition-all cursor-pointer font-bold px-1 py-0.5 ${
                 activeSection === i
                   ? "text-[#b6240f] scale-110"
-                  : "text-[#747878] hover:text-[#1b1c18]"
+                  : "text-[#55534E] hover:text-[#1b1c18]"
               }`}
             >
               {num}
             </button>
             {i < SECTIONS.length - 1 && (
-              <div
-                className="w-px"
+                <div
+                className="w-0.5"
                 style={{
                   height: activeSection === i ? "32px" : "14px",
                   backgroundColor: activeSection === i ? "#b6240f" : "#e4e2dd",

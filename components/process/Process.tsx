@@ -140,20 +140,20 @@ export default function Process() {
           <div className="flex items-center gap-3">
             <span
               className="font-mono text-[10px] text-[#b6240f] font-bold"
-              style={{ fontFamily: "'Space Mono', monospace" }}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               02 / PROCESS
             </span>
             <span
               className="font-mono text-[10px] text-[#747878] uppercase tracking-wider"
-              style={{ fontFamily: "'Space Mono', monospace" }}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               FROM IDEA TO OUTPUT
             </span>
           </div>
           <div
             className="font-mono text-[10px] text-[#747878] uppercase tracking-widest hidden sm:block"
-            style={{ fontFamily: "'Space Mono', monospace" }}
+            style={{ fontFamily: "'DM Mono', monospace" }}
           >
             MOVE THE IDEA FORWARD
           </div>
@@ -179,14 +179,14 @@ export default function Process() {
             >
               <div
                 className="font-mono text-[10px] text-[#b6240f] font-bold mb-4"
-                style={{ fontFamily: "'Space Mono', monospace" }}
+                style={{ fontFamily: "'DM Mono', monospace" }}
               >
                 {p.label}
               </div>
               <h3
                 className="text-[#1b1c18] mb-4"
                 style={{
-                  fontFamily: "'Newsreader', Georgia, serif",
+                  fontFamily: "'Space Grotesk', sans-serif",
                   fontSize: "1.5rem",
                   lineHeight: "2rem",
                   letterSpacing: "-0.01em",
@@ -198,8 +198,8 @@ export default function Process() {
               <p
                 className="leading-relaxed mb-6"
                 style={{
-                  fontFamily: "'Manrope', sans-serif",
-                  fontSize: "0.8125rem",
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.875rem",
                   lineHeight: "1.375rem",
                   color: "#747878",
                 }}
@@ -208,7 +208,7 @@ export default function Process() {
               </p>
               <div
                 className="flex items-center justify-between pt-4 border-t font-mono text-[10px] text-[#747878] uppercase"
-                style={{ borderColor: "#e4e2dd", fontFamily: "'Space Mono', monospace" }}
+                style={{ borderColor: "#e4e2dd", fontFamily: "'DM Mono', monospace" }}
               >
                 <span>{p.phase}</span>
                 <span>{p.metric}</span>

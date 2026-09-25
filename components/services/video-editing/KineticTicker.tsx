@@ -2,9 +2,9 @@
 
 const WORDS = [
   { text: "RHYTHM", font: "'Space Grotesk', sans-serif", style: "normal", color: "hover:text-[#b6240f]" },
-  { text: "PACE", font: "'Newsreader', Georgia, serif", style: "italic font-light text-[#747878]", color: "hover:text-white" },
+  { text: "PACE", font: "'Space Grotesk', sans-serif", style: "italic font-light text-[#747878]", color: "hover:text-white" },
   { text: "STORY", font: "'Space Grotesk', sans-serif", style: "normal", color: "hover:text-[#b6240f]" },
-  { text: "EMOTION", font: "'Manrope', sans-serif", style: "font-bold text-[#c4c7c7]", color: "hover:text-white" },
+  { text: "EMOTION", font: "'Inter', sans-serif", style: "font-bold text-[#c4c7c7]", color: "hover:text-white" },
   { text: "CADENCE", font: "'Space Grotesk', sans-serif", style: "normal", color: "hover:text-[#b6240f]" },
 ];
 

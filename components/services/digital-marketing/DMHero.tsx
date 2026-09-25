@@ -121,7 +121,7 @@ export default function DMHero() {
                   <div
                     className="line-mask block w-full max-w-full"
                     style={{
-                      fontFamily: "'Newsreader', Georgia, serif",
+                      fontFamily: "'Space Grotesk', sans-serif",
                       fontSize: "clamp(2.15rem, 5vw, 5.5rem)",
                       fontWeight: 400,
                       fontStyle: "italic",
@@ -256,7 +256,7 @@ export default function DMHero() {
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <p
                     className="text-white text-xs leading-snug italic mb-2"
-                    style={{ fontFamily: "'Newsreader', Georgia, serif", fontSize: "0.8rem" }}
+                    style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.8rem" }}
                   >
                     &quot;Every brand silence is someone else&apos;s moment.&quot;
                   </p>

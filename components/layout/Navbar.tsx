@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import StartProjectButton from "@/components/motion/StartProjectButton";
 
 const SERVICES = [
   { number: "01", label: "VIDEO EDITING", meta: "Motion direction / Film", href: "/services/video-editing", image: "/images/service_video_motion_1789796437874.png" },
@@ -84,7 +85,7 @@ export default function Navbar() {
       style={{ borderBottom: scrolled ? "1px solid" : "1px solid transparent" }}
     >
       <div className={`mx-auto flex h-full w-full max-w-[1400px] items-center justify-between gap-6 px-5 md:px-8 lg:px-12 ${borderColor}`}>
-        <Link href="/" onClick={handleLogoClick} className={`group flex min-h-11 items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] transition-colors ${textColor}`} style={{ fontFamily: "'Space Mono', monospace" }} aria-label="MODEXA home">
+        <Link href="/" onClick={handleLogoClick} className={`group flex min-h-11 items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] transition-colors ${textColor}`} style={{ fontFamily: "'DM Mono', monospace" }} aria-label="MODEXA home">
           <span className="transition-transform duration-300 group-hover:-translate-y-0.5">MODEXA</span>
           <span className="hidden text-[8px] font-normal tracking-[0.12em] opacity-50 sm:inline">/ STUDIO</span>
         </Link>
@@ -115,7 +116,7 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link href={homeHref("#inquiry-station")} onClick={closeMenus} className="hidden min-h-11 items-center justify-center border border-[#E7472E] bg-[#E7472E] px-4 font-mono text-[10px] font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#b6240f] sm:inline-flex" style={{ fontFamily: "'Space Mono', monospace" }}>START A PROJECT <span className="ml-2">→</span></Link>
+          <StartProjectButton href={homeHref("#inquiry-station")} onClick={closeMenus} className="hidden sm:inline-flex" />
           <button ref={menuButtonRef} type="button" aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen((open) => !open)} className={`flex min-h-11 min-w-11 flex-col items-center justify-center gap-1.5 border md:hidden ${borderColor} ${textColor}`}>
             <span className={`h-px w-5 bg-current transition-transform duration-300 ${menuOpen ? "translate-y-2 rotate-45" : ""}`} /><span className={`h-px w-5 bg-current transition-opacity duration-300 ${menuOpen ? "opacity-0" : ""}`} /><span className={`h-px w-5 bg-current transition-transform duration-300 ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
           </button>
@@ -132,7 +133,7 @@ export default function Navbar() {
               <AnimatePresence initial={false}>{mobileServicesOpen && <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden border-b border-[#E8E2D5]">{SERVICES.map((service) => <Link key={service.href} href={service.href} onClick={closeMenus} className="flex min-h-14 items-center gap-4 border-b border-[#E8E2D5] py-3 last:border-b-0"><span className="font-mono text-[10px] font-bold text-[#E7472E]">{service.number}</span><span><span className="block font-display text-lg">{service.label}</span><span className="block font-mono text-[8px] uppercase tracking-wider text-[#55534E]">{service.meta}</span></span></Link>)}</motion.div>}</AnimatePresence>
               <Link href={homeHref("#philosophy")} onClick={closeMenus} className="flex min-h-14 items-center border-b border-[#E8E2D5] font-display text-3xl tracking-tight transition-colors hover:text-[#E7472E]">ABOUT</Link>
             </nav>
-            <Link href={homeHref("#inquiry-station")} onClick={closeMenus} className="mt-8 flex min-h-14 items-center justify-between bg-[#E7472E] px-5 font-mono text-[11px] font-bold uppercase tracking-wider text-white">START A PROJECT <span>→</span></Link>
+            <StartProjectButton href={homeHref("#inquiry-station")} onClick={closeMenus} className="mt-8 flex w-full" />
           </motion.div>
         )}
       </AnimatePresence>

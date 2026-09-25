@@ -50,7 +50,7 @@ export default function DMTicker() {
                 className="font-mono text-[11px]"
                 style={{ color: "rgba(255,255,255,0.2)" }}
               >
-                //
+                {"//"}
               </span>
             </div>
           ))}

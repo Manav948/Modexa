@@ -104,7 +104,7 @@ export default function DMServicesIndex() {
                 <div>
                   <h3
                     className="text-[#151515] group-hover:text-[#E7472E] uppercase transition-colors text-xl md:text-2xl"
-                    style={{ fontFamily: "'Newsreader', Georgia, serif", fontWeight: 400 }}
+                    style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 400 }}
                   >
                     {svc.title}
                   </h3>

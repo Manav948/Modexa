@@ -28,7 +28,7 @@ export default function EditingCapabilities() {
             <h2
               className="text-[#1b1c18] uppercase tracking-tight text-reveal"
               style={{
-                fontFamily: "'Newsreader', Georgia, serif",
+                fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "clamp(2rem, 4vw, 3.25rem)",
                 fontWeight: 400,
               }}
@@ -57,13 +57,13 @@ export default function EditingCapabilities() {
                 <div>
                   <h3
                     className="text-[#1b1c18] group-hover:text-[#b6240f] uppercase transition-colors text-xl md:text-2xl"
-                    style={{ fontFamily: "'Newsreader', Georgia, serif", fontWeight: 400 }}
+                    style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 400 }}
                   >
                     {item.title}
                   </h3>
                   <p
                     className="text-[#747878] text-sm mt-1"
-                    style={{ fontFamily: "'Manrope', sans-serif" }}
+                    style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     {item.desc}
                   </p>

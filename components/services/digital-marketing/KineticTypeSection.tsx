@@ -127,7 +127,7 @@ export default function KineticTypeSection() {
               </span>
               <span
                 style={{
-                  fontFamily: "'Newsreader', Georgia, serif",
+                  fontFamily: "'Space Grotesk', sans-serif",
                   fontSize: "clamp(2rem, 4.5vw, 6rem)",
                   fontWeight: 400,
                   fontStyle: "italic",
@@ -181,7 +181,7 @@ export default function KineticTypeSection() {
             <div className="max-w-2xl text-center" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2.1em", marginTop: "2.8rem" }}>
               <div
                 style={{
-                  fontFamily: "'Newsreader', Georgia, serif",
+                  fontFamily: "'Space Grotesk', sans-serif",
                   fontSize: "clamp(1.5rem, 2.8vw, 2.8rem)",
                   lineHeight: 1.12,
                   color: "#151515",

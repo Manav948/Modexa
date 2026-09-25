@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface ServiceItem {
   num: string;
@@ -62,20 +62,17 @@ const SERVICES: ServiceItem[] = [
   },
 ];
 
+const MotionLink = motion.create(Link);
+
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
-  const router = useRouter();
 
   const [activeService, setActiveService] = useState<ServiceItem | null>(null);
   const mousePos = useRef({ x: 0, y: 0 });
   const cardPos = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number | null>(null);
-
-  const openService = (serviceSlug: string) => {
-    router.push(`/services/${serviceSlug}`);
-  };
 
   // Ultra-smooth cursor follow centering & lerp
   useEffect(() => {
@@ -126,13 +123,13 @@ export default function Services() {
               animate={isInView ? { y: 0 } : {}}
               transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] as const }}
               className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest"
-              style={{ fontFamily: "'Space Mono', monospace" }}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               [ WHAT WE DO ]
             </motion.div>
           </div>
 
-          {/* Main Title mask reveal in Newsreader font */}
+          {/* Main title reveal */}
           <div className="overflow-hidden">
             <motion.h2
               initial={{ y: "100%" }}
@@ -140,7 +137,7 @@ export default function Services() {
               transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] as const }}
               className="text-[#1b1c18] tracking-tight leading-none"
               style={{
-                fontFamily: "'Newsreader', Georgia, serif",
+                fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
                 fontWeight: 400,
               }}
@@ -160,7 +157,7 @@ export default function Services() {
               animate={isInView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
               className="font-mono text-[11px] leading-relaxed uppercase text-[#747878] tracking-wider"
-              style={{ fontFamily: "'Space Mono', monospace" }}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               CREATIVE AND DIGITAL CAPABILITIES BROUGHT TOGETHER AROUND ONE CLEAR DIRECTION.
             </motion.p>
@@ -171,8 +168,9 @@ export default function Services() {
       {/* 5 Services List */}
       <div className="relative flex flex-col w-full border-t" style={{ borderColor: "#e4e2dd" }}>
         {SERVICES.map((service, i) => (
-          <motion.div
+          <MotionLink
             key={service.num}
+            href={`/services/${service.slug}`}
             initial={{ opacity: 0, y: 35 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{
@@ -184,15 +182,6 @@ export default function Services() {
             style={{ borderColor: "#e4e2dd" }}
             onMouseEnter={() => setActiveService(service)}
             onMouseLeave={() => setActiveService(null)}
-            onClick={() => openService(service.slug)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                openService(service.slug);
-              }
-            }}
-            role="link"
-            tabIndex={0}
           >
             <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
               {/* Left Column: Number & Title & Paragraph */}
@@ -201,19 +190,19 @@ export default function Services() {
                 <div className="overflow-hidden pt-1">
                   <span
                     className="font-mono text-[12px] text-[#747878] group-hover:text-[#b6240f] transition-colors duration-300 font-bold block"
-                    style={{ fontFamily: "'Space Mono', monospace" }}
+                    style={{ fontFamily: "'DM Mono', monospace" }}
                   >
                     {service.num}
                   </span>
                 </div>
 
-                {/* Title & Description in Newsreader font */}
+                {/* Service title and description */}
                 <div className="flex flex-col gap-2">
                   <div className="overflow-hidden">
                     <h3
                       className="text-[#1b1c18] transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-[#b6240f]"
                       style={{
-                        fontFamily: "'Newsreader', Georgia, serif",
+                        fontFamily: "'Space Grotesk', sans-serif",
                         fontSize: "clamp(1.5rem, 3.5vw, 2.25rem)",
                         lineHeight: "1.1",
                         letterSpacing: "-0.015em",
@@ -228,7 +217,7 @@ export default function Services() {
                   <p
                     className="max-w-xl text-[#747878] transition-colors duration-300 group-hover:text-[#1b1c18]"
                     style={{
-                      fontFamily: "'Manrope', sans-serif",
+                      fontFamily: "'Inter', sans-serif",
                       fontSize: "0.875rem",
                       lineHeight: "1.5rem",
                     }}
@@ -242,7 +231,7 @@ export default function Services() {
               <div className="md:col-span-4 flex items-center justify-between md:justify-end gap-6 pt-4 md:pt-0">
                 <span
                   className="font-mono text-[10px] text-[#747878] uppercase tracking-widest group-hover:text-[#1b1c18] transition-colors"
-                  style={{ fontFamily: "'Space Mono', monospace" }}
+                  style={{ fontFamily: "'DM Mono', monospace" }}
                 >
                   {service.tags}
                 </span>
@@ -261,7 +250,7 @@ export default function Services() {
 
             {/* Bottom active line highlight */}
             <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#b6240f] transition-all duration-500 group-hover:w-full" />
-          </motion.div>
+          </MotionLink>
         ))}
       </div>
 
@@ -299,7 +288,7 @@ export default function Services() {
                 {/* Top Tag */}
                 <div
                   className="absolute top-3 left-3 px-2.5 py-1 bg-[#1b1c18]/90 backdrop-blur border border-[#e4e2dd]/20 font-mono text-[9px] text-white uppercase tracking-widest"
-                  style={{ fontFamily: "'Space Mono', monospace" }}
+                  style={{ fontFamily: "'DM Mono', monospace" }}
                 >
                   [ SPEC // {activeService.num} ]
                 </div>
@@ -307,7 +296,7 @@ export default function Services() {
                 {/* Live Pulsing Dot */}
                 <div
                   className="absolute top-3 right-3 flex items-center gap-1.5 px-2 py-1 bg-[#b6240f] font-mono text-[9px] text-white uppercase tracking-widest font-bold"
-                  style={{ fontFamily: "'Space Mono', monospace" }}
+                  style={{ fontFamily: "'DM Mono', monospace" }}
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                   LIVE PREVIEW
@@ -319,13 +308,13 @@ export default function Services() {
                 <div>
                   <div
                     className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-wider"
-                    style={{ fontFamily: "'Space Mono', monospace" }}
+                    style={{ fontFamily: "'DM Mono', monospace" }}
                   >
                     {activeService.title} {activeService.italicTitle}
                   </div>
                   <div
                     className="font-mono text-[9px] text-[#747878] uppercase"
-                    style={{ fontFamily: "'Space Mono', monospace" }}
+                    style={{ fontFamily: "'DM Mono', monospace" }}
                   >
                     {activeService.spec}
                   </div>

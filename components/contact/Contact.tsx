@@ -58,14 +58,14 @@ export default function Contact() {
           <div>
             <div
               className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest mb-3"
-              style={{ fontFamily: "'Space Mono', monospace" }}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               04 / CONTACT
             </div>
             <h2
               className="text-[#1b1c18] leading-tight mb-6"
               style={{
-                fontFamily: "'Newsreader', Georgia, serif",
+                fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
                 lineHeight: "2.75rem",
                 letterSpacing: "-0.015em",
@@ -79,7 +79,7 @@ export default function Contact() {
             <p
               className="max-w-md mb-8"
               style={{
-                fontFamily: "'Manrope', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: "0.9375rem",
                 lineHeight: "1.625rem",
                 color: "#747878",
@@ -90,7 +90,7 @@ export default function Contact() {
 
             <div
               className="flex flex-col gap-3 font-mono text-[10px] text-[#747878] pb-8"
-              style={{ fontFamily: "'Space Mono', monospace" }}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-[16px] text-[#b6240f]">
@@ -120,7 +120,7 @@ export default function Contact() {
               onClick={handleEmailClick}
               className="inline-flex items-center gap-3 group"
               aria-label="Email Modexa"
-              style={{ fontFamily: "'Space Mono', monospace" }}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               <span
                 className="font-mono text-[11px] tracking-wider uppercase text-[#1b1c18] group-hover:text-[#b6240f] transition-colors"
@@ -140,14 +140,14 @@ export default function Contact() {
           >
             <span
               className="font-mono text-[8px] tracking-widest text-[#b6240f] uppercase font-bold"
-              style={{ fontFamily: "'Space Mono', monospace" }}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               PROJECT READY
             </span>
             <span
               className="text-[#b6240f] leading-none py-1"
               style={{
-                fontFamily: "'Newsreader', Georgia, serif",
+                fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "1.5rem",
                 fontWeight: 500,
               }}
@@ -156,7 +156,7 @@ export default function Contact() {
             </span>
             <span
               className="font-mono text-[7px] tracking-wider text-[#b6240f] uppercase"
-              style={{ fontFamily: "'Space Mono', monospace" }}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               STUDIO NOTE
             </span>
@@ -175,14 +175,14 @@ export default function Contact() {
             <div className="flex flex-col items-center justify-center h-full gap-6 py-16 text-center">
               <div
                 className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest"
-                style={{ fontFamily: "'Space Mono', monospace" }}
+                style={{ fontFamily: "'DM Mono', monospace" }}
               >
                   MESSAGE RECEIVED
               </div>
               <h3
                 className="text-[#1b1c18]"
                 style={{
-                  fontFamily: "'Newsreader', Georgia, serif",
+                  fontFamily: "'Space Grotesk', sans-serif",
                   fontSize: "1.5rem",
                   fontWeight: 400,
                   fontStyle: "italic",
@@ -192,7 +192,7 @@ export default function Contact() {
               </h3>
               <p
                 style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: "0.875rem",
                   color: "#747878",
                 }}
@@ -219,7 +219,7 @@ export default function Contact() {
               <div className="flex flex-col">
                 <label
                   className="font-mono text-[10px] uppercase text-[#747878] font-bold mb-3"
-                  style={{ fontFamily: "'Space Mono', monospace" }}
+                  style={{ fontFamily: "'DM Mono', monospace" }}
                 >
                   01. WHAT DO YOU NEED? (SELECT MULTIPLE)
                 </label>
@@ -231,7 +231,7 @@ export default function Contact() {
                       onClick={() => toggleDiscipline(d)}
                       className="px-3 py-1.5 border font-mono text-[11px] uppercase tracking-wider transition-colors"
                       style={{
-                        fontFamily: "'Space Mono', monospace",
+                        fontFamily: "'DM Mono', monospace",
                         backgroundColor: selectedDisciplines.includes(d)
                           ? "#b6240f"
                           : "#fbf9f3",
@@ -253,7 +253,7 @@ export default function Contact() {
               <div className="flex flex-col gap-3 border-y py-5" style={{ borderColor: "#e4e2dd" }}>
                 <span
                   className="font-mono text-[10px] uppercase text-[#747878] font-bold"
-                  style={{ fontFamily: "'Space Mono', monospace" }}
+                  style={{ fontFamily: "'DM Mono', monospace" }}
                 >
                   02. EMAIL
                 </span>
@@ -267,13 +267,13 @@ export default function Contact() {
                 >
                   <span
                     className="min-w-0 break-words text-[#1b1c18] text-lg transition-colors group-hover:text-[#b6240f]"
-                    style={{ fontFamily: "'Manrope', sans-serif" }}
+                    style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     hello@company.com
                   </span>
                   <span
                     className="font-mono text-[11px] text-[#b6240f] transition-transform duration-300 group-hover:translate-x-1"
-                    style={{ fontFamily: "'Space Mono', monospace" }}
+                    style={{ fontFamily: "'DM Mono', monospace" }}
                   >
                     OPEN MAIL →
                   </span>
@@ -283,7 +283,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noreferrer"
                   className="self-start font-mono text-[9px] uppercase tracking-wider text-[#747878] underline underline-offset-4 hover:text-[#b6240f] transition-colors"
-                  style={{ fontFamily: "'Space Mono', monospace" }}
+                  style={{ fontFamily: "'DM Mono', monospace" }}
                 >
                   EMAIL DIRECTLY →
                 </a>
@@ -294,7 +294,7 @@ export default function Contact() {
                 <label
                   className="font-mono text-[10px] uppercase text-[#747878] font-bold mb-2"
                   htmlFor="message"
-                  style={{ fontFamily: "'Space Mono', monospace" }}
+                  style={{ fontFamily: "'DM Mono', monospace" }}
                 >
                   03. TELL US ABOUT THE PROJECT
                 </label>
@@ -302,7 +302,7 @@ export default function Contact() {
                   className="bg-transparent border-b focus:outline-none py-2 transition-colors resize-none"
                   style={{
                     borderColor: "#747878",
-                    fontFamily: "'Manrope', sans-serif",
+                    fontFamily: "'Inter', sans-serif",
                     fontSize: "0.9375rem",
                     color: "#1b1c18",
                   }}
@@ -319,7 +319,7 @@ export default function Contact() {
               <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <span
                   className="font-mono text-[10px] text-[#747878] uppercase tracking-wider"
-                  style={{ fontFamily: "'Space Mono', monospace" }}
+                  style={{ fontFamily: "'DM Mono', monospace" }}
                 >
                   READY WHEN YOU ARE
                 </span>
@@ -328,7 +328,7 @@ export default function Contact() {
                   type="submit"
                   className="w-full sm:w-auto px-10 py-4 font-mono text-[11px] tracking-widest uppercase transition-colors flex items-center justify-center gap-4 magnetic-btn"
                   style={{
-                    fontFamily: "'Space Mono', monospace",
+                    fontFamily: "'DM Mono', monospace",
                     backgroundColor: "#1b1c18",
                     color: "#ffffff",
                   }}

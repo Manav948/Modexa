@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
+import StartProjectButton from "@/components/motion/StartProjectButton";
 
 export default function VideoEditingHero() {
   return (
@@ -19,12 +21,12 @@ export default function VideoEditingHero() {
       <div className="relative z-10 w-full border-b border-white/10 px-5 md:px-8 lg:px-12 py-4 bg-[#1b1c18]/70 backdrop-blur-md">
         <div className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-between gap-y-2 font-mono text-[10px] tracking-widest uppercase text-[#c4c7c7]">
           <div className="flex items-center gap-3">
-            <a
+            <Link
               href="/#services"
               className="hover:text-[#b6240f] transition-colors inline-flex items-center gap-1 font-bold text-white"
             >
               <span>← RETURN TO SERVICES</span>
-            </a>
+            </Link>
             <span className="text-[#444748]">/</span>
             <span className="flex items-center gap-2 text-white">
               <span className="w-2 h-2 rounded-full bg-[#b6240f] animate-pulse" />
@@ -96,7 +98,7 @@ export default function VideoEditingHero() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
                 className="inline-block italic font-normal text-[#fbf9f3] lowercase tracking-normal"
-                style={{ fontFamily: "'Newsreader', Georgia, serif" }}
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 changes the story.
               </motion.span>
@@ -109,7 +111,7 @@ export default function VideoEditingHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.0, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="text-[#c4c7c7] max-w-2xl text-base md:text-xl leading-relaxed mb-10"
-            style={{ fontFamily: "'Manrope', sans-serif" }}
+            style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Editing is more than putting clips together. It is rhythm, pacing, emotion and knowing what deserves to stay.
           </motion.p>
@@ -124,18 +126,12 @@ export default function VideoEditingHero() {
             <a
               href="#selected-work"
               className="px-8 py-3.5 bg-[#b6240f] text-white font-mono text-[11px] tracking-widest uppercase font-bold hover:bg-[#fe573c] transition-colors inline-flex items-center gap-2 shadow-lg"
-              style={{ fontFamily: "'Space Mono', monospace" }}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               <span>EXPLORE WORK</span>
               <span>↓</span>
             </a>
-            <a
-              href="#initiation"
-              className="px-8 py-3.5 border border-white/30 hover:border-white bg-black/40 backdrop-blur-sm text-white font-mono text-[11px] tracking-widest uppercase transition-colors"
-              style={{ fontFamily: "'Space Mono', monospace" }}
-            >
-              START A PROJECT →
-            </a>
+            <StartProjectButton theme="dark" href="#initiation" />
           </motion.div>
         </div>
       </div>

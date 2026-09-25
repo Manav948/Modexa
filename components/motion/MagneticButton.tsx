@@ -39,7 +39,7 @@ export default function MagneticButton({
   };
 
   const baseStyles: React.CSSProperties = {
-    fontFamily: "'Space Mono', monospace",
+    fontFamily: "'DM Mono', monospace",
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "space-between",

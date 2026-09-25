@@ -84,7 +84,7 @@ export default function UIUXCapabilities() {
                 <h3
                   className="uppercase group-hover:text-[#E7472E] transition-colors"
                   style={{
-                    fontFamily: "'Newsreader', Georgia, serif",
+                    fontFamily: "'Space Grotesk', sans-serif",
                     fontSize: "clamp(1.25rem, 2vw, 1.75rem)",
                     fontWeight: 400,
                     fontStyle: "italic",

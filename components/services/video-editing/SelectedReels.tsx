@@ -147,7 +147,7 @@ export default function SelectedReels() {
           </div>
           <p
             className="text-[#747878] max-w-md font-sans text-sm md:text-base leading-relaxed text-reveal"
-            style={{ fontFamily: "'Manrope', sans-serif" }}
+            style={{ fontFamily: "'Inter', sans-serif" }}
           >
             All film frames share identical dimensions (280 × 400). Floating across a drafting coordinate grid, vertical rhythm offsets travel endlessly.
           </p>
@@ -222,7 +222,7 @@ export default function SelectedReels() {
 
                     <p
                       className="text-[#747878] text-[11px] leading-tight mt-1 line-clamp-1"
-                      style={{ fontFamily: "'Manrope', sans-serif" }}
+                      style={{ fontFamily: "'Inter', sans-serif" }}
                     >
                       {reel.desc}
                     </p>
@@ -264,7 +264,7 @@ export default function SelectedReels() {
               </h3>
               <p
                 className="mt-2 text-[11px] leading-tight text-[#747878]"
-                style={{ fontFamily: "'Manrope', sans-serif" }}
+                style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 {reel.desc}
               </p>

@@ -64,7 +64,7 @@ export default function DeliveryRoadmap() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest mb-4"
-              style={{ fontFamily: "'Space Mono', monospace" }}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               03 / DELIVERY
             </motion.div>
@@ -90,7 +90,7 @@ export default function DeliveryRoadmap() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 self-end max-w-lg font-body text-[0.9375rem] leading-7 text-[#747878]"
-            style={{ fontFamily: "'Manrope', sans-serif" }}
+            style={{ fontFamily: "'Inter', sans-serif" }}
           >
             The right creative team can change how an idea looks, feels and moves. We bring the right people and craft around one clear direction.
           </motion.p>
@@ -123,7 +123,7 @@ export default function DeliveryRoadmap() {
               <div className="md:col-span-3 flex flex-col items-start gap-3 md:pl-6">
                 <span
                   className="font-mono text-[10px] text-[#b6240f] font-bold tracking-wider"
-                  style={{ fontFamily: "'Space Mono', monospace" }}
+                  style={{ fontFamily: "'DM Mono', monospace" }}
                 >
                   PHASE {phase.number}
                 </span>
@@ -140,13 +140,13 @@ export default function DeliveryRoadmap() {
               </div>
               <p
                 className="md:col-span-6 max-w-xl text-[#747878] text-[0.8125rem] leading-6"
-                style={{ fontFamily: "'Manrope', sans-serif" }}
+                style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 {phase.body}
               </p>
               <span
                 className="md:col-span-3 md:text-right self-start font-mono text-[9px] text-[#747878] uppercase tracking-wider leading-5"
-                style={{ fontFamily: "'Space Mono', monospace" }}
+                style={{ fontFamily: "'DM Mono', monospace" }}
               >
                 {phase.meta}
               </span>

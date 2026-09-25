@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Project {
   id: string;
@@ -70,11 +70,12 @@ const PROJECTS: Project[] = [
   },
 ];
 
+const MotionLink = motion.create(Link);
+
 export default function Work() {
   const sectionRef = useRef<HTMLElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
-  const router = useRouter();
 
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [activeFilter, setActiveFilter] = useState("ALL");
@@ -82,17 +83,6 @@ export default function Work() {
   const mousePos = useRef({ x: 0, y: 0 });
   const cardPos = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number | null>(null);
-
-  const openProject = (projectId: string) => {
-    router.push(`/work/${projectId}`);
-  };
-
-  const handleProjectKeyDown = (event: React.KeyboardEvent, projectId: string) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      openProject(projectId);
-    }
-  };
 
   // Ultra-smooth cursor follow centering & lerp
   useEffect(() => {
@@ -133,9 +123,9 @@ export default function Work() {
       style={{ backgroundColor: "#000000", borderColor: "#30312d" }}
     >
       <div className="max-w-[1400px] mx-auto w-full">
-      {/* Header matching site-wide Newsreader serif typography */}
+      {/* Editorial display typography */}
       <div
-        className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-16 border-b"
+        className="flex flex-col items-start pb-8 mb-10 border-b"
         style={{ borderColor: "#30312d" }}
       >
         <div>
@@ -146,13 +136,13 @@ export default function Work() {
               animate={isInView ? { y: 0 } : {}}
               transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] as const }}
               className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest"
-              style={{ fontFamily: "'Space Mono', monospace" }}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               [ SELECTED WORK ]
             </motion.div>
           </div>
 
-          {/* Main Title mask reveal in Newsreader serif */}
+          {/* Main title reveal */}
           <div className="overflow-hidden">
             <motion.h2
               initial={{ y: "100%" }}
@@ -160,7 +150,7 @@ export default function Work() {
               transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] as const }}
               className="text-[#fbf9f3] tracking-tight leading-none"
               style={{
-                fontFamily: "'Newsreader', Georgia, serif",
+                fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
                 fontWeight: 400,
               }}
@@ -178,15 +168,16 @@ export default function Work() {
             initial={{ y: "100%", opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
-            className="flex items-center gap-4 font-mono text-[11px] text-[#747878]"
-            style={{ fontFamily: "'Space Mono', monospace" }}
+            className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-sm text-[#aaa69c]"
+            style={{ fontFamily: "'DM Mono', monospace" }}
           >
             <span className="uppercase tracking-wider">FILTERS:</span>
             {["ALL", "2024 — 2026"].map((filter) => (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`transition-colors uppercase tracking-widest ${
+                aria-pressed={activeFilter === filter}
+                className={`min-h-11 border-b px-1 transition-colors uppercase tracking-widest ${
                   activeFilter === filter ? "text-[#b6240f] font-bold" : "hover:text-[#fbf9f3]"
                 }`}
               >
@@ -200,40 +191,37 @@ export default function Work() {
       {/* Asymmetric Work Grid */}
       <div className="flex flex-col gap-16">
         {/* FEATURED COMMISSION // 01 */}
-        <motion.div
+        <MotionLink
+          href={`/work/${PROJECTS[0].id}`}
           initial={{ opacity: 0, y: 35 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
           className="group cursor-pointer flex flex-col gap-4"
           onMouseEnter={() => setActiveProject(PROJECTS[0])}
           onMouseLeave={() => setActiveProject(null)}
-          onClick={() => openProject(PROJECTS[0].id)}
-          onKeyDown={(event) => handleProjectKeyDown(event, PROJECTS[0].id)}
-          role="link"
-          tabIndex={0}
         >
           {/* Top metadata strip */}
           <div className="flex items-center justify-between font-mono text-[11px]">
             <span
               className="text-[#b6240f] font-bold tracking-wider uppercase"
-              style={{ fontFamily: "'Space Mono', monospace" }}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               {PROJECTS[0].tagline}
             </span>
             <span
               className="text-[#747878] tracking-widest uppercase"
-              style={{ fontFamily: "'Space Mono', monospace" }}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               {PROJECTS[0].specs}
             </span>
           </div>
 
-          {/* Title in Newsreader serif */}
+          {/* Project title */}
           <div className="overflow-hidden">
             <h3
               className="text-[#fbf9f3] transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-[#b6240f]"
               style={{
-                fontFamily: "'Newsreader', Georgia, serif",
+                fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "clamp(2rem, 5vw, 3.25rem)",
                 lineHeight: "1.05",
                 letterSpacing: "-0.015em",
@@ -264,33 +252,30 @@ export default function Work() {
               {PROJECTS[0].overlayBadge}
             </div>
           </div>
-        </motion.div>
+        </MotionLink>
 
         {/* ROW 2: TWO COLUMNS SIDE BY SIDE (02 & 03) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* Item 02: MOTION STORIES */}
-          <motion.div
+          <MotionLink
+            href={`/work/${PROJECTS[1].id}`}
             initial={{ opacity: 0, y: 35 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.0, delay: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
             className="group cursor-pointer flex flex-col gap-3"
             onMouseEnter={() => setActiveProject(PROJECTS[1])}
             onMouseLeave={() => setActiveProject(null)}
-            onClick={() => openProject(PROJECTS[1].id)}
-            onKeyDown={(event) => handleProjectKeyDown(event, PROJECTS[1].id)}
-            role="link"
-            tabIndex={0}
           >
             <div className="flex items-center justify-between font-mono text-[10px]">
               <span
                 className="text-[#747878] font-bold tracking-wider uppercase"
-                style={{ fontFamily: "'Space Mono', monospace" }}
+                style={{ fontFamily: "'DM Mono', monospace" }}
               >
                 {PROJECTS[1].tagline}
               </span>
               <span
                 className="text-[#747878] tracking-wider uppercase"
-                style={{ fontFamily: "'Space Mono', monospace" }}
+                style={{ fontFamily: "'DM Mono', monospace" }}
               >
                 {PROJECTS[1].specs}
               </span>
@@ -300,7 +285,7 @@ export default function Work() {
               <h3
                 className="text-[#fbf9f3] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#b6240f]"
                 style={{
-                  fontFamily: "'Newsreader', Georgia, serif",
+                  fontFamily: "'Space Grotesk', sans-serif",
                   fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
                   lineHeight: "1.1",
                   letterSpacing: "-0.015em",
@@ -328,31 +313,28 @@ export default function Work() {
                 {PROJECTS[1].overlayBadge}
               </div>
             </div>
-          </motion.div>
+          </MotionLink>
 
           {/* Item 03: ARCLAB SPATIAL */}
-          <motion.div
+          <MotionLink
+            href={`/work/${PROJECTS[2].id}`}
             initial={{ opacity: 0, y: 35 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.0, delay: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
             className="group cursor-pointer flex flex-col gap-3"
             onMouseEnter={() => setActiveProject(PROJECTS[2])}
             onMouseLeave={() => setActiveProject(null)}
-            onClick={() => openProject(PROJECTS[2].id)}
-            onKeyDown={(event) => handleProjectKeyDown(event, PROJECTS[2].id)}
-            role="link"
-            tabIndex={0}
           >
             <div className="flex items-center justify-between font-mono text-[10px]">
               <span
                 className="text-[#747878] font-bold tracking-wider uppercase"
-                style={{ fontFamily: "'Space Mono', monospace" }}
+                style={{ fontFamily: "'DM Mono', monospace" }}
               >
                 {PROJECTS[2].tagline}
               </span>
               <span
                 className="text-[#747878] tracking-wider uppercase"
-                style={{ fontFamily: "'Space Mono', monospace" }}
+                style={{ fontFamily: "'DM Mono', monospace" }}
               >
                 {PROJECTS[2].specs}
               </span>
@@ -362,7 +344,7 @@ export default function Work() {
               <h3
                 className="text-[#fbf9f3] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#b6240f]"
                 style={{
-                  fontFamily: "'Newsreader', Georgia, serif",
+                  fontFamily: "'Space Grotesk', sans-serif",
                   fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
                   lineHeight: "1.1",
                   letterSpacing: "-0.015em",
@@ -390,21 +372,18 @@ export default function Work() {
                 {PROJECTS[2].overlayBadge}
               </div>
             </div>
-          </motion.div>
+          </MotionLink>
         </div>
 
         {/* ROW 3: FULL WIDTH CASE STUDY // 04 */}
-        <motion.div
+        <MotionLink
+          href={`/work/${PROJECTS[3].id}`}
           initial={{ opacity: 0, y: 35 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.0, delay: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
           className="group cursor-pointer flex flex-col gap-4 mt-4"
           onMouseEnter={() => setActiveProject(PROJECTS[3])}
           onMouseLeave={() => setActiveProject(null)}
-          onClick={() => openProject(PROJECTS[3].id)}
-          onKeyDown={(event) => handleProjectKeyDown(event, PROJECTS[3].id)}
-          role="link"
-          tabIndex={0}
         >
           <div
             className="relative w-full overflow-hidden border shadow-sm transition-all duration-500 group-hover:shadow-2xl"
@@ -421,14 +400,14 @@ export default function Work() {
             <div className="absolute bottom-6 left-6 p-4 bg-[#fbf9f3]/95 backdrop-blur border border-[#30312d] flex flex-col gap-1 max-w-md shadow-xl z-20">
               <span
                 className="font-mono text-[9px] text-[#b6240f] font-bold uppercase tracking-wider"
-                style={{ fontFamily: "'Space Mono', monospace" }}
+                style={{ fontFamily: "'DM Mono', monospace" }}
               >
                 {PROJECTS[3].tagline}
               </span>
-              <h4
+              <h3
                 className="text-[#1b1c18] text-xl leading-tight"
                 style={{
-                  fontFamily: "'Newsreader', Georgia, serif",
+                  fontFamily: "'Space Grotesk', sans-serif",
                   fontWeight: 500,
                 }}
               >
@@ -436,10 +415,10 @@ export default function Work() {
                 <span className="italic font-normal text-[#b6240f]">
                   {PROJECTS[3].italicTitle}
                 </span>
-              </h4>
+              </h3>
               <p
-                className="text-[#747878] text-[12px] leading-snug"
-                style={{ fontFamily: "'Manrope', sans-serif" }}
+                className="text-[#aaa69c] text-sm leading-snug"
+                style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 {PROJECTS[3].overlaySubtext}
               </p>
@@ -449,7 +428,7 @@ export default function Work() {
               <span>▾</span>
             </div>
           </div>
-        </motion.div>
+        </MotionLink>
       </div>
 
       {/* ULTRA-SMOOTH SHARP FLOATING PREVIEW */}
@@ -483,7 +462,7 @@ export default function Work() {
                   <span className="w-1.5 h-1.5 rounded-full bg-[#b6240f] animate-pulse" />
                   WORK PREVIEW
                 </div>
-                <span>[ {activeProject.num} // SPEC ]</span>
+                <span>{`[ ${activeProject.num} // SPEC ]`}</span>
               </div>
 
               {/* Main Media Preview Container */}
@@ -502,7 +481,7 @@ export default function Work() {
                   </div>
                   <span
                     className="font-mono text-[9px] text-white font-bold tracking-widest uppercase bg-[#1b1c18]/90 px-3 py-1 border border-[#30312d]"
-                    style={{ fontFamily: "'Space Mono', monospace" }}
+                    style={{ fontFamily: "'DM Mono', monospace" }}
                   >
                     VIEW PROJECT
                   </span>
@@ -512,13 +491,13 @@ export default function Work() {
                 <div className="absolute bottom-3 left-3 right-3 p-2.5 bg-[#1b1c18]/95 border border-[#30312d] flex flex-col gap-0.5">
                   <span
                     className="font-mono text-[8px] text-[#b6240f] font-bold uppercase tracking-wider"
-                    style={{ fontFamily: "'Space Mono', monospace" }}
+                    style={{ fontFamily: "'DM Mono', monospace" }}
                   >
                     {activeProject.tagline}
                   </span>
                   <div
                     className="text-white text-xs truncate"
-                    style={{ fontFamily: "'Newsreader', Georgia, serif" }}
+                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                   >
                     {activeProject.title} {activeProject.italicTitle}
                   </div>

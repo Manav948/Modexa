@@ -45,7 +45,7 @@ export default function UIUXTicker() {
               >
                 {item}
               </span>
-              <span className="font-mono text-[10px] text-[#E8E2D5]">//</span>
+              <span className="font-mono text-[10px] text-[#E8E2D5]">{"//"}</span>
             </div>
           ))}
         </div>

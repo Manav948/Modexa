@@ -105,7 +105,7 @@ export default function HeroCreativeComposition() {
             <div className="pt-1 flex items-center justify-between">
               <span
                 className="text-[11px] leading-tight text-[#1b1c18]"
-                style={{ fontFamily: "'Newsreader', Georgia, serif" }}
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 Tectonic Grid
               </span>
@@ -130,7 +130,7 @@ export default function HeroCreativeComposition() {
           </div>
           <div
             className="leading-[0.95] tracking-tight"
-            style={{ fontFamily: "'Newsreader', Georgia, serif", fontSize: "22px", fontWeight: 400 }}
+            style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "22px", fontWeight: 400 }}
           >
             MAKE
             <br />
@@ -243,7 +243,7 @@ export default function HeroCreativeComposition() {
           <div className="font-mono text-[7px] text-[#b6240f] font-bold uppercase mb-0.5">
             ARTIFACT / 07
           </div>
-          <div className="text-[9px] font-medium leading-tight text-[#1b1c18]" style={{ fontFamily: "'Manrope', sans-serif" }}>
+          <div className="text-[9px] font-medium leading-tight text-[#1b1c18]" style={{ fontFamily: "'Inter', sans-serif" }}>
             PROJECT 07
           </div>
           <div className="font-mono text-[7px] text-[#747878] mt-0.5 tracking-wider">
@@ -422,7 +422,7 @@ export default function HeroCreativeComposition() {
     <div className="lg:col-span-5 flex flex-col items-center justify-center mt-12 lg:mt-0 relative select-none">
       {/* Installation header */}
       <div className="w-full flex flex-wrap items-center justify-between gap-2 pb-3 font-mono text-[9px] sm:text-[10px] text-[#747878]"
-           style={{ fontFamily: "'Space Mono', monospace" }}>
+           style={{ fontFamily: "'DM Mono', monospace" }}>
         <span>FIG. 01 — COLLAPSED CREATIVE WORLD</span>
         <span className="text-[#b6240f] font-bold">[MULTI-DISCIPLINARY ASSEMBLY]</span>
       </div>
@@ -475,26 +475,26 @@ export default function HeroCreativeComposition() {
 
         {/* Corner reticles */}
         <div className="absolute top-2 left-2 font-mono text-[9px] text-[#747878] tracking-widest select-none pointer-events-none"
-             style={{ fontFamily: "'Space Mono', monospace" }}>
+             style={{ fontFamily: "'DM Mono', monospace" }}>
           + 00.12
         </div>
         <div className="absolute top-2 right-2 font-mono text-[9px] text-[#747878] tracking-widest select-none pointer-events-none"
-             style={{ fontFamily: "'Space Mono', monospace" }}>
+             style={{ fontFamily: "'DM Mono', monospace" }}>
           LOCUS: 250,250
         </div>
         <div className="absolute bottom-2 left-2 font-mono text-[9px] text-[#747878] tracking-widest select-none pointer-events-none"
-             style={{ fontFamily: "'Space Mono', monospace" }}>
+             style={{ fontFamily: "'DM Mono', monospace" }}>
           INERTIA: SPRING
         </div>
         <div className="absolute bottom-2 right-2 font-mono text-[9px] text-[#b6240f] tracking-widest select-none pointer-events-none"
-             style={{ fontFamily: "'Space Mono', monospace" }}>
+             style={{ fontFamily: "'DM Mono', monospace" }}>
           {isHovered ? "● UNFOLDED" : "• HOVER TO UNFOLD"}
         </div>
       </div>
 
       {/* Installation footer */}
       <div className="w-full pt-3 flex flex-wrap items-center justify-between gap-2 font-mono text-[9px] sm:text-[10px] text-[#747878]"
-           style={{ fontFamily: "'Space Mono', monospace" }}>
+           style={{ fontFamily: "'DM Mono', monospace" }}>
         <span ref={captionRef}>INTERACTION: EXPLODE &amp; TETHER</span>
         <span className="text-[#b6240f] font-medium">8 FRAGMENTS BOUND</span>
       </div>

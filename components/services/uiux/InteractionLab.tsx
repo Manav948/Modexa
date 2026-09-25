@@ -203,7 +203,7 @@ export default function InteractionLab() {
                     key={word}
                     className="lab-word inline-block"
                     style={{
-                      fontFamily: "'Newsreader', Georgia, serif",
+                      fontFamily: "'Space Grotesk', sans-serif",
                       fontSize: "clamp(2.5rem, 5.5vw, 5.5rem)",
                       fontWeight: 400,
                       fontStyle: "italic",
@@ -256,7 +256,7 @@ export default function InteractionLab() {
                 <h3
                   className="text-[#151515] mb-2"
                   style={{
-                    fontFamily: "'Newsreader', Georgia, serif",
+                    fontFamily: "'Space Grotesk', sans-serif",
                     fontSize: "1.35rem",
                     fontWeight: 400,
                     fontStyle: "italic",

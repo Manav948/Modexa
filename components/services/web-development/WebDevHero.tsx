@@ -1,6 +1,7 @@
 "use client";
 
 import AtmosphericBackground from "./AtmosphericBackground";
+import StartProjectButton from "@/components/motion/StartProjectButton";
 
 export default function WebDevHero() {
   const scrollToSection = (id: string) => {
@@ -35,11 +36,7 @@ export default function WebDevHero() {
         </p>
 
         <div className="mt-8 flex w-full max-w-[720px] flex-col items-stretch justify-center gap-3 sm:mt-9 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
-          <a
-            href="#inquiry-station"
-            onClick={(event) => { event.preventDefault(); scrollToSection("inquiry-station"); }}
-            className="rounded-xl border border-white/35 bg-black/35 px-5 py-3 font-sans text-sm text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-white/75 hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-          >START A PROJECT</a>
+          <StartProjectButton href="#inquiry-station" onClick={(event) => { event.preventDefault(); scrollToSection("inquiry-station"); }} />
           <a
             href="#works"
             onClick={(event) => { event.preventDefault(); scrollToSection("works"); }}

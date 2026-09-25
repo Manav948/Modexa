@@ -1,5 +1,9 @@
 "use client";
 
+import Link from "next/link";
+
+import StartProjectButton from "@/components/motion/StartProjectButton";
+
 export default function UIUXCTA() {
   return (
     <section
@@ -41,7 +45,7 @@ export default function UIUXCTA() {
             HAVE AN EXPERIENCE<br />
             <span
               className="italic font-normal tracking-normal"
-              style={{ fontFamily: "'Newsreader', Georgia, serif", color: "#f7f5ef", fontSize: "0.85em" }}
+              style={{ fontFamily: "'Space Grotesk', sans-serif", color: "#f7f5ef", fontSize: "0.85em" }}
             >
               worth designing?
             </span>
@@ -56,21 +60,14 @@ export default function UIUXCTA() {
 
           {/* CTAs */}
           <div className="flex flex-wrap items-center gap-4 mb-16 font-mono text-[10px]" style={{ fontFamily: "'DM Mono', monospace" }}>
-            <a
-              href="mailto:hello@company.com?subject=UI%2FUX%20Design%20Project"
-              className="px-8 py-4 text-white tracking-widest uppercase inline-flex items-center gap-3 font-bold shadow-lg hover:opacity-90 transition-opacity"
-              style={{ backgroundColor: "#E7472E" }}
-            >
-              START A PROJECT
-              <span>→</span>
-            </a>
-            <a
+            <StartProjectButton theme="dark" href="mailto:hello@company.com?subject=UI%2FUX%20Design%20Project" />
+            <Link
               href="/#services"
               className="px-6 py-4 border text-white tracking-widest uppercase transition-colors hover:border-white"
               style={{ borderColor: "#444" }}
             >
               BACK TO SERVICES
-            </a>
+            </Link>
           </div>
 
           {/* Colophon */}

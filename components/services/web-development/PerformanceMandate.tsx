@@ -67,7 +67,7 @@ export default function PerformanceMandate() {
               <br />
               <span
                 className="text-[#e7472e] italic font-editorial lowercase font-normal pr-2"
-                style={{ fontFamily: "'Newsreader', Georgia, serif" }}
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 the experience.
               </span>
@@ -90,9 +90,9 @@ export default function PerformanceMandate() {
                 <span className="font-mono text-xs text-[#ffdad4] uppercase block font-semibold">
                   RESPONSIVE
                 </span>
-                <h4 className="font-display text-sm uppercase text-white mt-1.5 font-bold">
+                <h3 className="font-display text-sm uppercase text-white mt-1.5 font-bold">
                   Clear Structure
-                </h4>
+                </h3>
                 <p className="font-sans text-xs text-white/60 mt-1 leading-relaxed">
                   Layouts that hold together across screens and contexts.
                 </p>
@@ -102,9 +102,9 @@ export default function PerformanceMandate() {
                 <span className="font-mono text-xs text-[#ffdad4] uppercase block font-semibold">
                   EFFICIENT
                 </span>
-                <h4 className="font-display text-sm uppercase text-white mt-1.5 font-bold">
+                <h3 className="font-display text-sm uppercase text-white mt-1.5 font-bold">
                   Focused Output
-                </h4>
+                </h3>
                 <p className="font-sans text-xs text-white/60 mt-1 leading-relaxed">
                   Only the weight the experience actually needs.
                 </p>
@@ -114,9 +114,9 @@ export default function PerformanceMandate() {
                 <span className="font-mono text-xs text-[#ffdad4] uppercase block font-semibold">
                   LCP &lt; 0.8S
                 </span>
-                <h4 className="font-display text-sm uppercase text-white mt-1.5 font-bold">
+                <h3 className="font-display text-sm uppercase text-white mt-1.5 font-bold">
                   Asset Austerity
-                </h4>
+                </h3>
                 <p className="font-sans text-xs text-white/60 mt-1 leading-relaxed">
                   AVIF picture sets with automated responsive resolution clipping.
                 </p>
