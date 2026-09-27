@@ -201,12 +201,12 @@ export default function UIUXHero() {
           <div className="uiux-body-right col-span-12 lg:col-span-5 xl:col-span-5 flex flex-col justify-end pt-8 lg:pt-0">
             <div ref={imageRef} className="relative aspect-[4/3] w-full overflow-hidden border" style={{ borderColor: "#E8E2D5" }}>
               <Image
-                src="/images/service_ui_ux_1789796467059.png"
-                alt="Interface design system displayed on a studio monitor"
+                src="/ui%26ux/ui1.jpg"
+                alt="Full-page product interface study with a violet and blue visual system"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 42vw"
-                className="object-cover"
+                className="object-cover object-top"
               />
               <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-[#151515]/90 px-3 py-2 font-mono text-[9px] uppercase tracking-widest text-white" style={{ fontFamily: "'DM Mono', monospace" }}>
                 <span>FIELD STUDY / 01</span>

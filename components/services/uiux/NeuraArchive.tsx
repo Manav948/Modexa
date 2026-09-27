@@ -76,7 +76,7 @@ export default function NeuraArchive() {
         className="neura-label flex items-center justify-between px-5 md:px-8 lg:px-14 py-3 border-b font-mono text-[9px] uppercase tracking-widest"
         style={{ borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace", color: "#55534E" }}
       >
-        <span className="text-[#E7472E] font-bold">04 / SELECTED SYSTEM</span>
+        <span className="text-[#E7472E] font-bold">05 / SELECTED SYSTEM</span>
         <span>UI/UX / DIGITAL EXPERIENCE</span>
       </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 import StartProjectButton from "@/components/motion/StartProjectButton";
 
@@ -13,11 +14,12 @@ export default function UIUXCTA() {
     >
       {/* Background imagery */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <img
-          src="/images/service_ui_ux_1789796467059.png"
+        <Image
+          src="/ui%26ux/ui14.jpg"
           alt=""
-          className="w-full h-full object-cover"
-          style={{ filter: "grayscale(100%)" }}
+          fill
+          sizes="100vw"
+          className="object-cover object-top grayscale"
         />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #151515 30%, rgba(21,21,21,0.6))" }} />
       </div>
@@ -29,7 +31,7 @@ export default function UIUXCTA() {
             className="font-mono text-[9px] uppercase tracking-widest text-[#E7472E] font-bold mb-4"
             style={{ fontFamily: "'DM Mono', monospace" }}
           >
-            06 / START A PROJECT
+            07 / START A PROJECT
           </div>
 
           {/* Heading */}

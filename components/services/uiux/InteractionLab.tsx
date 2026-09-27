@@ -192,7 +192,7 @@ export default function InteractionLab() {
               className="font-mono text-[9px] uppercase tracking-widest text-[#E7472E] font-bold mb-2"
               style={{ fontFamily: "'DM Mono', monospace" }}
             >
-              SECTION 02 // RESEARCH BODY
+              SECTION 04 // RESEARCH BODY
             </div>
 
             {/* The large italic Interaction Laboratory heading */}

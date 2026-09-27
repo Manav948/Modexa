@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import ScrollRevealProvider from "@/components/layout/ScrollRevealProvider";
 import UIUXHero from "./UIUXHero";
 import UIUXTicker from "./UIUXTicker";
+import UIUXVisualAtlas from "./UIUXVisualAtlas";
 import InteractionLab from "./InteractionLab";
 import NeuraArchive from "./NeuraArchive";
 import UIUXCapabilities from "./UIUXCapabilities";
@@ -23,16 +24,19 @@ export default function UIUXPage() {
           {/* 02. Ticker — INTERFACES // CLARITY // STRUCTURE // INTERACTION... */}
           <UIUXTicker />
 
-          {/* 03. Interaction Laboratory — 4-column pillar section */}
+          {/* 03. Full-page interface studies */}
+          <UIUXVisualAtlas />
+
+          {/* 04. Interaction Laboratory — 4-column pillar section */}
           <InteractionLab />
 
-          {/* 04. NEURA ARCHIVE — project showcase */}
+          {/* 05. NEURA ARCHIVE — project showcase */}
           <NeuraArchive />
 
-          {/* 05. Capabilities index */}
+          {/* 06. Capabilities index */}
           <UIUXCapabilities />
 
-          {/* 06. CTA / Commission section */}
+          {/* 07. CTA / Commission section */}
           <UIUXCTA />
         </main>
         <Footer />

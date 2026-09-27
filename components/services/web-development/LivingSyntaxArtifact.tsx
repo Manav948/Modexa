@@ -49,6 +49,7 @@ export default function LivingSyntaxArtifact() {
   const phoneCanvasRef = useRef<HTMLCanvasElement>(null);
   const phoneMotionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isFinePointer, setIsFinePointer] = useState(false);
 
@@ -114,7 +115,10 @@ export default function LivingSyntaxArtifact() {
     }, section);
 
     const resizeObserver = new ResizeObserver(() => {
-      if (visible && !video.paused) renderFrames();
+      if (visible && !video.paused) {
+        window.cancelAnimationFrame(frameId);
+        renderFrames();
+      }
     });
     resizeObserver.observe(stage);
     if (phoneCanvasRef.current) resizeObserver.observe(phoneCanvasRef.current);
@@ -217,6 +221,8 @@ export default function LivingSyntaxArtifact() {
             controls={false}
             disablePictureInPicture
             aria-hidden="true"
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
           />
 
           <div
@@ -231,7 +237,10 @@ export default function LivingSyntaxArtifact() {
             }}
             onPointerMove={handlePointerMove}
           >
-            <div ref={stageRef} className="mx-auto aspect-video w-full bg-[#0a0a0a]">
+            <div
+              ref={stageRef}
+              className={`mx-auto aspect-video w-full bg-[#0a0a0a] transition-transform duration-700 ease-out ${showDesktopPhone ? "md:scale-[1.015]" : "scale-100"}`}
+            >
               <canvas
                 ref={mainCanvasRef}
                 role="img"
@@ -260,7 +269,7 @@ export default function LivingSyntaxArtifact() {
 
           <div className="flex flex-wrap items-center justify-between gap-2 border-t border-white/10 bg-[#0e0e0e] px-4 py-2 font-mono text-[11px] text-white/60">
             <div className="flex items-center gap-4">
-              <span className="text-[#e7472e]">{isVisible ? "● PLAYING" : "● READY"}</span>
+              <span className="text-[#e7472e]">{isPlaying ? "● PLAYING" : isVisible ? "● LOADING" : "● STANDBY"}</span>
               <span className="hidden sm:inline">ENGINEERING DEMO REEL</span>
             </div>
             <span className="font-medium text-white">16:9 EXPERIENCE / 9:16 CROP</span>

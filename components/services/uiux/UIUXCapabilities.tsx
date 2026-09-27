@@ -54,7 +54,7 @@ export default function UIUXCapabilities() {
         <div className="flex flex-wrap items-end justify-between gap-4 mb-12 pb-6 border-b border-[#E8E2D5]">
           <div>
             <div className="font-mono text-[9px] uppercase tracking-widest text-[#E7472E] font-bold mb-2" style={{ fontFamily: "'DM Mono', monospace" }}>
-              03 / CAPABILITIES
+              06 / CAPABILITIES
             </div>
             <h2
               className="cap-heading uppercase leading-none tracking-tight"
