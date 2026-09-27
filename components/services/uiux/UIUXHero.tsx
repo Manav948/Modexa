@@ -4,407 +4,232 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { UIUX_HERO_PROJECT_IDS, UIUX_PROJECTS } from "./UIUXProjects";
+import { useUIUXProjectActions } from "./UIUXProjectProvider";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+const LAYER_CLASSES = [
+  "left-[14%] top-[17%] z-20 h-[65%] w-[70%] sm:left-[16%] sm:w-[66%]",
+  "left-[1%] top-[9%] z-10 h-[56%] w-[35%]",
+  "right-[0%] top-[5%] z-30 h-[48%] w-[32%]",
+  "right-[7%] bottom-[1%] z-40 h-[47%] w-[38%]",
+];
+
+const LAYER_ROTATIONS = [-1.2, 1.8, 1.3, -1.5];
+
 export default function UIUXHero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const screenRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLHeadingElement>(null);
+  const layerRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const { openProject } = useUIUXProjectActions();
+
+  const heroProjects = UIUX_HERO_PROJECT_IDS.map((id) =>
+    UIUX_PROJECTS.find((project) => project.id === id),
+  ).filter((project) => project !== undefined);
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    const section = sectionRef.current;
+    if (!section) return;
 
-    const ctx = gsap.context(() => {
-      // Label fade
-      gsap.fromTo(".uiux-label",
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.9, ease: "power2.out", delay: 0.05 }
-      );
-
-      // Line-by-line masked reveal
-      const lines = sectionRef.current?.querySelectorAll(".hero-line");
-      if (lines) {
-        gsap.fromTo(lines,
-          { yPercent: 105, opacity: 0 },
-          { yPercent: 0, opacity: 1, duration: 1.25, stagger: 0.1, ease: "power3.out", delay: 0.15 }
+    const context = gsap.context(() => {
+      const media = gsap.matchMedia();
+      media.add("(prefers-reduced-motion: no-preference)", () => {
+        const lines = textRef.current?.querySelectorAll<HTMLElement>("[data-hero-line]");
+        gsap.fromTo(
+          lines || [],
+          { yPercent: 108, autoAlpha: 0 },
+          { yPercent: 0, autoAlpha: 1, duration: 0.95, stagger: 0.1, ease: "power3.out", delay: 0.08 },
         );
-      }
 
-      // Body + tags fade up
-      gsap.fromTo(".uiux-body-right",
-        { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, duration: 1.0, ease: "power2.out", delay: 0.55 }
-      );
+        const cards = layerRefs.current.filter(
+          (card): card is HTMLButtonElement => card !== null,
+        );
+        cards.forEach((card, index) => {
+          gsap.fromTo(
+            card,
+            {
+              autoAlpha: 0,
+              y: 24 + index * 5,
+              x: index % 2 === 0 ? 18 : -18,
+              rotation: LAYER_ROTATIONS[index] * 1.8,
+              clipPath: "inset(14% 8% 18% 8%)",
+            },
+            {
+              autoAlpha: 1,
+              y: 0,
+              x: 0,
+              rotation: LAYER_ROTATIONS[index],
+              clipPath: "inset(0% 0% 0% 0%)",
+              duration: 1.05,
+              delay: 0.18 + index * 0.1,
+              ease: "power3.out",
+            },
+          );
+        });
 
-      // Dashboard screen — clip-path reveal from bottom
-      gsap.fromTo(screenRef.current,
-        { clipPath: "inset(100% 0% 0% 0%)", opacity: 0 },
-        { clipPath: "inset(0% 0% 0% 0%)", opacity: 1, duration: 1.4, ease: "power3.out", delay: 0.6 }
-      );
+        const stage = section.querySelector<HTMLElement>("[data-hero-stage]");
+        if (!stage) return;
 
-      gsap.fromTo(imageRef.current,
-        { clipPath: "inset(0% 0% 100% 0%)", opacity: 0 },
-        { clipPath: "inset(0% 0% 0% 0%)", opacity: 1, duration: 1.2, ease: "power3.out", delay: 0.45 }
-      );
+        const pointerSetters = cards.map((card, index) => ({
+          x: gsap.quickTo(card, "x", { duration: 0.55 + index * 0.08, ease: "power3.out" }),
+          y: gsap.quickTo(card, "y", { duration: 0.55 + index * 0.08, ease: "power3.out" }),
+        }));
 
-      // Floating dark card slides in from right
-      gsap.fromTo(cardRef.current,
-        { opacity: 0, x: 30, y: -10 },
-        { opacity: 1, x: 0, y: 0, duration: 1.2, ease: "power3.out", delay: 1.0 }
-      );
+        const canParallax =
+          window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
+        const onPointerMove = (event: MouseEvent) => {
+          if (!canParallax) return;
+          const rect = stage.getBoundingClientRect();
+          const x = (event.clientX - rect.left) / rect.width - 0.5;
+          const y = (event.clientY - rect.top) / rect.height - 0.5;
+          pointerSetters.forEach((setter, index) => {
+            const depth = 5 + index * 2.5;
+            setter.x(x * depth);
+            setter.y(y * depth * 0.65);
+          });
+        };
+        const onPointerLeave = () => {
+          pointerSetters.forEach((setter) => {
+            setter.x(0);
+            setter.y(0);
+          });
+        };
 
-      // Subtle parallax on screen while scrolling
-      gsap.to(screenRef.current, {
-        yPercent: -8,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.5,
-        },
+        if (canParallax) {
+          stage.addEventListener("mousemove", onPointerMove, { passive: true });
+          stage.addEventListener("mouseleave", onPointerLeave);
+        }
+
+        cards.forEach((card, index) => {
+          const spreadX = index % 2 === 0 ? -12 - index * 2 : 12 + index * 2;
+          const spreadY = index % 2 === 0 ? -8 : 9;
+          gsap.to(card, {
+            xPercent: spreadX,
+            yPercent: spreadY,
+            scrollTrigger: {
+              trigger: section,
+              start: "top top",
+              end: "bottom top",
+              scrub: 0.8,
+            },
+          });
+        });
+
+        return () => {
+          stage.removeEventListener("mousemove", onPointerMove);
+          stage.removeEventListener("mouseleave", onPointerLeave);
+        };
       });
 
-      // Mouse tilt on floating card
-      const onMouseMove = (e: MouseEvent) => {
-        if (!cardRef.current || !sectionRef.current) return;
-        const rect = sectionRef.current.getBoundingClientRect();
-        const dx = (e.clientX - rect.left - rect.width / 2) / rect.width;
-        const dy = (e.clientY - rect.top - rect.height / 2) / rect.height;
-        gsap.to(cardRef.current, { x: dx * 14, y: dy * 10, duration: 0.8, ease: "power2.out" });
-      };
-      sectionRef.current?.addEventListener("mousemove", onMouseMove, { passive: true });
-      return () => sectionRef.current?.removeEventListener("mousemove", onMouseMove);
-    }, sectionRef);
+      gsap.fromTo(
+        section.querySelectorAll("[data-hero-meta]"),
+        { autoAlpha: 0, y: 10 },
+        { autoAlpha: 1, y: 0, duration: 0.65, stagger: 0.08, delay: 0.55, ease: "power2.out" },
+      );
+    }, section);
 
-    return () => ctx.revert();
+    return () => context.revert();
   }, []);
+
+  const emphasizeLayer = (activeIndex: number | null) => {
+    layerRefs.current.forEach((card, index) => {
+      if (!card) return;
+      const active = activeIndex === index;
+      gsap.to(card, {
+        scale: active ? 1.035 : activeIndex === null ? 1 : 0.975,
+        opacity: active || activeIndex === null ? 1 : 0.58,
+        duration: 0.32,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    });
+  };
 
   return (
     <section
       ref={sectionRef}
       id="uiux-hero"
-      className="relative w-full overflow-hidden"
-      style={{ backgroundColor: "#f7f5ef" }}
+      className="relative w-full overflow-hidden border-b border-[#E8E2D5] bg-[#f7f5ef]"
     >
-      {/* ── Top editorial metadata bar ── */}
-      <div
-        className="uiux-label w-full border-b px-5 md:px-8 lg:px-14 py-2 flex flex-wrap items-center gap-6 justify-between font-mono text-[9px] uppercase tracking-widest"
-        style={{ borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace", color: "#55534E" }}
-      >
-        <div className="flex items-center gap-6">
-          <span className="text-[#E7472E] font-bold">UI/UX DESIGN / 02</span>
-          <span className="hidden md:inline">CLARITY / STRUCTURE</span>
-          <span className="hidden md:inline">INTERACTION / SYSTEMS</span>
-        </div>
-        <div className="flex items-center gap-6 hidden lg:flex">
-          <span>[DIGITAL PRODUCTS / WEB]</span>
-          <span className="text-[#E7472E]">[RESPONSIVE / TACTILE]</span>
-        </div>
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E8E2D5] px-5 py-3 font-mono text-[9px] uppercase tracking-[0.14em] text-[#55534E] md:px-8 lg:px-14">
+        <span data-hero-meta className="font-bold text-[#E7472E]">UI/UX DESIGN / 02</span>
+        <span data-hero-meta>DESIGN SYSTEM IN MOTION</span>
+        <span data-hero-meta className="hidden sm:inline">CLARITY / STRUCTURE / INTERACTION</span>
       </div>
 
-      {/* ── Secondary label row ── */}
-      <div
-        className="uiux-label w-full border-b px-5 md:px-8 lg:px-14 py-2 flex items-center justify-between font-mono text-[9px] uppercase tracking-widest"
-        style={{ borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace", color: "#55534E" }}
-      >
-        <span className="border border-[#E8E2D5] px-2 py-0.5">CLARITY → INTERACTION</span>
-        <span className="hidden md:inline">DIGITAL PRODUCTS / WEB</span>
-      </div>
-
-      {/* ── Main hero content ── */}
-      <div className="relative px-5 md:px-8 lg:px-14 pt-8 pb-0 max-w-[1400px] mx-auto w-full">
-
-        {/* Small label above heading */}
-        <div
-          className="uiux-label font-mono text-[9px] uppercase tracking-widest text-[#E7472E] font-bold mb-3"
-          style={{ fontFamily: "'DM Mono', monospace" }}
-        >
-          UI/UX DESIGN / DIGITAL EXPERIENCES
-        </div>
-
-        {/* ── Two-column row: HUGE heading left + body right ── */}
-        <div className="grid grid-cols-12 gap-6 items-end">
-          {/* LEFT: The mega heading */}
-          <div className="col-span-12 lg:col-span-7 xl:col-span-7">
-            <div className="flex flex-col">
-              {/* WHERE */}
-              <div className="overflow-hidden">
-                <div
-                  className="hero-line leading-[0.88] tracking-tight"
-                  style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    fontSize: "clamp(3.75rem, 8.5vw, 9rem)",
-                    fontWeight: 700,
-                    color: "#151515",
-                    letterSpacing: "-0.03em",
-                  }}
-                >
-                  INTERFACES
-                </div>
-              </div>
-              {/* STRUCTURE */}
-              <div className="overflow-hidden">
-                <div
-                  className="hero-line leading-[0.88] tracking-tight"
-                  style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    fontSize: "clamp(3.75rem, 8.5vw, 9rem)",
-                    fontWeight: 700,
-                    color: "#151515",
-                    letterSpacing: "-0.03em",
-                  }}
-                >
-                  BUILT TO FEEL
-                </div>
-              </div>
-              {/* meets — italic serif, smaller */}
-              <div className="overflow-hidden">
-                <div
-                  className="hero-line leading-[1.0]"
-                  style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    fontSize: "clamp(3rem, 6.5vw, 7rem)",
-                    fontWeight: 400,
-                    fontStyle: "italic",
-                    color: "#55534E",
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  as good as
-                </div>
-              </div>
-              {/* INTERACTION. */}
-              <div className="overflow-hidden">
-                <div
-                  className="hero-line leading-[0.88] tracking-tight"
-                  style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    fontSize: "clamp(2.75rem, 6vw, 6.5rem)",
-                    fontWeight: 700,
-                    color: "#151515",
-                    letterSpacing: "-0.03em",
-                  }}
-                >
-                  THEY WORK
-                  <span style={{ color: "#E7472E" }}>.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT: image, body copy, and tags */}
-          <div className="uiux-body-right col-span-12 lg:col-span-5 xl:col-span-5 flex flex-col justify-end pt-8 lg:pt-0">
-            <div ref={imageRef} className="relative aspect-[4/3] w-full overflow-hidden border" style={{ borderColor: "#E8E2D5" }}>
-              <Image
-                src="/ui%26ux/ui1.jpg"
-                alt="Full-page product interface study with a violet and blue visual system"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 42vw"
-                className="object-cover object-top"
-              />
-              <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-[#151515]/90 px-3 py-2 font-mono text-[9px] uppercase tracking-widest text-white" style={{ fontFamily: "'DM Mono', monospace" }}>
-                <span>FIELD STUDY / 01</span>
-                <span className="text-[#E7472E]">LIVE SYSTEM</span>
-              </div>
-            </div>
-            <p
-              className="text-[#55534E] text-sm leading-relaxed max-w-sm mt-5 mb-5"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-            >
-              Interfaces with structure, rhythm, and tactile intent.
+      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-5 px-5 pb-8 pt-8 sm:px-8 sm:pb-12 md:pt-12 lg:grid-cols-12 lg:gap-4 lg:px-14 lg:pb-14 lg:pt-14">
+        <div className="relative z-50 lg:col-span-5">
+          <p data-hero-meta className="mb-4 font-mono text-[9px] uppercase tracking-[0.15em] text-[#747878]">
+            INDEPENDENT DIGITAL DESIGN
+          </p>
+          <h1 ref={textRef} className="font-display uppercase leading-[0.84] tracking-[-0.065em] text-[#151515]">
+            <span className="block overflow-hidden pb-1"><span data-hero-line className="block text-[clamp(2.75rem,11vw,4.2rem)] lg:text-[clamp(3.3rem,6vw,6.2rem)]">DESIGNING</span></span>
+            <span className="block overflow-hidden pb-1"><span data-hero-line className="block text-[clamp(2.75rem,11vw,4.2rem)] lg:text-[clamp(3.3rem,6vw,6.2rem)]">DIGITAL</span></span>
+            <span className="block overflow-hidden pb-1"><span data-hero-line className="block whitespace-nowrap text-[clamp(2.75rem,9.7vw,4.2rem)] lg:text-[clamp(3rem,5.55vw,5.8rem)]">EXPERIENCES<span className="text-[#E7472E]">.</span></span></span>
+          </h1>
+          <div data-hero-meta className="mt-6 flex max-w-md items-start gap-4 sm:mt-8">
+            <span className="mt-2 h-px w-8 shrink-0 bg-[#E7472E]" />
+            <p className="font-sans text-sm leading-relaxed text-[#55534E] sm:text-[15px]">
+              We design digital experiences with clarity, structure and intent.
             </p>
-            {/* Tags */}
-            <div
-              className="flex flex-wrap items-center gap-2 font-mono text-[9px] uppercase tracking-widest"
-              style={{ fontFamily: "'DM Mono', monospace" }}
-            >
-              <span className="text-[#55534E]">DESIGN PROCESS:</span>
-              {["FEEL UX", "SYSTEMS", "INTERACTION"].map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2.5 py-1 border text-[#151515] font-bold hover:border-[#E7472E] hover:text-[#E7472E] transition-colors cursor-default"
-                  style={{ borderColor: "#E8E2D5" }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
           </div>
+          <p data-hero-meta className="mt-7 font-mono text-[8px] uppercase tracking-[0.14em] text-[#8f8b82]">
+            INTERFACE / SYSTEM / MOTION
+          </p>
+        </div>
+
+        <div
+          data-hero-stage
+          className="relative isolate h-[min(112vw,31rem)] min-h-[360px] w-full overflow-hidden sm:min-h-[430px] lg:col-span-7 lg:h-[min(56vw,44rem)] lg:min-h-[510px]"
+          aria-label="Layered previews of UI and UX design work"
+        >
+          <div className="pointer-events-none absolute inset-0 drafting-grid opacity-40" />
+          {heroProjects.map((project, index) => (
+            <button
+              key={project.id}
+              ref={(node) => {
+                layerRefs.current[index] = node;
+              }}
+              type="button"
+              onClick={() => openProject(project.id)}
+              onPointerEnter={(event) => {
+                if (event.pointerType === "mouse") emphasizeLayer(index);
+              }}
+              onPointerLeave={(event) => {
+                if (event.pointerType === "mouse") emphasizeLayer(null);
+              }}
+              onFocus={() => emphasizeLayer(index)}
+              onBlur={() => emphasizeLayer(null)}
+              aria-label={"Open " + project.title + " in the project viewer"}
+              aria-haspopup="dialog"
+              className={"group absolute overflow-hidden border border-[#d8d2c5] bg-[#fbf9f3] p-0 text-left shadow-[0_18px_45px_rgba(25,22,18,0.14)] focus-visible:z-[60] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E7472E] " + LAYER_CLASSES[index]}
+              style={{ transformOrigin: "center center" }}
+            >
+              <Image
+                src={project.src}
+                alt=""
+                fill
+                sizes="(max-width: 1023px) 68vw, 38vw"
+                quality={65}
+                preload={index === 0}
+                className="object-cover object-top transition-[filter] duration-500 group-hover:brightness-[1.02]"
+                draggable={false}
+              />
+              <span className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 bg-[#151515]/90 px-2 py-1.5 font-mono text-[7px] uppercase tracking-[0.12em] text-white opacity-90 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 sm:px-3 sm:py-2 sm:text-[9px]">
+                <span>{String(project.index).padStart(2, "0")} <span className="text-[#E7472E]">/</span> {project.category}</span>
+                <span className="whitespace-nowrap text-[#E7472E] opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">VIEW DESIGN →</span>
+              </span>
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* ── Dashboard UI screenshot row ── */}
-      <div className="relative w-full mt-6">
-        {/* Thin border line at top */}
-        <div className="w-full border-t" style={{ borderColor: "#E8E2D5" }}>
-          {/* Playbar chrome meta */}
-          <div
-            className="px-5 md:px-8 lg:px-14 py-2 flex items-center justify-between font-mono text-[9px] uppercase tracking-widest"
-            style={{ fontFamily: "'DM Mono', monospace", color: "#55534E", backgroundColor: "#f0ede6" }}
-          >
-            <div className="flex items-center gap-4">
-              <span className="flex gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "#E7472E" }} />
-                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "#E8E2D5" }} />
-                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "#E8E2D5" }} />
-              </span>
-              <span>CANVAS 01 ARCH/v_COPY — v.1.13.4</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <span>STATE — PROGRESS:LIVE</span>
-              <span className="border px-2 py-0.5" style={{ borderColor: "#E8E2D5" }}>SELECTED WORK</span>
-            </div>
-          </div>
-        </div>
-
-        {/* The main screen composition */}
-        <div ref={screenRef} className="relative w-full flex" style={{ backgroundColor: "#f0ede6" }}>
-          {/* Left panel — sidebar list */}
-          <div
-            className="hidden lg:flex flex-col border-r"
-            style={{ minWidth: "220px", backgroundColor: "#f7f5ef", borderColor: "#E8E2D5" }}
-          >
-            <div className="p-4 border-b" style={{ borderColor: "#E8E2D5" }}>
-              <div className="font-mono text-[9px] uppercase tracking-widest text-[#55534E] mb-3" style={{ fontFamily: "'DM Mono', monospace" }}>
-                PRIMARY MEDIA
-              </div>
-              {[
-                { label: "01 / MATRIX ATRIUM", active: true },
-                { label: "02 / TYPOGRAPHIC ATLAS", active: false },
-                { label: "03 / TOPOLOGY RENDER", active: false },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  className="flex items-center justify-between py-2 border-b font-mono text-[9px] uppercase"
-                  style={{ borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace", color: item.active ? "#151515" : "#55534E" }}
-                >
-                  <span>{item.label}</span>
-                  {item.active && <span className="w-2 h-2" style={{ backgroundColor: "#E7472E" }} />}
-                </div>
-              ))}
-            </div>
-            <div className="p-4 mt-auto border-t text-[9px] font-mono uppercase" style={{ borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace", color: "#55534E" }}>
-              <div>BINARY CACHE: 0.12.88</div>
-              <div>INTERACTION: READY</div>
-            </div>
-          </div>
-
-          {/* CENTER: waveform chart */}
-          <div className="flex-1 relative border-r" style={{ borderColor: "#E8E2D5" }}>
-            <div
-              className="px-4 py-2 border-b font-mono text-[9px] uppercase tracking-widest flex items-center justify-between"
-              style={{ borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace", color: "#55534E" }}
-            >
-              <span>PALLATINI FREQUENCY // LIVE SAMPLE</span>
-              <span className="text-[#E7472E] font-bold">TIME 0.001</span>
-            </div>
-            {/* SVG Waveform */}
-            <div className="relative w-full" style={{ height: "160px", padding: "16px 24px" }}>
-              <svg viewBox="0 0 800 120" className="w-full h-full" preserveAspectRatio="none">
-                <polyline
-                  points="0,60 60,60 80,20 100,100 120,40 150,90 180,50 220,75 260,60 300,15 330,90 360,55 400,70 440,30 470,85 510,60 550,45 590,80 630,60 670,50 720,65 760,60 800,60"
-                  fill="none"
-                  stroke="#151515"
-                  strokeWidth="1.5"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-            {/* Metrics row */}
-            <div
-              className="flex items-center border-t"
-              style={{ borderColor: "#E8E2D5" }}
-            >
-              {[
-                { label: "FPX LOCK", value: "88.90" },
-                { label: "GEO ROUGH", value: "1.808" },
-                { label: "COHERENCE", value: "88 ACTS" },
-              ].map((m, i) => (
-                <div
-                  key={i}
-                  className="flex-1 px-4 py-3 border-r font-mono text-[9px] uppercase"
-                  style={{ borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace" }}
-                >
-                  <div className="text-[#55534E] mb-1">{m.label}</div>
-                  <div className="text-[#151515] font-bold text-sm">{m.value}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* RIGHT: description panel */}
-          <div className="hidden xl:flex flex-col" style={{ minWidth: "240px" }}>
-            <div className="p-4 border-b" style={{ borderColor: "#E8E2D5" }}>
-              <div className="font-mono text-[9px] uppercase tracking-widest text-[#55534E] mb-2" style={{ fontFamily: "'DM Mono', monospace" }}>
-                SPATIAL STRUCTURE
-              </div>
-              <p className="text-[#55534E] text-xs leading-snug" style={{ fontFamily: "'Inter', sans-serif" }}>
-                Zero non-semantic layout erasures. Modular composition geometry adhering to flow constraints.
-              </p>
-            </div>
-          </div>
-
-          {/* FLOATING dark card (overlapping right edge) */}
-          <div
-            ref={cardRef}
-            className="absolute right-4 -bottom-8 z-20 hidden shadow-2xl md:block md:right-8"
-            style={{ width: "clamp(220px, 22vw, 280px)" }}
-          >
-            <div style={{ backgroundColor: "#151515" }}>
-              {/* Card top bar */}
-              <div
-                className="px-3 py-2 border-b font-mono text-[8px] uppercase tracking-wider flex items-center justify-between"
-                style={{ borderColor: "rgba(255,255,255,0.08)", fontFamily: "'DM Mono', monospace", color: "rgba(255,255,255,0.45)" }}
-              >
-                <span>ELEMENT_ARCH01 // CRAFT</span>
-                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#E7472E" }} />
-              </div>
-              {/* Card tag */}
-              <div className="px-3 pt-3 pb-1">
-                <span
-                  className="font-mono text-[8px] uppercase tracking-widest font-bold"
-                  style={{ fontFamily: "'DM Mono', monospace", color: "#E7472E" }}
-                >
-                  01 / TACTILE ELEMENT
-                </span>
-              </div>
-              {/* Card quote */}
-              <div className="px-3 pb-3">
-                <p
-                  className="text-white leading-tight"
-                  style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1.1rem", fontWeight: 400, fontStyle: "italic" }}
-                >
-                  &quot;Gesture-first tactile feedback with physical momentum damping.&quot;
-                </p>
-              </div>
-              {/* Progress bar */}
-              <div className="px-3 pb-3">
-                <div className="w-full h-1 bg-[rgba(255,255,255,0.1)] rounded-none">
-                  <div className="h-1 w-3/4" style={{ backgroundColor: "#E7472E" }} />
-                </div>
-              </div>
-              {/* Footer */}
-              <div
-                className="px-3 pb-3 flex items-center justify-between font-mono text-[8px] uppercase"
-                style={{ fontFamily: "'DM Mono', monospace", color: "rgba(255,255,255,0.4)" }}
-              >
-                <span>OPS.ML 110.14</span>
-                <a
-                  href="#"
-                  className="text-white font-bold hover:text-[#E7472E] transition-colors"
-                >
-                  READY →
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="flex items-center justify-between border-t border-[#E8E2D5] px-5 py-2 font-mono text-[8px] uppercase tracking-[0.13em] text-[#8f8b82] sm:px-8 lg:px-14">
+        <span data-hero-meta>SELECT A LAYER TO EXPLORE</span>
+        <span data-hero-meta>{String(heroProjects.length).padStart(2, "0")} PREVIEWS / FULL DESIGN VIEW</span>
       </div>
     </section>
   );

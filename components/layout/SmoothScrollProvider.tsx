@@ -43,6 +43,12 @@ export default function SmoothScrollProvider({
 
     lenisRef.current = lenis;
 
+    const handleViewerLock = (event: Event) => {
+      if ((event as CustomEvent<boolean>).detail) lenis.stop();
+      else lenis.start();
+    };
+    window.addEventListener("modexa:lenis-lock", handleViewerLock);
+
     lenis.scrollTo(0, { immediate: true });
     window.scrollTo(0, 0);
 
@@ -71,6 +77,7 @@ export default function SmoothScrollProvider({
       resizeObserver.disconnect();
       lenis.destroy();
       lenisRef.current = null;
+      window.removeEventListener("modexa:lenis-lock", handleViewerLock);
       window.removeEventListener("popstate", handlePopState);
     };
   }, []);
