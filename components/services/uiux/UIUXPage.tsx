@@ -7,8 +7,8 @@ import UIUXHero from "./UIUXHero";
 import UIUXTicker from "./UIUXTicker";
 import UIUXSelectedWork from "./UIUXSelectedWork";
 import UIUXProjectProvider from "./UIUXProjectProvider";
-import InteractionLab from "./InteractionLab";
-import NeuraArchive from "./NeuraArchive";
+import InteractionExperience from "./InteractionExperience";
+import IdeaToInterface from "./IdeaToInterface";
 import UIUXCapabilities from "./UIUXCapabilities";
 import UIUXCTA from "./UIUXCTA";
 
@@ -23,8 +23,8 @@ export default function UIUXPage() {
             <UIUXHero />
             <UIUXTicker />
             <UIUXSelectedWork />
-            <InteractionLab />
-            <NeuraArchive />
+            <InteractionExperience />
+            <IdeaToInterface />
             <UIUXCapabilities />
             <UIUXCTA />
           </UIUXProjectProvider>
