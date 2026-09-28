@@ -135,8 +135,11 @@ export default function UIUXSelectedWork() {
       track.style.paddingLeft = sidePadding + "px";
       track.style.paddingRight = sidePadding + "px";
 
-      cardScalesRef.current = projectCards.map((card) =>
-        gsap.quickTo(card, "scale", { duration: 0.38, ease: "power2.out" }),
+      cardScaleXRef.current = projectCards.map((card) =>
+        gsap.quickTo(card, "scaleX", { duration: 0.38, ease: "power2.out" }),
+      );
+      cardScaleYRef.current = projectCards.map((card) =>
+        gsap.quickTo(card, "scaleY", { duration: 0.38, ease: "power2.out" }),
       );
       cardOpacityRef.current = projectCards.map((card) =>
         gsap.quickTo(card, "opacity", { duration: 0.38, ease: "power2.out" }),
