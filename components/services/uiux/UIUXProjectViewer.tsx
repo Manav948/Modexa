@@ -94,44 +94,36 @@ export default function UIUXProjectViewer({
       document.activeElement instanceof HTMLElement ? document.activeElement : null;
 
     const priorBodyStyle = {
-      position: body.style.position,
-      top: body.style.top,
-      left: body.style.left,
-      right: body.style.right,
-      width: body.style.width,
       overflow: body.style.overflow,
+      paddingRight: body.style.paddingRight,
     };
     const priorHtmlOverflow = html.style.overflow;
     const priorScrollBehavior = html.style.scrollBehavior;
 
     // Lock background page
     window.dispatchEvent(new CustomEvent("modexa:lenis-lock", { detail: true }));
+    // The overlay is a separate fixed scroll context. Only lock the document behind it;
+    // fixing <body> would also interfere with wheel scrolling in the nested viewer on desktop.
+    const scrollbarWidth = window.innerWidth - html.clientWidth;
+    const bodyPaddingRight = Number.parseFloat(window.getComputedStyle(body).paddingRight) || 0;
     html.style.overflow = "hidden";
-    body.style.position = "fixed";
-    body.style.top = `-${scrollY}px`;
-    body.style.left = "0";
-    body.style.right = "0";
-    body.style.width = "100%";
     body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) body.style.paddingRight = `${bodyPaddingRight + scrollbarWidth}px`;
 
     closeButtonRef.current?.focus();
 
     return () => {
       // Restore background page exactly
-      body.style.position = priorBodyStyle.position;
-      body.style.top = priorBodyStyle.top;
-      body.style.left = priorBodyStyle.left;
-      body.style.right = priorBodyStyle.right;
-      body.style.width = priorBodyStyle.width;
       body.style.overflow = priorBodyStyle.overflow;
+      body.style.paddingRight = priorBodyStyle.paddingRight;
       html.style.overflow = priorHtmlOverflow;
       html.style.scrollBehavior = "auto";
 
       window.scrollTo(0, scrollY);
-      window.dispatchEvent(new CustomEvent("modexa:lenis-lock", { detail: false }));
 
       requestAnimationFrame(() => {
         window.scrollTo(0, scrollY);
+        window.dispatchEvent(new CustomEvent("modexa:lenis-lock", { detail: false }));
         previousFocusRef.current?.focus({ preventScroll: true });
         html.style.scrollBehavior = priorScrollBehavior;
       });
@@ -155,10 +147,15 @@ export default function UIUXProjectViewer({
       { opacity: 0, scale: 0.96 },
       { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" },
     );
+    return () => {
+      gsap.killTweensOf(dialog);
+      gsap.killTweensOf(design);
+    };
   }, []);
 
   // Reset scroll to top and animate when switching project
   useEffect(() => {
+    setZoom(100);
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTop = 0;
       scrollContainerRef.current.scrollLeft = 0;
@@ -174,6 +171,7 @@ export default function UIUXProjectViewer({
       { opacity: 0, x: startX, scale: 0.98 },
       { opacity: 1, x: 0, scale: 1, duration: 0.48, ease: "power3.out", overwrite: true },
     );
+    return () => gsap.killTweensOf(design);
   }, [projectIndex, navDirection]);
 
   // Keyboard controls (Part 11)
@@ -236,7 +234,10 @@ export default function UIUXProjectViewer({
       role="dialog"
       aria-modal="true"
       aria-labelledby="uiux-viewer-title"
-      className="fixed inset-0 z-[120] flex flex-col bg-[#f7f5ef] text-[#151515]"
+      data-lenis-prevent="true"
+      data-lenis-prevent-wheel="true"
+      data-lenis-prevent-touch="true"
+      className="viewer-overlay fixed inset-0 z-[120] flex flex-col bg-[#f7f5ef] text-[#151515]"
     >
       {/* ── Fixed Header ── */}
       <header className="relative z-20 flex shrink-0 items-center justify-between border-b border-[#dcd7cb] bg-[#f7f5ef]/95 px-4 py-3 backdrop-blur-md sm:px-8 sm:py-3.5 lg:px-12">
@@ -272,7 +273,12 @@ export default function UIUXProjectViewer({
       {/* ── Internal Scrollable Viewport (Supports tall full-page scroll from top to bottom) ── */}
       <div
         ref={scrollContainerRef}
-        className="relative min-h-0 flex-1 overflow-y-auto overflow-x-auto overscroll-contain"
+        data-lenis-prevent="true"
+        data-lenis-prevent-wheel="true"
+        data-lenis-prevent-touch="true"
+        onWheel={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
+        className="viewer-scroll-area relative min-h-0 flex-1 overflow-y-auto overflow-x-auto overscroll-contain touch-auto [scrollbar-gutter:stable]"
         tabIndex={0}
       >
         <div
@@ -297,8 +303,10 @@ export default function UIUXProjectViewer({
               src={project.src}
               alt={project.alt}
               className="block w-full h-auto"
+              width={project.width}
+              height={project.height}
               loading="eager"
-              decoding="sync"
+              decoding="async"
               draggable={false}
             />
           </div>
@@ -306,7 +314,7 @@ export default function UIUXProjectViewer({
       </div>
 
       {/* ── Fixed Bottom Floating Control Toolbar ── */}
-      <footer className="fixed bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 sm:gap-4 rounded-none border border-[#dcd7cb] bg-[#f7f5ef]/98 px-3 py-2 shadow-[0_12px_36px_rgba(30,28,20,0.16)] backdrop-blur-md max-w-[94vw]">
+      <footer data-lenis-prevent="true" className="fixed bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 sm:gap-4 rounded-none border border-[#dcd7cb] bg-[#f7f5ef]/98 px-3 py-2 shadow-[0_12px_36px_rgba(30,28,20,0.16)] backdrop-blur-md max-w-[94vw]">
         {/* Previous Design (Works Infinitely) */}
         <button
           type="button"
