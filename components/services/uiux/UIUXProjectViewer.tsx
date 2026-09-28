@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
-import Image from "next/image";
+import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { UIUX_PROJECTS } from "./UIUXProjects";
+
+const N = UIUX_PROJECTS.length;
+const ZOOM_LEVELS = [50, 75, 100, 125, 150, 175, 200];
 
 type UIUXProjectViewerProps = {
   projectIndex: number;
@@ -17,29 +18,82 @@ export default function UIUXProjectViewer({
   onClose,
   onNavigate,
 }: UIUXProjectViewerProps) {
-  const project = UIUX_PROJECTS[projectIndex];
+  const project = UIUX_PROJECTS[projectIndex] || UIUX_PROJECTS[0];
+
   const dialogRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef<HTMLElement>(null);
-  const imageFrameRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const designWrapperRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
-  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
 
+  const [zoom, setZoom] = useState(100);
+  const [navDirection, setNavDirection] = useState<-1 | 1>(1);
+
+  // Truly infinite viewer navigation
   const move = useCallback(
     (direction: -1 | 1) => {
-      const length = UIUX_PROJECTS.length;
-      onNavigate((projectIndex + direction + length) % length);
+      setNavDirection(direction);
+      const nextIndex = (projectIndex + direction + N) % N;
+      onNavigate(nextIndex);
     },
     [onNavigate, projectIndex],
   );
 
+  // Zoom handlers
+  const handleZoomIn = () => {
+    setZoom((prev) => {
+      const idx = ZOOM_LEVELS.indexOf(prev);
+      if (idx !== -1 && idx < ZOOM_LEVELS.length - 1) {
+        return ZOOM_LEVELS[idx + 1];
+      }
+      return prev;
+    });
+  };
+
+  const handleZoomOut = () => {
+    setZoom((prev) => {
+      const idx = ZOOM_LEVELS.indexOf(prev);
+      if (idx > 0) {
+        return ZOOM_LEVELS[idx - 1];
+      }
+      return prev;
+    });
+  };
+
+  const handleResetZoom = () => {
+    setZoom(100);
+  };
+
+  const handleToggleZoom = () => {
+    setZoom((prev) => (prev === 100 ? 150 : 100));
+  };
+
+  // Close with smooth animation and restore page scroll
+  const handleClose = useCallback(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) {
+      onClose();
+      return;
+    }
+
+    gsap.to(dialog, {
+      opacity: 0,
+      duration: 0.28,
+      ease: "power2.in",
+      onComplete: onClose,
+    });
+  }, [onClose]);
+
+  // Lock background page scroll & preserve exact position
   useEffect(() => {
     const body = document.body;
     const html = document.documentElement;
     const scrollY = window.scrollY;
+
     previousFocusRef.current =
       document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const priorBody = {
+
+    const priorBodyStyle = {
       position: body.style.position,
       top: body.style.top,
       left: body.style.left,
@@ -48,30 +102,34 @@ export default function UIUXProjectViewer({
       overflow: body.style.overflow,
     };
     const priorHtmlOverflow = html.style.overflow;
+    const priorScrollBehavior = html.style.scrollBehavior;
 
+    // Lock background page
     window.dispatchEvent(new CustomEvent("modexa:lenis-lock", { detail: true }));
     html.style.overflow = "hidden";
     body.style.position = "fixed";
-    body.style.top = "-" + scrollY + "px";
+    body.style.top = `-${scrollY}px`;
     body.style.left = "0";
     body.style.right = "0";
     body.style.width = "100%";
     body.style.overflow = "hidden";
+
     closeButtonRef.current?.focus();
 
     return () => {
-      body.style.position = priorBody.position;
-      body.style.top = priorBody.top;
-      body.style.left = priorBody.left;
-      body.style.right = priorBody.right;
-      body.style.width = priorBody.width;
-      body.style.overflow = priorBody.overflow;
+      // Restore background page exactly
+      body.style.position = priorBodyStyle.position;
+      body.style.top = priorBodyStyle.top;
+      body.style.left = priorBodyStyle.left;
+      body.style.right = priorBodyStyle.right;
+      body.style.width = priorBodyStyle.width;
+      body.style.overflow = priorBodyStyle.overflow;
       html.style.overflow = priorHtmlOverflow;
-
-      const priorScrollBehavior = html.style.scrollBehavior;
       html.style.scrollBehavior = "auto";
+
       window.scrollTo(0, scrollY);
       window.dispatchEvent(new CustomEvent("modexa:lenis-lock", { detail: false }));
+
       requestAnimationFrame(() => {
         window.scrollTo(0, scrollY);
         previousFocusRef.current?.focus({ preventScroll: true });
@@ -80,36 +138,50 @@ export default function UIUXProjectViewer({
     };
   }, []);
 
+  // Opening animation (Part 7)
   useEffect(() => {
-    const context = gsap.context(() => {
-      gsap.fromTo(
-        dialogRef.current,
-        { autoAlpha: 0 },
-        { autoAlpha: 1, duration: 0.3, ease: "power2.out" },
-      );
-    });
-    closeButtonRef.current?.focus();
-
-    return () => context.revert();
-  }, []);
-
-  useEffect(() => {
-    if (scrollRef.current) scrollRef.current.scrollTop = 0;
-    const imageFrame = imageFrameRef.current;
-    if (!imageFrame) return;
+    const dialog = dialogRef.current;
+    const design = designWrapperRef.current;
+    if (!dialog || !design) return;
 
     gsap.fromTo(
-      imageFrame,
-      { autoAlpha: 0, x: 16 },
-      { autoAlpha: 1, x: 0, duration: 0.42, ease: "power2.out", overwrite: true },
+      dialog,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.35, ease: "power2.out" },
     );
-  }, [projectIndex]);
 
+    gsap.fromTo(
+      design,
+      { opacity: 0, scale: 0.96 },
+      { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" },
+    );
+  }, []);
+
+  // Reset scroll to top and animate when switching project
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+      scrollContainerRef.current.scrollLeft = 0;
+    }
+
+    const design = designWrapperRef.current;
+    if (!design) return;
+
+    // Directional transition matching navigation button
+    const startX = navDirection * 35;
+    gsap.fromTo(
+      design,
+      { opacity: 0, x: startX, scale: 0.98 },
+      { opacity: 1, x: 0, scale: 1, duration: 0.48, ease: "power3.out", overwrite: true },
+    );
+  }, [projectIndex, navDirection]);
+
+  // Keyboard controls (Part 11)
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
-        onClose();
+        handleClose();
         return;
       }
       if (event.key === "ArrowLeft") {
@@ -122,8 +194,19 @@ export default function UIUXProjectViewer({
         move(1);
         return;
       }
-      if (event.key !== "Tab" || !dialogRef.current) return;
+      if (event.key === "+" || event.key === "=") {
+        event.preventDefault();
+        handleZoomIn();
+        return;
+      }
+      if (event.key === "-" || event.key === "_") {
+        event.preventDefault();
+        handleZoomOut();
+        return;
+      }
 
+      // Trap focus inside modal
+      if (event.key !== "Tab" || !dialogRef.current) return;
       const focusable = Array.from(
         dialogRef.current.querySelectorAll<HTMLElement>(
           'button:not([disabled]), [tabindex="0"]',
@@ -143,7 +226,7 @@ export default function UIUXProjectViewer({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [move, onClose]);
+  }, [handleClose, move]);
 
   if (!project) return null;
 
@@ -155,98 +238,128 @@ export default function UIUXProjectViewer({
       aria-labelledby="uiux-viewer-title"
       className="fixed inset-0 z-[120] flex flex-col bg-[#f7f5ef] text-[#151515]"
     >
-      <header className="relative z-10 flex shrink-0 items-center justify-between border-b border-[#dcd7cb] bg-[#f7f5ef]/95 px-4 py-3 backdrop-blur-md sm:px-8 sm:py-4 lg:px-12">
-        <div className="min-w-0">
+      {/* ── Fixed Header ── */}
+      <header className="relative z-20 flex shrink-0 items-center justify-between border-b border-[#dcd7cb] bg-[#f7f5ef]/95 px-4 py-3 backdrop-blur-md sm:px-8 sm:py-3.5 lg:px-12">
+        <div className="min-w-0 pr-4">
           <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#E7472E] sm:text-[10px]">
-            UI/UX DESIGN <span className="px-1 text-[#8f8b82]">{"//"}</span> PROJECT VIEWER
+            UI/UX DESIGN <span className="px-1 text-[#8f8b82]">{"//"}</span> COMPLETE DESIGN VIEW
           </p>
-          <h2 id="uiux-viewer-title" className="mt-1 truncate font-editorial text-lg uppercase leading-none sm:text-xl">
-            {project.title}
+          <h2
+            id="uiux-viewer-title"
+            className="mt-0.5 truncate font-editorial text-lg uppercase leading-none sm:text-xl text-[#151515]"
+          >
+            {project.title} <span className="hidden font-mono text-xs font-normal text-[#747878] sm:inline">[{project.category}]</span>
           </h2>
         </div>
-        <button
-          ref={closeButtonRef}
-          type="button"
-          onClick={onClose}
-          aria-label="Close project viewer"
-          className="ml-4 flex h-10 w-10 shrink-0 items-center justify-center border border-[#dcd7cb] text-2xl leading-none transition-colors hover:border-[#E7472E] hover:text-[#E7472E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E7472E]"
-        >
-          ×
-        </button>
+
+        <div className="flex items-center gap-3 shrink-0">
+          <span className="hidden sm:inline font-mono text-[10px] uppercase tracking-wider text-[#747878]">
+            {String(project.index).padStart(2, "0")} / {String(N).padStart(2, "0")}
+          </span>
+          <button
+            ref={closeButtonRef}
+            type="button"
+            onClick={handleClose}
+            aria-label="Close design viewer"
+            className="inline-flex items-center gap-1.5 border border-[#dcd7cb] bg-[#fbf9f3] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-[#151515] transition-colors hover:border-[#E7472E] hover:bg-[#E7472E] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E7472E] cursor-pointer"
+          >
+            <span className="text-base font-bold leading-none">×</span>
+            <span className="font-bold">CLOSE</span>
+          </button>
+        </div>
       </header>
 
-      <main
-        ref={scrollRef}
-        className="min-h-0 flex-1 overflow-y-auto overscroll-contain"
-        onTouchStart={(event) => {
-          const touch = event.touches[0];
-          touchStartRef.current = { x: touch.clientX, y: touch.clientY };
-        }}
-        onTouchEnd={(event) => {
-          const start = touchStartRef.current;
-          const touch = event.changedTouches[0];
-          touchStartRef.current = null;
-          if (!start || !touch) return;
-          const dx = touch.clientX - start.x;
-          const dy = touch.clientY - start.y;
-          if (Math.abs(dx) > 72 && Math.abs(dx) > Math.abs(dy) * 1.35) {
-            move(dx < 0 ? 1 : -1);
-          }
-        }}
+      {/* ── Internal Scrollable Viewport (Supports tall full-page scroll from top to bottom) ── */}
+      <div
+        ref={scrollContainerRef}
+        className="relative min-h-0 flex-1 overflow-y-auto overflow-x-auto overscroll-contain"
+        tabIndex={0}
       >
-        <div className="mx-auto w-full max-w-[1050px] px-3 py-5 sm:px-6 sm:py-8 lg:px-10">
-          <div className="mb-3 flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.14em] text-[#747878] sm:text-[10px]">
-            <span>{project.category}</span>
-            <span>{String(project.index).padStart(2, "0")} / {String(UIUX_PROJECTS.length).padStart(2, "0")}</span>
-          </div>
+        <div
+          className="min-h-full flex flex-col items-center justify-start p-3 sm:p-6 lg:p-10 pb-28 pt-6 sm:pt-8"
+          style={{ minWidth: "100%" }}
+        >
+          {/* Complete Uncropped Design Container */}
           <div
-            ref={imageFrameRef}
-            className="relative mx-auto w-full max-w-[900px] overflow-hidden border border-[#dcd7cb] bg-white shadow-[0_16px_50px_rgba(30,28,20,0.08)]"
+            ref={designWrapperRef}
+            onDoubleClick={handleToggleZoom}
+            title="Double-click to toggle 100% / 150% zoom"
+            className="relative border border-[#dcd7cb] bg-white shadow-[0_24px_64px_rgba(30,28,20,0.12)] cursor-zoom-in transition-[width,max-width] duration-300 ease-out"
+            style={{
+              width: `${Math.round(100 * (zoom / 100))}%`,
+              maxWidth: `${Math.round(1400 * (zoom / 100))}px`,
+              minWidth: `${Math.round(320 * (zoom / 100))}px`,
+            }}
           >
-            <Image
+            {/* The COMPLETE uncropped design with its natural aspect ratio */}
+            <img
               key={project.id}
               src={project.src}
               alt={project.alt}
-              width={project.width}
-              height={project.height}
-              sizes="(max-width: 767px) 100vw, min(900px, 76vw)"
-              quality={80}
+              className="block w-full h-auto"
               loading="eager"
-              fetchPriority="high"
-              className="block h-auto w-full"
-              onLoad={() => ScrollTrigger.refresh()}
+              decoding="sync"
               draggable={false}
             />
           </div>
         </div>
+      </div>
 
-        <footer className="sticky bottom-0 z-10 flex items-center justify-between border-t border-[#dcd7cb] bg-[#f7f5ef]/95 px-4 py-3 backdrop-blur-md sm:px-8 lg:px-12">
-          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#747878] sm:text-[10px]">
-            {String(project.index).padStart(2, "0")} <span className="px-1 text-[#E7472E]">/</span> {String(UIUX_PROJECTS.length).padStart(2, "0")}
-          </span>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => move(-1)}
-              aria-label="Previous design"
-              className="flex h-10 w-10 items-center justify-center border border-[#dcd7cb] text-xl transition-colors hover:border-[#E7472E] hover:text-[#E7472E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E7472E]"
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              onClick={() => move(1)}
-              aria-label="Next design"
-              className="flex h-10 w-10 items-center justify-center border border-[#dcd7cb] text-xl transition-colors hover:border-[#E7472E] hover:text-[#E7472E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E7472E]"
-            >
-              →
-            </button>
-          </div>
-          <span className="font-mono text-[8px] uppercase tracking-[0.12em] text-[#8f8b82] sm:text-[9px]">
-            Scroll to explore
-          </span>
-        </footer>
-      </main>
+      {/* ── Fixed Bottom Floating Control Toolbar ── */}
+      <footer className="fixed bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 sm:gap-4 rounded-none border border-[#dcd7cb] bg-[#f7f5ef]/98 px-3 py-2 shadow-[0_12px_36px_rgba(30,28,20,0.16)] backdrop-blur-md max-w-[94vw]">
+        {/* Previous Design (Works Infinitely) */}
+        <button
+          type="button"
+          onClick={() => move(-1)}
+          aria-label="Previous design"
+          className="inline-flex items-center gap-1.5 border border-[#dcd7cb] bg-[#fbf9f3] px-2.5 sm:px-3 py-1.5 font-mono text-[9px] sm:text-[10px] uppercase tracking-wider text-[#151515] transition-colors hover:border-[#E7472E] hover:bg-[#E7472E] hover:text-white cursor-pointer"
+        >
+          <span>←</span>
+          <span className="hidden sm:inline font-bold">PREVIOUS</span>
+        </button>
+
+        {/* Zoom Controls (−  100%  +) */}
+        <div className="flex items-center border border-[#dcd7cb] bg-[#fbf9f3]">
+          <button
+            type="button"
+            onClick={handleZoomOut}
+            disabled={zoom <= 50}
+            aria-label="Zoom out"
+            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center font-mono text-base font-bold transition-colors hover:bg-[#E7472E] hover:text-white disabled:cursor-not-allowed disabled:opacity-30 cursor-pointer"
+          >
+            −
+          </button>
+          <button
+            type="button"
+            onClick={handleResetZoom}
+            aria-label="Reset zoom to 100%"
+            title="Click to reset zoom to 100%"
+            className="px-2 sm:px-3 font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-[#151515] transition-colors hover:text-[#E7472E] cursor-pointer"
+          >
+            {zoom}%
+          </button>
+          <button
+            type="button"
+            onClick={handleZoomIn}
+            disabled={zoom >= 200}
+            aria-label="Zoom in"
+            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center font-mono text-base font-bold transition-colors hover:bg-[#E7472E] hover:text-white disabled:cursor-not-allowed disabled:opacity-30 cursor-pointer"
+          >
+            +
+          </button>
+        </div>
+
+        {/* Next Design (Works Infinitely) */}
+        <button
+          type="button"
+          onClick={() => move(1)}
+          aria-label="Next design"
+          className="inline-flex items-center gap-1.5 border border-[#dcd7cb] bg-[#fbf9f3] px-2.5 sm:px-3 py-1.5 font-mono text-[9px] sm:text-[10px] uppercase tracking-wider text-[#151515] transition-colors hover:border-[#E7472E] hover:bg-[#E7472E] hover:text-white cursor-pointer"
+        >
+          <span className="hidden sm:inline font-bold">NEXT</span>
+          <span>→</span>
+        </button>
+      </footer>
     </div>
   );
 }
