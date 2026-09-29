@@ -17,10 +17,7 @@ export default function StartProjectButton({
     <Link
       href={href}
       onClick={onClick}
-      className={`start-project-button ${theme === "dark" ? "start-project-button-dark" : ""} ${className}`}
     >
-      <span>START A PROJECT</span>
-      <span aria-hidden="true" className="start-project-arrow">→</span>
     </Link>
   );
 }
