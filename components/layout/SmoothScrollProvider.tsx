@@ -55,6 +55,11 @@ export default function SmoothScrollProvider({
     };
     window.addEventListener("modexa:lenis-lock", handleViewerLock);
 
+    const handleScrollToTop = () => {
+      lenis.scrollTo(0, { duration: 1.2 });
+    };
+    window.addEventListener("modexa:scroll-to-top", handleScrollToTop);
+
     lenis.scrollTo(0, { immediate: true });
     window.scrollTo(0, 0);
 
@@ -84,6 +89,7 @@ export default function SmoothScrollProvider({
       lenis.destroy();
       lenisRef.current = null;
       window.removeEventListener("modexa:lenis-lock", handleViewerLock);
+      window.removeEventListener("modexa:scroll-to-top", handleScrollToTop);
       window.removeEventListener("popstate", handlePopState);
     };
   }, []);

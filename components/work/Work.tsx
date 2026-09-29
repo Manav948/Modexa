@@ -138,7 +138,6 @@ export default function Work() {
               className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest"
               style={{ fontFamily: "'DM Mono', monospace" }}
             >
-              [ SELECTED WORK ]
             </motion.div>
           </div>
 

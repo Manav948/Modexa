@@ -50,9 +50,6 @@ export default function TactileFidelity() {
     >
       <div className="mx-auto max-w-[1440px]">
         <header className="mb-10 border-b border-[#E8E2D5] pb-8 sm:mb-12 sm:pb-10 lg:mb-14">
-          <p data-interaction-intro className="mb-5 font-mono text-[10px] uppercase tracking-[0.16em] text-[#747878] sm:text-[11px]">
-            SECTION 04 <span className="px-1.5 text-[#E7472E]">{"//"}</span> INTERACTION METRICS
-          </p>
           <h2
             id="interaction-metrics-title"
             data-interaction-intro

@@ -107,9 +107,6 @@ export default function EngineeringCapabilities() {
       className="w-full border-t border-[#E8E2D5] bg-[#F7F5EF] px-5 py-16 text-[#151515] sm:px-8 sm:py-20 md:px-12 lg:px-16 lg:py-24"
     >
       <div className="mx-auto max-w-[1440px]">
-        <p data-capabilities-label className="mb-6 border-b border-[#E8E2D5] pb-4 font-mono text-[10px] uppercase tracking-[0.16em] text-[#747878] sm:mb-8 sm:text-[11px]">
-          SECTION 05 <span className="px-1.5 text-[#E7472E]">{"//"}</span> ENGINEERING CAPABILITIES
-        </p>
 
         <div className="grid grid-cols-1 border-l border-t border-[#E8E2D5] sm:grid-cols-2 lg:grid-cols-3">
           {CAPABILITIES.map((capability) => (

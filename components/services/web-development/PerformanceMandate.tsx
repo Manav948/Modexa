@@ -54,9 +54,6 @@ export default function PerformanceMandate() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Monumental Type Block */}
           <div className="lg:col-span-6">
-            <span className="font-mono text-xs text-[#ffdad4] uppercase tracking-widest block mb-4 font-medium">
-              06 / PERFORMANCE
-            </span>
             <h2
               ref={headlineRef}
               className="font-display text-4xl sm:text-6xl md:text-7xl uppercase leading-[0.9] tracking-tighter text-white"

@@ -140,7 +140,6 @@ export default function VideoEditingHero() {
       <div className="relative z-10 w-full border-t border-white/10 px-5 md:px-8 lg:px-12 py-3.5 bg-[#1b1c18]/80 backdrop-blur-md">
         <div className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-between gap-y-2 font-mono text-[10px] text-[#747878]">
           <div className="flex items-center gap-3">
-            <span className="text-[#b6240f] font-bold">[01 / CADENCE]</span>
             <span className="text-white font-bold uppercase tracking-wider">
               RHYTHM / PACING / STORY
             </span>

@@ -16,9 +16,6 @@ export default function MethodologyProtocol() {
       style={{ backgroundColor: "#f5f3ed", borderColor: "#e4e2dd" }}
     >
       <div className="mb-14">
-        <span className="font-mono text-xs text-[#e7472e] uppercase tracking-widest block mb-2 font-medium">
-          SECTION 08 // PROCESS
-        </span>
         <h2 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase text-[#1b1c18]">
           FROM IDEA TO DEPLOYMENT
         </h2>

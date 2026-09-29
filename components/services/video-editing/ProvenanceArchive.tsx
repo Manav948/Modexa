@@ -18,7 +18,6 @@ export default function ProvenanceArchive() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8 pb-3 border-b border-[#e4e2dd]">
           <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-[#1b1c18] line-reveal">
-            <span className="text-[#b6240f] font-bold">05 / VIDEO INDEX</span>
             <span className="text-[#747878]">— SELECTED DIRECTIONS</span>
           </div>
           <span className="font-mono text-[10px] text-[#747878] uppercase line-reveal">RHYTHM / PACING / STORY</span>

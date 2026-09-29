@@ -280,9 +280,6 @@ export default function TechnicalReleases() {
     >
       <div className="mx-auto mb-9 flex max-w-[1440px] flex-col gap-5 px-5 sm:mb-12 sm:px-8 md:flex-row md:items-end md:justify-between md:px-12 lg:px-16">
         <div>
-          <p data-work-intro className="mb-3 font-mono text-[10px] uppercase tracking-[0.16em] text-[#747878] sm:text-[11px]">
-            SECTION 07 <span className="px-1.5 text-[#E7472E]">{"//"}</span> SELECTED WORK
-          </p>
           <h2
             data-work-intro
             id="selected-work-title"

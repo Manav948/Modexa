@@ -81,9 +81,6 @@ export default function SpecificationLedger() {
       {/* Section Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 pb-4 border-b border-[#e4e2dd]">
         <div>
-          <span className="font-mono text-xs text-[#e7472e] uppercase tracking-widest block mb-2 font-medium">
-            SECTION 09 // CAPABILITIES
-          </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase text-[#1b1c18]">
             WHAT WE BUILD
           </h2>

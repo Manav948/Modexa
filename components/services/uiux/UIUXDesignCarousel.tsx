@@ -690,11 +690,11 @@ export default function UIUXDesignCarousel({
                 >
                   <div className="relative block aspect-[4/5] overflow-hidden border border-[#D8D2C5] bg-[#FBF9F3]">
                     <Image
-                      src={project.src}
+                      src={project.thumbSrc || project.src}
                       alt={project.alt}
                       fill
                       sizes="(max-width: 640px) 80vw, (max-width: 1024px) 70vw, 672px"
-                      quality={60}
+                      quality={75}
                       priority={isInitialCenter}
                       loading={isInitialCenter ? "eager" : "lazy"}
                       className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.01]"

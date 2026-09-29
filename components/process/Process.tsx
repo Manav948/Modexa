@@ -139,12 +139,6 @@ export default function Process() {
         >
           <div className="flex items-center gap-3">
             <span
-              className="font-mono text-[10px] text-[#b6240f] font-bold"
-              style={{ fontFamily: "'DM Mono', monospace" }}
-            >
-              02 / PROCESS
-            </span>
-            <span
               className="font-mono text-[10px] text-[#747878] uppercase tracking-wider"
               style={{ fontFamily: "'DM Mono', monospace" }}
             >

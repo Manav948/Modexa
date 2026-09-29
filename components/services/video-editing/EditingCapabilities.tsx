@@ -21,7 +21,6 @@ export default function EditingCapabilities() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-[#e4e2dd] gap-6">
           <div>
             <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-2 font-bold line-reveal">
-              <span>02 / CAPABILITIES</span>
               <span className="w-4 h-px bg-[#b6240f]" />
               <span>VIDEO EDITING</span>
             </div>

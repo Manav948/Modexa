@@ -42,7 +42,6 @@ export default function FilmStripSection() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 pb-4 border-b border-[#e4e2dd] gap-4">
           <div>
             <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-1.5 font-bold line-reveal">
-              <span>03 / DIRECTORIAL HORIZON</span>
               <span className="w-4 h-px bg-[#b6240f]" />
               <span>PANORAMIC TIMELINE</span>
             </div>

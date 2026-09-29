@@ -27,12 +27,6 @@ export default function UIUXVisualAtlas() {
       <div className="max-w-[1400px] mx-auto w-full px-5 md:px-8 lg:px-14">
         <div className="flex flex-wrap items-end justify-between gap-5 mb-8">
           <div>
-            <p
-              className="font-mono text-[9px] uppercase tracking-widest text-[#E7472E] font-bold mb-2"
-              style={{ fontFamily: "'DM Mono', monospace" }}
-            >
-              03 / INTERFACE ATLAS
-            </p>
             <h2
               id="uiux-visual-atlas-title"
               className="text-[#151515] leading-none tracking-tight"

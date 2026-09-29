@@ -166,9 +166,6 @@ export default function LivingSyntaxArtifact() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 flex flex-col items-start justify-between gap-3 md:flex-row md:items-baseline">
           <div>
-            <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-widest text-[#e7472e]">
-              SECTION 03 // LIVING CODE WORKSPACE
-            </span>
             <h2
               id="living-code-workspace-title"
               className="font-display text-2xl uppercase text-[#1b1c18] sm:text-3xl md:text-4xl"

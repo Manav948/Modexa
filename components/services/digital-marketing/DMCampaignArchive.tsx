@@ -49,7 +49,6 @@ export default function DMCampaignArchive() {
             className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-[#151515]"
             style={{ fontFamily: "'DM Mono', monospace" }}
           >
-            <span className="text-[#E7472E] font-bold">06 / DIGITAL INDEX</span>
             <span className="text-[#55534E]">— SELECTED DIRECTIONS</span>
           </div>
           <span

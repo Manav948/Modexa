@@ -130,7 +130,6 @@ export default function SelectedReels() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between pb-6 border-b border-[#e4e2dd] gap-6">
           <div>
             <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-2 font-bold line-reveal">
-              <span>02 / RHYTHM &amp; PACING</span>
               <span className="w-4 h-px bg-[#b6240f]" />
               <span>SELECTED VIDEO WORK</span>
             </div>

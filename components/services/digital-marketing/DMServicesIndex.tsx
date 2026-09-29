@@ -63,11 +63,6 @@ export default function DMServicesIndex() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 pb-6 border-b border-[#E8E2D5] gap-4">
           <div>
-            <div className="dm-service-label flex items-center gap-3 font-mono text-[10px] text-[#E7472E] uppercase tracking-widest mb-2 font-bold" style={{ fontFamily: "'DM Mono', monospace" }}>
-                <span>04 / CAPABILITIES</span>
-              <span className="w-4 h-px bg-[#E7472E]" />
-              <span>SERVICES INDEX</span>
-            </div>
             <h2
               className="dm-service-heading text-[#151515] uppercase tracking-tight leading-none"
               style={{

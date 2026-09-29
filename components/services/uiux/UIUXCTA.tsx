@@ -1,105 +1,15 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-
-import StartProjectButton from "@/components/motion/StartProjectButton";
+import ServiceContextualCTA from "../shared/ServiceContextualCTA";
 
 export default function UIUXCTA() {
   return (
-    <section
-      id="uiux-mandate"
-      className="relative w-full border-t py-28 overflow-hidden"
-      style={{ backgroundColor: "#151515", borderColor: "#2a2a2a" }}
-    >
-      {/* Background imagery */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <Image
-          src="/ui%26ux/ui14.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          quality={50}
-          loading="lazy"
-          className="object-cover object-top grayscale"
-        />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #151515 30%, rgba(21,21,21,0.6))" }} />
-      </div>
-
-      <div className="relative z-10 max-w-[1400px] mx-auto w-full px-5 md:px-8 lg:px-14">
-        <div>
-          {/* Label */}
-          <div
-            className="font-mono text-[9px] uppercase tracking-widest text-[#E7472E] font-bold mb-4"
-            style={{ fontFamily: "'DM Mono', monospace" }}
-          >
-            07 / START A PROJECT
-          </div>
-
-          {/* Heading */}
-          <h2
-            className="text-white leading-none tracking-tight mb-6"
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(2.75rem, 6vw, 5.5rem)",
-              fontWeight: 700,
-              letterSpacing: "-0.03em",
-            }}
-          >
-            HAVE AN EXPERIENCE<br />
-            <span
-              className="italic font-normal tracking-normal"
-              style={{ fontFamily: "'Space Grotesk', sans-serif", color: "#f7f5ef", fontSize: "0.85em" }}
-            >
-              worth designing?
-            </span>
-          </h2>
-
-          <p
-            className="text-[rgba(255,255,255,0.6)] max-w-xl text-base leading-relaxed mb-8"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
-            Bring the experience you&apos;re trying to shape. We&apos;ll design the system, map the interactions and make the next action clear.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-wrap items-center gap-4 mb-16 font-mono text-[10px]" style={{ fontFamily: "'DM Mono', monospace" }}>
-            <StartProjectButton theme="dark" href="mailto:hello@company.com?subject=UI%2FUX%20Design%20Project" />
-            <Link
-              href="/#services"
-              className="px-6 py-4 border text-white tracking-widest uppercase transition-colors hover:border-white"
-              style={{ borderColor: "#444" }}
-            >
-              BACK TO SERVICES
-            </Link>
-          </div>
-
-          {/* Colophon */}
-          <div
-            className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 border-t font-mono text-[9px] uppercase"
-            style={{ borderColor: "#2a2a2a", fontFamily: "'DM Mono', monospace" }}
-          >
-            <div>
-                <span className="text-white font-bold">FOCUS:</span>
-              <p className="mt-1 leading-relaxed text-[rgba(255,255,255,0.5)]">
-                Clarity, structure and interaction from the first screen.
-              </p>
-            </div>
-            <div>
-                <span className="text-white font-bold">DELIVERABLES:</span>
-              <p className="mt-1 leading-relaxed text-[rgba(255,255,255,0.5)]">
-                Flows, screens, systems and prototypes ready to explore.
-              </p>
-            </div>
-            <div>
-                <span className="text-white font-bold">DIRECTION:</span>
-              <p className="mt-1 leading-relaxed text-[rgba(255,255,255,0.5)]">
-                A clear visual and interaction language for the product.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <ServiceContextualCTA
+      discipline="UI/UX DESIGN"
+      headlinePrefix="HAVE AN EXPERIENCE"
+      headlineItalic="WORTH DESIGNING?"
+      description="Bring the experience you're trying to shape. We'll design the system, map the interactions and make the next action clear."
+      subject="UI/UX Design Project // Modexa"
+    />
   );
 }

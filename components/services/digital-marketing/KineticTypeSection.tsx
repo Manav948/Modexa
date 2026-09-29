@@ -84,7 +84,6 @@ export default function KineticTypeSection() {
           className="kinetic-meta flex items-center gap-4 md:gap-6 pt-10 pb-3 font-mono text-[9px] sm:text-[10px] uppercase tracking-widest border-t"
           style={{ borderColor: "#E8E2D5", color: "#55534E", fontFamily: "'DM Mono', monospace" }}
         >
-          <span>06 // KINETIC METRIC POSTER</span>
           <span className="w-4 h-px bg-[#E8E2D5]" />
           <span className="text-[#E7472E] font-bold">SYSTEM STATEMENT</span>
         </div>

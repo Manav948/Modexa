@@ -3,350 +3,137 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
-const DISCIPLINES = [
-  "VIDEO EDITING",
-  "UI / UX DESIGN",
-  "DIGITAL MARKETING",
-  "WEB DEVELOPMENT",
-];
-
-const WEBMAIL_URL =
-  "mailto:hello@company.com?subject=New%20Project%20Inquiry";
-const MAILTO_URL =
-  "mailto:hello@company.com?subject=New%20Project%20Inquiry";
-
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const [selectedDisciplines, setSelectedDisciplines] = useState<string[]>([]);
-  const [submitted, setSubmitted] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const toggleDiscipline = (d: string) => {
-    setSelectedDisciplines((prev) =>
-      prev.includes(d) ? prev.filter((x) => x !== d) : [...prev, d]
-    );
-  };
+  const email = "modexa1819@gmail.com";
+  const mailtoUrl = `mailto:${email}?subject=New%20Project%20Inquiry%20//%20Modexa`;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
-  const handleEmailClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (window.matchMedia("(max-width: 767px)").matches) {
-      e.preventDefault();
-      window.location.href = MAILTO_URL;
-    }
+  const copyEmail = () => {
+    navigator.clipboard?.writeText(email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
     <section
       id="inquiry-station"
       ref={sectionRef}
-      className="relative w-full px-5 md:px-8 lg:px-12 py-24"
-      style={{ backgroundColor: "#ffffff" }}
+      className="relative w-full border-t border-[#e4e2dd] bg-[#ffffff] px-5 py-20 sm:py-28 md:px-8 lg:px-12"
+      aria-label="Contact and project initiation"
     >
-      <div className="max-w-[1400px] mx-auto w-full">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left: Info */}
+      <div className="mx-auto max-w-[1400px]">
         <motion.div
-          className="lg:col-span-5 flex flex-col justify-between pr-0 lg:pr-8"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 items-start"
         >
-          <div>
+          {/* Left Column: Heading & Core Editorial Statement */}
+          <div className="lg:col-span-8 flex flex-col items-start">
+            {/* Editorial Label */}
             <div
-              className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest mb-3"
+              className="mb-4 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-[#E7472E] font-bold sm:mb-6 sm:text-xs"
               style={{ fontFamily: "'DM Mono', monospace" }}
             >
-              04 / CONTACT
+              <span className="h-px w-4 bg-[#E7472E]" />
+              <span className="text-[#747878]">STUDIO INITIATION</span>
             </div>
+
+            {/* Main Editorial Headline */}
             <h2
-              className="text-[#1b1c18] leading-tight mb-6"
-              style={{
-                fontFamily: "'Space Grotesk', sans-serif",
-                fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
-                lineHeight: "2.75rem",
-                letterSpacing: "-0.015em",
-                fontWeight: 400,
-              }}
+              className="font-display text-[clamp(2.75rem,6.5vw,5.75rem)] font-bold uppercase leading-[0.92] tracking-[-0.045em] text-[#1b1c18]"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
-              HAVE SOMETHING
+              LET&apos;S MAKE
               <br />
-              <span className="italic">WORTH BUILDING?</span>
+              <span className="font-normal italic text-[#747878]">SOMETHING</span>
+              <br />
+              WORTH REMEMBERING.
             </h2>
+
+            {/* Supporting Copy */}
             <p
-              className="max-w-md mb-8"
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "0.9375rem",
-                lineHeight: "1.625rem",
-                color: "#747878",
-              }}
+              className="mt-6 max-w-xl font-sans text-base leading-relaxed text-[#747878] sm:mt-8 sm:text-lg"
+              style={{ fontFamily: "'Inter', sans-serif" }}
             >
-              Tell us what you&apos;re working on. We&apos;ll bring the right creative and technical direction around it.
+              Have an idea, project or problem worth solving? Tell us what you&apos;re
+              working on.
             </p>
-
-            <div
-              className="flex flex-col gap-3 font-mono text-[10px] text-[#747878] pb-8"
-              style={{ fontFamily: "'DM Mono', monospace" }}
-            >
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[16px] text-[#b6240f]">
-                  location_on
-                </span>
-                <span className="text-[#1b1c18]">DESIGN / CONTENT / TECHNOLOGY</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[16px] text-[#b6240f]">
-                  location_on
-                </span>
-                <span className="text-[#1b1c18]">ONE CREATIVE DIRECTION</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[16px] text-[#b6240f]">
-                  verified
-                </span>
-                <span className="text-[#1b1c18]">THE RIGHT SPECIALISTS FOR THE WORK</span>
-              </div>
-            </div>
-
-            {/* Direct email link */}
-            <a
-              href={WEBMAIL_URL}
-              target="_blank"
-              rel="noreferrer"
-              onClick={handleEmailClick}
-              className="inline-flex items-center gap-3 group"
-              aria-label="Email Modexa"
-              style={{ fontFamily: "'DM Mono', monospace" }}
-            >
-              <span
-                className="font-mono text-[11px] tracking-wider uppercase text-[#1b1c18] group-hover:text-[#b6240f] transition-colors"
-              >
-                hello@company.com →
-              </span>
-            </a>
           </div>
 
-          {/* Verification seal */}
-          <div
-            className="w-36 h-36 rounded-full border-2 border-dashed flex flex-col items-center justify-center p-3 text-center mt-8 select-none pointer-events-none"
-            style={{
-              borderColor: "rgba(182,36,15,0.4)",
-              transform: "rotate(-6deg)",
-            }}
-          >
-            <span
-              className="font-mono text-[8px] tracking-widest text-[#b6240f] uppercase font-bold"
-              style={{ fontFamily: "'DM Mono', monospace" }}
-            >
-              PROJECT READY
-            </span>
-            <span
-              className="text-[#b6240f] leading-none py-1"
-              style={{
-                fontFamily: "'Space Grotesk', sans-serif",
-                fontSize: "1.5rem",
-                fontWeight: 500,
-              }}
-            >
-              2026
-            </span>
-            <span
-              className="font-mono text-[7px] tracking-wider text-[#b6240f] uppercase"
-              style={{ fontFamily: "'DM Mono', monospace" }}
-            >
-              STUDIO NOTE
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Right: Form */}
-        <motion.div
-          className="lg:col-span-7 p-8 md:p-12 border shadow-sm"
-          style={{ backgroundColor: "#f5f3ed", borderColor: "#e4e2dd" }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {submitted ? (
-            <div className="flex flex-col items-center justify-center h-full gap-6 py-16 text-center">
-              <div
-                className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest"
-                style={{ fontFamily: "'DM Mono', monospace" }}
-              >
-                  MESSAGE RECEIVED
-              </div>
-              <h3
-                className="text-[#1b1c18]"
-                style={{
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  fontSize: "1.5rem",
-                  fontWeight: 400,
-                  fontStyle: "italic",
-                }}
-              >
-                We&apos;ll review the direction and come back with a clear next step.
-              </h3>
-              <p
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "0.875rem",
-                  color: "#747878",
-                }}
-              >
-                Or reach us directly at{" "}
-                <a
-                  href={WEBMAIL_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={handleEmailClick}
-                  className="text-[#b6240f] underline"
-                >
-                  hello@company.com
-                </a>
-              </p>
-            </div>
-          ) : (
-            <form
-              id="inquiry-form"
-              className="space-y-8"
-              onSubmit={handleSubmit}
-            >
-              {/* Discipline chips */}
-              <div className="flex flex-col">
-                <label
-                  className="font-mono text-[10px] uppercase text-[#747878] font-bold mb-3"
+          {/* Right Column: Direct Contact & Action Dispatch */}
+          <div className="lg:col-span-4 flex flex-col justify-between self-stretch pt-2 lg:pt-14">
+            <div className="flex flex-col gap-6">
+              {/* Direct Studio Email with Interactive Hover */}
+              <div>
+                <span
+                  className="block font-mono text-[10px] uppercase tracking-widest text-[#747878] mb-2"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
-                  01. WHAT DO YOU NEED? (SELECT MULTIPLE)
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {DISCIPLINES.map((d) => (
-                    <button
-                      key={d}
-                      type="button"
-                      onClick={() => toggleDiscipline(d)}
-                      className="px-3 py-1.5 border font-mono text-[11px] uppercase tracking-wider transition-colors"
-                      style={{
-                        fontFamily: "'DM Mono', monospace",
-                        backgroundColor: selectedDisciplines.includes(d)
-                          ? "#b6240f"
-                          : "#fbf9f3",
-                        color: selectedDisciplines.includes(d)
-                          ? "#ffffff"
-                          : "#1b1c18",
-                        borderColor: selectedDisciplines.includes(d)
-                          ? "#b6240f"
-                          : "#e4e2dd",
-                      }}
+                  DIRECT DISPATCH // INQUIRY
+                </span>
+                <div className="flex flex-col items-start gap-2">
+                  <a
+                    href={mailtoUrl}
+                    className="group inline-flex items-center gap-2 font-mono text-lg sm:text-xl font-medium text-[#1b1c18] transition-colors hover:text-[#E7472E]"
+                    style={{ fontFamily: "'DM Mono', monospace" }}
+                  >
+                    <span>{email}</span>
+                    <span
+                      aria-hidden="true"
+                      className="text-xs transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5"
                     >
-                      {d}
-                    </button>
-                  ))}
+                      ↗
+                    </span>
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={copyEmail}
+                    className="font-mono text-[10px] uppercase tracking-wider text-[#747878] hover:text-[#1b1c18] transition-colors"
+                  >
+                    {copied ? "✓ COPIED TO CLIPBOARD" : "[ COPY EMAIL ]"}
+                  </button>
                 </div>
               </div>
 
-              {/* Direct mail channel */}
-              <div className="flex flex-col gap-3 border-y py-5" style={{ borderColor: "#e4e2dd" }}>
-                <span
-                  className="font-mono text-[10px] uppercase text-[#747878] font-bold"
+              {/* Primary Action Button */}
+              <div className="pt-4">
+                <a
+                  href={mailtoUrl}
+                  className="group inline-flex w-full sm:w-auto items-center justify-center gap-3 rounded-none bg-[#E7472E] px-8 py-4 font-mono text-xs uppercase tracking-widest text-white shadow-[0_8px_24px_-4px_rgba(231,71,46,0.3)] transition-all duration-300 hover:bg-[#1b1c18] hover:shadow-[0_12px_28px_-4px_rgba(27,28,24,0.3)]"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
-                  02. EMAIL
-                </span>
-                <a
-                  href={WEBMAIL_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={handleEmailClick}
-                  className="group flex flex-wrap items-start justify-between gap-2"
-                  aria-label="Email Modexa directly"
-                >
+                  <span>START A PROJECT</span>
                   <span
-                    className="min-w-0 break-words text-[#1b1c18] text-lg transition-colors group-hover:text-[#b6240f]"
-                    style={{ fontFamily: "'Inter', sans-serif" }}
+                    aria-hidden="true"
+                    className="transition-transform duration-300 group-hover:translate-x-1.5"
                   >
-                    hello@company.com
-                  </span>
-                  <span
-                    className="font-mono text-[11px] text-[#b6240f] transition-transform duration-300 group-hover:translate-x-1"
-                    style={{ fontFamily: "'DM Mono', monospace" }}
-                  >
-                    OPEN MAIL →
+                    →
                   </span>
                 </a>
-                <a
-                  href={WEBMAIL_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="self-start font-mono text-[9px] uppercase tracking-wider text-[#747878] underline underline-offset-4 hover:text-[#b6240f] transition-colors"
-                  style={{ fontFamily: "'DM Mono', monospace" }}
-                >
-                  EMAIL DIRECTLY →
-                </a>
               </div>
+            </div>
 
-              {/* Message */}
-              <div className="flex flex-col">
-                <label
-                  className="font-mono text-[10px] uppercase text-[#747878] font-bold mb-2"
-                  htmlFor="message"
-                  style={{ fontFamily: "'DM Mono', monospace" }}
-                >
-                  03. TELL US ABOUT THE PROJECT
-                </label>
-                <textarea
-                  className="bg-transparent border-b focus:outline-none py-2 transition-colors resize-none"
-                  style={{
-                    borderColor: "#747878",
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "0.9375rem",
-                    color: "#1b1c18",
-                  }}
-                  id="message"
-                  placeholder="What are you trying to make?"
-                  required
-                  rows={4}
-                  onFocus={(e) => (e.target.style.borderColor = "#1b1c18")}
-                  onBlur={(e) => (e.target.style.borderColor = "#747878")}
-                />
+            {/* Studio Availability Telemetry */}
+            <div
+              className="mt-12 border-t border-[#e4e2dd] pt-6 font-mono text-[10px] uppercase tracking-wider text-[#747878]"
+              style={{ fontFamily: "'DM Mono', monospace" }}
+            >
+              <div className="flex items-center justify-between py-1">
+                <span>CADENCE</span>
+                <span className="text-[#1b1c18] font-semibold">Q2 / Q3 ACTIVE</span>
               </div>
-
-              {/* Submit */}
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <span
-                  className="font-mono text-[10px] text-[#747878] uppercase tracking-wider"
-                  style={{ fontFamily: "'DM Mono', monospace" }}
-                >
-                  READY WHEN YOU ARE
-                </span>
-                <button
-                  id="submit-btn"
-                  type="submit"
-                  className="w-full sm:w-auto px-10 py-4 font-mono text-[11px] tracking-widest uppercase transition-colors flex items-center justify-center gap-4 magnetic-btn"
-                  style={{
-                    fontFamily: "'DM Mono', monospace",
-                    backgroundColor: "#1b1c18",
-                    color: "#ffffff",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.target as HTMLButtonElement).style.backgroundColor = "#b6240f";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.target as HTMLButtonElement).style.backgroundColor = "#1b1c18";
-                  }}
-                >
-                  <span>DISPATCH INQUIRY</span>
-                  <span>→</span>
-                </button>
+              <div className="flex items-center justify-between py-1">
+                <span>RESPONSE</span>
+                <span className="text-emerald-700 font-semibold">&lt; 24 HOURS</span>
               </div>
-            </form>
-          )}
+            </div>
+          </div>
         </motion.div>
-      </div>
       </div>
     </section>
   );

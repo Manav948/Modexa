@@ -23,10 +23,6 @@ export default function Hero() {
     <section id="overview" className="relative w-full px-5 md:px-8 lg:px-12 pt-12 pb-24 overflow-hidden" style={{ backgroundColor: "#fbf9f3" }}>
       <div className="max-w-[1350px] mx-auto w-full">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.2 }} className="w-full flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between pb-6 mb-12 border-b" style={{ borderColor: "#e4e2dd" }}>
-          <div className="flex items-center gap-4">
-            <span className="font-mono text-[10px] tracking-widest uppercase text-[#b6240f] font-bold" style={{ fontFamily: "'DM Mono', monospace" }}>CREATIVE STUDIO / 01</span>
-            <span className="hidden sm:inline font-mono text-[10px] text-[#747878]" style={{ fontFamily: "'DM Mono', monospace" }}>DESIGN / CONTENT / TECHNOLOGY / DIGITAL</span>
-          </div>
           <div className="flex items-center gap-2 font-mono text-[10px] text-[#747878]" style={{ fontFamily: "'DM Mono', monospace" }}>
             <span className="inline-block w-2 h-2 rounded-full bg-[#b6240f]" />
             <span className="tracking-wider">ONE CONNECTED DIGITAL EXPERIENCE</span>

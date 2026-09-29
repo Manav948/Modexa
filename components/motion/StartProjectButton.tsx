@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 interface StartProjectButtonProps {
@@ -8,16 +10,31 @@ interface StartProjectButtonProps {
 }
 
 export default function StartProjectButton({
-  href = "#inquiry-station",
+  href = "mailto:modexa1819@gmail.com?subject=Project%20Inquiry%20//%20Modexa",
   className = "",
   theme = "light",
   onClick,
 }: StartProjectButtonProps) {
+  const isDark = theme === "dark";
+
   return (
     <Link
       href={href}
       onClick={onClick}
+      className={`group inline-flex items-center justify-center gap-2.5 rounded-none px-6 py-3.5 font-mono text-xs uppercase tracking-widest transition-all duration-300 ${
+        isDark
+          ? "bg-[#E7472E] text-white hover:bg-white hover:text-[#1b1c18] shadow-[0_4px_16px_rgba(231,71,46,0.3)]"
+          : "bg-[#E7472E] text-white hover:bg-[#1b1c18] hover:text-white shadow-[0_4px_16px_rgba(231,71,46,0.2)]"
+      } ${className}`}
+      style={{ fontFamily: "'DM Mono', monospace" }}
     >
+      <span>START A PROJECT</span>
+      <span
+        aria-hidden="true"
+        className="transition-transform duration-300 group-hover:translate-x-1.5"
+      >
+        →
+      </span>
     </Link>
   );
 }

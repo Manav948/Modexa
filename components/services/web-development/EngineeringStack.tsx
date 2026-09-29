@@ -89,9 +89,6 @@ export default function EngineeringStack() {
     >
       <div className="mx-auto max-w-[1440px]">
         <div className="border-b border-[#E8E2D5] pb-8 md:pb-10">
-          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#747878] sm:text-[11px]">
-            SECTION 01 <span className="px-1.5 text-[#E7472E]">{"//"}</span> ENGINEERING STACK
-          </p>
           <div className="mt-5 flex flex-col gap-5 md:mt-6 md:flex-row md:items-end md:justify-between">
             <h2 id="engineering-stack-title" className="font-display text-[clamp(2.2rem,5vw,4.6rem)] font-normal uppercase leading-[0.94] tracking-[-0.055em]">
               THE ENGINEERING<br />STACK

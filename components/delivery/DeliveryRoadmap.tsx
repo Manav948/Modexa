@@ -59,15 +59,6 @@ export default function DeliveryRoadmap() {
       <div className="max-w-[1400px] mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-24">
           <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest mb-4"
-              style={{ fontFamily: "'DM Mono', monospace" }}
-            >
-              03 / DELIVERY
-            </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}

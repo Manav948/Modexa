@@ -90,12 +90,7 @@ export default function CreativeNetwork() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div
-            className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest mb-3"
-            style={{ fontFamily: "'DM Mono', monospace" }}
-          >
-            05 / TOPOLOGY
-          </div>
+
           <h2
             className="text-[#1b1c18]"
             style={{

@@ -238,9 +238,6 @@ export default function InteractionExperience() {
             {/* Small label */}
             <div className="mb-4 flex items-center gap-3">
               <span className="h-1.5 w-1.5 rounded-full bg-[#E7472E]" />
-              <span className="font-mono text-[9px] uppercase tracking-[0.2em] font-bold text-[#E7472E]">
-                04 / INTERACTION & EXPERIENCE
-              </span>
             </div>
 
             {/* Main Headline */}

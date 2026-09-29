@@ -31,7 +31,6 @@ export default function CreativeStatement() {
       <div className="relative z-10 max-w-[1400px] mx-auto flex flex-col gap-12">
         {/* Top Tagline */}
         <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] tracking-widest uppercase font-bold">
-            <span>[ CREATIVE STUDIO ]</span>
             <span className="text-[#747878]">CONNECTED DIGITAL WORK</span>
         </div>
 
