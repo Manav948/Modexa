@@ -18,7 +18,8 @@ export default function ServiceContextualCTA({
   description,
   subject,
 }: ServiceContextualCTAProps) {
-  const mailtoUrl = `mailto:modexa1819@gmail.com?subject=${encodeURIComponent(subject)}`;
+  const mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=modexa1819@gmail.com&su=${encodeURIComponent(subject)}`;
+
 
   return (
     <section

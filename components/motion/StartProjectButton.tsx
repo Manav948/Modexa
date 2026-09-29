@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 interface StartProjectButtonProps {
   href?: string;
   className?: string;
@@ -10,7 +8,7 @@ interface StartProjectButtonProps {
 }
 
 export default function StartProjectButton({
-  href = "mailto:modexa1819@gmail.com?subject=Project%20Inquiry%20//%20Modexa",
+  href = "https://mail.google.com/mail/?view=cm&fs=1&to=modexa1819@gmail.com&su=Project%20Inquiry%20%2F%2F%20Modexa",
   className = "",
   theme = "light",
   onClick,
@@ -18,9 +16,11 @@ export default function StartProjectButton({
   const isDark = theme === "dark";
 
   return (
-    <Link
+    <a
       href={href}
       onClick={onClick}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`group inline-flex items-center justify-center gap-2.5 rounded-none px-6 py-3.5 font-mono text-xs uppercase tracking-widest transition-all duration-300 ${
         isDark
           ? "bg-[#E7472E] text-white hover:bg-white hover:text-[#1b1c18] shadow-[0_4px_16px_rgba(231,71,46,0.3)]"
@@ -35,6 +35,6 @@ export default function StartProjectButton({
       >
         →
       </span>
-    </Link>
+    </a>
   );
 }

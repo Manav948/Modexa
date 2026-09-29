@@ -8,7 +8,7 @@ export default function Footer() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const homeHref = (hash: string) => (isHomePage ? hash : `/${hash}`);
-  const mailtoUrl = "mailto:modexa1819@gmail.com?subject=Project%20Inquiry%20//%20Modexa";
+  const mailtoUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=modexa1819@gmail.com&su=Project%20Inquiry%20%2F%2F%20Modexa";
 
   return (
     <footer
@@ -82,6 +82,8 @@ export default function Footer() {
             <span className="text-[#747878] font-bold mb-1">INQUIRY</span>
             <a
               href={mailtoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-xs font-semibold text-[#1b1c18] hover:text-[#E7472E] transition-colors"
             >
               modexa1819@gmail.com
@@ -89,6 +91,8 @@ export default function Footer() {
             <div className="pt-2">
               <a
                 href={mailtoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 rounded-none bg-[#1b1c18] px-4 py-2.5 font-mono text-[10px] uppercase tracking-wider text-white transition-all hover:bg-[#E7472E]"
               >
                 <span>START A PROJECT</span>

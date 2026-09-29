@@ -9,7 +9,7 @@ export default function Contact() {
   const [copied, setCopied] = useState(false);
 
   const email = "modexa1819@gmail.com";
-  const mailtoUrl = `mailto:${email}?subject=New%20Project%20Inquiry%20//%20Modexa`;
+  const mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent("New Project Inquiry // Modexa")}`;
 
   const copyEmail = () => {
     navigator.clipboard?.writeText(email);
@@ -78,6 +78,8 @@ export default function Contact() {
                 <div className="flex flex-col items-start gap-2">
                   <a
                     href={mailtoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group inline-flex items-center gap-2 font-mono text-lg sm:text-xl font-medium text-[#1b1c18] transition-colors hover:text-[#E7472E]"
                     style={{ fontFamily: "'DM Mono', monospace" }}
                   >
@@ -104,6 +106,8 @@ export default function Contact() {
               <div className="pt-4">
                 <a
                   href={mailtoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group inline-flex w-full sm:w-auto items-center justify-center gap-3 rounded-none bg-[#E7472E] px-8 py-4 font-mono text-xs uppercase tracking-widest text-white shadow-[0_8px_24px_-4px_rgba(231,71,46,0.3)] transition-all duration-300 hover:bg-[#1b1c18] hover:shadow-[0_12px_28px_-4px_rgba(27,28,24,0.3)]"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
