@@ -5,44 +5,83 @@ import type { ReactNode } from "react";
 import { UIUX_PROJECTS } from "./UIUXProjects";
 import UIUXProjectViewer from "./UIUXProjectViewer";
 
-type UIUXProjectActions = {
+type UIUXProjectContextType = {
+  activeProjectId: string | null;
   openProject: (projectId: string) => void;
+  closeProject: () => void;
+  registerViewer: () => void;
+  unregisterViewer: () => void;
 };
 
-const ProjectActionsContext = createContext<UIUXProjectActions>({
+const ProjectContext = createContext<UIUXProjectContextType>({
+  activeProjectId: null,
   openProject: () => undefined,
+  closeProject: () => undefined,
+  registerViewer: () => undefined,
+  unregisterViewer: () => undefined,
 });
 
 export function useUIUXProjectActions() {
-  return useContext(ProjectActionsContext);
+  const ctx = useContext(ProjectContext);
+  return {
+    openProject: ctx.openProject,
+    closeProject: ctx.closeProject,
+    activeProjectId: ctx.activeProjectId,
+  };
+}
+
+export function useUIUXProjectRegistration() {
+  return useContext(ProjectContext);
 }
 
 export default function UIUXProjectProvider({ children }: { children: ReactNode }) {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
+  const [hasRegisteredViewer, setHasRegisteredViewer] = useState(false);
 
   const openProject = useCallback((projectId: string) => {
-    const index = UIUX_PROJECTS.findIndex((project) => project.id === projectId);
-    if (index >= 0) setActiveIndex(index);
+    setActiveProjectId(projectId);
   }, []);
 
   const closeProject = useCallback(() => {
-    setActiveIndex(null);
+    setActiveProjectId(null);
   }, []);
 
-  const navigateProject = useCallback((nextIndex: number) => {
-    setActiveIndex(nextIndex);
+  const registerViewer = useCallback(() => {
+    setHasRegisteredViewer(true);
   }, []);
+
+  const unregisterViewer = useCallback(() => {
+    setHasRegisteredViewer(false);
+  }, []);
+
+  const projectIndex =
+    activeProjectId !== null
+      ? UIUX_PROJECTS.findIndex((p) => p.id === activeProjectId)
+      : -1;
 
   return (
-    <ProjectActionsContext.Provider value={{ openProject }}>
+    <ProjectContext.Provider
+      value={{
+        activeProjectId,
+        openProject,
+        closeProject,
+        registerViewer,
+        unregisterViewer,
+      }}
+    >
       {children}
-      {activeIndex !== null && (
+      {/* Only render fallback viewer if UIUXDesignCarousel isn't present to consume it */}
+      {!hasRegisteredViewer && activeProjectId !== null && projectIndex >= 0 && (
         <UIUXProjectViewer
-          projectIndex={activeIndex}
+          projectIndex={projectIndex}
           onClose={closeProject}
-          onNavigate={navigateProject}
+          onNavigate={(nextIdx) => {
+            if (UIUX_PROJECTS[nextIdx]) {
+              setActiveProjectId(UIUX_PROJECTS[nextIdx].id);
+            }
+          }}
         />
       )}
-    </ProjectActionsContext.Provider>
+    </ProjectContext.Provider>
   );
 }

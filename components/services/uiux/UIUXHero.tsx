@@ -212,9 +212,10 @@ export default function UIUXHero() {
                 src={project.src}
                 alt=""
                 fill
-                sizes="(max-width: 1023px) 68vw, 38vw"
-                quality={65}
-                preload={index === 0}
+                sizes="(max-width: 767px) 75vw, (max-width: 1023px) 65vw, 36vw"
+                quality={60}
+                priority={index === 0}
+                loading={index === 0 ? "eager" : "lazy"}
                 className="object-cover object-top transition-[filter] duration-500 group-hover:brightness-[1.02]"
                 draggable={false}
               />

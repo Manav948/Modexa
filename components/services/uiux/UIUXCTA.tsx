@@ -19,6 +19,8 @@ export default function UIUXCTA() {
           alt=""
           fill
           sizes="100vw"
+          quality={50}
+          loading="lazy"
           className="object-cover object-top grayscale"
         />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #151515 30%, rgba(21,21,21,0.6))" }} />

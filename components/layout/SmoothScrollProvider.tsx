@@ -39,6 +39,12 @@ export default function SmoothScrollProvider({
       wheelMultiplier: 1.0,
       touchMultiplier: 1.5,
       lerp: 0.06,
+      prevent: (node) => {
+        return Boolean(
+          node instanceof HTMLElement &&
+            node.closest?.('[data-lenis-prevent], .viewer-overlay, .viewer-scroll-area')
+        );
+      },
     });
 
     lenisRef.current = lenis;

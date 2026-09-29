@@ -167,9 +167,10 @@ export default function IdeaToInterface() {
         }
       });
 
-      // 4. Subtle Parallax for the Final Large Interface Visual
+      // 4. Subtle Parallax for the Final Large Interface Visual (Desktop only)
+      const isDesktop = window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
       const stage4Visual = stage4Ref.current?.querySelector<HTMLElement>("[data-stage-visual]");
-      if (stage4Visual) {
+      if (isDesktop && stage4Visual) {
         gsap.to(stage4Visual, {
           y: -30,
           ease: "none",
@@ -181,6 +182,29 @@ export default function IdeaToInterface() {
           },
         });
       }
+
+      // 5. Intelligent Video Lifecycle (Play only when in viewport)
+      const videoEl = videoRef.current;
+      let videoObserver: IntersectionObserver | null = null;
+      if (videoEl) {
+        videoObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                videoEl.play().catch(() => {});
+              } else {
+                videoEl.pause();
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+        videoObserver.observe(videoEl);
+      }
+
+      return () => {
+        videoObserver?.disconnect();
+      };
     }, section);
 
     return () => ctx.revert();
@@ -335,6 +359,8 @@ export default function IdeaToInterface() {
                     alt="Design process: Typography and conceptual layout study"
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
+                    quality={65}
+                    loading="lazy"
                     className="object-cover object-top"
                   />
                   {/* Visual Spec Overlay */}
@@ -376,6 +402,8 @@ export default function IdeaToInterface() {
                     alt="Design process: Structural layout and wireframe balance"
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
+                    quality={65}
+                    loading="lazy"
                     className="object-cover object-top"
                   />
                   <div className="pointer-events-none absolute bottom-3 right-3 bg-[#151515]/90 px-3 py-1.5 font-mono text-[8px] uppercase tracking-widest text-white backdrop-blur-sm">
@@ -475,10 +503,10 @@ export default function IdeaToInterface() {
                   <video
                     ref={videoRef}
                     src="/videos/video1.mp4"
-                    autoPlay
                     muted
                     loop
                     playsInline
+                    preload="metadata"
                     className="h-full w-full object-cover object-center"
                   />
                   {/* Live Motion Status Tag */}
@@ -576,8 +604,9 @@ export default function IdeaToInterface() {
                   alt="Final complete UI/UX interface design"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1440px) 95vw, 1360px"
+                  quality={65}
+                  loading="lazy"
                   className="object-cover object-top"
-                  priority
                 />
 
                 {/* Corner registration marks */}

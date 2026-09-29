@@ -4,10 +4,19 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { UIUX_PROJECTS, UIUXProject } from "./UIUXProjects";
+import { useUIUXProjectRegistration } from "./UIUXProjectProvider";
 
-const N = UIUX_PROJECTS.length;
-// 3 cloned sets: [Set 0 (clone before), Set 1 (middle original), Set 2 (clone after)]
-const SLIDES: UIUXProject[] = [...UIUX_PROJECTS, ...UIUX_PROJECTS, ...UIUX_PROJECTS];
+const N = UIUX_PROJECTS.length; // 14
+const CLONE_COUNT = 3;
+
+// Minimal clones: 3 clones before [11, 12, 13], 14 originals [0..13], 3 clones after [0, 1, 2]
+// Total = 20 slides. Reduces DOM tree by >52% compared to 42 clones!
+const CLONES_BEFORE = UIUX_PROJECTS.slice(-CLONE_COUNT);
+const CLONES_AFTER = UIUX_PROJECTS.slice(0, CLONE_COUNT);
+const SLIDES: UIUXProject[] = [...CLONES_BEFORE, ...UIUX_PROJECTS, ...CLONES_AFTER];
+const ORIGINAL_START_INDEX = CLONE_COUNT; // 3
+const ORIGINAL_END_INDEX = CLONE_COUNT + N - 1; // 16
+
 const ZOOM_LEVELS = [50, 75, 100, 125, 150, 175, 200];
 
 type DragState = {
@@ -22,7 +31,7 @@ type DragState = {
 };
 
 type UIUXDesignCarouselProps = {
-  /** Optional externally controlled project ID to open in viewer (e.g. from hero or other sections) */
+  /** Optional externally controlled project ID (e.g. from hero or external links) */
   externalOpenProjectId?: string | null;
   onExternalClose?: () => void;
 };
@@ -31,6 +40,9 @@ export default function UIUXDesignCarousel({
   externalOpenProjectId,
   onExternalClose,
 }: UIUXDesignCarouselProps) {
+  // Context integration with UIUXProjectProvider
+  const projectContext = useUIUXProjectRegistration();
+
   // ── Carousel Refs ──
   const sectionRef = useRef<HTMLElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -39,15 +51,20 @@ export default function UIUXDesignCarousel({
 
   const targetsRef = useRef<number[]>([]);
   const trackXRef = useRef(0);
-  const activeTrackIndexRef = useRef(N); // Start in middle set (index 14)
-  const targetTrackIndexRef = useRef(N);
+  const activeTrackIndexRef = useRef(ORIGINAL_START_INDEX); // Start at Project 0
+  const targetTrackIndexRef = useRef(ORIGINAL_START_INDEX);
   const isNavigatingRef = useRef(false);
   const suppressClickUntilRef = useRef(0);
 
   const autoplayTimerRef = useRef<gsap.core.Tween | null>(null);
   const restartTimerRef = useRef<gsap.core.Tween | null>(null);
   const transitionTweenRef = useRef<gsap.core.Tween | null>(null);
-  const pauseReasonsRef = useRef({ hover: false, interaction: false, viewer: false, reducedMotion: false });
+  const pauseReasonsRef = useRef({
+    hover: false,
+    interaction: false,
+    viewer: false,
+    reducedMotion: false,
+  });
 
   // ── Viewer Refs ──
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -56,19 +73,33 @@ export default function UIUXDesignCarousel({
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
-  // ── React State (Only updated when active slide changes or viewer opens/closes) ──
+  // ── React State (Strictly limited: only updates when slide or viewer changes) ──
   const [activeIndex, setActiveIndex] = useState(0); // 0 .. N-1
-  const [viewerIndex, setViewerIndex] = useState<number | null>(null);
+  const [localViewerProjectId, setLocalViewerProjectId] = useState<string | null>(null);
   const [zoom, setZoom] = useState(100);
   const [viewerNavDirection, setViewerNavDirection] = useState<-1 | 1>(1);
 
-  // Sync external open request
+  // Register with UIUXProjectProvider as the canonical viewer renderer
   useEffect(() => {
-    if (externalOpenProjectId) {
-      const idx = UIUX_PROJECTS.findIndex((p) => p.id === externalOpenProjectId);
-      if (idx >= 0) setViewerIndex(idx);
-    }
-  }, [externalOpenProjectId]);
+    projectContext?.registerViewer?.();
+    return () => {
+      projectContext?.unregisterViewer?.();
+    };
+  }, [projectContext]);
+
+  // Determine active project for the viewer (from external prop, provider context, or local card click)
+  const effectiveViewerProjectId =
+    externalOpenProjectId !== undefined
+      ? externalOpenProjectId
+      : projectContext?.activeProjectId ?? localViewerProjectId;
+
+  const activeViewerIndex =
+    effectiveViewerProjectId !== null
+      ? UIUX_PROJECTS.findIndex((p) => p.id === effectiveViewerProjectId)
+      : -1;
+
+  const activeViewerProject =
+    activeViewerIndex >= 0 ? UIUX_PROJECTS[activeViewerIndex] : null;
 
   // ─────────────────────────────────────────────────────────────
   // 1. CAROUSEL GEOMETRY & MEASUREMENT (Calculated once on mount/resize)
@@ -78,7 +109,9 @@ export default function UIUXDesignCarousel({
     const track = trackRef.current;
     if (!viewport || !track) return;
 
-    const cards = Array.from(track.querySelectorAll<HTMLButtonElement>("[data-project-card]"));
+    const cards = Array.from(
+      track.querySelectorAll<HTMLButtonElement>("[data-project-card]")
+    );
     if (!cards.length) return;
 
     const firstCard = cards[0];
@@ -89,7 +122,7 @@ export default function UIUXDesignCarousel({
     track.style.paddingLeft = `${sidePadding}px`;
     track.style.paddingRight = `${sidePadding}px`;
 
-    // Compute target X for every card so the card sits perfectly centered in the viewport
+    // Compute target X for every card so it centers in the viewport
     targetsRef.current = cards.map((card) => {
       return viewportWidth / 2 - (card.offsetLeft + card.offsetWidth / 2);
     });
@@ -101,7 +134,7 @@ export default function UIUXDesignCarousel({
   }, []);
 
   // ─────────────────────────────────────────────────────────────
-  // 2. SILENT NORMALIZATION (Infinite Loop without visible jump)
+  // 2. SILENT NORMALIZATION (Seamless loop without visible jump)
   // ─────────────────────────────────────────────────────────────
   const normalizeTrackPosition = useCallback(() => {
     const track = trackRef.current;
@@ -109,14 +142,16 @@ export default function UIUXDesignCarousel({
     if (!track || !targets.length) return;
 
     const curIndex = activeTrackIndexRef.current;
-    if (curIndex >= 2 * N) {
+    if (curIndex > ORIGINAL_END_INDEX) {
+      // Wrapped past right boundary: jump back into middle original set
       const wrapped = curIndex - N;
       const wrappedX = targets[wrapped] ?? 0;
       track.style.transform = `translate3d(${wrappedX}px, 0, 0)`;
       trackXRef.current = wrappedX;
       activeTrackIndexRef.current = wrapped;
       targetTrackIndexRef.current = wrapped;
-    } else if (curIndex < N) {
+    } else if (curIndex < ORIGINAL_START_INDEX) {
+      // Wrapped before left boundary: jump forward into middle original set
       const wrapped = curIndex + N;
       const wrappedX = targets[wrapped] ?? 0;
       track.style.transform = `translate3d(${wrappedX}px, 0, 0)`;
@@ -147,9 +182,12 @@ export default function UIUXDesignCarousel({
       }
 
       // Pre-normalize boundary if needed
-      if (direction === 1 && targetTrackIndexRef.current >= 2 * N) {
+      if (direction === 1 && targetTrackIndexRef.current > ORIGINAL_END_INDEX) {
         normalizeTrackPosition();
-      } else if (direction === -1 && targetTrackIndexRef.current < N) {
+      } else if (
+        direction === -1 &&
+        targetTrackIndexRef.current < ORIGINAL_START_INDEX
+      ) {
         normalizeTrackPosition();
       }
 
@@ -158,7 +196,8 @@ export default function UIUXDesignCarousel({
       isNavigatingRef.current = true;
 
       const targetX = targets[nextTargetIndex] ?? 0;
-      const realIndex = ((nextTargetIndex % N) + N) % N;
+      const realIndex =
+        (((nextTargetIndex - ORIGINAL_START_INDEX) % N) + N) % N;
 
       transitionTweenRef.current = gsap.to(track, {
         x: targetX,
@@ -174,16 +213,14 @@ export default function UIUXDesignCarousel({
           isNavigatingRef.current = false;
           activeTrackIndexRef.current = nextTargetIndex;
 
-          // Silent normalization after transition
           normalizeTrackPosition();
           setActiveIndex(realIndex);
 
-          // Schedule next autoplay tick
           scheduleAutoplay();
         },
       });
     },
-    [normalizeTrackPosition],
+    [normalizeTrackPosition]
   );
 
   // ─────────────────────────────────────────────────────────────
@@ -221,7 +258,8 @@ export default function UIUXDesignCarousel({
 
       targetTrackIndexRef.current = bestIndex;
       isNavigatingRef.current = true;
-      const realIndex = ((bestIndex % N) + N) % N;
+      const realIndex =
+        (((bestIndex - ORIGINAL_START_INDEX) % N) + N) % N;
 
       transitionTweenRef.current = gsap.to(track, {
         x: bestX,
@@ -246,7 +284,7 @@ export default function UIUXDesignCarousel({
         },
       });
     },
-    [normalizeTrackPosition, scheduleAutoplay],
+    [normalizeTrackPosition, scheduleAutoplay]
   );
 
   // ─────────────────────────────────────────────────────────────
@@ -281,7 +319,7 @@ export default function UIUXDesignCarousel({
   }, [measureLayout, scheduleAutoplay]);
 
   // ─────────────────────────────────────────────────────────────
-  // 6. HIGH-PERFORMANCE POINTER EVENTS (Zero React re-renders on drag)
+  // 6. HIGH-PERFORMANCE POINTER EVENTS (Zero React setState on drag)
   // ─────────────────────────────────────────────────────────────
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     if (event.pointerType === "mouse" && event.button !== 0) return;
@@ -317,29 +355,29 @@ export default function UIUXDesignCarousel({
     const dx = event.clientX - drag.startX;
     const dy = event.clientY - drag.startY;
 
-    // Determine gesture direction (Horizontal carousel drag vs Vertical page scroll)
+    // Strict gesture direction detection: Horizontal carousel swipe vs Vertical page scroll
     if (drag.axis === "pending") {
       const distance = Math.hypot(dx, dy);
       if (distance < 5) return;
 
       if (Math.abs(dx) <= Math.abs(dy)) {
-        // Vertical page scroll gesture: release carousel control completely
+        // Vertical page scroll gesture: release control completely to browser
         drag.axis = "vertical";
         return;
       }
 
-      // Horizontal gesture: capture pointer stream for the carousel
+      // Horizontal swipe detected: capture pointer
       drag.axis = "horizontal";
       try {
         event.currentTarget.setPointerCapture(event.pointerId);
       } catch {
-        // Pointer capture fallback
+        // Fallback
       }
     }
 
     if (drag.axis !== "horizontal") return;
 
-    // Prevent default only once horizontal drag is locked
+    // Prevent default only when horizontal carousel drag is active
     if (event.cancelable) event.preventDefault();
 
     const now = performance.now();
@@ -351,7 +389,7 @@ export default function UIUXDesignCarousel({
     const nextX = drag.startTrackX + dx;
     trackXRef.current = nextX;
 
-    // DIRECT GPU TRANSFORM UPDATE (No setState, no React re-render, no layout query)
+    // DIRECT GPU TRANSFORM (No setState, no re-render, no layout query)
     track.style.transform = `translate3d(${nextX}px, 0, 0)`;
   };
 
@@ -372,13 +410,10 @@ export default function UIUXDesignCarousel({
     }
 
     if (wasHorizontal) {
-      // Prevent click event triggering viewer immediately after swipe
       suppressClickUntilRef.current = Date.now() + 260;
-      // Project destination using velocity and settle smoothly
       const projectedX = trackXRef.current + drag.velocity * 160;
       settleAtNearest(projectedX);
     } else {
-      // Resume autoplay if it was just a tap/cancelled gesture
       restartTimerRef.current?.kill();
       restartTimerRef.current = gsap.delayedCall(2.0, scheduleAutoplay);
     }
@@ -386,8 +421,16 @@ export default function UIUXDesignCarousel({
 
   const handleCardClick = (slideIndex: number) => {
     if (Date.now() < suppressClickUntilRef.current) return;
-    const realIndex = ((slideIndex % N) + N) % N;
-    setViewerIndex(realIndex);
+    const realIndex =
+      (((slideIndex - ORIGINAL_START_INDEX) % N) + N) % N;
+    const clickedProject = UIUX_PROJECTS[realIndex];
+    if (!clickedProject) return;
+
+    if (projectContext?.openProject) {
+      projectContext.openProject(clickedProject.id);
+    } else {
+      setLocalViewerProjectId(clickedProject.id);
+    }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -401,36 +444,47 @@ export default function UIUXDesignCarousel({
   };
 
   // ─────────────────────────────────────────────────────────────
-  // 7. FULL-SCREEN DESIGN VIEWER LOGIC (Flawless Desktop & Mobile)
+  // 7. FULL-SCREEN DESIGN VIEWER LOGIC (Desktop & Mobile)
   // ─────────────────────────────────────────────────────────────
-  const activeViewerProject = viewerIndex !== null ? UIUX_PROJECTS[viewerIndex] : null;
-
   const handleCloseViewer = useCallback(() => {
     const dialog = dialogRef.current;
-    if (!dialog) {
-      setViewerIndex(null);
+    const cleanupClose = () => {
+      if (projectContext?.closeProject) {
+        projectContext.closeProject();
+      }
+      setLocalViewerProjectId(null);
       onExternalClose?.();
+    };
+
+    if (!dialog) {
+      cleanupClose();
       return;
     }
 
     gsap.to(dialog, {
       opacity: 0,
-      duration: 0.24,
+      duration: 0.22,
       ease: "power2.in",
-      onComplete: () => {
-        setViewerIndex(null);
-        onExternalClose?.();
-      },
+      onComplete: cleanupClose,
     });
-  }, [onExternalClose]);
+  }, [projectContext, onExternalClose]);
 
-  const moveViewer = useCallback((direction: -1 | 1) => {
-    setViewerNavDirection(direction);
-    setViewerIndex((prev) => {
-      if (prev === null) return 0;
-      return (prev + direction + N) % N;
-    });
-  }, []);
+  const moveViewer = useCallback(
+    (direction: -1 | 1) => {
+      if (activeViewerIndex < 0) return;
+      setViewerNavDirection(direction);
+      const nextIdx = (activeViewerIndex + direction + N) % N;
+      const nextProj = UIUX_PROJECTS[nextIdx];
+      if (!nextProj) return;
+
+      if (projectContext?.openProject) {
+        projectContext.openProject(nextProj.id);
+      } else {
+        setLocalViewerProjectId(nextProj.id);
+      }
+    },
+    [activeViewerIndex, projectContext]
+  );
 
   const handleZoomIn = () => {
     setZoom((prev) => {
@@ -451,7 +505,7 @@ export default function UIUXDesignCarousel({
 
   // Background Scroll-Lock & Lenis Lock
   useEffect(() => {
-    if (viewerIndex === null) return;
+    if (!activeViewerProject) return;
 
     pauseReasonsRef.current.viewer = true;
     autoplayTimerRef.current?.kill();
@@ -460,7 +514,10 @@ export default function UIUXDesignCarousel({
     const html = document.documentElement;
     const priorScrollY = window.scrollY;
 
-    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    previousFocusRef.current =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
 
     // Measure scrollbar width to prevent background layout shift
     const scrollbarWidth = window.innerWidth - html.clientWidth;
@@ -475,7 +532,9 @@ export default function UIUXDesignCarousel({
     html.style.overflow = "hidden";
 
     // Pause Lenis smooth scrolling on main page
-    window.dispatchEvent(new CustomEvent("modexa:lenis-lock", { detail: true }));
+    window.dispatchEvent(
+      new CustomEvent("modexa:lenis-lock", { detail: true })
+    );
 
     closeButtonRef.current?.focus();
 
@@ -486,7 +545,9 @@ export default function UIUXDesignCarousel({
 
       window.scrollTo(0, priorScrollY);
       // Resume Lenis smooth scrolling
-      window.dispatchEvent(new CustomEvent("modexa:lenis-lock", { detail: false }));
+      window.dispatchEvent(
+        new CustomEvent("modexa:lenis-lock", { detail: false })
+      );
 
       pauseReasonsRef.current.viewer = false;
       restartTimerRef.current?.kill();
@@ -494,11 +555,11 @@ export default function UIUXDesignCarousel({
 
       previousFocusRef.current?.focus({ preventScroll: true });
     };
-  }, [viewerIndex, scheduleAutoplay]);
+  }, [activeViewerProject, scheduleAutoplay]);
 
-  // Reset scroll & animate design image on viewer index change
+  // Reset scroll position & subtle animate on viewer project change
   useEffect(() => {
-    if (viewerIndex === null) return;
+    if (!activeViewerProject) return;
     setZoom(100);
 
     if (scrollContainerRef.current) {
@@ -508,18 +569,25 @@ export default function UIUXDesignCarousel({
 
     const design = designWrapperRef.current;
     if (design) {
-      const startX = viewerNavDirection * 28;
+      const startX = viewerNavDirection * 24;
       gsap.fromTo(
         design,
         { opacity: 0, x: startX, scale: 0.98 },
-        { opacity: 1, x: 0, scale: 1, duration: 0.38, ease: "power2.out", overwrite: true },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 0.35,
+          ease: "power2.out",
+          overwrite: true,
+        }
       );
     }
-  }, [viewerIndex, viewerNavDirection]);
+  }, [activeViewerProject?.id, viewerNavDirection]);
 
   // Viewer Keyboard Navigation
   useEffect(() => {
-    if (viewerIndex === null) return;
+    if (!activeViewerProject) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -542,7 +610,7 @@ export default function UIUXDesignCarousel({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [viewerIndex, handleCloseViewer, moveViewer]);
+  }, [activeViewerProject, handleCloseViewer, moveViewer]);
 
   const currentProject = UIUX_PROJECTS[activeIndex] || UIUX_PROJECTS[0];
 
@@ -575,8 +643,8 @@ export default function UIUXDesignCarousel({
 
         {/* 
           Carousel Viewport:
-          - touch-action: pan-y (enables smooth native vertical page scroll while horizontally swiping)
-          - Single Pointer Events handling
+          - touch-action: pan-y (enables normal vertical page scroll while swiping horizontally)
+          - Single Pointer Events system
         */}
         <div
           ref={viewportRef}
@@ -608,10 +676,10 @@ export default function UIUXDesignCarousel({
             className="relative flex w-max items-start gap-4 sm:gap-6 lg:gap-8 [will-change:transform]"
           >
             {SLIDES.map((project, slideIndex) => {
-              const isMiddleSet = slideIndex >= N && slideIndex < 2 * N;
+              const isInitialCenter = slideIndex === ORIGINAL_START_INDEX;
               return (
                 <button
-                  key={`${project.id}-clone-${slideIndex}`}
+                  key={`${project.id}-slide-${slideIndex}`}
                   type="button"
                   data-project-card
                   data-project-id={project.id}
@@ -625,10 +693,10 @@ export default function UIUXDesignCarousel({
                       src={project.src}
                       alt={project.alt}
                       fill
-                      sizes="(max-width: 767px) 80vw, min(672px, 80vw)"
-                      quality={68}
-                      priority={isMiddleSet && slideIndex === N}
-                      loading={isMiddleSet ? "eager" : "lazy"}
+                      sizes="(max-width: 640px) 80vw, (max-width: 1024px) 70vw, 672px"
+                      quality={60}
+                      priority={isInitialCenter}
+                      loading={isInitialCenter ? "eager" : "lazy"}
                       className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.01]"
                       draggable={false}
                     />
@@ -713,10 +781,15 @@ export default function UIUXDesignCarousel({
           data-lenis-prevent="true"
           data-lenis-prevent-wheel="true"
           data-lenis-prevent-touch="true"
-          className="viewer-overlay fixed inset-0 z-[120] flex flex-col bg-[#F7F5EF] text-[#151515]"
+          onWheel={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+          className="viewer-overlay fixed inset-0 z-[9999] flex flex-col bg-[#F7F5EF] text-[#151515] overflow-hidden"
         >
-          {/* Fixed Top Header */}
-          <header className="relative z-20 flex shrink-0 items-center justify-between border-b border-[#DCD7CB] bg-[#F7F5EF]/95 px-4 py-3 backdrop-blur-md sm:px-8 sm:py-3.5 lg:px-12">
+          {/* Fixed Top Header Toolbar */}
+          <header
+            data-lenis-prevent="true"
+            className="viewer-toolbar relative z-20 flex shrink-0 items-center justify-between border-b border-[#DCD7CB] bg-[#F7F5EF]/98 px-4 py-3 sm:px-8 sm:py-3.5 lg:px-12 backdrop-blur-md"
+          >
             <div className="min-w-0 pr-4">
               <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#E7472E] sm:text-[10px]">
                 UI/UX DESIGN <span className="px-1 text-[#8F8B82]">{"//"}</span> COMPLETE DESIGN VIEW
@@ -751,19 +824,22 @@ export default function UIUXDesignCarousel({
 
           {/* 
             Native Scroll Container:
-            - data-lenis-prevent prevents Lenis from cancelling wheel events
-            - onWheel e.stopPropagation() prevents wheel event bubbling to window
-            - overflow-y: auto and overflow-x: auto enable native vertical + horizontal scrolling
+            - data-lenis-prevent ensures Lenis never prevents wheel events
+            - onWheel e.stopPropagation() isolates viewer scrolling from parent window
+            - overflow-y: auto + overflow-x: auto enable native vertical + horizontal scrolling
           */}
           <div
             ref={scrollContainerRef}
             data-lenis-prevent="true"
             data-lenis-prevent-wheel="true"
             data-lenis-prevent-touch="true"
+            tabIndex={0}
             onWheel={(e) => e.stopPropagation()}
             onTouchMove={(e) => e.stopPropagation()}
             className="viewer-scroll-area relative min-h-0 flex-1 overflow-y-auto overflow-x-auto overscroll-contain touch-auto [scrollbar-gutter:stable]"
-            tabIndex={0}
+            style={{
+              WebkitOverflowScrolling: "touch",
+            }}
           >
             <div
               className="min-h-full flex flex-col items-center justify-start p-3 sm:p-6 lg:p-10 pb-28 pt-6 sm:pt-8"
@@ -774,7 +850,7 @@ export default function UIUXDesignCarousel({
                 ref={designWrapperRef}
                 onDoubleClick={handleToggleZoom}
                 title="Double-click to toggle 100% / 150% zoom"
-                className="relative border border-[#DCD7CB] bg-white shadow-[0_20px_50px_rgba(30,28,20,0.1)] cursor-zoom-in transition-[width,max-width] duration-300 ease-out"
+                className="viewer-design relative border border-[#DCD7CB] bg-white shadow-[0_20px_50px_rgba(30,28,20,0.1)] cursor-zoom-in transition-[width,max-width] duration-200 ease-out"
                 style={{
                   width: `${Math.round(100 * (zoom / 100))}%`,
                   maxWidth: `${Math.round(1400 * (zoom / 100))}px`,

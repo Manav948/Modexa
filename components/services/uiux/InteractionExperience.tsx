@@ -153,30 +153,33 @@ export default function InteractionExperience() {
         }
       );
 
-      // 3. Image parallax layer: moves upward 20–40px across scroll
-      gsap.to(imageWrapper, {
-        y: -35,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.2,
-        },
-      });
-
-      // 4. Subtle typography counter-drift for layered depth
-      if (headingRef.current) {
-        gsap.to(headingRef.current, {
-          y: -12,
+      // 3. Image parallax layer (Desktop only for peak mobile performance)
+      const isDesktop = window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
+      if (isDesktop) {
+        gsap.to(imageWrapper, {
+          y: -35,
           ease: "none",
           scrollTrigger: {
             trigger: section,
             start: "top bottom",
             end: "bottom top",
-            scrub: 1.4,
+            scrub: 1.2,
           },
         });
+
+        // 4. Subtle typography counter-drift for layered depth
+        if (headingRef.current) {
+          gsap.to(headingRef.current, {
+            y: -12,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1.4,
+            },
+          });
+        }
       }
 
       // 5. Small metadata and annotations appear after the main image
@@ -347,8 +350,9 @@ export default function InteractionExperience() {
                 alt="UI/UX Interaction & Experience design study"
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1440px) 90vw, 1180px"
+                quality={65}
+                loading="lazy"
                 className="object-cover object-top transition-opacity duration-300"
-                priority
               />
 
               {/* Editorial architectural grid lines over the study */}
