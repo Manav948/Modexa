@@ -4,7 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollRevealProvider from "@/components/layout/ScrollRevealProvider";
 import VideoEditingHero from "./VideoEditingHero";
-import SelectedReels from "./SelectedReels";
+import EditorialWorkIndex from "./EditorialWorkIndex";
 import FilmStripSection from "./FilmStripSection";
 import KineticTicker from "./KineticTicker";
 import LongFormArchive from "./LongFormArchive";
@@ -26,8 +26,8 @@ export default function VideoEditingPage() {
           {/* 01. Hero */}
           <VideoEditingHero />
 
-          {/* 02. Selected Reels & Short Form Matrix */}
-          <SelectedReels />
+          {/* 02. Selected Work */}
+          <EditorialWorkIndex />
 
           {/* 03. Panoramic Film Strip Section */}
           <FilmStripSection />
