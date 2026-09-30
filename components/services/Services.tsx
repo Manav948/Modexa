@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ServiceItem {
   num: string;
@@ -12,7 +13,6 @@ interface ServiceItem {
   description: string;
   tags: string;
   image: string;
-  spec: string;
 }
 
 const SERVICES: ServiceItem[] = [
@@ -24,8 +24,7 @@ const SERVICES: ServiceItem[] = [
     description:
       "Short-form, long-form and motion-led storytelling built around rhythm, pacing and purpose.",
     tags: "SHORT-FORM • LONG-FORM • MOTION",
-    image: "/images/service_video_motion_1789796437874.png",
-    spec: "RHYTHM // PACING // PURPOSE",
+    image: "/home/home(edit).png",
   },
   {
     num: "02",
@@ -35,8 +34,7 @@ const SERVICES: ServiceItem[] = [
     description:
       "Interfaces and digital experiences designed around clarity, interaction and visual language.",
     tags: "PRODUCTS • WEB • SYSTEMS",
-    image: "/images/service_ui_ux_1789796467059.png",
-    spec: "CLARITY // INTERACTION // SYSTEMS",
+    image: "/home/home(uiux).png",
   },
   {
     num: "03",
@@ -46,8 +44,7 @@ const SERVICES: ServiceItem[] = [
     description:
       "Content, campaigns and digital strategy designed to earn attention and keep it.",
     tags: "CONTENT • CAMPAIGNS • DISTRIBUTION",
-    image: "/images/work_vanguard_hardware_1789796410306.png",
-    spec: "ATTENTION // CONNECTION // REACH",
+    image: "/home/home(marketing).png",
   },
   {
     num: "04",
@@ -57,8 +54,7 @@ const SERVICES: ServiceItem[] = [
     description:
       "Fast, interactive and thoughtful digital experiences built from design to deployment.",
     tags: "INTERACTIVE • PERFORMANCE • DEPLOYMENT",
-    image: "/images/work_codeverse_platform_1789796324968.png",
-    spec: "DESIGN // CODE // DELIVERY",
+    image: "/home/home(web).png",
   },
 ];
 
@@ -85,9 +81,9 @@ export default function Services() {
 
     const updateCard = () => {
       if (previewRef.current) {
-        // Centered directly under mouse (width 400px, height 250px -> offset -200px, -125px)
-        const targetX = mousePos.current.x - 200;
-        const targetY = mousePos.current.y - 125;
+        // Center the 3:2 image preview under the cursor.
+        const targetX = mousePos.current.x - 195;
+        const targetY = mousePos.current.y - 130;
 
         cardPos.current.x += (targetX - cardPos.current.x) * 0.14;
         cardPos.current.y += (targetY - cardPos.current.y) * 0.14;
@@ -254,13 +250,13 @@ export default function Services() {
         ))}
       </div>
 
-      {/* ULTRA-SMOOTH HOVER CURSOR FLOATING PREVIEW */}
+      {/* Floating service image preview */}
       <div
         ref={previewRef}
         className="floating-preview fixed top-0 left-0 pointer-events-none z-50 transition-transform duration-75 ease-out"
         style={{
-          width: "400px",
-          height: "250px",
+          width: "390px",
+          height: "260px",
           willChange: "transform",
           display: activeService ? "block" : "none",
         }}
@@ -273,54 +269,18 @@ export default function Services() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.85, opacity: 0, y: 12 }}
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] as const }}
-              className="w-full h-full bg-[#1b1c18] border border-[#1b1c18] shadow-2xl rounded-none overflow-hidden flex flex-col"
-              style={{ boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.6)" }}
+              className="h-full w-full overflow-hidden border border-[#1b1c18] bg-[#1b1c18] shadow-2xl"
+              style={{ boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.35)" }}
             >
-              {/* Image Preview Container */}
-              <div className="relative w-full flex-1 overflow-hidden">
-                <img
-                  src={activeService.image}
-                  alt={activeService.title}
-                  className="w-full h-full object-cover object-center scale-105 transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1b1c18] via-transparent to-transparent opacity-80" />
-
-                {/* Top Tag */}
-                <div
-                  className="absolute top-3 left-3 px-2.5 py-1 bg-[#1b1c18]/90 backdrop-blur border border-[#e4e2dd]/20 font-mono text-[9px] text-white uppercase tracking-widest"
-                  style={{ fontFamily: "'DM Mono', monospace" }}
-                >
-                  [ SPEC // {activeService.num} ]
-                </div>
-
-                {/* Live Pulsing Dot */}
-                <div
-                  className="absolute top-3 right-3 flex items-center gap-1.5 px-2 py-1 bg-[#b6240f] font-mono text-[9px] text-white uppercase tracking-widest font-bold"
-                  style={{ fontFamily: "'DM Mono', monospace" }}
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                  LIVE PREVIEW
-                </div>
-              </div>
-
-              {/* Bottom Info Bar inside Card */}
-              <div className="w-full px-4 py-3 bg-[#1b1c18] border-t border-[#30312d] flex items-center justify-between">
-                <div>
-                  <div
-                    className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-wider"
-                    style={{ fontFamily: "'DM Mono', monospace" }}
-                  >
-                    {activeService.title} {activeService.italicTitle}
-                  </div>
-                  <div
-                    className="font-mono text-[9px] text-[#747878] uppercase"
-                    style={{ fontFamily: "'DM Mono', monospace" }}
-                  >
-                    {activeService.spec}
-                  </div>
-                </div>
-                <span className="font-mono text-[11px] text-white">→</span>
-              </div>
+              <Image
+                src={activeService.image}
+                alt={`${activeService.title} ${activeService.italicTitle ?? ""} service preview`}
+                width={1536}
+                height={1024}
+                sizes="390px"
+                quality={75}
+                className="block h-full w-full object-cover"
+              />
             </motion.div>
           )}
         </AnimatePresence>
