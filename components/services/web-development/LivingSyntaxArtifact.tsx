@@ -99,15 +99,17 @@ export default function LivingSyntaxArtifact() {
     const context = gsap.context(() => {
       gsap.fromTo(
         stage,
-        { width: "92%" },
+        { scale: 0.92 },
         {
-          width: "100%",
+          scale: 1,
+          transformOrigin: "center center",
+          force3D: true,
           ease: "none",
           scrollTrigger: {
             trigger: section,
             start: "top 82%",
             end: "top 28%",
-            scrub: 0.8,
+            scrub: true,
             invalidateOnRefresh: true,
           },
         },

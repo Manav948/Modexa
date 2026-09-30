@@ -62,7 +62,7 @@ export default function UIUXVisualAtlas() {
             >
               <div className="border border-[#E8E2D5] bg-[#fbf9f3]">
                 <Image
-                  src={`/ui%26ux/${study.file}`}
+                  src={`/ui%26ux/optimized/${study.file.replace(/\.(png|jpg)$/, ".webp")}`}
                   alt={`${study.label}, full-page interface design study`}
                   width={study.width}
                   height={study.height}

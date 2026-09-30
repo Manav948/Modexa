@@ -343,7 +343,7 @@ export default function InteractionExperience() {
               }}
             >
               <Image
-                src="/ui%26ux/ui1.jpg"
+                src="/ui%26ux/optimized/ui1.webp"
                 alt="UI/UX Interaction & Experience design study"
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1440px) 90vw, 1180px"

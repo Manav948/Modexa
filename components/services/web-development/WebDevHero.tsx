@@ -953,7 +953,7 @@ export default function WebDevHero() {
                     src="/images/web1.png"
                     alt="Web development project experience preview"
                     fill
-                    sizes="100vw"
+                    sizes="(max-width: 767px) calc(100vw - 2.5rem), 530px"
                     className="object-cover object-top"
                     priority
                   />

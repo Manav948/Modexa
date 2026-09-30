@@ -455,7 +455,7 @@ export default function UIUXCapabilities() {
               {/* Natural Proportion Image Container */}
               <div className="relative aspect-[16/11] w-full overflow-hidden border border-[#E8E2D5] bg-[#0A0D0E]">
                 <Image
-                  src="/ui%26ux/ui5.jpg"
+                  src="/ui%26ux/optimized/ui5.webp"
                   alt="Primary UI/UX design: Commerce and digital system"
                   fill
                   sizes="(max-width: 1024px) 50vw, 680px"
@@ -504,7 +504,7 @@ export default function UIUXCapabilities() {
 
               <div className="relative aspect-[4/3] w-full overflow-hidden border border-[#E8E2D5] bg-[#F7F5EF]">
                 <Image
-                  src="/ui%26ux/ui2.png"
+                  src="/ui%26ux/optimized/ui2.webp"
                   alt="Secondary UI/UX design: Wellness and editorial interface"
                   fill
                   sizes="(max-width: 1024px) 36vw, 480px"
@@ -544,7 +544,7 @@ export default function UIUXCapabilities() {
 
               <div className="relative aspect-[9/16] w-full overflow-hidden border border-[#E8E2D5] bg-[#F7F5EF]">
                 <Image
-                  src="/ui%26ux/ui8.png"
+                  src="/ui%26ux/optimized/ui8.webp"
                   alt="Mobile UI/UX design: Responsive healthcare interface"
                   fill
                   sizes="(max-width: 1024px) 24vw, 320px"
@@ -576,7 +576,7 @@ export default function UIUXCapabilities() {
               </div>
               <div className="relative aspect-[16/9] w-full overflow-hidden border border-[#E8E2D5] bg-[#111111]">
                 <Image
-                  src="/ui%26ux/ui12.jpg"
+                  src="/ui%26ux/optimized/ui12.webp"
                   alt="Design system tokens and interface components"
                   fill
                   sizes="(max-width: 1024px) 30vw, 380px"
@@ -695,7 +695,7 @@ export default function UIUXCapabilities() {
             </div>
             <div className="relative aspect-[16/11] w-full overflow-hidden border border-[#E8E2D5] bg-[#0A0D0E]">
               <Image
-                src="/ui%26ux/ui5.jpg"
+                src="/ui%26ux/optimized/ui5.webp"
                 alt="Primary UI design"
                 fill
                 sizes="92vw"
@@ -730,7 +730,7 @@ export default function UIUXCapabilities() {
             </div>
             <div className="relative aspect-[4/3] w-full overflow-hidden border border-[#E8E2D5] bg-[#F7F5EF]">
               <Image
-                src="/ui%26ux/ui2.png"
+                src="/ui%26ux/optimized/ui2.webp"
                 alt="Secondary UI design"
                 fill
                 sizes="92vw"
@@ -763,7 +763,7 @@ export default function UIUXCapabilities() {
             </div>
             <div className="relative aspect-[16/10] w-full overflow-hidden border border-[#E8E2D5] bg-[#F7F5EF]">
               <Image
-                src="/ui%26ux/ui8.png"
+                src="/ui%26ux/optimized/ui8.webp"
                 alt="Mobile portrait UI design"
                 fill
                 sizes="92vw"

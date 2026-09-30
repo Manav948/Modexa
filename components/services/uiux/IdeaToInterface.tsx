@@ -352,7 +352,7 @@ export default function IdeaToInterface() {
 
                 <div className="relative h-[240px] sm:h-[320px] w-full overflow-hidden border border-[#E8E2D5] bg-[#F7F5EF]">
                   <Image
-                    src="/ui%26ux/ui9.png"
+                    src="/ui%26ux/optimized/ui9.webp"
                     alt="Design process: Typography and conceptual layout study"
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
@@ -395,7 +395,7 @@ export default function IdeaToInterface() {
 
                 <div className="relative h-[260px] sm:h-[340px] w-full overflow-hidden border border-[#E8E2D5] bg-[#F7F5EF]">
                   <Image
-                    src="/ui%26ux/ui11.png"
+                    src="/ui%26ux/optimized/ui11.webp"
                     alt="Design process: Structural layout and wireframe balance"
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
@@ -597,7 +597,7 @@ export default function IdeaToInterface() {
                 }}
               >
                 <Image
-                  src="/ui%26ux/ui4.jpg"
+                  src="/ui%26ux/optimized/ui4.webp"
                   alt="Final complete UI/UX interface design"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1440px) 95vw, 1360px"
