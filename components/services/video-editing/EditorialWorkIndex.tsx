@@ -74,7 +74,7 @@ const PROJECTS: Project[] = [
     title: "Narrative Sequence",
     category: "BRAND FILM",
     description: "A cinematic sequence built around story structure, tone and measured momentum.",
-    image: "/edit/edit1.png",
+    image: "/edit/edit7.png",
     externalUrl: "https://thecreatorhub.in/",
     objectPosition: "center center",
   },
@@ -99,6 +99,60 @@ function ProjectSlide({
 }) {
   const imageRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const mediaRef = useRef<HTMLDivElement>(null);
+  const playRef = useRef<HTMLButtonElement>(null);
+
+  const showPlayControl = () => {
+    if (!playRef.current) return;
+    gsap.to(playRef.current, {
+      opacity: 1,
+      scale: 1,
+      autoAlpha: 1,
+      duration: 0.25,
+      ease: "power3.out",
+    });
+    gsap.set(playRef.current, { pointerEvents: "auto" });
+  };
+
+  const hidePlayControl = () => {
+    if (!playRef.current) return;
+    gsap.to(playRef.current, {
+      opacity: 0,
+      scale: 0.86,
+      autoAlpha: 0,
+      duration: 0.22,
+      ease: "power3.out",
+    });
+    gsap.set(playRef.current, { pointerEvents: "none" });
+  };
+
+  const updatePlayPosition = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "touch") return;
+
+    const media = mediaRef.current;
+    const playButton = playRef.current;
+    if (!media || !playButton) return;
+
+    const rect = media.getBoundingClientRect();
+    const offsetX = event.clientX - rect.left - rect.width / 2;
+    const offsetY = event.clientY - rect.top - rect.height / 2;
+
+    const limitX = Math.max(rect.width / 2 - 42, 14);
+    const limitY = Math.max(rect.height / 2 - 30, 12);
+
+    gsap.to(playButton, {
+      x: gsap.utils.clamp(-limitX, limitX, offsetX),
+      y: gsap.utils.clamp(-limitY, limitY, offsetY),
+      duration: 0.22,
+      ease: "power3.out",
+    });
+  };
+
+  const handlePlayClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    window.open(project.externalUrl, "_blank", "noopener,noreferrer");
+  };
 
   useEffect(() => {
     if (!isActive) return;
@@ -117,6 +171,15 @@ function ProjectSlide({
       { y: 24, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.7, stagger: 0.07, ease: "power3.out" },
     );
+
+    gsap.set(playRef.current, {
+      x: 0,
+      y: 0,
+      opacity: 0,
+      scale: 0.86,
+      autoAlpha: 0,
+      pointerEvents: "none",
+    });
   }, [isActive]);
 
   return (
@@ -127,18 +190,45 @@ function ProjectSlide({
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Open ${project.title} project in a new tab`}
-          className="group block relative overflow-hidden border border-[#dcd7cb] bg-[#1b1c18] shadow-[0_25px_50px_rgba(27,28,24,0.08)] transition-shadow duration-300 hover:shadow-[0_30px_60px_rgba(27,28,24,0.12)]"
+          className="group relative block overflow-hidden border border-[#dcd7cb] bg-[#f5f3ed] shadow-[0_25px_50px_rgba(27,28,24,0.08)] transition-shadow duration-300 hover:shadow-[0_30px_60px_rgba(27,28,24,0.12)]"
         >
-          <div ref={imageRef} className="relative aspect-[3/2] w-full overflow-hidden">
+          <div
+            ref={(node) => {
+              imageRef.current = node;
+              mediaRef.current = node;
+            }}
+            className="relative aspect-[3/2] w-full overflow-hidden bg-[#f5f3ed]"
+            onPointerEnter={(event) => {
+              showPlayControl();
+              updatePlayPosition(event);
+            }}
+            onPointerMove={updatePlayPosition}
+            onPointerLeave={hidePlayControl}
+          >
             <Image
               src={project.image}
               alt={`${project.title} — ${project.category.toLowerCase()}`}
               fill
               priority={isActive}
               sizes="(max-width: 768px) 100vw, 70vw"
-              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              className="h-full w-full object-contain transition-all duration-500 ease-out group-hover:scale-[1.03] group-hover:brightness-[0.72] group-hover:blur-[0.5px]"
               style={{ objectPosition: project.objectPosition ?? "center" }}
             />
+
+            <div className="pointer-events-none absolute inset-0 bg-black/10 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" />
+
+            <button
+              ref={playRef}
+              type="button"
+              onClick={handlePlayClick}
+              className="absolute left-1/2 top-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border border-white/40 bg-[#111111]/80 px-3 py-2 text-[9px] font-medium uppercase tracking-[0.28em] text-white shadow-[0_20px_30px_rgba(17,17,17,0.22)] backdrop-blur-sm opacity-100 md:pointer-events-none md:opacity-0 md:group-hover:opacity-100 md:group-hover:pointer-events-auto"
+              aria-label={`Play ${project.title}`}
+            >
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/35 bg-white/5 text-[10px] leading-none">
+                ▶
+              </span>
+              <span>Play</span>
+            </button>
           </div>
         </a>
       </div>
@@ -272,7 +362,7 @@ export default function EditorialWorkIndex() {
 
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     const target = event.target as HTMLElement;
-    if (target.closest("button, a")) return;
+    if (target.closest("a, button")) return;
     if (event.pointerType === "mouse" && event.button !== 0) return;
     dragRef.current = { pointerId: event.pointerId, startX: event.clientX, deltaX: 0 };
     event.currentTarget.setPointerCapture(event.pointerId);

@@ -5,10 +5,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import StartProjectButton from "@/components/motion/StartProjectButton";
 
 const CHAPTERS = [
-  { time: "00:00 — 04:12", title: "I. PROLOGUE", sub: "Cold opening & Thesis", timecode: "02:15 / 38:10", progress: "15%" },
-  { time: "04:12 — 18:40", title: "II. THE BUILD", sub: "Structure & Story Cuts", timecode: "14:32 / 38:10", progress: "42%" },
-  { time: "18:40 — 38:10", title: "III. RESONANCE", sub: "Culmination & Outro", timecode: "28:50 / 38:10", progress: "78%" },
+  { mark: "00%", title: "I. PROLOGUE", sub: "Opening / tone", offset: 0 },
+  { mark: "34%", title: "II. THE BUILD", sub: "Structure / momentum", offset: 0.34 },
+  { mark: "68%", title: "III. RESONANCE", sub: "Finish / release", offset: 0.68 },
 ];
+
+const formatTime = (seconds: number) => {
+  if (!Number.isFinite(seconds)) return "00:00";
+  const minutes = Math.floor(seconds / 60);
+  const remainder = Math.floor(seconds % 60);
+  return `${String(minutes).padStart(2, "0")}:${String(remainder).padStart(2, "0")}`;
+};
 
 const SECONDARY_PROJECTS = [
   {
@@ -34,14 +41,35 @@ const SECONDARY_PROJECTS = [
 ];
 
 export default function LongFormArchive() {
-  const [activeChapter, setActiveChapter] = useState(1);
+  const [activeChapter, setActiveChapter] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMainHovered, setIsMainHovered] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [activeSecondary, setActiveSecondary] = useState<typeof SECONDARY_PROJECTS[0] | null>(null);
 
+  const videoRef = useRef<HTMLVideoElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const mousePos = useRef({ x: 0, y: 0 });
   const cardPos = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number | null>(null);
+
+  const seekArchiveVideo = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const video = videoRef.current;
+    if (!video || !Number.isFinite(video.duration)) return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const ratio = Math.min(1, Math.max(0, (event.clientX - bounds.left) / bounds.width));
+    video.currentTime = video.duration * ratio;
+  };
+
+  const seekToChapter = (index: number) => {
+    const video = videoRef.current;
+    if (!video || !Number.isFinite(video.duration)) return;
+    video.currentTime = video.duration * CHAPTERS[index].offset;
+    setActiveChapter(index);
+    if (isMainHovered) void video.play().catch(() => setIsMainHovered(false));
+  };
 
   // Smooth cursor-follow preview logic for long-form project cards
   useEffect(() => {
@@ -101,118 +129,97 @@ export default function LongFormArchive() {
             className="text-[#747878] max-w-md font-sans text-sm md:text-base leading-relaxed text-reveal"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            Hover over the master player or project cards to trigger interactive video playback, optical HUD viewfinders, and stem preview audio monitors.
+            A long-form master cut shaped through pacing, sound and a clear editorial point of view.
           </p>
         </div>
 
         {/* Heroic Featured Project Player Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 bg-[#f5f3ed] p-6 border border-[#e4e2dd] mb-16">
-          {/* Video Player Visual Mockup (8 Cols) */}
+          {/* Hover preview player (8 Cols) */}
           <div className="lg:col-span-8 flex flex-col">
             <div
-              onMouseEnter={() => setIsMainHovered(true)}
-              onMouseLeave={() => setIsMainHovered(false)}
-              className="relative aspect-video w-full bg-[#1b1c18] overflow-hidden group border border-[#e4e2dd] cursor-pointer shadow-lg"
+              onPointerEnter={() => setIsMainHovered(true)}
+              onPointerLeave={() => setIsMainHovered(false)}
+              className="relative aspect-video w-full overflow-hidden border border-[#e4e2dd] bg-[#1b1c18] shadow-lg"
             >
-              {/* Main Image Plate */}
-              <img
-                src="/edit/edit6.png"
-                alt="The Architecture of Silence Documentary"
-                className={`w-full h-full object-cover transition-all duration-700 ${
-                  isMainHovered ? "scale-105" : "scale-100"
-                }`}
+              <video
+                ref={videoRef}
+                src="/videos/video2.mp4"
+                poster="/edit/edit6.png"
+                preload="auto"
+                autoPlay
+                muted
+                loop
+                controls
+                playsInline
+                onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)}
+                onTimeUpdate={(event) => {
+                  const video = event.currentTarget;
+                  if (!video.duration) return;
+                  setDuration((current) => current === video.duration ? current : video.duration);
+                  setIsPlaying(true);
+                  const currentProgress = video.currentTime / video.duration;
+                  setCurrentTime(video.currentTime);
+                  setProgress(currentProgress * 100);
+                  const chapter = CHAPTERS.reduce(
+                    (selected, item, index) => currentProgress >= item.offset ? index : selected,
+                    0,
+                  );
+                  setActiveChapter((current) => current === chapter ? current : chapter);
+                }}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                aria-label="Long-form editing archive video"
+                className="absolute inset-0 h-full w-full object-cover"
               />
 
-              {/* Hover Dark Glass Overlay */}
-              <div
-                className={`absolute inset-0 bg-[#1b1c18]/40 backdrop-blur-[2px] transition-opacity duration-500 pointer-events-none ${
-                  isMainHovered ? "opacity-100" : "opacity-40"
-                }`}
-              />
-
-              {/* Viewfinder Corner Crop Hairlines */}
-              <div className="absolute inset-0 p-4 pointer-events-none">
-                <div className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-[#b6240f]" />
-                <div className="absolute top-4 right-4 w-4 h-4 border-t-2 border-r-2 border-[#b6240f]" />
-                <div className="absolute bottom-16 left-4 w-4 h-4 border-b-2 border-l-2 border-[#b6240f]" />
-                <div className="absolute bottom-16 right-4 w-4 h-4 border-b-2 border-r-2 border-[#b6240f]" />
+              <div className="pointer-events-none absolute inset-0 p-4">
+                <div className="absolute left-4 top-4 h-4 w-4 border-l-2 border-t-2 border-[#b6240f]" />
+                <div className="absolute right-4 top-4 h-4 w-4 border-r-2 border-t-2 border-[#b6240f]" />
+                <div className="absolute bottom-16 left-4 h-4 w-4 border-b-2 border-l-2 border-[#b6240f]" />
+                <div className="absolute bottom-16 right-4 h-4 w-4 border-b-2 border-r-2 border-[#b6240f]" />
               </div>
 
-              {/* Center Pulsing Play / Viewfinder Badge on Hover */}
-              <div
-                className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 pointer-events-none ${
-                  isMainHovered ? "scale-100 opacity-100" : "scale-90 opacity-0"
-                }`}
-              >
-                <div className="w-16 h-16 rounded-full bg-[#b6240f] text-white flex items-center justify-center font-mono text-[20px] shadow-2xl mb-2 animate-pulse">
+              <div aria-hidden="true" className={`pointer-events-none absolute inset-0 flex flex-col items-center justify-center transition-all duration-300 ${isMainHovered ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}>
+                <span className="mb-2 flex h-14 w-14 items-center justify-center rounded-full border border-white/60 bg-[#b6240f]/90 font-mono text-lg text-white shadow-lg">
                   ▶
-                </div>
-                <span className="font-mono text-[10px] text-white bg-[#1b1c18]/90 px-3 py-1 uppercase tracking-widest font-bold border border-white/20">
-                  PLAYING LIVE STEM // {CHAPTERS[activeChapter].title}
+                </span>
+                <span className="border border-white/20 bg-[#1b1c18]/90 px-3 py-1 font-mono text-[9px] font-bold uppercase tracking-[0.15em] text-white">
+                  {isPlaying ? "PLAYING / VIDEO 02" : "VIDEO 02 / BUFFERING"}
                 </span>
               </div>
 
-              {/* Scrubber Timeline UI Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[#1b1c18] via-[#1b1c18]/90 to-transparent">
-                <div className="w-full h-1.5 bg-[#444748]/50 rounded-full relative mb-3 cursor-pointer overflow-hidden">
-                  <div
-                    className="absolute top-0 left-0 h-full bg-[#b6240f] transition-all duration-500"
-                    style={{ width: CHAPTERS[activeChapter].progress }}
-                  />
-                </div>
-                <div className="flex items-center justify-between font-mono text-[10px] text-white">
-                  <div className="flex items-center gap-3">
-                    <span className="flex items-center gap-1.5 text-[#b6240f] font-bold">
-                      <span className="w-2 h-2 rounded-full bg-[#b6240f] animate-ping" />
-                      REC ● {isMainHovered ? "PLAYING" : "STANDBY"}
-                    </span>
-                    <span className="text-[#c4c7c7]">{CHAPTERS[activeChapter].timecode}</span>
-                    <span className="text-[#444748]">|</span>
-                    <span className="text-white uppercase font-bold">
-                      {CHAPTERS[activeChapter].title}
-                    </span>
-                  </div>
-
-                  {/* Equalizer Waveform bars on hover */}
-                  <div className="flex items-center gap-1.5">
-                    <div className="hidden sm:flex items-end gap-[2px] h-4">
-                      {Array.from({ length: 12 }).map((_, i) => (
-                        <div
-                          key={i}
-                          className={`w-1 bg-[#b6240f] transition-all duration-300 ${
-                            isMainHovered ? "animate-pulse" : "h-1"
-                          }`}
-                          style={{
-                            height: isMainHovered ? `${4 + ((i * 7) % 12)}px` : "3px",
-                          }}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-[#b6240f] font-bold">ACEScc REC709</span>
-                  </div>
+              <div className="absolute bottom-0 left-0 right-0 bg-[#1b1c18]/85 p-4 pt-3">
+                <button
+                  type="button"
+                  onClick={seekArchiveVideo}
+                  className="mb-3 block h-2 w-full cursor-pointer overflow-hidden bg-white/20"
+                  aria-label="Seek in video 2"
+                >
+                  <span className="block h-full origin-left bg-[#b6240f] transition-[width] duration-100" style={{ width: `${progress}%` }} />
+                </button>
+                <div className="flex items-center justify-between gap-3 font-mono text-[9px] uppercase text-white sm:text-[10px]">
+                  <span className="flex items-center gap-2 text-[#b6240f]">
+                    <span className={`h-2 w-2 rounded-full bg-[#b6240f] ${isMainHovered ? "animate-pulse" : ""}`} />
+                      {isPlaying ? "PLAYING" : "BUFFERING"}
+                  </span>
+                  <span className="text-white/75">{formatTime(currentTime)} / {formatTime(duration)}</span>
+                  <span className="hidden truncate font-bold sm:inline">{CHAPTERS[activeChapter].title}</span>
                 </div>
               </div>
             </div>
 
-            {/* Interactive Chapter Buttons */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 font-mono text-[10px]">
-              {CHAPTERS.map((chap, idx) => (
+            <div className="mt-4 grid grid-cols-1 gap-3 font-mono text-[10px] sm:grid-cols-3">
+              {CHAPTERS.map((chapter, index) => (
                 <button
-                  key={chap.title}
-                  onClick={() => setActiveChapter(idx)}
-                  className={`p-3 border text-left flex flex-col transition-all cursor-pointer ${
-                    activeChapter === idx
-                      ? "bg-[#1b1c18] text-white border-[#1b1c18] border-l-4 border-l-[#b6240f] shadow-md"
-                      : "bg-[#fbf9f3] text-[#1b1c18] border-[#e4e2dd] hover:border-[#1b1c18]"
-                  }`}
+                  key={chapter.title}
+                  type="button"
+                  onClick={() => seekToChapter(index)}
+                  className={`flex min-h-20 flex-col border p-3 text-left transition-colors ${activeChapter === index ? "border-[#1b1c18] border-l-4 border-l-[#b6240f] bg-[#1b1c18] text-white" : "border-[#e4e2dd] bg-[#fbf9f3] text-[#1b1c18] hover:border-[#1b1c18]"}`}
                 >
-                  <span className={activeChapter === idx ? "text-[#b6240f] font-bold" : "text-[#747878]"}>
-                    {chap.time}
-                  </span>
-                  <span className="font-bold uppercase mt-1">{chap.title}</span>
-                  <span className={activeChapter === idx ? "text-[#c4c7c7] text-[9px]" : "text-[#747878] text-[9px]"}>
-                    {chap.sub}
-                  </span>
+                  <span className={activeChapter === index ? "font-bold text-[#b6240f]" : "text-[#747878]"}>{chapter.mark}</span>
+                  <span className="mt-1 font-bold uppercase">{chapter.title}</span>
+                  <span className={`text-[9px] ${activeChapter === index ? "text-[#c4c7c7]" : "text-[#747878]"}`}>{chapter.sub}</span>
                 </button>
               ))}
             </div>
