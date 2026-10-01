@@ -22,7 +22,7 @@ const REELS: ReelItem[] = [
     desc: "Viscoelastic pacing with audio-reactive typographic hooks.",
     duration: "00:15 CUT",
     retention: "SHORT-FORM",
-    image: "/images/media__1789795957723.png",
+    image: "/edit/edit1.png",
   },
   {
     id: "02",
@@ -32,7 +32,7 @@ const REELS: ReelItem[] = [
     desc: "Tactile macro zooms paired with spatial subterranean foley.",
     duration: "00:30 TEASER",
     retention: "MOTION",
-    image: "/images/work_arclab_spatial_1789796381832.png",
+    image: "/edit/edit2.png",
   },
   {
     id: "03",
@@ -42,7 +42,7 @@ const REELS: ReelItem[] = [
     desc: "Three-act structure compressed into eighteen ruthless seconds.",
     duration: "00:19 STORY",
     retention: "LONG-FORM",
-    image: "/images/work_motion_stories_1789796354503.png",
+    image: "/edit/edit3.png",
   },
   {
     id: "04",
@@ -52,7 +52,7 @@ const REELS: ReelItem[] = [
     desc: "Sound-designed cuts where every transition is triggered by sub-bass.",
     duration: "00:45 AUDIO CUT",
     retention: "STORY",
-    image: "/images/work_vanguard_hardware_1789796410306.png",
+    image: "/edit/edit4.png",
   },
   {
     id: "05",
@@ -62,7 +62,7 @@ const REELS: ReelItem[] = [
     desc: "Precision typographic overlays with motion-tracked spatial cuts.",
     duration: "01:42 TRAILER",
     retention: "EDIT",
-    image: "/images/work_codeverse_platform_1789796324968.png",
+    image: "/edit/edit5.png",
   },
   {
     id: "06",
@@ -72,7 +72,7 @@ const REELS: ReelItem[] = [
     desc: "Paced to mimic the slow mechanical turning of an artisan wheel.",
     duration: "00:40 ESSAY",
     retention: "SOUND",
-    image: "/images/media__1789794671970.png",
+    image: "/edit/edit6.png",
   },
 ];
 
@@ -184,7 +184,7 @@ export default function SelectedReels() {
                     <img
                       src={reel.image}
                       alt={reel.title}
-                      className="w-full h-full object-cover grayscale contrast-125 transition-transform duration-700 hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                     />
 
                     {/* Hover Play Button Overlay */}

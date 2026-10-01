@@ -7,24 +7,24 @@ const STRIP_FRAMES = [
     frameNum: "FRAME 01",
     timecode: "00:01:12",
     title: "MOTION RHYTHM & LOGGING",
-    desc: "Tactile sub-bass cut of speed.",
-    image: "/images/work_motion_stories_1789796354503.png",
+    desc: "Tactile pacing shaped from an editorial, character-first cut.",
+    image: "/edit/edit2.png",
     aspect: "aspect-video",
   },
   {
     frameNum: "FRAME 02",
     timecode: "00:02:45",
     title: "CHROMA STRUCTURAL PASS",
-    desc: "Acoustic grading of raw daylight.",
-    image: "/images/work_arclab_spatial_1789796381832.png",
+    desc: "Cinematic contrast and story-led sequencing in a wide field frame.",
+    image: "/edit/edit6.png",
     aspect: "aspect-video",
   },
   {
     frameNum: "FRAME 03",
     timecode: "00:04:18",
     title: "VISCOELASTIC FINISHING PASS",
-    desc: "Pacing master audio stems.",
-    image: "/images/work_codeverse_platform_1789796324968.png",
+    desc: "Precision in sound, tempo and finish for short-form momentum.",
+    image: "/edit/edit5.png",
     aspect: "aspect-video",
     badge: "MATCH CUT APPROVED",
   },
@@ -81,7 +81,7 @@ export default function FilmStripSection() {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover grayscale contrast-125 group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
 
                 {item.badge && (

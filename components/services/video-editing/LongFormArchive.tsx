@@ -18,7 +18,7 @@ const SECONDARY_PROJECTS = [
     title: "THE SPECIALIST DIALOGUE",
     desc: "A conversation shaped through considered multicam editing, clear pacing and warm sound.",
     views: "VIDEO / STORY / SOUND",
-    image: "/images/work_motion_stories_1789796354503.png",
+    image: "/edit/edit3.png",
     spec: "DUAL 4K PRORES // MULTICAM 24-BIT",
   },
   {
@@ -28,7 +28,7 @@ const SECONDARY_PROJECTS = [
     title: "DESIGN CADENCE",
     desc: "A long-form edit shaped with structure, screen detail and a clear narrative rhythm.",
     views: "VIDEO / EDIT / DELIVERY",
-    image: "/images/work_codeverse_platform_1789796324968.png",
+    image: "/edit/edit4.png",
     spec: "SCREEN GRAPHICS // DaVinci ACES",
   },
 ];
@@ -116,10 +116,10 @@ export default function LongFormArchive() {
             >
               {/* Main Image Plate */}
               <img
-                src="/images/work_arclab_spatial_1789796381832.png"
+                src="/edit/edit6.png"
                 alt="The Architecture of Silence Documentary"
-                className={`w-full h-full object-cover grayscale contrast-125 transition-all duration-700 ${
-                  isMainHovered ? "scale-105 contrast-140" : "scale-100"
+                className={`w-full h-full object-cover transition-all duration-700 ${
+                  isMainHovered ? "scale-105" : "scale-100"
                 }`}
               />
 
