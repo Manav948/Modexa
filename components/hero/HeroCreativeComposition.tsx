@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import Image from "next/image";
 
 interface FragmentState {
   el: HTMLElement | null;
@@ -43,11 +44,17 @@ export default function HeroCreativeComposition() {
             <div
               className="w-full h-full"
               style={{
-                background: "linear-gradient(135deg, #1b1c18 0%, #30312d 50%, #1b1c18 100%)",
                 position: "relative",
                 overflow: "hidden",
               }}
             >
+              <Image
+                src="/images/HomeHero.png"
+                alt=""
+                fill
+                sizes="(max-width: 1024px) 55vw, 25vw"
+                className="object-cover"
+              />
               {/* Cinematic film grain overlay */}
               <div className="absolute inset-0 opacity-30"
                 style={{
@@ -154,22 +161,15 @@ export default function HeroCreativeComposition() {
       content: (
         <div className="bg-[#fbf9f3] border border-[#e4e2dd] shadow-md p-1.5 hover:border-[#b6240f] hover:scale-[1.03] transition-all">
           <div className="relative w-full bg-[#e4e2dd]" style={{ aspectRatio: "3/4" }}>
-            <div
-              className="w-full h-full"
-              style={{
-                background: "linear-gradient(160deg, #dcdad4 0%, #f0eee8 30%, #c4c7c7 70%, #30312d 100%)",
-              }}
-            >
-              <div className="absolute inset-0 flex items-end">
-                <div className="w-full h-2/3 bg-gradient-to-t from-[#1b1c18]/80 to-transparent" />
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                {/* Bust silhouette */}
-                <svg viewBox="0 0 60 80" className="w-14 h-20 opacity-60" fill="none">
-                  <ellipse cx="30" cy="25" rx="14" ry="16" fill="#dcdad4"/>
-                  <path d="M16 41 Q10 55 8 70 L52 70 Q50 55 44 41" fill="#c4c7c7"/>
-                </svg>
-              </div>
+            <Image
+              src="/images/HomeHero2.png"
+              alt=""
+              fill
+              sizes="(max-width: 1024px) 40vw, 20vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 flex items-end">
+              <div className="w-full h-2/3 bg-gradient-to-t from-[#1b1c18]/80 to-transparent" />
             </div>
             <div className="absolute bottom-1.5 left-1.5 px-1.5 py-0.5 bg-[#fbf9f3]/90 font-mono text-[7px] text-[#b6240f] font-bold tracking-wider">
               IMAGE / 04
