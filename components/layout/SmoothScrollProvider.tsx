@@ -100,14 +100,10 @@ export default function SmoothScrollProvider({
       return;
     }
 
-    const resetScroll = () => {
-      lenisRef.current?.scrollTo(0, { immediate: true });
-      window.scrollTo(0, 0);
-      ScrollTrigger.refresh();
-    };
+    lenisRef.current?.scrollTo(0, { immediate: true });
+    window.scrollTo(0, 0);
 
-    resetScroll();
-    const frame = requestAnimationFrame(resetScroll);
+    const frame = requestAnimationFrame(() => ScrollTrigger.refresh());
     return () => cancelAnimationFrame(frame);
   }, [pathname]);
 
