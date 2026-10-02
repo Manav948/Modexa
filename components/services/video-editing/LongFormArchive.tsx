@@ -144,13 +144,12 @@ export default function LongFormArchive() {
             >
               <video
                 ref={videoRef}
-                src="/videos/video2.mp4"
+                src="/videos/c1.mp4"
                 poster="/edit/edit6.png"
                 preload="auto"
                 autoPlay
                 muted
                 loop
-                controls
                 playsInline
                 onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)}
                 onTimeUpdate={(event) => {
@@ -185,7 +184,7 @@ export default function LongFormArchive() {
                   ▶
                 </span>
                 <span className="border border-white/20 bg-[#1b1c18]/90 px-3 py-1 font-mono text-[9px] font-bold uppercase tracking-[0.15em] text-white">
-                  {isPlaying ? "PLAYING / VIDEO 02" : "VIDEO 02 / BUFFERING"}
+                  {isPlaying ? "PLAYING / C1" : "C1 / BUFFERING"}
                 </span>
               </div>
 
@@ -194,7 +193,7 @@ export default function LongFormArchive() {
                   type="button"
                   onClick={seekArchiveVideo}
                   className="mb-3 block h-2 w-full cursor-pointer overflow-hidden bg-white/20"
-                  aria-label="Seek in video 2"
+                  aria-label="Seek in video C1"
                 >
                   <span className="block h-full origin-left bg-[#b6240f] transition-[width] duration-100" style={{ width: `${progress}%` }} />
                 </button>

@@ -172,6 +172,7 @@ function ProjectSlide({
               className="absolute inset-0 z-0 block"
             >
               <Image
+                key={project.id}
                 src={project.image}
                 alt={`${project.title} — ${project.category.toLowerCase()}`}
                 fill
