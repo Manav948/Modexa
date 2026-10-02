@@ -84,16 +84,12 @@ const AUTOPLAY_DELAY = 4600;
 
 function ProjectSlide({
   project,
-  index,
-  total,
   isActive,
   onPrev,
   onNext,
   onProjectActivate,
 }: {
   project: Project;
-  index: number;
-  total: number;
   isActive: boolean;
   onPrev: () => void;
   onNext: () => void;
@@ -101,8 +97,7 @@ function ProjectSlide({
 }) {
   const imageRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
-  const mediaRef = useRef<HTMLDivElement>(null);
-  const playRef = useRef<HTMLButtonElement>(null);
+  const playRef = useRef<HTMLAnchorElement>(null);
 
   const showPlayControl = () => {
     if (!playRef.current) return;
@@ -126,35 +121,6 @@ function ProjectSlide({
       ease: "power3.out",
     });
     gsap.set(playRef.current, { pointerEvents: "none" });
-  };
-
-  const updatePlayPosition = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (event.pointerType === "touch") return;
-
-    const media = mediaRef.current;
-    const playButton = playRef.current;
-    if (!media || !playButton) return;
-
-    const rect = media.getBoundingClientRect();
-    const offsetX = event.clientX - rect.left - rect.width / 2;
-    const offsetY = event.clientY - rect.top - rect.height / 2;
-
-    const limitX = Math.max(rect.width / 2 - 42, 14);
-    const limitY = Math.max(rect.height / 2 - 30, 12);
-
-    gsap.to(playButton, {
-      x: gsap.utils.clamp(-limitX, limitX, offsetX),
-      y: gsap.utils.clamp(-limitY, limitY, offsetY),
-      duration: 0.22,
-      ease: "power3.out",
-    });
-  };
-
-  const handlePlayClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-    onProjectActivate();
-    window.open(project.externalUrl, "_blank", "noopener,noreferrer");
   };
 
   useEffect(() => {
@@ -188,43 +154,42 @@ function ProjectSlide({
   return (
     <div className="grid w-full gap-6 lg:grid-cols-[1.6fr_0.9fr] lg:gap-10">
       <div className="relative">
-        <a
-          href={project.externalUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={onProjectActivate}
-          aria-label={`Open ${project.title} project in a new tab`}
-          className="group relative block overflow-hidden border border-[#dcd7cb] bg-[#f5f3ed] shadow-[0_25px_50px_rgba(27,28,24,0.08)] transition-shadow duration-300 hover:shadow-[0_30px_60px_rgba(27,28,24,0.12)]"
-        >
+        <div className="group relative block overflow-hidden border border-[#dcd7cb] bg-[#f5f3ed] shadow-[0_25px_50px_rgba(27,28,24,0.08)] transition-shadow duration-300 hover:shadow-[0_30px_60px_rgba(27,28,24,0.12)]">
           <div
-            ref={(node) => {
-              imageRef.current = node;
-              mediaRef.current = node;
-            }}
+            ref={imageRef}
             className="relative aspect-[3/2] w-full overflow-hidden bg-[#f5f3ed]"
-            onPointerEnter={(event) => {
+            onPointerEnter={() => {
               showPlayControl();
-              updatePlayPosition(event);
             }}
-            onPointerMove={updatePlayPosition}
             onPointerLeave={hidePlayControl}
           >
-            <Image
-              src={project.image}
-              alt={`${project.title} — ${project.category.toLowerCase()}`}
-              fill
-              priority={isActive}
-              sizes="(max-width: 768px) 100vw, 70vw"
-              className="h-full w-full object-contain transition-all duration-500 ease-out group-hover:scale-[1.03] group-hover:brightness-[0.72] group-hover:blur-[0.5px]"
-              style={{ objectPosition: project.objectPosition ?? "center" }}
-            />
+            <a
+              href={project.externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={onProjectActivate}
+              aria-label={`Open ${project.title} project in a new tab`}
+              className="absolute inset-0 z-0 block"
+            >
+              <Image
+                src={project.image}
+                alt={`${project.title} — ${project.category.toLowerCase()}`}
+                fill
+                priority={isActive}
+                sizes="(max-width: 768px) 100vw, 70vw"
+                className="h-full w-full object-contain transition-all duration-500 ease-out group-hover:scale-[1.03] group-hover:brightness-[0.72] group-hover:blur-[0.5px]"
+                style={{ objectPosition: project.objectPosition ?? "center" }}
+              />
 
-            <div className="pointer-events-none absolute inset-0 bg-black/10 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" />
+              <div className="pointer-events-none absolute inset-0 bg-black/10 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" />
+            </a>
 
-            <button
+            <a
               ref={playRef}
-              type="button"
-              onClick={handlePlayClick}
+              href={project.externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={onProjectActivate}
               className="absolute left-1/2 top-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border border-white/40 bg-[#111111]/80 px-3 py-2 text-[9px] font-medium uppercase tracking-[0.28em] text-white shadow-[0_20px_30px_rgba(17,17,17,0.22)] backdrop-blur-sm opacity-100 md:pointer-events-none md:opacity-0 md:group-hover:opacity-100 md:group-hover:pointer-events-auto"
               aria-label={`Play ${project.title}`}
             >
@@ -232,9 +197,9 @@ function ProjectSlide({
                 ▶
               </span>
               <span>Play</span>
-            </button>
+            </a>
           </div>
-        </a>
+        </div>
       </div>
 
       <div ref={textRef} className="flex flex-col justify-end">
@@ -294,16 +259,27 @@ export default function EditorialWorkIndex() {
   const suppressClickRef = useRef(false);
   const autoplayRef = useRef<number | null>(null);
   const resumeTimeoutRef = useRef<number | null>(null);
-  const dragRef = useRef<{ pointerId: number; startX: number; deltaX: number } | null>(null);
+  const dragRef = useRef<{ pointerId: number; startX: number; deltaX: number; isDragging: boolean } | null>(null);
 
-  const clearAutoplay = () => {
+  const clearAutoplay = useCallback(() => {
     if (autoplayRef.current !== null) {
       window.clearTimeout(autoplayRef.current);
       autoplayRef.current = null;
     }
-  };
+  }, []);
 
-  const triggerInteraction = () => {
+  const goTo = useCallback((direction: -1 | 1, preserveDragOffset = false) => {
+    dragTweenRef.current?.kill();
+    dragTweenRef.current = null;
+    if (!preserveDragOffset && slideRef.current) {
+      gsap.set(slideRef.current, { x: 0 });
+    }
+    const nextIndex = (activeIndexRef.current + direction + PROJECTS.length) % PROJECTS.length;
+    activeIndexRef.current = nextIndex;
+    setActiveIndex(nextIndex);
+  }, []);
+
+  const triggerInteraction = useCallback(() => {
     clearAutoplay();
     if (resumeTimeoutRef.current !== null) {
       window.clearTimeout(resumeTimeoutRef.current);
@@ -316,18 +292,7 @@ export default function EditorialWorkIndex() {
         }, AUTOPLAY_DELAY);
       }
     }, 800);
-  };
-
-  const goTo = useCallback((direction: -1 | 1, preserveDragOffset = false) => {
-    dragTweenRef.current?.kill();
-    dragTweenRef.current = null;
-    if (!preserveDragOffset && slideRef.current) {
-      gsap.set(slideRef.current, { x: 0 });
-    }
-    const nextIndex = (activeIndexRef.current + direction + PROJECTS.length) % PROJECTS.length;
-    activeIndexRef.current = nextIndex;
-    setActiveIndex(nextIndex);
-  }, []);
+  }, [clearAutoplay, goTo, isHovering, reducedMotion]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -348,7 +313,7 @@ export default function EditorialWorkIndex() {
       goTo(1);
     }, AUTOPLAY_DELAY);
     return clearAutoplay;
-  }, [activeIndex, isHovering, reducedMotion, goTo]);
+  }, [activeIndex, clearAutoplay, isHovering, reducedMotion, goTo]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -366,7 +331,7 @@ export default function EditorialWorkIndex() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isHovering, reducedMotion]);
+  }, [goTo, triggerInteraction]);
 
   useEffect(() => () => {
     clearAutoplay();
@@ -374,15 +339,14 @@ export default function EditorialWorkIndex() {
     if (resumeTimeoutRef.current !== null) {
       window.clearTimeout(resumeTimeoutRef.current);
     }
-  }, []);
+  }, [clearAutoplay]);
 
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     const target = event.target as HTMLElement;
     if (target.closest("button")) return;
     if (event.pointerType === "mouse" && event.button !== 0) return;
     suppressClickRef.current = false;
-    dragRef.current = { pointerId: event.pointerId, startX: event.clientX, deltaX: 0 };
-    event.currentTarget.setPointerCapture(event.pointerId);
+    dragRef.current = { pointerId: event.pointerId, startX: event.clientX, deltaX: 0, isDragging: false };
     triggerInteraction();
   };
 
@@ -393,6 +357,10 @@ export default function EditorialWorkIndex() {
     drag.deltaX = deltaX;
     if (Math.abs(deltaX) > 8) {
       suppressClickRef.current = true;
+      if (!drag.isDragging) {
+        drag.isDragging = true;
+        event.currentTarget.setPointerCapture(event.pointerId);
+      }
       gsap.set(slideRef.current, { x: deltaX, force3D: true });
     }
   };
@@ -415,7 +383,9 @@ export default function EditorialWorkIndex() {
     });
     dragRef.current = null;
     triggerInteraction();
-    event.currentTarget.releasePointerCapture(event.pointerId);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
   };
 
   const activeProject = PROJECTS[activeIndex];
@@ -490,8 +460,6 @@ export default function EditorialWorkIndex() {
 
           <ProjectSlide
             project={activeProject}
-            index={activeIndex}
-            total={PROJECTS.length}
             isActive
             onPrev={() => {
               triggerInteraction();
