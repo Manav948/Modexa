@@ -38,7 +38,7 @@ export default function ServiceContextualCTA({
             >
               <span>{discipline}</span>
               <span className="h-px w-4 bg-[#E7472E]" />
-              <span className="text-white/50">DIRECT COMMISSION</span>
+              <span className="text-white/50">LET&apos;S TALK</span>
             </div>
 
             <h2
@@ -67,7 +67,7 @@ export default function ServiceContextualCTA({
               className="inline-flex w-full sm:w-auto lg:w-full items-center justify-center border border-white/20 bg-transparent px-6 py-3.5 font-mono text-xs uppercase tracking-widest text-white/80 transition-colors hover:border-white hover:text-white"
               style={{ fontFamily: "'DM Mono', monospace" }}
             >
-              <span>ALL SERVICES</span>
+              <span>VIEW ALL SERVICES →</span>
             </Link>
           </div>
         </div>

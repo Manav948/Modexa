@@ -23,7 +23,7 @@ export default function DetailPlaceholder({ type }: DetailPlaceholderProps) {
         <section className="flex flex-1 items-center py-20">
           <div className="w-full border border-[#e4e2dd] bg-[#f5f3ed] p-6 sm:p-10 md:p-16">
             <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#b6240f]">
-              CONTENT RESERVED
+              {type === "SERVICE" ? "SERVICE OVERVIEW" : "PROJECT OVERVIEW"}
             </span>
             <h1
               className="mt-5 max-w-3xl text-[clamp(2.5rem,7vw,6rem)] leading-[0.95]"
@@ -32,13 +32,13 @@ export default function DetailPlaceholder({ type }: DetailPlaceholderProps) {
               {type === "SERVICE" ? "SERVICE DETAILS." : "PROJECT DETAILS."}
             </h1>
             <p className="mt-6 max-w-xl font-mono text-xs uppercase leading-relaxed tracking-wider text-[#747878]">
-              This dossier is ready for content, imagery, and case study notes.
+              {type === "SERVICE" ? "Details about this service." : "Details and case study notes for this project."}
             </p>
             <Link
               href="/"
               className="mt-10 inline-flex border border-[#1b1c18] px-4 py-3 font-mono text-[10px] uppercase tracking-widest transition-colors hover:bg-[#b6240f] hover:text-white"
             >
-              RETURN TO MODEXA <span className="ml-3">→</span>
+              BACK TO HOME <span className="ml-3">→</span>
             </Link>
           </div>
         </section>

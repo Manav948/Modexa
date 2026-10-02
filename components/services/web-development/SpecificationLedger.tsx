@@ -14,21 +14,21 @@ const LEDGER_ROWS = [
     title: "Frontend",
     tech: "Next.js • React • TypeScript • Tailwind CSS",
     cycle: "01 / BUILD",
-    specLink: "mailto:modexa1819@gmail.com?subject=SPEC:%20Bespoke%20Frontend%20Engineering",
+    specLink: "mailto:modexa1819@gmail.com?subject=SPEC:%20Frontend%20Website%20Development",
   },
   {
     num: "02",
     title: "Interactive Web",
     tech: "GSAP • Lenis • ScrollTrigger",
     cycle: "02 / INTERACTION",
-    specLink: "mailto:modexa1819@gmail.com?subject=SPEC:%20Creative%20Motion%20WebGL",
+    specLink: "mailto:modexa1819@gmail.com?subject=SPEC:%20Interactive%20Web%20Development",
   },
   {
     num: "03",
     title: "Web Applications",
-    tech: "Node.js • Prisma • MongoDB",
+    tech: "Server code • APIs • Databases",
     cycle: "03 / SYSTEMS",
-    specLink: "mailto:modexa1819@gmail.com?subject=SPEC:%20Full-Stack%20Edge%20Apps",
+    specLink: "mailto:modexa1819@gmail.com?subject=SPEC:%20Web%20Application%20Development",
   },
   {
     num: "04",
@@ -42,7 +42,7 @@ const LEDGER_ROWS = [
     title: "Performance",
     tech: "Responsive structure • Focused output • Smooth interaction",
     cycle: "05 / REFINE",
-    specLink: "mailto:modexa1819@gmail.com?subject=SPEC:%20Performance%20Refactoring",
+    specLink: "mailto:modexa1819@gmail.com?subject=SPEC:%20Website%20Performance",
   },
 ];
 
@@ -119,7 +119,7 @@ export default function SpecificationLedger() {
                 href={row.specLink}
                 className="font-mono text-[11px] uppercase tracking-wider px-4 py-2 bg-[#151515] text-white hover:bg-[#e7472e] transition-colors duration-200 font-medium"
               >
-                DISCOVER MORE →
+                VIEW SERVICE →
               </a>
             </div>
           </div>

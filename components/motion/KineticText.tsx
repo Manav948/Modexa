@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const WORDS = ["DESIGN", "BUILD", "EDIT", "GROW"];
+const WORDS = ["DESIGN", "CONTENT", "DEVELOPMENT", "MARKETING"];
 
 export default function KineticText() {
   const [activeIdx, setActiveIdx] = useState(0);
@@ -59,7 +59,7 @@ export default function KineticText() {
         color: "#1b1c18",
       }}
     >
-      <span style={{ color: "#747878" }}>WE</span>
+      <span style={{ color: "#747878" }}>WE BRING</span>
 
       {/* Animated ticker slot */}
       <div
@@ -73,7 +73,7 @@ export default function KineticText() {
         onMouseEnter={handleMouseEnter}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        title="Scrub on mouseover"
+        title="Explore our services"
       >
         <div
           ref={sliderRef}
@@ -97,7 +97,7 @@ export default function KineticText() {
         </div>
       </div>
 
-      <span>COHESIVELY.</span>
+      <span>TOGETHER.</span>
     </div>
   );
 }

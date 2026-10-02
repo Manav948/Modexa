@@ -81,7 +81,7 @@ export default function HeroCreativeComposition() {
           </div>
           <div className="flex items-center justify-between px-1 pt-1 font-mono text-[8px] text-[#747878]">
             <span className="text-[#b6240f] font-bold">MOTION / 01</span>
-            <span>24.00 FPS</span>
+            <span>VIDEO / EDITING</span>
           </div>
         </div>
       ),
@@ -192,7 +192,7 @@ export default function HeroCreativeComposition() {
         <div className="bg-[#ffffff] border border-[#e4e2dd] shadow-md p-2 hover:border-[#b6240f] hover:scale-[1.03] transition-all font-mono">
           <div className="flex items-center justify-between border-b border-[#e4e2dd] pb-1 mb-1.5 text-[8px] text-[#747878]">
             <span className="text-[#b6240f] font-bold">CODE / 05</span>
-            <span>ENGINE.GLSL</span>
+            <span>FRONTEND.TS</span>
           </div>
           <pre className="text-[8px] leading-relaxed text-[#1b1c18] font-mono overflow-hidden">
             <code>
@@ -201,7 +201,7 @@ export default function HeroCreativeComposition() {
               {"idea "}
               <span className="text-[#b6240f]">→</span>
               {" experience;\n"}
-              {"render({ latency: 0 });"}
+              {"render({ responsive: true });"}
             </code>
           </pre>
         </div>

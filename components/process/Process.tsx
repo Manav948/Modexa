@@ -1,28 +1,27 @@
 "use client";
-
 import { useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const PRINCIPLES = [
   {
-    label: "[01. DISCOVER]",
-    title: "Understand the idea",
-    body: "Understand the idea, audience and objective.",
-    phase: "PHASE: CONTEXT",
+    label: "[01. THE IDEA]",
+    title: "Start with the brief",
+    body: "We learn what you want to make, who it is for and what needs to happen.",
+    phase: "START HERE",
     metric: "DISCOVER",
   },
   {
-    label: "[02. DEFINE]",
-    title: "Shape the direction",
-    body: "Shape the scope, creative approach and path forward.",
-    phase: "PHASE: DIRECTION",
+    label: "[02. ONE DIRECTION]",
+    title: "Make a clear plan",
+    body: "We agree on the direction, scope and plan before the work begins.",
+    phase: "MAKE A PLAN",
     metric: "DEFINE",
   },
   {
-    label: "[03. CREATE]",
-    title: "Bring the craft together",
-    body: "Bring the right specialists and disciplines together.",
-    phase: "PHASE: CRAFT",
+    label: "[03. THE RIGHT TEAM]",
+    title: "Build the right team",
+    body: "We bring in the designers, editors, developers and marketers the project needs.",
+    phase: "MAKE IT REAL",
     metric: "CREATE",
   },
 ];
@@ -142,14 +141,14 @@ export default function Process() {
               className="font-mono text-[10px] text-[#747878] uppercase tracking-wider"
               style={{ fontFamily: "'DM Mono', monospace" }}
             >
-              FROM IDEA TO OUTPUT
+              HOW WE WORK / 03
             </span>
           </div>
           <div
             className="font-mono text-[10px] text-[#747878] uppercase tracking-widest hidden sm:block"
             style={{ fontFamily: "'DM Mono', monospace" }}
           >
-            MOVE THE IDEA FORWARD
+            ONE DIRECTION. THE RIGHT SPECIALISTS.
           </div>
         </div>
 

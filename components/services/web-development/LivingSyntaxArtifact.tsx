@@ -172,25 +172,24 @@ export default function LivingSyntaxArtifact() {
               id="living-code-workspace-title"
               className="font-display text-2xl uppercase text-[#1b1c18] sm:text-3xl md:text-4xl"
             >
-              SYNTAX AS AN EDITORIAL ARTIFACT
+              DESIGN AND CODE, WORKING TOGETHER
             </h2>
           </div>
 
           <div className="flex flex-wrap items-center gap-4 font-mono text-xs text-[#747878]">
             <span className="flex items-center gap-1.5">
               <span className="h-2 w-2 animate-pulse rounded-full bg-[#e7472e]" />
-              LIVE ENVIRONMENT
+              VIDEO PREVIEW
             </span>
             <span>•</span>
-            <span>MOTION + INTERFACE</span>
+            <span>WEB DESIGN / DEVELOPMENT</span>
             <span>•</span>
             <span className="font-bold text-[#1b1c18]">DEVELOPMENT DEMO</span>
           </div>
         </div>
 
         <p className="mb-6 max-w-2xl font-sans text-sm leading-relaxed text-[#55534E] sm:text-[15px]">
-          A living interface where code, interaction, motion and visual systems come together —
-          shown as an ambient engineering workspace rather than a static diagram.
+          See how design, code and interaction come together in a working website.
         </p>
 
         <div className="relative w-full border border-[#1b1c18]/15 bg-[#0a0a0a]">
@@ -202,7 +201,7 @@ export default function LivingSyntaxArtifact() {
                 <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
               </div>
               <span className="min-w-0 truncate font-mono text-xs tracking-wider text-white/90">
-                workspace / living-environment.mp4
+                modexa / web-development-preview
               </span>
             </div>
             <span className="font-mono text-[11px] text-white/50">AUTO / LOOP / MUTED</span>
@@ -269,7 +268,7 @@ export default function LivingSyntaxArtifact() {
           <div className="flex flex-wrap items-center justify-between gap-2 border-t border-white/10 bg-[#0e0e0e] px-4 py-2 font-mono text-[11px] text-white/60">
             <div className="flex items-center gap-4">
               <span className="text-[#e7472e]">{isPlaying ? "● PLAYING" : isVisible ? "● LOADING" : "● STANDBY"}</span>
-              <span className="hidden sm:inline">ENGINEERING DEMO REEL</span>
+              <span className="hidden sm:inline">WEB DEVELOPMENT PREVIEW</span>
             </div>
             <span className="font-medium text-white">16:9 EXPERIENCE / 9:16 CROP</span>
           </div>

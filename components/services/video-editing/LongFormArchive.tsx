@@ -23,7 +23,7 @@ const SECONDARY_PROJECTS = [
     tag: "INTERVIEW / LONG-FORM",
     ep: "PROJECT 01",
     title: "THE SPECIALIST DIALOGUE",
-    desc: "A conversation shaped through considered multicam editing, clear pacing and warm sound.",
+    desc: "A conversation edited with clear pacing and balanced sound.",
     views: "VIDEO / STORY / SOUND",
     image: "/edit/edit3.png",
     spec: "DUAL 4K PRORES // MULTICAM 24-BIT",
@@ -33,7 +33,7 @@ const SECONDARY_PROJECTS = [
     tag: "TALK / LONG-FORM",
     ep: "PROJECT 02",
     title: "DESIGN CADENCE",
-    desc: "A long-form edit shaped with structure, screen detail and a clear narrative rhythm.",
+    desc: "A longer edit with a clear structure and steady pace.",
     views: "VIDEO / EDIT / DELIVERY",
     image: "/edit/edit4.png",
     spec: "SCREEN GRAPHICS // DaVinci ACES",
@@ -112,7 +112,7 @@ export default function LongFormArchive() {
           <div>
             <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] uppercase tracking-widest mb-2 font-bold line-reveal">
               <span className="w-4 h-px bg-[#b6240f]" />
-              <span>EXPANDED ARCHIVE</span>
+              <span>LONG-FORM VIDEO</span>
             </div>
             <h2
               className="text-[#1b1c18] uppercase tracking-tight text-reveal"
@@ -129,7 +129,7 @@ export default function LongFormArchive() {
             className="text-[#747878] max-w-md font-sans text-sm md:text-base leading-relaxed text-reveal"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            A long-form master cut shaped through pacing, sound and a clear editorial point of view.
+            Longer edits shaped around story, pacing and sound.
           </p>
         </div>
 
@@ -240,7 +240,7 @@ export default function LongFormArchive() {
                 className="text-[#747878] text-sm leading-relaxed mb-6"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
-                A long-form narrative shaped through structure, pacing, sound and a clear editorial point of view.
+                A longer story shaped through structure, pacing and sound.
               </p>
 
               <div className="flex flex-col gap-2.5 border-t border-[#e4e2dd] pt-4 font-mono text-[10px]">

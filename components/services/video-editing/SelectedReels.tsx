@@ -19,7 +19,7 @@ const REELS: ReelItem[] = [
     label: "AURA KINETICS",
     category: "2026 // COMMERCE",
     title: "Launch Reel Cut 01",
-    desc: "Viscoelastic pacing with audio-reactive typographic hooks.",
+    desc: "Fast cuts and clear titles give this launch reel its pace.",
     duration: "00:15 CUT",
     retention: "SHORT-FORM",
     image: "/edit/edit1.png",
@@ -29,7 +29,7 @@ const REELS: ReelItem[] = [
     label: "SOCIAL EDIT",
     category: "2026 // CULTURAL",
     title: "Heritage Teaser Cut",
-    desc: "Tactile macro zooms paired with spatial subterranean foley.",
+    desc: "A teaser edit built around close-up details and sound.",
     duration: "00:30 TEASER",
     retention: "MOTION",
     image: "/edit/edit2.png",
@@ -39,7 +39,7 @@ const REELS: ReelItem[] = [
     label: "CHRONO SCULPT",
     category: "2025 // EDITORIAL",
     title: "Micro Arc Narrative",
-    desc: "Three-act structure compressed into eighteen ruthless seconds.",
+    desc: "A short story with a clear beginning, middle and end.",
     duration: "00:19 STORY",
     retention: "LONG-FORM",
     image: "/edit/edit3.png",
@@ -49,7 +49,7 @@ const REELS: ReelItem[] = [
     label: "TECTONIC SOUND",
     category: "2025 // EXPERIMENTAL",
     title: "Audio-Driven Cut",
-    desc: "Sound-designed cuts where every transition is triggered by sub-bass.",
+    desc: "Sound shapes the timing of each cut.",
     duration: "00:45 AUDIO CUT",
     retention: "STORY",
     image: "/edit/edit4.png",
@@ -59,7 +59,7 @@ const REELS: ReelItem[] = [
     label: "DIGITAL CUT",
     category: "2026 // BRAND LAUNCH",
     title: "Spatial Launch Cut",
-    desc: "Precision typographic overlays with motion-tracked spatial cuts.",
+    desc: "Type and moving images give this launch film its visual rhythm.",
     duration: "01:42 TRAILER",
     retention: "EDIT",
     image: "/edit/edit5.png",
@@ -69,7 +69,7 @@ const REELS: ReelItem[] = [
     label: "MATERIAL FILM",
     category: "2025 // PRINT & FILM",
     title: "Tactile Material Film",
-    desc: "Paced to mimic the slow mechanical turning of an artisan wheel.",
+    desc: "A measured edit built around the movement of a crafted object.",
     duration: "00:40 ESSAY",
     retention: "SOUND",
     image: "/edit/edit6.png",
@@ -148,7 +148,7 @@ export default function SelectedReels() {
             className="text-[#747878] max-w-md font-sans text-sm md:text-base leading-relaxed text-reveal"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            All film frames share identical dimensions (280 × 400). Floating across a drafting coordinate grid, vertical rhythm offsets travel endlessly.
+            Short-form edits, motion pieces and longer stories, each shaped for its format.
           </p>
         </div>
       </div>

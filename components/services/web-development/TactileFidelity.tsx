@@ -6,37 +6,37 @@ const MODULES = [
   {
     number: "01",
     label: "MOTION RESPONSE",
-    title: "KINETIC SPRING DAMPING",
-    description: "Natural movement, controlled acceleration and a smooth, deliberate settle.",
+    title: "SMOOTH MOTION",
+    description: "Motion can guide people without slowing them down.",
     visual: "spring",
   },
   {
     number: "02",
     label: "RESPONSIVE SYSTEM",
-    title: "HARDWARE THREAD ISOLATION",
-    description: "Separate interaction work from expensive rendering so input remains responsive.",
+    title: "RESPONSIVE LAYOUTS",
+    description: "Layouts adapt to phones, tablets and desktops.",
     visual: "threads",
   },
   {
     number: "03",
     label: "VISUAL SYSTEM",
-    title: "FLUID CLIP PATH TOPOLOGY",
-    description: "Controlled clip-path transitions create smooth visual movement without unnecessary layout work.",
+    title: "CLEAR PAGE CHANGES",
+    description: "Transitions show people where they are and what has changed.",
     visual: "clip-path",
   },
   {
     number: "04",
     label: "INPUT RESPONSE",
-    title: "ZERO-DELAY TACTILE TRIGGERS",
-    description: "Direct interaction should feel immediate, physical and predictable.",
+    title: "CLEAR BUTTON FEEDBACK",
+    description: "Buttons and controls respond when people use them.",
     visual: "tactile",
   },
 ] as const;
 
 const THREAD_BARS = [
-  { label: "THREAD", heights: ["h-8", "h-10", "h-9", "h-12", "h-10"] },
+  { label: "PAGE", heights: ["h-8", "h-10", "h-9", "h-12", "h-10"] },
   { label: "INPUT", heights: ["h-7", "h-11", "h-9", "h-8", "h-10"] },
-  { label: "RENDER", heights: ["h-12", "h-10", "h-14", "h-11", "h-13"] },
+  { label: "UPDATE", heights: ["h-12", "h-10", "h-14", "h-11", "h-13"] },
   { label: "RESPONSE", heights: ["h-8", "h-9", "h-11", "h-8", "h-10"] },
 ];
 
@@ -62,7 +62,7 @@ export default function TactileFidelity() {
             </span>
           </h2>
           <p data-interaction-intro className="mt-5 max-w-[610px] font-sans text-sm leading-relaxed text-[#55534E] sm:mt-6 sm:text-[15px]">
-            Visual aesthetics mean nothing if the physical responsiveness of an interface feels sluggish or uncertain.
+            A website should feel quick and clear every time someone uses it.
           </p>
         </header>
 

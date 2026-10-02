@@ -12,31 +12,31 @@ const NODE_DATA: Record<string, {
   video: {
     id: "01 / VIDEO",
     title: "Video",
-    desc: "Story, rhythm and motion shaped through the edit.",
+    desc: "We shape footage into clear stories with strong pacing.",
     proto: "RHYTHM / PACING",
   },
   design: {
     id: "02 / DESIGN",
     title: "Design",
-    desc: "Clarity, structure and interaction shaped around people and context.",
+    desc: "We design websites and digital products that are easy to use.",
     proto: "CLARITY / SYSTEMS",
   },
   webgl: {
     id: "03 / DEVELOPMENT",
     title: "Development",
-    desc: "Content, campaigns and distribution shaped around attention and connection.",
-    proto: "CONTENT / REACH",
+    desc: "We build websites and digital experiences that work across devices.",
+    proto: "FRONTEND / FULL-STACK",
   },
   brand: {
     id: "04 / MARKETING",
     title: "Marketing",
-    desc: "Design, interaction and technology brought together in a working experience.",
-    proto: "DESIGN / CODE",
+    desc: "We create content and campaigns that give people a reason to care.",
+    proto: "CONTENT / CAMPAIGNS",
   },
   growth: {
     id: "05 / BRANDING + CONTENT",
-    title: "Branding / Content",
-    desc: "The clear point of view that keeps every discipline moving together.",
+    title: "Creative Direction",
+    desc: "We keep the specialists focused on one clear direction.",
     proto: "ONE DIRECTION",
   },
 };
@@ -101,16 +101,16 @@ export default function CreativeNetwork() {
               fontWeight: 400,
             }}
           >
-            ONE CREATIVE DIRECTION.
+            GOOD WORK STARTS WITH
             <br />
-            <span className="italic">MANY SPECIALISTS.</span>
+            <span className="italic">GOOD DIRECTION.</span>
           </h2>
         </motion.div>
         <div
           className="mt-4 md:mt-0 font-mono text-[10px] text-[#747878]"
           style={{ fontFamily: "'DM Mono', monospace" }}
         >
-          CREATIVE DISCIPLINES • TAP/HOVER TO EXPLORE
+          VIDEO / DESIGN / DEVELOPMENT / MARKETING / CONTENT
         </div>
       </div>
 
@@ -261,7 +261,7 @@ export default function CreativeNetwork() {
                 className="font-mono text-[10px] text-[#747878] uppercase"
                 style={{ fontFamily: "'DM Mono', monospace" }}
               >
-                SELECTED • ACTIVE
+                SELECTED
               </span>
             </div>
 
@@ -294,14 +294,14 @@ export default function CreativeNetwork() {
                 className="flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:justify-between font-mono text-[10px] text-[#747878] border-b pb-1"
                 style={{ borderColor: "#f0eee8", fontFamily: "'DM Mono', monospace" }}
               >
-                <span>PRIMARY CRAFT</span>
+                <span>SPECIALTY</span>
                 <span className="text-[#1b1c18] font-semibold">{dossier.proto}</span>
               </div>
               <div
                 className="flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:justify-between font-mono text-[10px] text-[#747878] border-b pb-1"
                 style={{ borderColor: "#f0eee8", fontFamily: "'DM Mono', monospace" }}
               >
-                <span>CONNECTED BY</span>
+                <span>WORKING WITH</span>
                 <span className="text-[#1b1c18] font-semibold">ONE DIRECTION</span>
               </div>
             </div>

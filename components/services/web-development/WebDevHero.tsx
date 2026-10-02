@@ -54,6 +54,14 @@ export default function WebDevHero() {
       headingLine2Ref.current,
       headingLine3Ref.current,
     ].filter(Boolean);
+    const supportingElements = [subtextRef.current, buttonsRef.current].filter(
+      (element): element is HTMLParagraphElement | HTMLDivElement => element !== null
+    );
+    const metadataElements = [
+      metadataRef.current,
+      fragLabelsRef.current,
+      scrollIndicatorRef.current,
+    ].filter((element): element is HTMLDivElement => element !== null);
 
     const secondaryFragments = [
       fragMobileRef.current,
@@ -274,6 +282,8 @@ export default function WebDevHero() {
       end: "bottom top",
       scrub: 1.2,
       onUpdate: (self) => {
+        if (!section.isConnected) return;
+
         const p = self.progress;
         if (p < 0.01) return;
 
@@ -284,7 +294,7 @@ export default function WebDevHero() {
         });
 
         // Supporting text & buttons fade out faster
-        gsap.set([subtextRef.current, buttonsRef.current], {
+        gsap.set(supportingElements, {
           y: `${-p * 30}px`,
           opacity: Math.max(0, 1 - p * 2.3),
         });
@@ -298,12 +308,9 @@ export default function WebDevHero() {
         }
 
         // Technical lines & metadata fade
-        gsap.set(
-          [metadataRef.current, fragLabelsRef.current, scrollIndicatorRef.current],
-          {
-            opacity: Math.max(0, 1 - p * 2.8),
-          }
-        );
+        gsap.set(metadataElements, {
+          opacity: Math.max(0, 1 - p * 2.8),
+        });
       },
     });
 
@@ -565,7 +572,7 @@ export default function WebDevHero() {
           SYS.ID // MODEXA.DEV.04
         </div>
         <div className="absolute right-8 top-24 hidden font-mono text-[9px] uppercase tracking-[0.25em] text-white/20 xl:block">
-          CADENCE // 60FPS STABLE
+          DESIGN / DEVELOPMENT
         </div>
       </div>
 
@@ -629,8 +636,7 @@ export default function WebDevHero() {
               ref={subtextRef}
               className="mt-6 max-w-[460px] font-sans text-sm leading-relaxed text-white/65 sm:mt-7 sm:text-base"
             >
-              Websites and digital products built where design, interaction
-              and technology meet.
+              We build fast, responsive websites and digital products where good design meets solid technology.
             </p>
 
             {/* Action Buttons (Section 16) */}
@@ -666,7 +672,7 @@ export default function WebDevHero() {
                 }}
                 className="group inline-flex items-center justify-center gap-2.5 rounded-lg border border-white/20 bg-white/[0.03] px-6 py-3.5 font-mono text-xs uppercase tracking-wider text-white/85 backdrop-blur-sm transition-all duration-300 hover:border-white/60 hover:bg-white/[0.08] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:text-sm"
               >
-                <span>VIEW OUR WORK</span>
+                <span>EXPLORE OUR WORK</span>
                 <span
                   aria-hidden="true"
                   className="text-white/40 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white"
@@ -680,11 +686,11 @@ export default function WebDevHero() {
             <div className="mt-8 flex items-center gap-6 border-t border-white/10 pt-4 font-mono text-[10px] uppercase tracking-wider text-white/40">
               <div className="flex items-center gap-2">
                 <span className="h-1 w-1 rounded-full bg-emerald-400" />
-                <span>STACK: NEXT 15+ / TS</span>
+                <span>STACK: NEXT.JS / TYPESCRIPT</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="h-1 w-1 rounded-full bg-white/40" />
-                <span>LATENCY &lt; 14MS</span>
+                <span>RESPONSIVE / INTERACTIVE</span>
               </div>
             </div>
           </div>
@@ -707,12 +713,12 @@ export default function WebDevHero() {
               >
                 <div className="flex h-full w-full flex-col justify-between border border-dashed border-white/[0.05] p-3">
                   <div className="flex items-center justify-between font-mono text-[9px] tracking-widest text-white/20">
-                    <span>TOPOLOGY MATRIX // 01</span>
-                    <span>COORDS [37.77, -122.41]</span>
+                    <span>WEB DESIGN // 01</span>
+                    <span>SCREEN / RESPONSIVE</span>
                   </div>
                   <div className="flex items-center justify-between font-mono text-[9px] tracking-widest text-white/20">
-                    <span>AXIS: 3D KINETIC FIELD</span>
-                    <span>EXP: MODEXA.RELEASE</span>
+                    <span>LAYOUT / INTERACTION</span>
+                    <span>MODEXA / WEB</span>
                   </div>
                 </div>
               </div>
@@ -756,7 +762,7 @@ export default function WebDevHero() {
                   {/* On-screen status badge */}
                   <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-md border border-white/15 bg-black/70 px-2.5 py-1 font-mono text-[10px] text-white/80 backdrop-blur-md">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#E7472E]" />
-                    <span>PROD RELEASE // ACTIVE</span>
+                    <span>WEBSITE PREVIEW</span>
                   </div>
                 </div>
               </div>
@@ -781,7 +787,7 @@ export default function WebDevHero() {
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
                   <div className="absolute bottom-2 inset-x-2 text-center font-mono text-[8px] uppercase tracking-wider text-white/80">
-                    MOBILE CADENCE
+                    MOBILE DESIGN
                   </div>
                 </div>
               </div>
@@ -831,7 +837,7 @@ export default function WebDevHero() {
               >
                 <div className="flex items-center justify-between font-mono text-[9px] uppercase tracking-wider text-white/40">
                   <span>SPRING DYNAMICS</span>
-                  <span className="text-emerald-400">80FPS</span>
+                  <span className="text-emerald-400">MOTION</span>
                 </div>
                 <div className="my-2 h-[26px] w-full">
                   {/* Kinetic Waveform curve SVG */}
@@ -926,7 +932,7 @@ export default function WebDevHero() {
                 <div className="relative flex h-4 w-4 items-center justify-center rounded-full border border-white/30">
                   <span className="h-1 w-1 rounded-full bg-[#E7472E]" />
                 </div>
-                <span>TGT: PHYSICS_CORE</span>
+                <span>WEB / INTERACTION</span>
               </div>
             </div>
 
@@ -983,8 +989,8 @@ export default function WebDevHero() {
                 {/* Mobile Spec Card */}
                 <div className="flex flex-col justify-between rounded-lg border border-white/12 bg-[#0c0c0e] p-3 font-mono text-[9px] text-white/70">
                   <div className="text-white/40">CADENCE</div>
-                  <div className="font-semibold text-white">60FPS // NEXT.JS</div>
-                  <div className="text-emerald-400">LATENCY &lt; 14MS</div>
+                  <div className="font-semibold text-white">NEXT.JS / TYPESCRIPT</div>
+                  <div className="text-emerald-400">RESPONSIVE WEB</div>
                 </div>
               </div>
 
@@ -1037,7 +1043,7 @@ export default function WebDevHero() {
         </button>
 
         <div className="hidden sm:block text-right text-white/35">
-          GRID REF. 7180-819-8828
+                  MODEXA / WEB DEVELOPMENT
         </div>
       </div>
     </section>

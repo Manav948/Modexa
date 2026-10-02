@@ -11,33 +11,33 @@ if (typeof window !== "undefined") {
 const CAPABILITIES = [
   {
     number: "01",
-    title: "ARCHITECTURE & SCHEMA MAPPING",
-    description: "Data contracts, mapping, API boundaries and system relationships planned before integration.",
+    title: "PLAN THE SYSTEM",
+    description: "Plan data, APIs and how each part of the website works together.",
   },
   {
     number: "02",
-    title: "DESIGN TOKEN CODIFICATION",
-    description: "Translating Figma and direction files into atomic, semantic CSS variables, typography, fluid systems and reusable visual primitives.",
+    title: "TURN DESIGN INTO CODE",
+    description: "Build responsive styles and reusable components from the design.",
   },
   {
     number: "03",
-    title: "KINETIC & MOTION PHYSICS",
-    description: "GSAP ScrollTrigger sequencing, Lenis virtual scroll synchronization, cursor gestures and motion systems that respect interaction.",
+    title: "INTERACTION AND MOTION",
+    description: "Add scroll, cursor and page animations that support the experience.",
   },
   {
     number: "04",
-    title: "FULL-STACK & EDGE INTEGRATION",
-    description: "Handlers, APIs, authentication and data systems connected to production architecture with reliable request and response flows.",
+    title: "CONNECT SERVICES",
+    description: "Connect APIs, accounts and data the project needs.",
   },
   {
     number: "05",
-    title: "HARDWARE PROFILING AUDIT",
-    description: "Chrome performance profiler passes, memory leak sweeps, Lighthouse 100 audits, and multi-tier device testing from low-end mobile through high-end desktop.",
+    title: "TEST ON REAL SCREENS",
+    description: "Check performance and layouts on phones, tablets and desktops.",
   },
   {
     number: "06",
-    title: "PRODUCTION CI/CD DISPATCH",
-    description: "Zero-downtime atomic deployments, automated type verification pipelines, CI/CD and production monitoring.",
+    title: "DEPLOY AND MONITOR",
+    description: "Prepare the website for launch and check how it runs.",
   },
 ];
 

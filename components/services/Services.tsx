@@ -22,8 +22,8 @@ const SERVICES: ServiceItem[] = [
     title: "VIDEO",
     italicTitle: "EDITING",
     description:
-      "Short-form, long-form and motion-led storytelling built around rhythm, pacing and purpose.",
-    tags: "SHORT-FORM • LONG-FORM • MOTION",
+      "We turn raw footage into videos with a clear story, strong pacing and a reason to keep watching.",
+    tags: "SHORT-FORM • LONG-FORM • MOTION • SOCIAL CONTENT",
     image: "/home/home(edit).png",
   },
   {
@@ -32,8 +32,8 @@ const SERVICES: ServiceItem[] = [
     title: "UI/UX",
     italicTitle: "DESIGN",
     description:
-      "Interfaces and digital experiences designed around clarity, interaction and visual language.",
-    tags: "PRODUCTS • WEB • SYSTEMS",
+      "We design websites and digital products that are clear, useful and easy to use.",
+    tags: "WEB DESIGN • UI DESIGN • UX DESIGN • PROTOTYPING",
     image: "/home/home(uiux).png",
   },
   {
@@ -42,8 +42,8 @@ const SERVICES: ServiceItem[] = [
     title: "DIGITAL",
     italicTitle: "MARKETING",
     description:
-      "Content, campaigns and digital strategy designed to earn attention and keep it.",
-    tags: "CONTENT • CAMPAIGNS • DISTRIBUTION",
+      "We turn ideas into content and campaigns that reach the right people and give them a reason to care.",
+    tags: "CONTENT • SOCIAL MEDIA • CAMPAIGNS • STRATEGY",
     image: "/home/home(marketing).png",
   },
   {
@@ -52,8 +52,8 @@ const SERVICES: ServiceItem[] = [
     title: "WEB",
     italicTitle: "DEVELOPMENT",
     description:
-      "Fast, interactive and thoughtful digital experiences built from design to deployment.",
-    tags: "INTERACTIVE • PERFORMANCE • DEPLOYMENT",
+      "We build fast, responsive websites and digital experiences where good design meets solid technology.",
+    tags: "FRONTEND • FULL-STACK • INTERACTIVE WEB • DEPLOYMENT",
     image: "/home/home(web).png",
   },
 ];
@@ -121,7 +121,7 @@ export default function Services() {
               className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest"
               style={{ fontFamily: "'DM Mono', monospace" }}
             >
-              [ WHAT WE DO ]
+              WHAT WE DO / 02
             </motion.div>
           </div>
 
@@ -138,9 +138,9 @@ export default function Services() {
                 fontWeight: 400,
               }}
             >
-              WHAT WE
+              FROM FIRST IDEA
               <br />
-              <span className="italic font-normal text-[#b6240f]">DO.</span>
+              <span className="italic font-normal text-[#b6240f]">TO FINAL OUTPUT.</span>
             </motion.h2>
           </div>
         </div>
@@ -155,7 +155,7 @@ export default function Services() {
               className="font-mono text-[11px] leading-relaxed uppercase text-[#747878] tracking-wider"
               style={{ fontFamily: "'DM Mono', monospace" }}
             >
-              CREATIVE AND DIGITAL CAPABILITIES BROUGHT TOGETHER AROUND ONE CLEAR DIRECTION.
+              We work across design, video, development and digital marketing, bringing the right skills around each project.
             </motion.p>
           </div>
         </div>

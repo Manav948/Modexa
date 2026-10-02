@@ -9,12 +9,12 @@ if (typeof window !== "undefined") {
 }
 
 const SERVICES = [
-  { num: "01", title: "Social Media", desc: "Content and creative direction designed for the platforms where people spend attention.", tag: "SOCIAL / CREATIVE" },
-  { num: "02", title: "Content Strategy", desc: "A clear direction for what to say, show and publish.", tag: "STRATEGY / CONTENT" },
-  { num: "03", title: "Campaign Creative", desc: "Ideas turned into visual campaigns with a consistent point of view.", tag: "CAMPAIGN / VISUAL" },
-  { num: "04", title: "Digital Strategy", desc: "Connecting audience, content and distribution around a clear objective.", tag: "STRATEGY / DISTRIBUTION" },
-  { num: "05", title: "Content Direction", desc: "Building a consistent visual and editorial language across content.", tag: "CONTENT / DIRECTION" },
-  { num: "06", title: "Distribution", desc: "Making sure good content reaches the right places.", tag: "DISTRIBUTION / REACH" },
+  { num: "01", title: "Social Media", desc: "Content and creative for the social channels your audience uses.", tag: "SOCIAL / CONTENT" },
+  { num: "02", title: "Content Strategy", desc: "A clear plan for what to say, show and share.", tag: "PLAN / PUBLISH" },
+  { num: "03", title: "Campaign Creative", desc: "Campaign ideas and visuals that keep the message clear.", tag: "CAMPAIGNS / CREATIVE" },
+  { num: "04", title: "Digital Strategy", desc: "Plan who to reach, what to share and where.", tag: "AUDIENCE / CONTENT" },
+  { num: "05", title: "Content Direction", desc: "Set a consistent look and voice across your content.", tag: "LOOK / VOICE" },
+  { num: "06", title: "Distribution", desc: "Put content in the right places.", tag: "CONTENT / CHANNELS" },
 ];
 
 export default function DMServicesIndex() {
@@ -71,14 +71,14 @@ export default function DMServicesIndex() {
                 fontWeight: 700,
               }}
             >
-                What We Make Move
+                DIGITAL MARKETING SERVICES
             </h2>
           </div>
             <span
               className="font-mono text-[10px] text-[#55534E] uppercase tracking-wider font-bold"
               style={{ fontFamily: "'DM Mono', monospace" }}
             >
-              [ATTENTION / CONTENT / CONNECTION]
+              [ATTENTION / CONTENT / CAMPAIGNS]
             </span>
         </div>
 

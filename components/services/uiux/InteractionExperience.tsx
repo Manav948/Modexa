@@ -30,42 +30,42 @@ const ANNOTATIONS: AnnotationItem[] = [
     id: "transition",
     num: "01",
     title: "TRANSITION",
-    sub: "SPATIAL CONTINUITY",
-    desc: "Eased viewport shifts, spatial continuity, and state changes between user actions.",
+    sub: "PAGE CHANGES",
+    desc: "Show how pages change and help people understand where they are.",
     targetZone: {
       top: "4%",
       left: "4%",
       width: "92%",
       height: "22%",
-      label: "NAV & VIEWPORT TRANSITION LAYER",
+      label: "PAGE NAVIGATION",
     },
   },
   {
     id: "feedback",
     num: "02",
     title: "FEEDBACK",
-    sub: "TACTILE RESPONSE",
-    desc: "Immediate reactive tactile response to cursor gestures, active inputs, and system triggers.",
+    sub: "BUTTON FEEDBACK",
+    desc: "Give a clear response when someone taps, clicks or types.",
     targetZone: {
       top: "30%",
       left: "8%",
       width: "84%",
       height: "36%",
-      label: "INTERACTIVE CONTROL CORE",
+      label: "BUTTONS AND CONTROLS",
     },
   },
   {
     id: "hierarchy",
     num: "03",
     title: "HIERARCHY",
-    sub: "STRUCTURAL PATHWAYS",
-    desc: "Calculated typographical weights, negative space, and clear visual focal pathways.",
+    sub: "CONTENT ORDER",
+    desc: "Use type, spacing and contrast to make important information easy to find.",
     targetZone: {
       top: "70%",
       left: "6%",
       width: "88%",
       height: "26%",
-      label: "TYPOGRAPHIC & DATA ARCHITECTURE",
+      label: "TYPE AND CONTENT",
     },
   },
 ];
@@ -246,13 +246,13 @@ export default function InteractionExperience() {
               className="font-display uppercase text-[#151515] leading-[0.88] tracking-[-0.05em] text-[clamp(2.75rem,8vw,5.5rem)]"
             >
               <span className="block overflow-hidden pb-1">
-                <span data-split-line className="block">DESIGN IS</span>
+                <span data-split-line className="block">CLARITY</span>
               </span>
               <span className="block overflow-hidden pb-1">
-                <span data-split-line className="block">MORE THAN</span>
+                <span data-split-line className="block">MATTERS.</span>
               </span>
               <span className="block overflow-hidden pb-1">
-                <span data-split-line className="block">THE SCREEN.</span>
+                <span data-split-line className="block">FOR EVERYONE.</span>
               </span>
             </h2>
           </div>
@@ -263,18 +263,16 @@ export default function InteractionExperience() {
               ref={textRef}
               className="font-sans text-[15px] leading-relaxed text-[#55534E] sm:text-[16px] md:max-w-md"
             >
-              We design the moments between actions — the transitions, feedback,
-              hierarchy and movement that make a digital experience feel clear,
-              responsive and intentional.
+              Good design makes it easier for people to understand what to do next.
             </p>
 
             <div
               ref={metaRef}
               className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-[#E8E2D5] pt-4 font-mono text-[9px] uppercase tracking-[0.15em] text-[#55534E]"
             >
-              <span>CORE STUDY: PRODUCT INTERACTION</span>
+              <span>DESIGN STUDY: PRODUCT INTERACTION</span>
               <span className="text-[#E7472E]">FIGURE 04-A</span>
-              <span className="hidden sm:inline">STATE CADENCE: 60FPS</span>
+              <span className="hidden sm:inline">FLOW / FEEDBACK / CONTENT</span>
             </div>
           </div>
         </div>
@@ -304,7 +302,7 @@ export default function InteractionExperience() {
                     ACTIVE: {ANNOTATIONS[activeAnnotation].title}
                   </span>
                 ) : (
-                  "HOVER ANNOTATION TO INSPECT"
+                  "SELECT A DETAIL TO EXPLORE"
                 )}
               </span>
               <button
@@ -313,7 +311,7 @@ export default function InteractionExperience() {
                 className="group inline-flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.14em] text-[#151515] transition-colors hover:text-[#E7472E]"
                 title="Inspect full uncropped interface design"
               >
-                <span>OPEN FULL STUDY</span>
+                <span>VIEW FULL DESIGN</span>
                 <span className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-[#E7472E]">
                   ↗
                 </span>
@@ -439,9 +437,9 @@ export default function InteractionExperience() {
           {/* Board Footer Dimension Bar */}
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-[#E8E2D5] pt-3 font-mono text-[9px] uppercase tracking-[0.14em] text-[#55534E]">
             <div className="flex items-center gap-2">
-              <span className="text-[#E7472E]">SCALE: 1:1 RENDERING</span>
+              <span className="text-[#E7472E]">FULL-PAGE DESIGN</span>
               <span>•</span>
-              <span className="hidden sm:inline">SUBPIXEL PRECISION</span>
+              <span className="hidden sm:inline">INTERFACE DETAILS</span>
             </div>
             <div className="text-[#151515]">
               MODEXA UI ARCHIVE / STUDY 01
@@ -520,7 +518,7 @@ export default function InteractionExperience() {
                     className="transition-colors duration-200"
                     style={{ color: isActive ? "#E7472E" : "#747878" }}
                   >
-                    {isActive ? "TARGETING VIEWPORT ZONE" : "INSPECT TARGET ZONE"}
+                    {isActive ? "DETAIL SELECTED" : "SELECT DETAIL"}
                   </span>
                 </div>
               </div>

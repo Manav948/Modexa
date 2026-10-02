@@ -1,12 +1,12 @@
 "use client";
 
 const PHASES = [
-  { phase: "PHASE // 01", title: "Discover", description: "Understand the product, audience and goal." },
-  { phase: "PHASE // 02", title: "Structure", description: "Define the experience, architecture and technical direction." },
-  { phase: "PHASE // 03", title: "Build", description: "Turn the design into a working digital experience." },
-  { phase: "PHASE // 04", title: "Integrate", description: "Connect the systems, data and interactions." },
-  { phase: "PHASE // 05", title: "Refine", description: "Improve the details, performance and behavior." },
-  { phase: "PHASE // 06", title: "Deploy", description: "Take the finished experience into production." },
+  { phase: "01 / DISCOVER", title: "Discover", description: "Understand the product, people using it and the goal." },
+  { phase: "02 / STRUCTURE", title: "Structure", description: "Plan the pages, content and technical foundation." },
+  { phase: "03 / BUILD", title: "Build", description: "Turn the design into a working website or product." },
+  { phase: "04 / INTEGRATE", title: "Integrate", description: "Connect the APIs, data and tools the project needs." },
+  { phase: "05 / REFINE", title: "Refine", description: "Test the details, performance and screen sizes." },
+  { phase: "06 / DEPLOY", title: "Deploy", description: "Prepare the website or product for launch." },
 ];
 
 export default function MethodologyProtocol() {
@@ -17,7 +17,7 @@ export default function MethodologyProtocol() {
     >
       <div className="mb-14">
         <h2 className="font-display text-3xl sm:text-4xl md:text-5xl uppercase text-[#1b1c18]">
-          FROM IDEA TO DEPLOYMENT
+          FROM IDEA TO DONE.
         </h2>
         <p className="font-sans text-sm md:text-base text-[#444748] max-w-xl mt-3 leading-relaxed">
           A clear path from product idea to working digital experience.
@@ -52,9 +52,9 @@ export default function MethodologyProtocol() {
           className="mb-3 flex flex-wrap items-end justify-between gap-x-6 gap-y-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[#747878] sm:text-[11px]"
         >
           <span>
-            PROCESS / 05 <span className="px-1.5 text-[#E7472E]">{"//"}</span> IDEA → DESIGN → CODE → TEST → DEPLOY
+            PROCESS / 06 <span className="px-1.5 text-[#E7472E]">{"//"}</span> IDEA → STRUCTURE → BUILD → INTEGRATE → REFINE → DEPLOY
           </span>
-          <span className="text-[#55534E]">SYSTEM / DIGITAL EXPERIENCE</span>
+          <span className="text-[#55534E]">WEB DEVELOPMENT</span>
         </div>
 
         <div className="relative lg:ml-[7%] lg:w-[93%]">
@@ -68,7 +68,7 @@ export default function MethodologyProtocol() {
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-black/20" />
             <span className="absolute left-3 top-3 border border-white/20 bg-[#151515]/80 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-white/85 sm:left-4 sm:top-4 sm:text-[10px]">
-              IDEA → INTERFACE → CODE → DEPLOY
+              IDEA → DESIGN → BUILD → LAUNCH
             </span>
           </div>
 
@@ -76,15 +76,15 @@ export default function MethodologyProtocol() {
               className="relative z-10 mt-4 max-w-[34rem] border border-[#E8E2D5] bg-[#F7F5EF] p-5 sm:p-6 lg:absolute lg:-left-[7.5%] lg:bottom-8 lg:mt-0 lg:max-w-[22.5rem]"
           >
             <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.16em] text-[#E7472E]">
-              BUILD STATUS / PRODUCTION
+              WEB DEVELOPMENT
             </p>
             <h3
               className="font-display text-2xl uppercase leading-[0.95] tracking-[-0.04em] text-[#151515] sm:text-3xl"
             >
-              FROM CONCEPT TO PRODUCTION.
+              FROM PLAN TO LAUNCH.
             </h3>
             <p className="mt-3 font-sans text-sm leading-relaxed text-[#55534E]">
-              Design, interaction and engineering come together to turn an idea into something people can actually use.
+              We build the design, connect the tools it needs and prepare it to go live.
             </p>
           </aside>
         </div>

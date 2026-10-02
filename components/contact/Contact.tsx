@@ -39,7 +39,7 @@ export default function Contact() {
               style={{ fontFamily: "'DM Mono', monospace" }}
             >
               <span className="h-px w-4 bg-[#E7472E]" />
-              <span className="text-[#747878]">STUDIO INITIATION</span>
+              <span className="text-[#747878]">HAVE SOMETHING IN MIND?</span>
             </div>
 
             {/* Main Editorial Headline */}
@@ -51,7 +51,7 @@ export default function Contact() {
               <br />
               <span className="font-normal italic text-[#747878]">SOMETHING</span>
               <br />
-              WORTH REMEMBERING.
+              GOOD.
             </h2>
 
             {/* Supporting Copy */}
@@ -59,8 +59,7 @@ export default function Contact() {
               className="mt-6 max-w-xl font-sans text-base leading-relaxed text-[#747878] sm:mt-8 sm:text-lg"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
-              Have an idea, project or problem worth solving? Tell us what you&apos;re
-              working on.
+              Tell us what you&apos;re working on. We&apos;ll take a look and figure out what the project needs.
             </p>
           </div>
 
@@ -73,7 +72,7 @@ export default function Contact() {
                   className="block font-mono text-[10px] uppercase tracking-widest text-[#747878] mb-2"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
-                  DIRECT DISPATCH // INQUIRY
+                  GET IN TOUCH
                 </span>
                 <div className="flex flex-col items-start gap-2">
                   <a
@@ -97,7 +96,7 @@ export default function Contact() {
                     onClick={copyEmail}
                     className="font-mono text-[10px] uppercase tracking-wider text-[#747878] hover:text-[#1b1c18] transition-colors"
                   >
-                    {copied ? "✓ COPIED TO CLIPBOARD" : "[ COPY EMAIL ]"}
+                    {copied ? "✓ EMAIL COPIED" : "[ COPY EMAIL ]"}
                   </button>
                 </div>
               </div>
@@ -128,12 +127,12 @@ export default function Contact() {
               style={{ fontFamily: "'DM Mono', monospace" }}
             >
               <div className="flex items-center justify-between py-1">
-                <span>CADENCE</span>
-                <span className="text-[#1b1c18] font-semibold">Q2 / Q3 ACTIVE</span>
+                <span>PROJECTS</span>
+                <span className="text-[#1b1c18] font-semibold">TELL US YOUR IDEA</span>
               </div>
               <div className="flex items-center justify-between py-1">
-                <span>RESPONSE</span>
-                <span className="text-emerald-700 font-semibold">&lt; 24 HOURS</span>
+                <span>NEXT STEP</span>
+                <span className="text-emerald-700 font-semibold">START A CONVERSATION</span>
               </div>
             </div>
           </div>

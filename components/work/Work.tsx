@@ -25,8 +25,8 @@ const PROJECTS: Project[] = [
     tagline: "01 / WEB",
     title: "DIGITAL",
     italicTitle: "EXPERIENCE",
-    category: "Interface, interaction and development",
-    specs: "WEB • UI/UX • DEVELOPMENT",
+    category: "A website with a clear interface and useful interactions.",
+    specs: "WEB • UI/UX",
     image: "/images/work_codeverse_platform_1789796324968.png",
     mobilePreview: "/images/work_codeverse_platform_1789796324968.png",
     overlayBadge: "WEB / DIGITAL EXPERIENCE",
@@ -37,7 +37,7 @@ const PROJECTS: Project[] = [
     tagline: "02 / VIDEO",
     title: "MOTION",
     italicTitle: "STORIES",
-    category: "Editing, rhythm and motion direction",
+    category: "Video edits shaped around pacing, movement and story.",
     specs: "VIDEO / CONTENT",
     image: "/images/work_motion_stories_1789796354503.png",
     mobilePreview: "/images/work_motion_stories_1789796354503.png",
@@ -49,8 +49,8 @@ const PROJECTS: Project[] = [
     tagline: "03 / DIGITAL",
     title: "SPATIAL",
     italicTitle: "EXPERIENCE",
-    category: "Creative technology and digital space",
-    specs: "DIGITAL / INTERACTIVE",
+    category: "An interactive website built around a digital environment.",
+    specs: "DIGITAL / CREATIVE",
     image: "/images/work_arclab_spatial_1789796381832.png",
     mobilePreview: "/images/work_arclab_spatial_1789796381832.png",
     overlayBadge: "WEB EXPERIENCE",
@@ -61,12 +61,12 @@ const PROJECTS: Project[] = [
     tagline: "04 / UI/UX",
     title: "PRODUCT",
     italicTitle: "SYSTEM",
-    category: "Interface structure and interaction design",
-    specs: "UI/UX • DIGITAL PRODUCT",
+    category: "A digital product with clear pages and useful interactions.",
+    specs: "UI/UX • WEB",
     image: "/images/work_vanguard_hardware_1789796410306.png",
     mobilePreview: "/images/work_vanguard_hardware_1789796410306.png",
     overlayBadge: "UI/UX / PRODUCT SYSTEM",
-    overlaySubtext: "Interface structure, visual language and interaction detail",
+    overlaySubtext: "Page structure, visual design and interaction.",
   },
 ];
 
@@ -138,6 +138,7 @@ export default function Work() {
               className="font-mono text-[10px] text-[#b6240f] font-bold uppercase tracking-widest"
               style={{ fontFamily: "'DM Mono', monospace" }}
             >
+              SELECTED WORK / 04
             </motion.div>
           </div>
 
@@ -154,9 +155,9 @@ export default function Work() {
                 fontWeight: 400,
               }}
             >
-              SELECTED WORK &amp;
+              WORK WORTH
               <br />
-              <span className="italic font-normal text-[#b6240f]">ACROSS DISCIPLINES.</span>
+              <span className="italic font-normal text-[#b6240f]">LOOKING AT.</span>
             </motion.h2>
           </div>
         </div>
@@ -170,8 +171,8 @@ export default function Work() {
             className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-sm text-[#aaa69c]"
             style={{ fontFamily: "'DM Mono', monospace" }}
           >
-            <span className="uppercase tracking-wider">FILTERS:</span>
-            {["ALL", "2024 — 2026"].map((filter) => (
+            <span className="uppercase tracking-wider">CATEGORIES:</span>
+            {["ALL", "CREATIVE"].map((filter) => (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}

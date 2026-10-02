@@ -16,8 +16,6 @@ export default function StartProjectButton({
   const isDark = theme === "dark";
 
   return (
-    <a>
-      
-    </a>
+    <a></a>
   );
 }

@@ -119,13 +119,13 @@ export default function CampaignLaboratory() {
                       className="text-white leading-tight italic text-xs mb-1"
                       style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                     >
-                      &quot;Curve followed silence until the room answered.&quot;
+                      A clear idea gives every piece of content a place to start.
                     </p>
                     <div
                       className="font-mono text-[8px] uppercase tracking-widest"
                       style={{ color: "rgba(255,255,255,0.4)", fontFamily: "'DM Mono', monospace" }}
                     >
-                      CONTENT DIRECTION
+                      CONTENT / CAMPAIGNS
                     </div>
                   </div>
                 </div>
@@ -163,7 +163,7 @@ export default function CampaignLaboratory() {
                 className="text-[#55534E] text-xs leading-relaxed max-w-[200px] mb-8 self-end -mt-10 hidden lg:block"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
-                Decisive content systems — built around typography, platform context, and cultural timing.
+                A clear plan for what to say, show and share.
               </p>
 
               {/* Editorial metadata line */}
@@ -171,7 +171,7 @@ export default function CampaignLaboratory() {
                 className="lab-quote flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-[#E7472E] font-bold mb-4"
                 style={{ fontFamily: "'DM Mono', monospace" }}
               >
-                <span>CAMPAIGN DIRECTION // CONTENT BRIEF</span>
+                <span>CAMPAIGN / CONTENT</span>
                 <span className="flex-1 h-px" style={{ backgroundColor: "#E8E2D5" }} />
                 <span className="text-[#55534E]">01 MKT</span>
               </div>
@@ -187,14 +187,14 @@ export default function CampaignLaboratory() {
                     color: "#151515",
                   }}
                 >
-                  &quot;THE HOOK MUST{" "}
+                    &quot;ATTENTION HAS TO BE{" "}
                   <span
                     className="underline decoration-[#E7472E] decoration-[3px] underline-offset-4"
                     style={{ color: "#E7472E" }}
                   >
-                    BREATHE
+                        EARNED.
                   </span>{" "}
-                    BEFORE IT CONVERTS.&quot;
+                      &quot;
                 </p>
 
                 {/* Body paragraph below quote */}
@@ -202,9 +202,7 @@ export default function CampaignLaboratory() {
                   className="text-[#55534E] text-sm leading-relaxed max-w-sm mb-6"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
-                  Most digital marketing misses because it demands attention before it
-                  earns it. We design content that creates trust on the first scroll,
-                  then drives behavior on the second.
+                  The right idea needs a clear message, good timing and the right place to reach people.
                 </p>
 
                 {/* CTA + metadata row */}
@@ -214,7 +212,7 @@ export default function CampaignLaboratory() {
                     className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-[#151515] hover:text-[#E7472E] transition-colors"
                     style={{ fontFamily: "'DM Mono', monospace" }}
                   >
-                    DISCOVER MORE →
+                    VIEW SERVICES →
                   </a>
                   <span
                     className="font-mono text-[10px] text-[#55534E] uppercase"
@@ -299,7 +297,7 @@ export default function CampaignLaboratory() {
                     className="font-mono text-[9px] text-[#E7472E] uppercase tracking-widest font-bold mb-1"
                     style={{ fontFamily: "'DM Mono', monospace" }}
                   >
-                    SONIC IDENTITY LAB
+                    CAMPAIGN CONTENT
                   </div>
                   <div
                     className="text-[#55534E] font-mono text-[9px] uppercase"
@@ -312,7 +310,7 @@ export default function CampaignLaboratory() {
                   className="font-mono text-[10px] text-[#E7472E] font-bold mt-3 uppercase tracking-widest"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
-                  CONTENT SYSTEM
+                  CONTENT PLAN
                 </div>
               </div>
 
@@ -337,8 +335,7 @@ export default function CampaignLaboratory() {
                   className="text-[#55534E] text-xs leading-relaxed mt-3 max-w-md"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
-                  A sonic-first content strategy generating consistent brand recall
-                  across all platforms. Voice tonality mapped to each vertical.
+                  We plan what to say, choose where to share it and keep the voice consistent.
                 </p>
               </div>
 
@@ -351,19 +348,19 @@ export default function CampaignLaboratory() {
                   className="font-mono text-[9px] uppercase text-[#55534E]"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
-                  REACH / RIGHT PLACES
+                  ATTENTION / FIRST LOOK
                 </div>
                 <div
                   className="font-mono text-[9px] uppercase text-[#55534E]"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
-                  RETENTION / RETURN
+                  INTEREST / LEARN MORE
                 </div>
                 <div
                   className="font-mono text-[9px] uppercase text-[#E7472E] font-bold"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
-                  CONNECTION ↑
+                  ACTION / NEXT STEP
                 </div>
               </div>
             </div>

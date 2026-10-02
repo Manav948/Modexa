@@ -8,7 +8,7 @@ export default function UIUXCTA() {
       discipline="UI/UX DESIGN"
       headlinePrefix="HAVE AN EXPERIENCE"
       headlineItalic="WORTH DESIGNING?"
-      description="Bring the experience you're trying to shape. We'll design the system, map the interactions and make the next action clear."
+      description="Tell us what you want to make easier for people. We'll design the pages and interactions around it."
       subject="UI/UX Design Project // Modexa"
     />
   );

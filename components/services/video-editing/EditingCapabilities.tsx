@@ -3,10 +3,10 @@
 import { motion } from "framer-motion";
 
 const CAPABILITIES = [
-  { num: "01", title: "Short-Form", desc: "Reels, social clips and fast-moving content built to hold attention.", badge: "SOCIAL / MOTION" },
-  { num: "02", title: "Long-Form", desc: "YouTube, branded content and longer narratives shaped around structure and pacing.", badge: "NARRATIVE / SERIES" },
-  { num: "03", title: "Motion", desc: "Titles, transitions and visual movement that support the story rather than distract from it.", badge: "TYPE / MOVEMENT" },
-  { num: "04", title: "Storytelling", desc: "Cuts that create rhythm, emotion and a reason to keep watching.", badge: "RHYTHM / PURPOSE" },
+  { num: "01", title: "Short-Form", desc: "Short videos for social media, shaped to hold attention.", badge: "SOCIAL CONTENT" },
+  { num: "02", title: "Long-Form", desc: "Longer videos with a clear structure and steady pace.", badge: "LONG-FORM" },
+  { num: "03", title: "Motion", desc: "Titles and transitions that support the story.", badge: "MOTION" },
+  { num: "04", title: "Storytelling", desc: "Cuts that shape a story and give people a reason to keep watching.", badge: "STORYTELLING" },
 ];
 
 export default function EditingCapabilities() {

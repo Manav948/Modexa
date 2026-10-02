@@ -11,38 +11,38 @@ if (typeof window !== "undefined") {
 const STACK_LAYERS = [
   {
     number: "01",
-    title: "NEXT.JS 16.3.5",
-    description: "App Router architecture for server-rendered pages and responsive digital experiences.",
+    title: "NEXT.JS 16",
+    description: "App Router pages and server rendering for fast, responsive websites.",
     category: "FRAMEWORK",
     detail: "APP ROUTER",
   },
   {
     number: "02",
-    title: "TYPESCRIPT 5.X",
-    description: "Typed interfaces and predictable application logic across the codebase.",
+    title: "TYPESCRIPT 5",
+    description: "Types help catch errors and keep application code clear.",
     category: "LANGUAGE",
     detail: "TYPE SYSTEM",
   },
   {
     number: "03",
-    title: "GSAP + LENIS + WEBGL",
-    description: "Scroll-linked motion and smooth interaction, composed as part of the experience.",
+    title: "GSAP + LENIS",
+    description: "Scroll-triggered animation and smooth scrolling where they support the experience.",
     category: "MOTION",
     detail: "SCROLLTRIGGER",
   },
   {
     number: "04",
-    title: "TAILWIND CSS & TOKENS",
-    description: "Responsive styling shaped by a shared set of color and typography tokens.",
+    title: "TAILWIND CSS",
+    description: "Responsive styles built from a consistent set of colors and type.",
     category: "STYLING",
     detail: "DESIGN TOKENS",
   },
   {
     number: "05",
-    title: "NODE.JS + PRISMA",
-    description: "Server-side services and persistent data systems for production applications.",
+    title: "SERVER / DATA",
+    description: "Connect websites to APIs, data and the services each project needs.",
     category: "BACKEND",
-    detail: "MONGODB / DATA",
+    detail: "API INTEGRATION",
   },
 ];
 
@@ -91,10 +91,10 @@ export default function EngineeringStack() {
         <div className="border-b border-[#E8E2D5] pb-8 md:pb-10">
           <div className="mt-5 flex flex-col gap-5 md:mt-6 md:flex-row md:items-end md:justify-between">
             <h2 id="engineering-stack-title" className="font-display text-[clamp(2.2rem,5vw,4.6rem)] font-normal uppercase leading-[0.94] tracking-[-0.055em]">
-              THE ENGINEERING<br />STACK
+              TOOLS FOR<br />THE WEB
             </h2>
             <p className="max-w-[420px] font-sans text-sm leading-relaxed text-[#55534E] md:pb-1 md:text-[15px]">
-              The frameworks, languages and motion systems behind considered digital experiences.
+              The tools we use to build websites and digital products.
             </p>
           </div>
         </div>

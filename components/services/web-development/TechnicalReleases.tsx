@@ -13,7 +13,7 @@ const PROJECTS = [
   {
     id: "01",
     title: "PROJECT 01",
-    description: "Athletic product landing page with a split-hero motion composition.",
+    description: "A product website with a split-screen layout and animated details.",
     image: "/images/web5.png",
     width: 925,
     height: 521,
@@ -22,7 +22,7 @@ const PROJECTS = [
   {
     id: "02",
     title: "PROJECT 02",
-    description: "Dark cinematic sports-gear launch experience with layered product UI.",
+    description: "A sports gear website with product details and a dark visual style.",
     image: "/images/web6.png",
     width: 896,
     height: 637,
@@ -31,7 +31,7 @@ const PROJECTS = [
   {
     id: "03",
     title: "PROJECT 03",
-    description: "Luxury mobility interface pairing editorial type with booking workflow.",
+    description: "A car booking website with clear pages and a simple booking flow.",
     image: "/images/web7.png",
     width: 952,
     height: 703,
@@ -289,7 +289,7 @@ export default function TechnicalReleases() {
           </h2>
         </div>
         <p data-work-intro className="max-w-[470px] font-sans text-sm leading-relaxed text-[#55534E] sm:text-[15px]">
-          A selection of digital experiences built across design, development and interaction.
+          A selection of websites, interfaces and digital products.
         </p>
       </div>
 

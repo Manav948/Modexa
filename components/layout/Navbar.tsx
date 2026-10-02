@@ -8,10 +8,10 @@ import { useEffect, useRef, useState } from "react";
 import StartProjectButton from "@/components/motion/StartProjectButton";
 
 const SERVICES = [
-  { number: "01", label: "VIDEO EDITING", meta: "Motion direction / Film", href: "/services/video-editing", image: "/images/service_video_motion_1789796437874.png" },
-  { number: "02", label: "UI / UX DESIGN", meta: "Digital products / Web", href: "/services/ui-ux-design", image: "/images/service_ui_ux_1789796467059.png" },
+  { number: "01", label: "VIDEO EDITING", meta: "Editing / Motion", href: "/services/video-editing", image: "/images/service_video_motion_1789796437874.png" },
+  { number: "02", label: "UI / UX DESIGN", meta: "Websites / Products", href: "/services/ui-ux-design", image: "/images/service_ui_ux_1789796467059.png" },
   { number: "03", label: "DIGITAL MARKETING", meta: "Content / Campaigns", href: "/services/digital-marketing", image: "/images/work_vanguard_hardware_1789796410306.png" },
-  { number: "04", label: "WEB DEVELOPMENT", meta: "Interactive / Systems", href: "/services/web-development", image: "/images/work_codeverse_platform_1789796324968.png" },
+  { number: "04", label: "WEB DEVELOPMENT", meta: "Websites / Systems", href: "/services/web-development", image: "/images/work_codeverse_platform_1789796324968.png" },
 ];
 
 export default function Navbar() {
@@ -97,7 +97,7 @@ export default function Navbar() {
             <AnimatePresence>
               {servicesOpen && (
                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ duration: 0.2 }} className="absolute right-0 top-full w-[min(560px,calc(100vw-40px))] border border-[#E8E2D5] bg-[#f7f5ef] p-3 text-[#151515] shadow-2xl" role="menu">
-                  <div className="mb-3 flex items-center justify-between border-b border-[#E8E2D5] px-2 pb-2 font-mono text-[9px] uppercase tracking-widest text-[#55534E]"><span>CAPABILITIES INDEX</span><span className="text-[#E7472E]">04 DISCIPLINES</span></div>
+                  <div className="mb-3 flex items-center justify-between border-b border-[#E8E2D5] px-2 pb-2 font-mono text-[9px] uppercase tracking-widest text-[#55534E]"><span>OUR SERVICES</span><span className="text-[#E7472E]">FOUR SERVICES</span></div>
                   <div className="grid grid-cols-2 gap-1">
                     {SERVICES.map((service) => (
                       <Link key={service.href} href={service.href} role="menuitem" onMouseEnter={() => setPreview(service)} onFocus={() => setPreview(service)} onClick={closeMenus} className="group flex min-h-20 items-start gap-3 border border-transparent p-3 transition-colors hover:border-[#E8E2D5] hover:bg-white">
@@ -107,7 +107,7 @@ export default function Navbar() {
                       </Link>
                     ))}
                   </div>
-                  <div className="mt-2 flex items-center gap-3 border-t border-[#E8E2D5] pt-3"><Image src={preview.image} alt="" width={56} height={40} className="h-10 w-14 object-cover grayscale" /><span className="font-mono text-[8px] uppercase tracking-wider text-[#55534E]">{preview.label} / SELECTED DIRECTION</span></div>
+                  <div className="mt-2 flex items-center gap-3 border-t border-[#E8E2D5] pt-3"><Image src={preview.image} alt="" width={56} height={40} className="h-10 w-14 object-cover grayscale" /><span className="font-mono text-[8px] uppercase tracking-wider text-[#55534E]">{preview.label} / SERVICE</span></div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -126,7 +126,7 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div id="mobile-navigation" ref={menuPanelRef} tabIndex={-1} initial={{ clipPath: "inset(0 0 100% 0)", opacity: 0.8 }} animate={{ clipPath: "inset(0 0 0% 0)", opacity: 1 }} exit={{ clipPath: "inset(0 0 100% 0)", opacity: 0.8 }} transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }} className="absolute inset-x-0 top-full max-h-[calc(100dvh-76px)] overflow-y-auto border-b border-[#E8E2D5] bg-[#f7f5ef] px-5 py-8 text-[#151515] shadow-2xl md:hidden">
-            <div className="mb-8 flex items-center justify-between border-b border-[#E8E2D5] pb-3 font-mono text-[9px] uppercase tracking-widest text-[#55534E]"><span>MODEXA / NAVIGATION</span><span className="text-[#E7472E]">INDEX 2026.4</span></div>
+            <div className="mb-8 flex items-center justify-between border-b border-[#E8E2D5] pb-3 font-mono text-[9px] uppercase tracking-widest text-[#55534E]"><span>MODEXA / NAVIGATION</span><span className="text-[#E7472E]">FOUR SERVICES</span></div>
             <nav className="flex flex-col" aria-label="Mobile navigation">
               <Link href={homeHref("#works")} onClick={closeMenus} className="flex min-h-14 items-center border-b border-[#E8E2D5] font-display text-3xl tracking-tight transition-colors hover:text-[#E7472E]">WORK</Link>
               <button type="button" aria-expanded={mobileServicesOpen} onClick={() => setMobileServicesOpen((open) => !open)} className="flex min-h-14 items-center justify-between border-b border-[#E8E2D5] text-left font-display text-3xl tracking-tight transition-colors hover:text-[#E7472E]">SERVICES <span className={`font-mono text-sm transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""}`}>↓</span></button>

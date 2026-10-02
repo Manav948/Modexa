@@ -636,8 +636,7 @@ export default function UIUXDesignCarousel({
             </h2>
           </div>
           <p className="max-w-[460px] font-sans text-sm leading-relaxed text-[#55534E] sm:text-[15px]">
-            Interfaces, systems and digital experiences designed around clarity,
-            interaction and visual language.
+            A selection of websites and digital products designed to be clear, useful and easy to use.
           </p>
         </div>
 
@@ -708,7 +707,7 @@ export default function UIUXDesignCarousel({
                         <span className="px-1 text-[#E7472E]">/</span> {project.category}
                       </span>
                       <span className="text-[#E7472E] font-bold">
-                        INSPECT DESIGN →
+                        VIEW DESIGN →
                       </span>
                     </div>
 
@@ -718,7 +717,7 @@ export default function UIUXDesignCarousel({
                         {project.title}
                       </span>
                       <span className="font-mono text-[8px] uppercase tracking-[0.12em] text-white/90 sm:text-[9px] bg-white/10 px-2.5 py-1 border border-white/20">
-                        OPEN FULL VIEW
+                        VIEW FULL DESIGN
                       </span>
                     </div>
                   </div>

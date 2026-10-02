@@ -8,7 +8,7 @@ export default function CommissionGateway() {
       discipline="WEB DEVELOPMENT"
       headlinePrefix="HAVE SOMETHING"
       headlineItalic="WORTH BUILDING?"
-      description="Websites and digital products built where design, interaction and technology meet."
+      description="Tell us what you want to build. We'll work out the pages, features and technology it needs."
       subject="Web Development Project // Modexa"
     />
   );

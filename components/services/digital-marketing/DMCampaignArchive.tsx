@@ -9,11 +9,11 @@ if (typeof window !== "undefined") {
 }
 
 const ARCHIVE = [
-  { ref: "01", title: "SOCIAL MEDIA", format: "Content / Platform Direction", year: "01", status: "SOCIAL" },
-  { ref: "02", title: "CONTENT STRATEGY", format: "Editorial Direction / Planning", year: "02", status: "STRATEGY" },
-  { ref: "03", title: "CAMPAIGN CREATIVE", format: "Concept / Visual Campaign", year: "03", status: "CAMPAIGN" },
-  { ref: "04", title: "DIGITAL STRATEGY", format: "Audience / Content / Distribution", year: "04", status: "STRATEGY" },
-  { ref: "05", title: "DISTRIBUTION", format: "Right Content / Right Places", year: "05", status: "REACH" },
+  { ref: "01", title: "SOCIAL MEDIA", format: "Social content and platform planning", year: "01", status: "SOCIAL" },
+  { ref: "02", title: "CONTENT STRATEGY", format: "A plan for what to say and share", year: "02", status: "STRATEGY" },
+  { ref: "03", title: "CAMPAIGN CREATIVE", format: "Campaign ideas and visuals", year: "03", status: "CAMPAIGN" },
+  { ref: "04", title: "DIGITAL STRATEGY", format: "Audience, content and distribution", year: "04", status: "STRATEGY" },
+  { ref: "05", title: "DISTRIBUTION", format: "Content in the right places", year: "05", status: "DISTRIBUTION" },
 ];
 
 export default function DMCampaignArchive() {
@@ -49,13 +49,13 @@ export default function DMCampaignArchive() {
             className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-[#151515]"
             style={{ fontFamily: "'DM Mono', monospace" }}
           >
-            <span className="text-[#55534E]">— SELECTED DIRECTIONS</span>
+            <span className="text-[#55534E]">— DIGITAL MARKETING / 03</span>
           </div>
           <span
             className="font-mono text-[10px] text-[#55534E] uppercase"
             style={{ fontFamily: "'DM Mono', monospace" }}
           >
-            ATTENTION / CONTENT / CONNECTION
+            CONTENT / CAMPAIGNS / DISTRIBUTION
           </span>
         </div>
 
@@ -65,9 +65,9 @@ export default function DMCampaignArchive() {
             <thead>
               <tr className="text-[#55534E] border-b border-[#E8E2D5]">
                 <th className="py-3 font-normal">REF.</th>
-                <th className="py-3 font-normal">CAMPAIGN NAME</th>
+                <th className="py-3 font-normal">SERVICE</th>
                 <th className="py-3 font-normal">DISCIPLINE & FORMAT</th>
-                <th className="py-3 font-normal">YEAR</th>
+                <th className="py-3 font-normal">INDEX</th>
                 <th className="py-3 font-normal text-right">STATUS</th>
               </tr>
             </thead>

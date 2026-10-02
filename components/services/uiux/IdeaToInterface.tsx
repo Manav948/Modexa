@@ -245,13 +245,12 @@ export default function IdeaToInterface() {
               ref={textRef}
               className="font-sans text-[15px] leading-relaxed text-[#55534E] sm:text-[16px] md:max-w-md"
             >
-              An interface starts with a problem, becomes a structure, and
-              finally turns into something people can understand, use and remember.
+              We start with the problem, plan the structure, design the interactions and refine the finished interface.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-[#E8E2D5] pt-4 font-mono text-[9px] uppercase tracking-[0.15em] text-[#55534E]">
-              <span>METHOD: ART-DIRECTED CHOREOGRAPHY</span>
-              <span className="text-[#E7472E]">4 CONTINUOUS PHASES</span>
+              <span>PROCESS: IDEA / STRUCTURE / INTERACTION / DESIGN</span>
+              <span className="text-[#E7472E]">FOUR STEPS</span>
             </div>
           </div>
         </div>
@@ -312,14 +311,13 @@ export default function IdeaToInterface() {
               <div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.18em] text-[#E7472E] font-bold mb-3">
                 <span>STAGE 01</span>
                 <span>//</span>
-                <span>FOUNDATION & INTENT</span>
+                <span>RESEARCH</span>
               </div>
               <h3 className="font-display text-[2rem] sm:text-[2.5rem] uppercase leading-[0.95] tracking-tight text-[#151515] mb-4">
                 IDEA
               </h3>
               <p className="font-sans text-[14px] leading-relaxed text-[#55534E] mb-6">
-                Every digital interface begins with intent. We define the typography,
-                spatial rhythm, and content hierarchy before drawing a single button.
+                We learn what people need and what the product should help them do.
               </p>
 
               {/* Editorial Spec Callouts */}
@@ -329,8 +327,8 @@ export default function IdeaToInterface() {
                   <span className="text-[#151515] font-bold">SPACE GROTESK + INTER</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span>SPATIAL BASE GRID</span>
-                  <span className="text-[#151515] font-bold">8PT HARMONIC INTERVAL</span>
+                  <span>SPACING GRID</span>
+                  <span className="text-[#151515] font-bold">8PT GRID</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span>PROBLEM DEFINITION</span>
@@ -362,7 +360,7 @@ export default function IdeaToInterface() {
                   />
                   {/* Visual Spec Overlay */}
                   <div className="pointer-events-none absolute bottom-3 left-3 bg-[#151515]/90 px-3 py-1.5 font-mono text-[8px] uppercase tracking-widest text-white backdrop-blur-sm">
-                    TYPE SPEC: CLARITY-FIRST HIERARCHY
+                    TYPE AND CONTENT ORDER
                   </div>
                 </div>
               </div>
@@ -389,7 +387,7 @@ export default function IdeaToInterface() {
                 className="relative overflow-hidden rounded-[2px] border border-[#E8E2D5] bg-[#FFFFFF] p-2.5 sm:p-4 shadow-[0_1px_3px_rgba(0,0,0,0.02)]"
               >
                 <div className="mb-2 flex items-center justify-between border-b border-[#E8E2D5] pb-2 font-mono text-[8px] uppercase tracking-wider text-[#747878]">
-                  <span>FIG 02 // SPATIAL ARCHITECTURE & WIREFRAME</span>
+                  <span>FIG 02 // PAGE STRUCTURE</span>
                   <span className="text-[#151515]">UI ARCHIVE 11</span>
                 </div>
 
@@ -404,7 +402,7 @@ export default function IdeaToInterface() {
                     className="object-cover object-top"
                   />
                   <div className="pointer-events-none absolute bottom-3 right-3 bg-[#151515]/90 px-3 py-1.5 font-mono text-[8px] uppercase tracking-widest text-white backdrop-blur-sm">
-                    STRUCTURAL GRID: 12-COLUMN MODULAR
+                    12-COLUMN PAGE LAYOUT
                   </div>
                 </div>
               </div>
@@ -420,23 +418,22 @@ export default function IdeaToInterface() {
               <div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.18em] text-[#E7472E] font-bold mb-3">
                 <span>STAGE 02</span>
                 <span>//</span>
-                <span>SPATIAL ARCHITECTURE</span>
+                <span>PAGE STRUCTURE</span>
               </div>
               <h3 className="font-display text-[2rem] sm:text-[2.5rem] uppercase leading-[0.95] tracking-tight text-[#151515] mb-4">
                 STRUCTURE
               </h3>
               <p className="font-sans text-[14px] leading-relaxed text-[#55534E] mb-6">
-                Balancing information density against negative space. Organizing complex
-                workflows into intuitive visual containers and structured pathways.
+                We organize pages and content so people can find what they need.
               </p>
 
               <div className="space-y-2 border-t border-[#E8E2D5] pt-4 font-mono text-[9px] uppercase tracking-[0.14em] text-[#55534E]">
                 <div className="flex items-center justify-between">
                   <span>LAYOUT SCAFFOLD</span>
-                  <span className="text-[#151515] font-bold">12-COL ASYMMETRIC GRID</span>
+                  <span className="text-[#151515] font-bold">12-COLUMN GRID</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span>READABILITY DENSITY</span>
+                  <span>CONTENT SPACING</span>
                   <span className="text-[#151515] font-bold">BALANCED WHITE SPACE</span>
                 </div>
                 <div className="flex items-center justify-between">
@@ -458,29 +455,27 @@ export default function IdeaToInterface() {
               <div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.18em] text-[#E7472E] font-bold mb-3">
                 <span>STAGE 03</span>
                 <span>//</span>
-                <span>MOTION & FEEDBACK</span>
+                <span>PROTOTYPE</span>
               </div>
               <h3 className="font-display text-[2rem] sm:text-[2.5rem] uppercase leading-[0.95] tracking-tight text-[#151515] mb-4">
                 INTERACTION
               </h3>
               <p className="font-sans text-[14px] leading-relaxed text-[#55534E] mb-6">
-                Motion gives life to structure. Choreographing feedback cadence,
-                micro-transitions, and responsive touchpoints so interactions feel
-                direct, tactile, and effortless.
+                We turn page layouts into prototypes people can try, then improve the details based on how they work.
               </p>
 
               <div className="space-y-2 border-t border-[#E8E2D5] pt-4 font-mono text-[9px] uppercase tracking-[0.14em] text-[#55534E]">
                 <div className="flex items-center justify-between">
-                  <span>EASING CURVE</span>
-                  <span className="text-[#151515] font-bold">CUBIC-BEZIER(0.16, 1, 0.3, 1)</span>
+                  <span>TRANSITIONS</span>
+                  <span className="text-[#151515] font-bold">SMOOTH AND CLEAR</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span>FEEDBACK CADENCE</span>
-                  <span className="text-[#151515] font-bold">REAL-TIME TACTILE ACCORD</span>
+                  <span>USER FEEDBACK</span>
+                  <span className="text-[#151515] font-bold">CLEAR RESPONSES</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span>FRAME RATE</span>
-                  <span className="text-[#E7472E] font-bold">60FPS LIQUID PERFORMANCE</span>
+                  <span>ANIMATION</span>
+                  <span className="text-[#E7472E] font-bold">RESPONSIVE MOTION</span>
                 </div>
               </div>
             </div>
@@ -492,8 +487,8 @@ export default function IdeaToInterface() {
                 className="relative overflow-hidden rounded-[2px] border border-[#E8E2D5] bg-[#FFFFFF] p-2.5 sm:p-4 shadow-[0_1px_3px_rgba(0,0,0,0.02)]"
               >
                 <div className="mb-2 flex items-center justify-between border-b border-[#E8E2D5] pb-2 font-mono text-[8px] uppercase tracking-wider text-[#747878]">
-                  <span>FIG 03 // LIVE KINETIC INTERACTION STUDY</span>
-                  <span className="text-[#E7472E] font-bold">LOOPING MOTION REVEAL</span>
+                  <span>FIG 03 // INTERACTION PROTOTYPE</span>
+                  <span className="text-[#E7472E] font-bold">MOTION PREVIEW</span>
                 </div>
 
                 <div className="relative h-[240px] sm:h-[320px] w-full overflow-hidden border border-[#E8E2D5] bg-[#0E1015]">
@@ -509,7 +504,7 @@ export default function IdeaToInterface() {
                   {/* Live Motion Status Tag */}
                   <div className="pointer-events-none absolute top-3 right-3 flex items-center gap-1.5 bg-[#151515]/90 px-2.5 py-1 font-mono text-[8px] uppercase tracking-widest text-white backdrop-blur-sm">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#E7472E] animate-pulse" />
-                    <span>MOTION STUDY // LIVE 60FPS</span>
+                    <span>INTERACTION PREVIEW</span>
                   </div>
                 </div>
               </div>
@@ -538,7 +533,7 @@ export default function IdeaToInterface() {
                 <div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.18em] text-[#E7472E] font-bold mb-3">
                   <span>STAGE 04</span>
                   <span>//</span>
-                  <span>CULMINATION & EXPERIENCE</span>
+                  <span>FINAL DESIGN</span>
                 </div>
                 <h3 className="font-display text-[2.4rem] sm:text-[3.2rem] md:text-[4rem] uppercase leading-[0.9] tracking-tight text-[#151515]">
                   FINAL INTERFACE
@@ -547,12 +542,11 @@ export default function IdeaToInterface() {
 
               <div className="flex flex-col items-start md:items-end">
                 <p className="font-sans text-[14px] leading-relaxed text-[#55534E] max-w-md md:text-right">
-                  Where concept, structure, and kinetic motion unite into a singular,
-                  memorable digital experience that users trust and enjoy.
+                  The finished design brings the pages, content and interactions together in one clear experience.
                 </p>
                 <div className="mt-3 flex items-center gap-3 font-mono text-[9px] uppercase tracking-[0.14em] text-[#55534E]">
-                  <span>RESOLUTION: COMPLETE DESIGN SYSTEM</span>
-                  <span className="text-[#E7472E] font-bold">FULL FIDELITY</span>
+                  <span>FINAL DESIGNS</span>
+                  <span className="text-[#E7472E] font-bold">READY FOR DEVELOPMENT</span>
                 </div>
               </div>
             </div>
@@ -569,9 +563,9 @@ export default function IdeaToInterface() {
               <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-[#E8E2D5] pb-3 font-mono text-[9px] uppercase tracking-[0.16em] text-[#55534E]">
                 <div className="flex items-center gap-2.5">
                   <span className="h-2 w-2 border border-[#151515] bg-[#151515]" />
-                  <span className="font-bold text-[#151515]">FINAL INTERFACE SPEC // CANDIDATE 04</span>
+                  <span className="font-bold text-[#151515]">FINAL DESIGN</span>
                   <span className="hidden sm:inline text-[#747878]">•</span>
-                  <span className="hidden sm:inline text-[#747878]">3840 × 15766 PX MASTER FILE</span>
+                  <span className="hidden sm:inline text-[#747878]">FULL-PAGE DESIGN</span>
                 </div>
 
                 <button
@@ -624,12 +618,12 @@ export default function IdeaToInterface() {
               {/* Final Architecture Legend Bar */}
               <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-[#E8E2D5] pt-3 font-mono text-[9px] uppercase tracking-[0.14em] text-[#55534E]">
                 <div className="flex items-center gap-3">
-                  <span className="text-[#E7472E] font-bold">ALL DISCIPLINES RESOLVED</span>
+                  <span className="text-[#E7472E] font-bold">READY TO BUILD</span>
                   <span>•</span>
-                  <span>INTENT → STRUCTURE → MOTION → INTERFACE</span>
+                  <span>IDEA → STRUCTURE → PROTOTYPE → DESIGN</span>
                 </div>
                 <div className="text-[#151515]">
-                  MODEXA STUDIO PRACTICE
+                  MODEXA UI/UX DESIGN
                 </div>
               </div>
             </div>

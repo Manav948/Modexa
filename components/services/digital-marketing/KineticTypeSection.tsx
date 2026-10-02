@@ -85,7 +85,7 @@ export default function KineticTypeSection() {
           style={{ borderColor: "#E8E2D5", color: "#55534E", fontFamily: "'DM Mono', monospace" }}
         >
           <span className="w-4 h-px bg-[#E8E2D5]" />
-          <span className="text-[#E7472E] font-bold">SYSTEM STATEMENT</span>
+          <span className="text-[#E7472E] font-bold">ATTENTION HAS TO BE EARNED.</span>
         </div>
 
         <div className="relative w-full min-h-[380px] lg:min-h-[660px] overflow-hidden py-7 md:py-10">
@@ -173,7 +173,7 @@ export default function KineticTypeSection() {
               INTO <span className="font-editorial text-[clamp(2rem,10vw,3rem)] font-normal italic tracking-normal text-[#E7472E]">motion</span>
             </div>
             <div className="mt-8 self-end font-display text-[clamp(3.25rem,18vw,5rem)] font-bold leading-[0.78] tracking-[-0.08em] text-[#151515]">CONVER<span className="text-[#E7472E]">SION</span></div>
-            <p className="mt-8 max-w-[15rem] self-center text-center font-editorial text-xl italic leading-tight text-[#151515]/80">Creative systems that turn attention into connection.</p>
+              <p className="mt-8 max-w-[15rem] self-center text-center font-editorial text-xl italic leading-tight text-[#151515]/80">Attention. Interest. Engagement. Action. Retention.</p>
           </div>
 
           <div className="absolute inset-x-0 top-[65%] z-[2] hidden -translate-y-1/2 justify-center px-8 md:flex md:px-12">
@@ -188,7 +188,7 @@ export default function KineticTypeSection() {
                   opacity: 0.82,
                 }}
               >
-                Creative systems that turn attention into measurable growth.
+                The right idea needs the right format, timing and place to get noticed.
               </div>
               <div
                 className="font-mono uppercase"
@@ -199,7 +199,7 @@ export default function KineticTypeSection() {
                   color: "#55534E",
                 }}
               >
-                strategy / creative / distribution
+                attention / interest / engagement / action / retention
               </div>
               <div
                 style={{
@@ -212,7 +212,7 @@ export default function KineticTypeSection() {
                   maxWidth: "540px",
                 }}
               >
-                built for attention, connection and the right destination.
+                made for the right people, place and moment.
               </div>
             </div>
           </div>
@@ -228,7 +228,7 @@ export default function KineticTypeSection() {
                 letterSpacing: "0.28em",
               }}
             >
-              CONNECTION
+              ACTION
             </span>
             <span className="h-[2px] w-12 bg-[#151515] md:w-20" />
           </div>
@@ -243,7 +243,7 @@ export default function KineticTypeSection() {
                 letterSpacing: "0.2em",
               }}
             >
-              01 // SIGNAL
+              01 // ATTENTION
             </div>
           </div>
 
@@ -257,7 +257,7 @@ export default function KineticTypeSection() {
                 letterSpacing: "0.2em",
               }}
             >
-              02 // SCALE
+              02 // ACTION
             </div>
           </div>
         </div>

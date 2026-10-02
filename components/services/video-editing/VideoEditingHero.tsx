@@ -151,11 +151,11 @@ export default function VideoEditingHero() {
               ))}
             </h1>
             <p ref={supportRef} className="mt-5 max-w-[24rem] text-sm leading-relaxed text-white/90 sm:text-base">
-              Editing shaped by rhythm, emotion and the moments worth keeping.
+              We turn raw footage into videos with a clear story, strong pacing and a reason to keep watching.
             </p>
             <div ref={ctaRef} className="mt-6 flex items-center">
               <Link href="#selected-work" className="inline-flex min-h-11 items-center gap-3 bg-[#b6240f] px-4 font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#941d0d] sm:px-5">
-                EXPLORE SELECTED WORK <span aria-hidden="true">→</span>
+                EXPLORE OUR WORK <span aria-hidden="true">→</span>
               </Link>
             </div>
         </div>

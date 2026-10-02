@@ -6,8 +6,8 @@ import { motion, useInView } from "framer-motion";
 const WORDS = [
   { text: "ONE", highlight: true },
   { text: "IDEA.", highlight: false },
-  { text: "MANY", highlight: false },
-  { text: "SPECIALISTS.", highlight: false },
+  { text: "THE RIGHT", highlight: false },
+  { text: "TEAM.", highlight: false },
 ];
 
 export default function CreativeStatement() {
@@ -31,7 +31,7 @@ export default function CreativeStatement() {
       <div className="relative z-10 max-w-[1400px] mx-auto flex flex-col gap-12">
         {/* Top Tagline */}
         <div className="flex items-center gap-3 font-mono text-[10px] text-[#b6240f] tracking-widest uppercase font-bold">
-            <span className="text-[#747878]">CONNECTED DIGITAL WORK</span>
+            <span className="text-[#747878]">A DIFFERENT WAY OF WORKING</span>
         </div>
 
         {/* Large Statement Typography */}
@@ -66,7 +66,7 @@ export default function CreativeStatement() {
         {/* Subtext description */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pt-8 border-t border-white/10">
           <div className="md:col-span-4 font-mono text-[10px] text-[#747878] uppercase tracking-widest">
-              {"// ONE CREATIVE DIRECTION"}
+              {"// YOU BRING THE IDEA. WE BUILD THE TEAM AROUND IT."}
           </div>
           <div className="md:col-span-8">
             <p
@@ -77,7 +77,7 @@ export default function CreativeStatement() {
                 lineHeight: "1.875rem",
               }}
             >
-                A single creative direction can bring together editors, designers, developers, marketers and other specialists when the project needs them.
+                Some projects need a designer. Some need a developer. Some need an editor, a marketer, or a mix of all of them. We bring the right people together and keep the whole project moving in one direction.
             </p>
           </div>
         </div>

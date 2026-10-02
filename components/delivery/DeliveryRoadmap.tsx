@@ -7,32 +7,32 @@ const PHASES = [
   {
     number: "01",
     title: "DISCOVER",
-    body: "Understand the idea, audience and objective.",
-    meta: "01 / CONTEXT",
+    body: "We learn what you're making, who it's for and what needs to happen.",
+    meta: "01 / DISCOVER",
   },
   {
     number: "02",
     title: "DEFINE",
-    body: "Shape the direction, scope and creative approach.",
-    meta: "02 / DIRECTION",
+    body: "We agree on the direction, scope and plan before work begins.",
+    meta: "02 / DEFINE",
   },
   {
     number: "03",
     title: "CREATE",
-    body: "Bring the right specialists and disciplines together.",
-    meta: "03 / CRAFT",
+    body: "We make the design, video, development or content the project needs.",
+    meta: "03 / CREATE",
   },
   {
     number: "04",
     title: "REFINE",
-    body: "Review, iterate and sharpen the work.",
-    meta: "04 / ITERATION",
+    body: "We review the details and improve what isn't working.",
+    meta: "04 / REFINE",
   },
   {
     number: "05",
     title: "DELIVER",
-    body: "Turn the final direction into something ready to use.",
-    meta: "05 / OUTPUT",
+    body: "We check the final work and get it ready to go live.",
+    meta: "05 / DELIVER",
   },
 ];
 
@@ -72,7 +72,7 @@ export default function DeliveryRoadmap() {
             >
               FROM IDEA
               <br />
-              <span className="text-[#b6240f]">TO OUTPUT.</span>
+              <span className="text-[#b6240f]">TO DONE.</span>
             </motion.h2>
           </div>
 
@@ -83,7 +83,7 @@ export default function DeliveryRoadmap() {
             className="lg:col-span-5 self-end max-w-lg font-body text-[0.9375rem] leading-7 text-[#747878]"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            The right creative team can change how an idea looks, feels and moves. We bring the right people and craft around one clear direction.
+            Every project is different, but the way we work stays clear. We listen, plan, make, improve and deliver.
           </motion.p>
         </div>
 
@@ -116,7 +116,7 @@ export default function DeliveryRoadmap() {
                   className="font-mono text-[10px] text-[#b6240f] font-bold tracking-wider"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
-                  PHASE {phase.number}
+                  {phase.number} - {phase.title}
                 </span>
                 <h3
                   className="text-[#1b1c18] leading-[0.95] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#b6240f]"

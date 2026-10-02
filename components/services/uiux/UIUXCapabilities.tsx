@@ -24,48 +24,48 @@ const CAPABILITIES: CapabilityItem[] = [
     id: "structure",
     num: "01",
     title: "STRUCTURE",
-    category: "SPATIAL TOPOLOGY",
-    desc: "12-column modular scaffolds, calculated white space and content hierarchy.",
+    category: "PAGE / CONTENT",
+    desc: "We organize pages and content so people can find what they need.",
     targetId: "primary",
   },
   {
     id: "interface",
     num: "02",
     title: "INTERFACE",
-    category: "VISUAL LANGUAGE",
-    desc: "Harmonic typography scales, contrast calibration and purposeful color systems.",
+    category: "VISUAL DESIGN",
+    desc: "We use type, color and spacing to make the interface clear.",
     targetId: "primary",
   },
   {
     id: "responsive",
     num: "03",
     title: "RESPONSIVE",
-    category: "VIEWPORT DYNAMICS",
-    desc: "Adaptive layouts crafted for high-density mobile screens and wide desktop displays.",
+    category: "RESPONSIVE DESIGN",
+    desc: "We make layouts work on phones, tablets and desktops.",
     targetId: "mobile",
   },
   {
     id: "interaction",
     num: "04",
     title: "INTERACTION",
-    category: "FEEDBACK CADENCE",
-    desc: "Micro-gestures, tactile state transitions and 60fps kinetic motion.",
+    category: "USER FEEDBACK",
+    desc: "We design useful responses to taps, clicks and other actions.",
     targetId: "secondary",
   },
   {
     id: "systems",
     num: "05",
     title: "SYSTEMS",
-    category: "DESIGN TOKENS",
-    desc: "Scalable component libraries, design tokens and consistent multi-platform foundations.",
+    category: "DESIGN SYSTEMS",
+    desc: "Reusable components keep the design consistent as the product grows.",
     targetId: "detail",
   },
   {
     id: "prototype",
     num: "06",
     title: "PROTOTYPE",
-    category: "TANGIBLE TESTING",
-    desc: "High-fidelity interactive models validating user workflows before engineering.",
+    category: "PROTOTYPING",
+    desc: "Interactive models let people try a design before development starts.",
     targetId: "mobile",
   },
 ];
@@ -402,8 +402,7 @@ export default function UIUXCapabilities() {
               ref={textRef}
               className="font-sans text-[15px] leading-relaxed text-[#55534E] sm:text-[16px] md:max-w-md"
             >
-              From structure and interface to interaction and motion, we design
-              the details that make digital products feel clear, useful and alive.
+              We design the pages, interactions and visual details that make digital products clear and easy to use.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-[#E8E2D5] pt-4 font-mono text-[9px] uppercase tracking-[0.15em] text-[#55534E]">
@@ -469,7 +468,7 @@ export default function UIUXCapabilities() {
                   <div className="absolute top-0 bottom-0 left-[40%] w-[1px] bg-white/10" />
                 </div>
                 <div className="pointer-events-none absolute bottom-2.5 left-2.5 bg-[#151515]/90 px-2.5 py-1 font-mono text-[8px] uppercase tracking-widest text-white backdrop-blur-sm">
-                  CORE SPEC: STRUCTURE & INTERFACE
+                  PAGE STRUCTURE / VISUAL DESIGN
                 </div>
               </div>
             </div>
@@ -513,7 +512,7 @@ export default function UIUXCapabilities() {
                   className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                 />
                 <div className="pointer-events-none absolute bottom-2.5 right-2.5 bg-[#151515]/90 px-2 py-1 font-mono text-[8px] uppercase tracking-widest text-white backdrop-blur-sm">
-                  SPEC: INTERACTION CADENCE
+                  INTERACTIVE DESIGN
                 </div>
               </div>
             </div>
@@ -553,7 +552,7 @@ export default function UIUXCapabilities() {
                   className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.025]"
                 />
                 <div className="pointer-events-none absolute bottom-2 left-2 bg-[#151515]/90 px-2 py-0.5 font-mono text-[7px] uppercase tracking-widest text-white backdrop-blur-sm">
-                  RESPONSIVE / PROTOTYPE
+                  MOBILE / PROTOTYPE
                 </div>
               </div>
             </div>
@@ -585,7 +584,7 @@ export default function UIUXCapabilities() {
                   className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                 />
                 <div className="pointer-events-none absolute bottom-2 right-2 bg-[#151515]/90 px-2 py-0.5 font-mono text-[7px] uppercase tracking-widest text-white backdrop-blur-sm">
-                  SYSTEM MODULARITY
+                  REUSABLE COMPONENTS
                 </div>
               </div>
             </div>
@@ -620,7 +619,7 @@ export default function UIUXCapabilities() {
                 data-connector-hairline
                 className="hidden lg:inline-block h-[1px] w-14 bg-[#D8D2C5]"
               />
-              <span className="text-[#8F8B82] hidden xl:inline">[HIERARCHY]</span>
+              <span className="text-[#8F8B82] hidden xl:inline">[CONTENT ORDER]</span>
             </div>
 
             {/* Annotation 03: RESPONSIVE (Above Mobile Frame) */}
@@ -634,7 +633,7 @@ export default function UIUXCapabilities() {
                 className="hidden lg:inline-block h-[1px] w-12 bg-[#D8D2C5]"
               />
               <span className="font-bold text-[#E7472E]">03 / RESPONSIVE</span>
-              <span className="text-[#151515]">[VIEWPORT]</span>
+              <span className="text-[#151515]">[SCREEN SIZE]</span>
             </div>
 
             {/* Annotation 04: INTERACTION (Beneath Secondary Frame) */}
@@ -648,7 +647,7 @@ export default function UIUXCapabilities() {
                 data-connector-hairline
                 className="hidden lg:inline-block h-[1px] w-16 bg-[#D8D2C5]"
               />
-              <span className="text-[#8F8B82] hidden xl:inline">[60FPS]</span>
+              <span className="text-[#8F8B82] hidden xl:inline">[FEEDBACK]</span>
             </div>
 
             {/* Annotation 05: SYSTEMS (Anchor next to Detail) */}
@@ -662,7 +661,7 @@ export default function UIUXCapabilities() {
                 className="hidden lg:inline-block h-[1px] w-16 bg-[#D8D2C5]"
               />
               <span className="font-bold text-[#151515]">05 / SYSTEMS</span>
-              <span className="text-[#8F8B82] hidden xl:inline">[REUSABLE]</span>
+              <span className="text-[#8F8B82] hidden xl:inline">[CONSISTENT]</span>
             </div>
 
             {/* Annotation 06: PROTOTYPE (Far Right Bottom) */}
@@ -837,7 +836,7 @@ export default function UIUXCapabilities() {
             </div>
 
             <span className="text-[#8F8B82] hidden lg:inline">
-              [DISCIPLINES SYNCHRONIZED]
+              [DESIGN / PROTOTYPING]
             </span>
           </div>
         </div>

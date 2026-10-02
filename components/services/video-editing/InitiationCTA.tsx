@@ -8,7 +8,7 @@ export default function InitiationCTA() {
       discipline="VIDEO EDITING"
       headlinePrefix="GOT FOOTAGE?"
       headlineItalic="LET'S FIND THE STORY."
-      description="Bring us the footage, the idea or the first cut. We'll find the rhythm and shape the story."
+      description="Tell us what the video needs to say and who needs to see it. We'll help shape the story."
       subject="Video Editing Project // Modexa"
     />
   );

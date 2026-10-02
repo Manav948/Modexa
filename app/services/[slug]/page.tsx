@@ -13,19 +13,19 @@ interface ServiceDetailPageProps {
 const SERVICE_METADATA: Record<string, Pick<Metadata, "title" | "description">> = {
   "video-editing": {
     title: "Video Editing & Motion Design | MODEXA",
-    description: "Cinematic video editing and motion design shaped into clear, memorable stories by MODEXA.",
+    description: "We turn raw footage into videos with a clear story, strong pacing and a reason to keep watching.",
   },
   "ui-ux-design": {
     title: "UI/UX Design Services | MODEXA",
-    description: "Explore MODEXA UI/UX design work across digital products, web experiences, interfaces, and visual systems.",
+    description: "We design websites and digital products that are clear, useful and easy to use.",
   },
   "web-development": {
     title: "Web Development Services | MODEXA",
-    description: "MODEXA builds responsive, high-performance websites with considered design, interaction, and engineering.",
+    description: "We build fast, responsive websites and digital products where good design meets solid technology.",
   },
   "digital-marketing": {
     title: "Digital Marketing Services | MODEXA",
-    description: "Explore MODEXA digital marketing services for campaign strategy, creative, and audience growth.",
+    description: "We turn ideas into content and campaigns that reach the right people and give them a reason to care.",
   },
 };
 

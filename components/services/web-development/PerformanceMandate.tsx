@@ -109,13 +109,13 @@ export default function PerformanceMandate() {
 
               <div>
                 <span className="font-mono text-xs text-[#ffdad4] uppercase block font-semibold">
-                  LCP &lt; 0.8S
+                  IMAGE DELIVERY
                 </span>
                 <h3 className="font-display text-sm uppercase text-white mt-1.5 font-bold">
-                  Asset Austerity
+                  Responsive Images
                 </h3>
                 <p className="font-sans text-xs text-white/60 mt-1 leading-relaxed">
-                  AVIF picture sets with automated responsive resolution clipping.
+                  Images sized for the screen they appear on.
                 </p>
               </div>
             </div>

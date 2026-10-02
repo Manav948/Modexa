@@ -131,7 +131,7 @@ export default function DMHero() {
                       maxWidth: "100%",
                     }}
                   >
-                    stop
+                    STOP
                   </div>
               </div>
               <div className="overflow-hidden mb-1">
@@ -148,7 +148,7 @@ export default function DMHero() {
                       maxWidth: "100%",
                     }}
                   >
-                    scrolling.
+                    SCROLLING.
                   </div>
               </div>
               <div className="overflow-hidden">
@@ -166,7 +166,7 @@ export default function DMHero() {
                     }}
                   >
                     
-                  </div>
+                    </div>
               </div>
             </div>
 
@@ -178,7 +178,7 @@ export default function DMHero() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#151515] via-transparent to-transparent opacity-80" />
               <div className="absolute bottom-3 left-3 right-3 font-mono text-[9px] uppercase tracking-widest text-white/70">
-                CONTENT / CAMPAIGN SYSTEM
+                CONTENT / CAMPAIGNS
               </div>
             </div>
 
@@ -189,14 +189,14 @@ export default function DMHero() {
                   className="text-[#55534E] text-[0.8rem] sm:text-sm leading-relaxed"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
-                  Strategy, content and creative direction built around attention and connection.
+                  We turn ideas into content and campaigns that reach the right people and give them a reason to care.
                 </p>
                 <a
                   href="#dm-campaigns"
                   className="inline-flex items-center gap-2 mt-5 font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-[#151515] border-b border-[#151515] pb-0.5 hover:text-[#E7472E] hover:border-[#E7472E] transition-colors"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >
-                  EXPLORE WORK ↓
+                  EXPLORE OUR WORK →
                 </a>
               </div>
               <div
@@ -258,13 +258,13 @@ export default function DMHero() {
                     className="text-white text-xs leading-snug italic mb-2"
                     style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.8rem" }}
                   >
-                    &quot;Every brand silence is someone else&apos;s moment.&quot;
+                    &quot;Give people a reason to stop and pay attention.&quot;
                   </p>
                   <div
                     className="font-mono text-[8px] uppercase tracking-widest"
                     style={{ color: "rgba(255,255,255,0.5)", fontFamily: "'DM Mono', monospace" }}
                   >
-                    SOCIAL DIRECTION // CONTENT LAB
+                    SOCIAL MEDIA / CONTENT
                   </div>
                 </div>
               </div>
@@ -275,7 +275,7 @@ export default function DMHero() {
                   className="text-white font-semibold text-sm mb-2"
                   style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
-                  Campaign Velocity & Content Structure
+                  CONTENT AND CAMPAIGNS
                 </div>
                 <div className="flex items-end gap-[2px] h-6">
                   {[4, 7, 10, 6, 14, 8, 12, 5, 9, 16, 7, 11, 4, 13].map((h, i) => (
@@ -293,7 +293,7 @@ export default function DMHero() {
                   className="font-mono text-[8px] uppercase tracking-widest mt-2"
                   style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'DM Mono', monospace" }}
                 >
-                  CONTENT / CAMPAIGN SYSTEM
+                  CONTENT / CAMPAIGNS
                 </div>
               </div>
             </div>

@@ -43,6 +43,9 @@ export default function Footer() {
                 <br />
                 <span className="italic text-[#747878]">TECHNOLOGY. DIGITAL.</span>
               </p>
+              <p className="mt-3 max-w-sm font-sans text-sm leading-relaxed text-[#747878]">
+                One creative direction. The right people for the work.
+              </p>
             </div>
           </div>
 
@@ -107,7 +110,7 @@ export default function Footer() {
           className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t font-mono text-[10px] text-[#747878]"
           style={{ borderColor: "#e4e2dd", fontFamily: "'DM Mono', monospace" }}
         >
-          <span>© 2026 MODEXA. ALL ARCHIVAL RIGHTS RESERVED.</span>
+          <span>© 2026 MODEXA. ALL RIGHTS RESERVED.</span>
           <div className="flex items-center gap-6">
             <BackToTop />
           </div>

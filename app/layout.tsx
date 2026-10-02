@@ -3,9 +3,9 @@ import "./globals.css";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 
 export const metadata: Metadata = {
-  title: "MODEXA — Flagship Creative Platform",
+  title: "MODEXA — Creative Studio",
   description:
-    "A unified, tactile design atelier binding motion, code, architectural interfaces, and editorial typography into one clear physical cadence.",
+    "MODEXA brings design, video, technology and digital marketing together around the needs of each project.",
   keywords: [
     "creative direction",
     "motion design",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MODEXA",
     description:
-      "Many ideas. Many specialized crafts. One creative direction.",
+      "The right specialists, working in one clear direction.",
     type: "website",
   },
 };
