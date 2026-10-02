@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 
@@ -89,6 +89,7 @@ function ProjectSlide({
   isActive,
   onPrev,
   onNext,
+  onProjectActivate,
 }: {
   project: Project;
   index: number;
@@ -96,6 +97,7 @@ function ProjectSlide({
   isActive: boolean;
   onPrev: () => void;
   onNext: () => void;
+  onProjectActivate: () => void;
 }) {
   const imageRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -151,6 +153,7 @@ function ProjectSlide({
   const handlePlayClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     event.stopPropagation();
+    onProjectActivate();
     window.open(project.externalUrl, "_blank", "noopener,noreferrer");
   };
 
@@ -189,6 +192,7 @@ function ProjectSlide({
           href={project.externalUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={onProjectActivate}
           aria-label={`Open ${project.title} project in a new tab`}
           className="group relative block overflow-hidden border border-[#dcd7cb] bg-[#f5f3ed] shadow-[0_25px_50px_rgba(27,28,24,0.08)] transition-shadow duration-300 hover:shadow-[0_30px_60px_rgba(27,28,24,0.12)]"
         >
@@ -270,6 +274,7 @@ function ProjectSlide({
           href={project.externalUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={onProjectActivate}
           className="mt-7 inline-flex w-fit items-center gap-2 border border-[#1b1c18] bg-[#1b1c18] px-5 py-3 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#fbf9f3] transition-colors hover:border-[#b6240f] hover:bg-[#b6240f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6240f]"
         >
           View project <span aria-hidden="true">→</span>
@@ -284,6 +289,9 @@ export default function EditorialWorkIndex() {
   const [isHovering, setIsHovering] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const slideRef = useRef<HTMLDivElement>(null);
+  const activeIndexRef = useRef(0);
+  const dragTweenRef = useRef<gsap.core.Tween | null>(null);
+  const suppressClickRef = useRef(false);
   const autoplayRef = useRef<number | null>(null);
   const resumeTimeoutRef = useRef<number | null>(null);
   const dragRef = useRef<{ pointerId: number; startX: number; deltaX: number } | null>(null);
@@ -304,15 +312,22 @@ export default function EditorialWorkIndex() {
       if (!isHovering && !reducedMotion) {
         clearAutoplay();
         autoplayRef.current = window.setTimeout(() => {
-          setActiveIndex((prev) => (prev + 1) % PROJECTS.length);
+          goTo(1);
         }, AUTOPLAY_DELAY);
       }
     }, 800);
   };
 
-  const goTo = (direction: -1 | 1) => {
-    setActiveIndex((prev) => (prev + direction + PROJECTS.length) % PROJECTS.length);
-  };
+  const goTo = useCallback((direction: -1 | 1, preserveDragOffset = false) => {
+    dragTweenRef.current?.kill();
+    dragTweenRef.current = null;
+    if (!preserveDragOffset && slideRef.current) {
+      gsap.set(slideRef.current, { x: 0 });
+    }
+    const nextIndex = (activeIndexRef.current + direction + PROJECTS.length) % PROJECTS.length;
+    activeIndexRef.current = nextIndex;
+    setActiveIndex(nextIndex);
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -330,10 +345,10 @@ export default function EditorialWorkIndex() {
     }
     clearAutoplay();
     autoplayRef.current = window.setTimeout(() => {
-      setActiveIndex((prev) => (prev + 1) % PROJECTS.length);
+      goTo(1);
     }, AUTOPLAY_DELAY);
     return clearAutoplay;
-  }, [activeIndex, isHovering, reducedMotion]);
+  }, [activeIndex, isHovering, reducedMotion, goTo]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -355,6 +370,7 @@ export default function EditorialWorkIndex() {
 
   useEffect(() => () => {
     clearAutoplay();
+    dragTweenRef.current?.kill();
     if (resumeTimeoutRef.current !== null) {
       window.clearTimeout(resumeTimeoutRef.current);
     }
@@ -362,8 +378,9 @@ export default function EditorialWorkIndex() {
 
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     const target = event.target as HTMLElement;
-    if (target.closest("a, button")) return;
+    if (target.closest("button")) return;
     if (event.pointerType === "mouse" && event.button !== 0) return;
+    suppressClickRef.current = false;
     dragRef.current = { pointerId: event.pointerId, startX: event.clientX, deltaX: 0 };
     event.currentTarget.setPointerCapture(event.pointerId);
     triggerInteraction();
@@ -374,7 +391,8 @@ export default function EditorialWorkIndex() {
     if (!drag || drag.pointerId !== event.pointerId) return;
     const deltaX = event.clientX - drag.startX;
     drag.deltaX = deltaX;
-    if (Math.abs(deltaX) > 12) {
+    if (Math.abs(deltaX) > 8) {
+      suppressClickRef.current = true;
       gsap.set(slideRef.current, { x: deltaX, force3D: true });
     }
   };
@@ -384,9 +402,17 @@ export default function EditorialWorkIndex() {
     if (!drag || drag.pointerId !== event.pointerId) return;
     const shouldAdvance = Math.abs(drag.deltaX) > 72;
     if (shouldAdvance) {
-      goTo(drag.deltaX < 0 ? 1 : -1);
+      goTo(drag.deltaX < 0 ? 1 : -1, true);
     }
-    gsap.to(slideRef.current, { x: 0, duration: 0.45, ease: "power3.out" });
+    dragTweenRef.current?.kill();
+    dragTweenRef.current = gsap.to(slideRef.current, {
+      x: 0,
+      duration: 0.45,
+      ease: "power3.out",
+      onComplete: () => {
+        dragTweenRef.current = null;
+      },
+    });
     dragRef.current = null;
     triggerInteraction();
     event.currentTarget.releasePointerCapture(event.pointerId);
@@ -424,6 +450,12 @@ export default function EditorialWorkIndex() {
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
+          onClickCapture={(event) => {
+            if (!suppressClickRef.current) return;
+            event.preventDefault();
+            event.stopPropagation();
+            suppressClickRef.current = false;
+          }}
           style={{ touchAction: "pan-y" }}
         >
           <div className="mb-6 flex items-center justify-between gap-4 border-b border-[#e4e2dd] pb-4">
@@ -469,6 +501,7 @@ export default function EditorialWorkIndex() {
               triggerInteraction();
               goTo(1);
             }}
+            onProjectActivate={triggerInteraction}
           />
         </div>
       </div>
