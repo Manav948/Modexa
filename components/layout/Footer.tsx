@@ -3,12 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import BackToTop from "./BackToTop";
+import EmailLink from "@/components/contact/EmailLink";
 
 export default function Footer() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const homeHref = (hash: string) => (isHomePage ? hash : `/${hash}`);
-  const mailtoUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=modexa1819@gmail.com&su=Project%20Inquiry%20%2F%2F%20Modexa";
+  const subject = encodeURIComponent("Project Inquiry // Modexa");
+  const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=modexa1819@gmail.com&su=${subject}`;
+  const mailtoUrl = `mailto:modexa1819@gmail.com?subject=${subject}`;
 
   return (
     <footer
@@ -83,24 +86,26 @@ export default function Footer() {
           {/* Column 4: Contact & Primary Action */}
           <div className="lg:col-span-3 flex flex-col items-start gap-3 font-mono text-[10px] uppercase tracking-wider" style={{ fontFamily: "'DM Mono', monospace" }}>
             <span className="text-[#747878] font-bold mb-1">INQUIRY</span>
-            <a
-              href={mailtoUrl}
+            <EmailLink
+              href={gmailComposeUrl}
+              mobileHref={mailtoUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs font-semibold text-[#1b1c18] hover:text-[#E7472E] transition-colors"
             >
               modexa1819@gmail.com
-            </a>
+            </EmailLink>
             <div className="pt-2">
-              <a
-                href={mailtoUrl}
+              <EmailLink
+                href={gmailComposeUrl}
+                mobileHref={mailtoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 rounded-none bg-[#1b1c18] px-4 py-2.5 font-mono text-[10px] uppercase tracking-wider text-white transition-all hover:bg-[#E7472E]"
               >
                 <span>START A PROJECT</span>
                 <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-              </a>
+              </EmailLink>
             </div>
           </div>
         </div>

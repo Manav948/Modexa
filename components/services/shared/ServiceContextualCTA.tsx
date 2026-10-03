@@ -18,8 +18,9 @@ export default function ServiceContextualCTA({
   description,
   subject,
 }: ServiceContextualCTAProps) {
-  const mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=modexa1819@gmail.com&su=${encodeURIComponent(subject)}`;
-
+  const encodedSubject = encodeURIComponent(subject);
+  const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=modexa1819@gmail.com&su=${encodedSubject}`;
+  const mailtoUrl = `mailto:modexa1819@gmail.com?subject=${encodedSubject}`;
 
   return (
     <section
@@ -60,7 +61,12 @@ export default function ServiceContextualCTA({
 
           {/* Action CTAs */}
           <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col items-start gap-4">
-            <StartProjectButton theme="dark" href={mailtoUrl} className="w-full sm:w-auto lg:w-full text-center" />
+            <StartProjectButton
+              theme="dark"
+              href={gmailComposeUrl}
+              mobileHref={mailtoUrl}
+              className="w-full sm:w-auto lg:w-full text-center"
+            />
             
             <Link
               href="/#services"

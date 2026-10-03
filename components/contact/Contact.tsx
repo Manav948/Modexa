@@ -1,27 +1,19 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import EmailLink from "./EmailLink";
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [copied, setCopied] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mobileQuery = window.matchMedia("(max-width: 767px)");
-    const updateDevice = () => setIsMobile(mobileQuery.matches);
-    updateDevice();
-    mobileQuery.addEventListener("change", updateDevice);
-    return () => mobileQuery.removeEventListener("change", updateDevice);
-  }, []);
 
   const email = "modexa1819@gmail.com";
-  const subject = encodeURIComponent("New Project Inquiry // Modexa");
-  const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}`;
-  const mailtoUrl = `mailto:${email}?subject=${subject}`;
-  const contactUrl = isMobile ? mailtoUrl : gmailComposeUrl;
+  const subject = "New Project Inquiry // Modexa";
+  const encodedSubject = encodeURIComponent(subject);
+  const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodedSubject}`;
+  const mailtoUrl = `mailto:${email}?subject=${encodedSubject}`;
 
   const copyEmail = () => {
     navigator.clipboard?.writeText(email);
@@ -87,9 +79,10 @@ export default function Contact() {
                   GET IN TOUCH
                 </span>
                 <div className="flex flex-col items-start gap-2">
-                  <a
-                    href={contactUrl}
-                    target={isMobile ? undefined : "_blank"}
+                  <EmailLink
+                    href={gmailComposeUrl}
+                    mobileHref={mailtoUrl}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="group inline-flex items-center gap-2 font-mono text-lg sm:text-xl font-medium text-[#1b1c18] transition-colors hover:text-[#E7472E]"
                     style={{ fontFamily: "'DM Mono', monospace" }}
@@ -101,7 +94,7 @@ export default function Contact() {
                     >
                       ↗
                     </span>
-                  </a>
+                  </EmailLink>
 
                   <button
                     type="button"
@@ -115,9 +108,10 @@ export default function Contact() {
 
               {/* Primary Action Button */}
               <div className="pt-4">
-                <a
-                  href={contactUrl}
-                  target={isMobile ? undefined : "_blank"}
+                <EmailLink
+                  href={gmailComposeUrl}
+                  mobileHref={mailtoUrl}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex w-full sm:w-auto items-center justify-center gap-3 rounded-none bg-[#E7472E] px-8 py-4 font-mono text-xs uppercase tracking-widest text-white shadow-[0_8px_24px_-4px_rgba(231,71,46,0.3)] transition-all duration-300 hover:bg-[#1b1c18] hover:shadow-[0_12px_28px_-4px_rgba(27,28,24,0.3)]"
                   style={{ fontFamily: "'DM Mono', monospace" }}
@@ -129,7 +123,7 @@ export default function Contact() {
                   >
                     →
                   </span>
-                </a>
+                </EmailLink>
               </div>
             </div>
 

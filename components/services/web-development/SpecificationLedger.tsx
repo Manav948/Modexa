@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import EmailLink from "@/components/contact/EmailLink";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -14,35 +15,35 @@ const LEDGER_ROWS = [
     title: "Frontend",
     tech: "Next.js • React • TypeScript • Tailwind CSS",
     cycle: "01 / BUILD",
-    specLink: "mailto:modexa1819@gmail.com?subject=SPEC:%20Frontend%20Website%20Development",
+    subject: "SPEC: Frontend Website Development",
   },
   {
     num: "02",
     title: "Interactive Web",
     tech: "GSAP • Lenis • ScrollTrigger",
     cycle: "02 / INTERACTION",
-    specLink: "mailto:modexa1819@gmail.com?subject=SPEC:%20Interactive%20Web%20Development",
+    subject: "SPEC: Interactive Web Development",
   },
   {
     num: "03",
     title: "Web Applications",
     tech: "Server code • APIs • Databases",
     cycle: "03 / SYSTEMS",
-    specLink: "mailto:modexa1819@gmail.com?subject=SPEC:%20Web%20Application%20Development",
+    subject: "SPEC: Web Application Development",
   },
   {
     num: "04",
     title: "Design Systems",
     tech: "React • TypeScript • Tailwind CSS",
     cycle: "04 / SYSTEMS",
-    specLink: "mailto:modexa1819@gmail.com?subject=SPEC:%20Design%20Systems",
+    subject: "SPEC: Design Systems",
   },
   {
     num: "05",
     title: "Performance",
     tech: "Responsive structure • Focused output • Smooth interaction",
     cycle: "05 / REFINE",
-    specLink: "mailto:modexa1819@gmail.com?subject=SPEC:%20Website%20Performance",
+    subject: "SPEC: Website Performance",
   },
 ];
 
@@ -115,12 +116,13 @@ export default function SpecificationLedger() {
               <span className="font-mono text-xs text-[#444748] uppercase font-medium">
                 {row.cycle}
               </span>
-              <a
-                href={row.specLink}
+              <EmailLink
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=modexa1819@gmail.com&su=${encodeURIComponent(row.subject)}`}
+                mobileHref={`mailto:modexa1819@gmail.com?subject=${encodeURIComponent(row.subject)}`}
                 className="font-mono text-[11px] uppercase tracking-wider px-4 py-2 bg-[#151515] text-white hover:bg-[#e7472e] transition-colors duration-200 font-medium"
               >
                 VIEW SERVICE →
-              </a>
+              </EmailLink>
             </div>
           </div>
         ))}
