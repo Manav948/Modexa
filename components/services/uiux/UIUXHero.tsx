@@ -154,17 +154,8 @@ export default function UIUXHero() {
       id="uiux-hero"
       className="relative w-full overflow-hidden border-b border-[#E8E2D5] bg-[#f7f5ef]"
     >
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E8E2D5] px-5 py-3 font-mono text-[9px] uppercase tracking-[0.14em] text-[#55534E] md:px-8 lg:px-14">
-        <span data-hero-meta className="font-bold text-[#E7472E]">UI/UX DESIGN / 02</span>
-        <span data-hero-meta>WEB / PRODUCTS / MOBILE</span>
-        <span data-hero-meta className="hidden sm:inline">CLARITY / STRUCTURE / INTERACTION</span>
-      </div>
-
-      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-5 px-5 pb-8 pt-8 sm:px-8 sm:pb-12 md:pt-12 lg:grid-cols-12 lg:gap-4 lg:px-14 lg:pb-14 lg:pt-14">
+      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-5 px-5 pb-8 pt-4 sm:px-8 sm:pb-12 md:pt-6 lg:grid-cols-12 lg:gap-4 lg:px-14 lg:pb-14 lg:pt-8">
         <div className="relative z-50 lg:col-span-5">
-          <p data-hero-meta className="mb-4 font-mono text-[9px] uppercase tracking-[0.15em] text-[#747878]">
-            UI/UX DESIGN / 02
-          </p>
           <h1 ref={textRef} className="font-display uppercase leading-[0.84] tracking-[-0.065em] text-[#151515]">
             <span className="block overflow-hidden pb-1"><span data-hero-line className="block text-[clamp(2.75rem,11vw,4.2rem)] lg:text-[clamp(3.3rem,6vw,6.2rem)]">DESIGNING</span></span>
             <span className="block overflow-hidden pb-1"><span data-hero-line className="block text-[clamp(2.75rem,11vw,4.2rem)] lg:text-[clamp(3.3rem,6vw,6.2rem)]">DIGITAL</span></span>
@@ -176,9 +167,6 @@ export default function UIUXHero() {
               We design websites and digital products that are clear, useful and easy to use.
             </p>
           </div>
-          <p data-hero-meta className="mt-7 font-mono text-[8px] uppercase tracking-[0.14em] text-[#8f8b82]">
-            UI DESIGN / UX DESIGN / PROTOTYPING
-          </p>
         </div>
 
         <div

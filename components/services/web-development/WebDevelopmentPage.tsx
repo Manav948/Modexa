@@ -4,7 +4,6 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollRevealProvider from "@/components/layout/ScrollRevealProvider";
 import WebDevHero from "./WebDevHero";
-import CadenceTicker from "./CadenceTicker";
 import EngineeringStack from "./EngineeringStack";
 import LivingSyntaxArtifact from "./LivingSyntaxArtifact";
 import TactileFidelity from "./TactileFidelity";
@@ -30,10 +29,7 @@ export default function WebDevelopmentPage() {
           {/* 02. Engineering Stack — editorial technology index */}
           <EngineeringStack />
 
-          {/* Existing cadence ticker */}
-          <CadenceTicker />
-
-          {/* 04. Living Code Workspace — SYNTAX AS AN EDITORIAL ARTIFACT */}
+          {/* 03. Living Code Workspace — SYNTAX AS AN EDITORIAL ARTIFACT */}
           <LivingSyntaxArtifact />
 
           {/* 05. Tactile Fidelity — 4-Quadrant Laboratory Grid */}

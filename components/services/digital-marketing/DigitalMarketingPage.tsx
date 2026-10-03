@@ -4,7 +4,6 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollRevealProvider from "@/components/layout/ScrollRevealProvider";
 import DMHero from "./DMHero";
-import DMTicker from "./DMTicker";
 import CampaignLaboratory from "./CampaignLaboratory";
 import DMServicesIndex from "./DMServicesIndex";
 import KineticTypeSection from "./KineticTypeSection";
@@ -21,10 +20,7 @@ export default function DigitalMarketingPage() {
           {/* 01. Hero — ATTENTION / is not captured. / IT IS DESIGNED. */}
           <DMHero />
 
-          {/* 02. Dark horizontal content ticker */}
-          <DMTicker />
-
-          {/* 03. Asymmetric campaign laboratory section */}
+          {/* 02. Asymmetric campaign laboratory section */}
           <CampaignLaboratory />
 
           {/* 04. Services scope index */}

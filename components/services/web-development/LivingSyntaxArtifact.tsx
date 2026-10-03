@@ -1,276 +1,142 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const WORKSPACE_VIDEO = "/videos/video1.mp4";
 
-function drawCover(canvas: HTMLCanvasElement, video: HTMLVideoElement, focusX = 0.5) {
-  if (video.videoWidth === 0 || video.videoHeight === 0) return;
-  const bounds = canvas.getBoundingClientRect();
-  if (!bounds.width || !bounds.height) return;
-
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  const width = Math.round(bounds.width * dpr);
-  const height = Math.round(bounds.height * dpr);
-  if (canvas.width !== width || canvas.height !== height) {
-    canvas.width = width;
-    canvas.height = height;
-  }
-
-  const videoRatio = video.videoWidth / video.videoHeight;
-  const viewportRatio = width / height;
-  let sx = 0;
-  let sy = 0;
-  let sw = video.videoWidth;
-  let sh = video.videoHeight;
-
-  if (videoRatio > viewportRatio) {
-    sw = video.videoHeight * viewportRatio;
-    sx = (video.videoWidth - sw) * Math.max(0, Math.min(1, focusX));
-  } else {
-    sh = video.videoWidth / viewportRatio;
-    sy = (video.videoHeight - sh) / 2;
-  }
-
-  const context = canvas.getContext("2d", { alpha: false });
-  context?.drawImage(video, sx, sy, sw, sh, 0, 0, width, height);
-}
-
 export default function LivingSyntaxArtifact() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const compositionRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const mainCanvasRef = useRef<HTMLCanvasElement>(null);
-  const phoneCanvasRef = useRef<HTMLCanvasElement>(null);
-  const phoneMotionRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isFinePointer, setIsFinePointer] = useState(false);
 
   useEffect(() => {
-    const query = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const updatePointer = () => setIsFinePointer(query.matches);
-    updatePointer();
-    query.addEventListener("change", updatePointer);
-    return () => query.removeEventListener("change", updatePointer);
-  }, []);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    const stage = stageRef.current;
     const video = videoRef.current;
-    if (!section || !stage || !video) return;
-
-    let visible = false;
-    let frameId = 0;
-
-    const renderFrames = () => {
-      if (!visible || video.paused || video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return;
-      if (mainCanvasRef.current) drawCover(mainCanvasRef.current, video, 0.5);
-      if (phoneCanvasRef.current) {
-        const focusPercent = parseFloat(
-          getComputedStyle(phoneCanvasRef.current).getPropertyValue("--video-focus-x"),
-        );
-        drawCover(phoneCanvasRef.current, video, Number.isFinite(focusPercent) ? focusPercent / 100 : 0.6);
-      }
-      frameId = window.requestAnimationFrame(renderFrames);
-    };
-
-    const observer = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      setIsVisible(visible);
-      if (visible) {
-        video.play().then(() => {
-          window.cancelAnimationFrame(frameId);
-          renderFrames();
-        }).catch(() => undefined);
-      } else {
-        video.pause();
-        window.cancelAnimationFrame(frameId);
-      }
-    }, { threshold: 0.15 });
-
-    const context = gsap.context(() => {
-      gsap.fromTo(
-        stage,
-        { scale: 0.92 },
-        {
-          scale: 1,
-          transformOrigin: "center center",
-          force3D: true,
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 82%",
-            end: "top 28%",
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
-        },
-      );
-    }, section);
-
-    const resizeObserver = new ResizeObserver(() => {
-      if (visible && !video.paused) {
-        window.cancelAnimationFrame(frameId);
-        renderFrames();
-      }
-    });
-    resizeObserver.observe(stage);
-    if (phoneCanvasRef.current) resizeObserver.observe(phoneCanvasRef.current);
-    observer.observe(section);
-
-    return () => {
-      observer.disconnect();
-      resizeObserver.disconnect();
-      window.cancelAnimationFrame(frameId);
+    if (!video) return;
+    if (isPreviewOpen) {
+      video.play().catch(() => undefined);
+    } else {
       video.pause();
-      context.revert();
-    };
-  }, []);
+    }
+  }, [isPreviewOpen]);
 
-  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (!isFinePointer || !phoneMotionRef.current) return;
-    const bounds = event.currentTarget.getBoundingClientRect();
-    const offsetX = (event.clientX - (bounds.left + bounds.width / 2)) / bounds.width;
-    const offsetY = (event.clientY - (bounds.top + bounds.height / 2)) / bounds.height;
-    const x = Math.max(-25, Math.min(25, offsetX * 35));
-    const y = Math.max(-20, Math.min(20, offsetY * 28));
+  const movePreview = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse" || !previewRef.current) return;
 
-    gsap.to(phoneMotionRef.current, {
-      x,
-      y,
-      rotation: (x / 25) * 2,
-      duration: 0.65,
-      ease: "power3.out",
-      overwrite: true,
-    });
+    const preview = previewRef.current;
+    const margin = 16;
+    const offset = 24;
+    const width = preview.offsetWidth;
+    const height = preview.offsetHeight;
+    const left = event.clientX + width + offset + margin > window.innerWidth
+      ? event.clientX - width - offset
+      : event.clientX + offset;
+    const top = event.clientY + height + offset + margin > window.innerHeight
+      ? event.clientY - height - offset
+      : event.clientY + offset;
+
+    preview.style.left = `${Math.max(margin, left)}px`;
+    preview.style.top = `${Math.max(margin, top)}px`;
   };
 
-  const showDesktopPhone = isFinePointer && isHovered;
-  const phoneVisibility = showDesktopPhone
-    ? "md:translate-y-0 md:scale-100 md:opacity-100 md:pointer-events-auto"
-    : "md:translate-y-5 md:scale-[0.88] md:opacity-0 md:pointer-events-none";
+  const handlePointerEnter = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse") return;
+    setIsPreviewOpen(true);
+    movePreview(event);
+  };
+
+  const handlePointerLeave = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "mouse") setIsPreviewOpen(false);
+  };
 
   return (
     <section
-      ref={sectionRef}
       aria-labelledby="living-code-workspace-title"
-      className="w-full border-t px-5 py-20 md:px-10 lg:px-16 lg:py-28"
-      style={{ backgroundColor: "#f0eee8", borderColor: "#e4e2dd" }}
+      className="w-full border-t border-[#e4e2dd] bg-[#f0eee8] px-5 py-16 sm:py-20 md:px-10 lg:px-16 lg:py-24"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="mb-8 flex flex-col items-start justify-between gap-3 md:flex-row md:items-baseline">
-          <div>
-            <h2
-              id="living-code-workspace-title"
-              className="font-display text-2xl uppercase text-[#1b1c18] sm:text-3xl md:text-4xl"
-            >
-              DESIGN AND CODE, WORKING TOGETHER
-            </h2>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-4 font-mono text-xs text-[#747878]">
-            <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-[#e7472e]" />
-              VIDEO PREVIEW
-            </span>
-            <span>•</span>
-            <span>WEB DESIGN / DEVELOPMENT</span>
-            <span>•</span>
-            <span className="font-bold text-[#1b1c18]">DEVELOPMENT DEMO</span>
-          </div>
+        <div className="mb-8 flex flex-col gap-3 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
+          <h2
+            id="living-code-workspace-title"
+            className="font-display text-2xl uppercase leading-tight text-[#1b1c18] sm:text-3xl md:text-4xl"
+          >
+            DESIGN AND CODE, WORKING TOGETHER
+          </h2>
+          <p className="max-w-md font-sans text-sm leading-relaxed text-[#55534E] sm:text-[15px]">
+            Explore the interface, then open the video preview.
+          </p>
         </div>
 
-        <p className="mb-6 max-w-2xl font-sans text-sm leading-relaxed text-[#55534E] sm:text-[15px]">
-          See how design, code and interaction come together in a working website.
-        </p>
-
-        <div className="relative w-full border border-[#1b1c18]/15 bg-[#0a0a0a]">
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 bg-[#151515] px-4 py-3 text-white/60">
-            <div className="flex min-w-0 items-center gap-4">
-              <div aria-hidden="true" className="flex shrink-0 gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#e7472e]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#7c8061]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-              </div>
-              <span className="min-w-0 truncate font-mono text-xs tracking-wider text-white/90">
-                modexa / web-development-preview
-              </span>
-            </div>
-            <span className="font-mono text-[11px] text-white/50">AUTO / LOOP / MUTED</span>
-          </div>
-
-          <video
-            ref={videoRef}
-            className="pointer-events-none absolute h-px w-px opacity-0"
-            src={WORKSPACE_VIDEO}
-            muted
-            loop
-            autoPlay
-            playsInline
-            preload="metadata"
-            controls={false}
-            disablePictureInPicture
-            aria-hidden="true"
-            onPlay={() => setIsPlaying(true)}
-            onPause={() => setIsPlaying(false)}
+        <div
+          ref={stageRef}
+          className="group relative isolate aspect-[4/3] w-full overflow-hidden bg-[#111820] sm:aspect-[16/9]"
+          onPointerEnter={handlePointerEnter}
+          onPointerMove={movePreview}
+          onPointerLeave={handlePointerLeave}
+        >
+          <Image
+            src="/images/web6.png"
+            alt="Sports gear product website shown in a desktop browser"
+            fill
+            sizes="(max-width: 768px) 100vw, 1200px"
+            className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+            priority={false}
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-black/20" />
+          <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-4 p-5 text-white sm:p-8 lg:p-10">
+            <p className="max-w-lg font-display text-2xl uppercase leading-[1.05] sm:text-3xl lg:text-4xl">
+              A digital experience, in motion.
+            </p>
+            <button
+              type="button"
+              aria-expanded={isPreviewOpen}
+              onClick={() => setIsPreviewOpen((open) => !open)}
+              className="inline-flex min-h-11 items-center gap-3 border border-white/70 bg-black/30 px-4 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-[#151515] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:hidden"
+            >
+              <span aria-hidden="true">{isPreviewOpen ? "×" : "▶"}</span>
+              {isPreviewOpen ? "CLOSE PREVIEW" : "PLAY VIDEO PREVIEW"}
+            </button>
+            <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-white/80 md:inline">
+              HOVER TO PLAY THE PREVIEW
+            </span>
+          </div>
 
           <div
-            ref={compositionRef}
-            className="relative"
-            onPointerEnter={() => { if (isFinePointer) setIsHovered(true); }}
-            onPointerLeave={() => {
-              setIsHovered(false);
-              if (phoneMotionRef.current) {
-                gsap.to(phoneMotionRef.current, { x: 0, y: 0, rotation: 0, duration: 0.7, ease: "power3.out" });
-              }
-            }}
-            onPointerMove={handlePointerMove}
+            ref={previewRef}
+            className={`fixed left-4 right-4 top-1/2 z-[60] w-auto -translate-y-1/2 overflow-hidden border border-white/20 bg-[#101010] shadow-[0_24px_80px_rgba(0,0,0,0.55)] transition-[opacity,scale] duration-200 md:left-0 md:right-auto md:top-0 md:w-[min(360px,calc(100vw-32px))] md:translate-y-0 ${isPreviewOpen ? "pointer-events-auto scale-100 opacity-100" : "pointer-events-none scale-[0.96] opacity-0"}`}
+            aria-hidden={!isPreviewOpen}
           >
-            <div
-              ref={stageRef}
-              className={`mx-auto aspect-video w-full bg-[#0a0a0a] transition-transform duration-700 ease-out ${showDesktopPhone ? "md:scale-[1.015]" : "scale-100"}`}
-            >
-              <canvas
-                ref={mainCanvasRef}
-                role="img"
-                aria-label="Landscape 16 by 9 video preview of a living code workspace"
-                className="block h-full w-full"
-              />
+            <div className="flex items-center justify-between border-b border-white/10 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.1em] text-white/70">
+              <span>WEB DEVELOPMENT / PREVIEW</span>
+              <button
+                type="button"
+                onClick={() => setIsPreviewOpen(false)}
+                className="min-h-8 min-w-8 text-base text-white hover:text-[#E7472E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white md:hidden"
+                aria-label="Close video preview"
+              >
+                ×
+              </button>
             </div>
-
-            <div
-              className={`living-phone-frame relative mx-auto mt-6 w-[min(62vw,240px)] aspect-[9/16] transition-[opacity,transform] duration-500 ease-out md:absolute md:bottom-5 md:right-5 md:mx-0 md:mt-0 md:w-[190px] lg:w-[240px] 2xl:w-[280px] ${phoneVisibility}`}
-            >
-              <div ref={phoneMotionRef} className="absolute inset-0">
-                <div className="absolute inset-0 overflow-hidden rounded-[18px] border border-[#353535] bg-[#080808] p-[5px] shadow-xl">
-                  <canvas
-                    ref={phoneCanvasRef}
-                    role="img"
-                    aria-label="Portrait crop preview of the same landscape video"
-                    className="block h-full w-full rounded-[14px] object-cover"
-                  />
-                  <span aria-hidden="true" className="absolute left-1/2 top-2 h-1 w-8 -translate-x-1/2 rounded-full bg-black/80 ring-1 ring-white/15" />
-                  <span aria-hidden="true" className="absolute right-3 top-2 h-1.5 w-1.5 rounded-full bg-black/80 ring-1 ring-white/15" />
-                </div>
-              </div>
+            <video
+              ref={videoRef}
+              src={WORKSPACE_VIDEO}
+              poster="/images/web6.png"
+              className="block aspect-video w-full bg-black object-cover"
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              controls
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+              aria-label="Web development video preview"
+            />
+            <div className="flex items-center justify-between px-3 py-2 font-mono text-[9px] uppercase tracking-[0.1em] text-white/60">
+              <span>{isPlaying ? "PLAYING" : "PAUSED"}</span>
+              <span>VIDEO 01 / LOOP</span>
             </div>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-between gap-2 border-t border-white/10 bg-[#0e0e0e] px-4 py-2 font-mono text-[11px] text-white/60">
-            <div className="flex items-center gap-4">
-              <span className="text-[#e7472e]">{isPlaying ? "● PLAYING" : isVisible ? "● LOADING" : "● STANDBY"}</span>
-              <span className="hidden sm:inline">WEB DEVELOPMENT PREVIEW</span>
-            </div>
-            <span className="font-medium text-white">16:9 EXPERIENCE / 9:16 CROP</span>
           </div>
         </div>
       </div>

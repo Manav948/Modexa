@@ -30,13 +30,6 @@ export default function DMHero() {
         );
       }
 
-      // Label reveal
-      gsap.fromTo(
-        ".dm-hero-label",
-        { opacity: 0, y: 12 },
-        { opacity: 1, y: 0, duration: 0.9, ease: "power2.out", delay: 0.05 }
-      );
-
       // Body copy reveal
       gsap.fromTo(
         bodyRef.current,
@@ -82,17 +75,7 @@ export default function DMHero() {
       className="relative w-full min-h-screen max-md:min-h-0 overflow-hidden select-none"
       style={{ backgroundColor: "#f7f5ef" }}
     >
-      <div className="relative max-w-[1400px] mx-auto w-full px-5 md:px-8 lg:px-14 pt-14 pb-20 max-md:min-h-0 max-md:justify-start overflow-x-hidden">
-
-        {/* Top editorial label */}
-        <div className="dm-hero-label flex items-center gap-3 mb-8 md:mb-10">
-              <span
-                className="font-mono text-[9px] sm:text-[10px] px-2.5 py-1 border text-[#E7472E] tracking-widest uppercase font-bold"
-                style={{ borderColor: "#E8E2D5", fontFamily: "'DM Mono', monospace" }}
-              >
-                DIGITAL MARKETING / 03
-              </span>
-        </div>
+      <div className="relative max-w-[1400px] mx-auto w-full px-5 md:px-8 lg:px-14 pt-4 pb-20 max-md:min-h-0 max-md:justify-start overflow-x-hidden">
 
         {/* Main composition row */}
         <div className="flex-1 grid grid-cols-12 gap-0 items-start">
