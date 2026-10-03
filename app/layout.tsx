@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "MODEXA | Digital Services",
   description:
     "MODEXA is a creative studio delivering web development, UI/UX design, video editing and digital marketing for brands and digital products.",
