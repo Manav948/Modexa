@@ -3,22 +3,47 @@ import "./globals.css";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 
 export const metadata: Metadata = {
-  title: "MODEXA — Creative Studio",
+  title: "MODEXA | Digital Services",
   description:
-    "MODEXA brings design, video, technology and digital marketing together around the needs of each project.",
+    "MODEXA is a creative studio delivering web development, UI/UX design, video editing and digital marketing for brands and digital products.",
+  applicationName: "MODEXA",
   keywords: [
-    "creative direction",
-    "motion design",
-    "UI/UX",
+    "MODEXA",
+    "creative studio",
     "web development",
-    "branding",
-    "editorial",
+    "UI/UX design",
+    "video editing",
+    "motion design",
+    "digital marketing",
+    "content and campaigns",
+    "digital experiences",
   ],
+  icons: {
+    icon: [{ url: "/images/logo.png", type: "image/png", sizes: "1280x1280" }],
+    shortcut: ["/images/logo.png"],
+    apple: [{ url: "/images/logo.png", type: "image/png", sizes: "1280x1280" }],
+  },
   openGraph: {
-    title: "MODEXA",
+    title: "MODEXA | Digital Services",
     description:
-      "The right specialists, working in one clear direction.",
+      "Web development, UI/UX design, video editing and digital marketing for brands and digital products.",
     type: "website",
+    siteName: "MODEXA",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 1280,
+        height: 1280,
+        alt: "MODEXA logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "MODEXA | Digital Services",
+    description:
+      "Web development, UI/UX design, video editing and digital marketing for brands and digital products.",
+    images: ["/images/logo.png"],
   },
 };
 
@@ -29,8 +54,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full antialiased" data-scroll-behavior="smooth">
-      <head>
-      </head>
       <body className="min-h-full flex flex-col bg-[#fbf9f3] text-[#1b1c18]">
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
