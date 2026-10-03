@@ -21,15 +21,11 @@ export default function EmailLink({
 }: EmailLinkProps) {
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     onClick?.(event);
-    if (event.defaultPrevented || isMobileDevice()) return;
+    if (event.defaultPrevented || !isMobileDevice()) return;
 
     event.preventDefault();
-    if (target === "_blank") {
-      window.open(href, "_blank", "noopener,noreferrer");
-    } else {
-      window.location.assign(href);
-    }
+    window.location.assign(mobileHref);
   };
 
-  return <a {...props} href={mobileHref} target={target} onClick={handleClick} />;
+  return <a {...props} href={href} target={target} onClick={handleClick} />;
 }
